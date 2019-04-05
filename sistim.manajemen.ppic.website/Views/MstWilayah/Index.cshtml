@@ -1,0 +1,66 @@
+﻿@model sistem.manajemen.ppic.website.Models.MstWilayahViewModel
+@{
+    ViewBag.Title = "Master Wilayah";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="data-table-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sparkline13-list">
+                    <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                            <h1>&nbsp;</h1>
+                        </div>
+                    </div>
+                    <div class="sparkline13-graph">
+                        <div class="datatable-dashv1-list custom-datatable-overright">
+                            <div class="add-product">
+                                <a href="@Url.Action("Create","MstWilayah")">Tambah Wilayah</a>
+                            </div>
+                            <table id="table" class="stripe row-border order-column" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Action</th>
+                                        <th>Wilayah</th>
+                                        <th>Kode</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ListData)
+                                    {
+                                        <tr>
+                                            <td>@Html.Raw(Model.ListData.IndexOf(item) + 1)</td>
+                                            <td>
+                                                <a href="@Url.Action("Edit","MstWilayah",new {@id=item.ID})" data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                            </td>
+                                            <td>@Html.Raw(item.WILAYAH)</td>
+                                            <td>@Html.Raw(item.KODE)</td>
+                                            <td>@Html.Raw(item.STATUS ? "Aktif" : "Tidak Aktif")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#table').DataTable({
+                "dom": 'lf<"table-overflow"t>pi',
+                orderCellsTop: true,
+                scrollY: "300px",
+                scrollX: true,
+                scrollCollapse: true,
+                fixedColumns: true
+            });
+        });
+    </script>
+}

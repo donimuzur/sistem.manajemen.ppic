@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SIM_PPICModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CHANGES_HISTORY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MODUL_ID" Type="int" Nullable="false" />
+          <Property Name="FORM_ID" Type="bigint" Nullable="false" />
+          <Property Name="MODIFIED_BY" Type="nvarchar" MaxLength="50" />
+          <Property Name="MODIFIED_DATE" Type="datetime" />
+          <Property Name="ACTION" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="USERNAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="LAST_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="PASSWORD" Type="text" Nullable="false" />
+          <Property Name="STATUS" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MST_BARANG_JADI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAMA_BARANG" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="KOMPOSISI" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="BENTUK" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="BENTUK_LAIN" Type="nvarchar" MaxLength="100" />
+          <Property Name="KEMASAN" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="STOCK" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="STATUS" Type="bit" Nullable="false" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="100" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="MODIFIED_BY" Type="nvarchar" MaxLength="100" />
+          <Property Name="MODIFIED_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MST_WILAYAH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WILAYAH" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="KODE" Type="int" Nullable="false" />
+          <Property Name="STATUS" Type="bit" Nullable="false" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="100" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="MODIFIED_BY" Type="nvarchar" MaxLength="100" />
+          <Property Name="MODIFIED_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PAGE">
+          <Key>
+            <PropertyRef Name="PAGE_ID" />
+          </Key>
+          <Property Name="PAGE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PAGE_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="PAGE_URL" Type="nvarchar" MaxLength="100" />
+          <Property Name="MENU_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="PARENT_PAGE_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="TRN_SPB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TANGGAL" Type="datetime" Nullable="false" />
+          <Property Name="NO_SPB" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SALES" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="WILAYAH" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NAMA_PRODUK" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="KOMPOSISI" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="BENTUK" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="BENTUK_DESC" Type="text" />
+          <Property Name="KEMASAN" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="KEMASAN_DESC" Type="text" />
+          <Property Name="NAMA_KONSUMEN" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ALAMAT_KONSUMEN" Type="text" Nullable="false" />
+          <Property Name="NO_TELP" Type="nvarchar" MaxLength="100" />
+          <Property Name="CONTACT_PERSON" Type="nvarchar" MaxLength="100" />
+          <Property Name="SEGMEN_PASAR" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="JENIS_PENJUALAN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="JENIS_PENJUALAN_DESC" Type="text" />
+          <Property Name="CARA_PEMBAYARAN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="KUANTUM" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="HARGA_JUAL" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ONGKOS_KIRIM" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PPN" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="HARGA_LOKO" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="LOKASI_KIRIM" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="BATAS_KIRIM" Type="datetime" Nullable="false" />
+          <Property Name="DOKUMEN_PENDUKUNG" Type="nvarchar" MaxLength="100" />
+          <Property Name="DOKUMEN_PENDUKUNG_DESC" Type="text" />
+          <Property Name="DOKUMEN_PENDUKUNG_FILE" Type="nvarchar" MaxLength="100" />
+          <Property Name="DOKUMEN_NOMOR" Type="nvarchar" MaxLength="100" />
+          <Property Name="CATATAN" Type="text" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="100" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="MODIFIED_BY" Type="nvarchar" MaxLength="100" />
+          <Property Name="MODIFIED_DATE" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="SIM_PPICModelStoreContainer">
+          <EntitySet Name="CHANGES_HISTORY" EntityType="Self.CHANGES_HISTORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MST_BARANG_JADI" EntityType="Self.MST_BARANG_JADI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MST_WILAYAH" EntityType="Self.MST_WILAYAH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAGE" EntityType="Self.PAGE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRN_SPB" EntityType="Self.TRN_SPB" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SIM_PPICModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FIRST_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LAST_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="Boolean" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="PPICEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Logins" EntityType="Self.Login" />
+          <EntitySet Name="PAGEs" EntityType="SIM_PPICModel.PAGE" />
+          <EntitySet Name="MST_BARANG_JADI" EntityType="SIM_PPICModel.MST_BARANG_JADI" />
+          <EntitySet Name="MST_WILAYAH" EntityType="SIM_PPICModel.MST_WILAYAH" />
+          <EntitySet Name="CHANGES_HISTORY" EntityType="SIM_PPICModel.CHANGES_HISTORY" />
+          <EntitySet Name="TRN_SPB" EntityType="SIM_PPICModel.TRN_SPB" />
+        </EntityContainer>
+        <EntityType Name="PAGE">
+          <Key>
+            <PropertyRef Name="PAGE_ID" />
+          </Key>
+          <Property Name="PAGE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PAGE_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PAGE_URL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MENU_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PARENT_PAGE_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MST_BARANG_JADI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NAMA_BARANG" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KOMPOSISI" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BENTUK" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BENTUK_LAIN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KEMASAN" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="STOCK" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="STATUS" Type="Boolean" Nullable="false" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="MST_WILAYAH">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WILAYAH" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KODE" Type="Int32" Nullable="false" />
+          <Property Name="STATUS" Type="Boolean" Nullable="false" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CHANGES_HISTORY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MODUL_ID" Type="Int32" Nullable="false" />
+          <Property Name="FORM_ID" Type="Int64" Nullable="false" />
+          <Property Name="MODIFIED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="ACTION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TRN_SPB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TANGGAL" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NO_SPB" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SALES" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="WILAYAH" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NAMA_PRODUK" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KOMPOSISI" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BENTUK" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BENTUK_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="KEMASAN" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NAMA_KONSUMEN" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ALAMAT_KONSUMEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NO_TELP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CONTACT_PERSON" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SEGMEN_PASAR" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="JENIS_PENJUALAN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JENIS_PENJUALAN_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CARA_PEMBAYARAN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KUANTUM" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="HARGA_JUAL" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ONGKOS_KIRIM" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PPN" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HARGA_LOKO" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="LOKASI_KIRIM" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BATAS_KIRIM" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DOKUMEN_PENDUKUNG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DOKUMEN_PENDUKUNG_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DOKUMEN_PENDUKUNG_FILE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DOKUMEN_NOMOR" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CATATAN" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="KEMASAN_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SIM_PPICModelStoreContainer" CdmEntityContainer="PPICEntities">
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="SIM_PPICModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+                <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAGEs">
+            <EntityTypeMapping TypeName="SIM_PPICModel.PAGE">
+              <MappingFragment StoreEntitySet="PAGE">
+                <ScalarProperty Name="PARENT_PAGE_ID" ColumnName="PARENT_PAGE_ID" />
+                <ScalarProperty Name="MENU_NAME" ColumnName="MENU_NAME" />
+                <ScalarProperty Name="PAGE_URL" ColumnName="PAGE_URL" />
+                <ScalarProperty Name="PAGE_NAME" ColumnName="PAGE_NAME" />
+                <ScalarProperty Name="PAGE_ID" ColumnName="PAGE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MST_BARANG_JADI">
+            <EntityTypeMapping TypeName="SIM_PPICModel.MST_BARANG_JADI">
+              <MappingFragment StoreEntitySet="MST_BARANG_JADI">
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="STOCK" ColumnName="STOCK" />
+                <ScalarProperty Name="KEMASAN" ColumnName="KEMASAN" />
+                <ScalarProperty Name="BENTUK_LAIN" ColumnName="BENTUK_LAIN" />
+                <ScalarProperty Name="BENTUK" ColumnName="BENTUK" />
+                <ScalarProperty Name="KOMPOSISI" ColumnName="KOMPOSISI" />
+                <ScalarProperty Name="NAMA_BARANG" ColumnName="NAMA_BARANG" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MST_WILAYAH">
+            <EntityTypeMapping TypeName="SIM_PPICModel.MST_WILAYAH">
+              <MappingFragment StoreEntitySet="MST_WILAYAH">
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="KODE" ColumnName="KODE" />
+                <ScalarProperty Name="WILAYAH" ColumnName="WILAYAH" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHANGES_HISTORY">
+            <EntityTypeMapping TypeName="SIM_PPICModel.CHANGES_HISTORY">
+              <MappingFragment StoreEntitySet="CHANGES_HISTORY">
+                <ScalarProperty Name="ACTION" ColumnName="ACTION" />
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
+                <ScalarProperty Name="FORM_ID" ColumnName="FORM_ID" />
+                <ScalarProperty Name="MODUL_ID" ColumnName="MODUL_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRN_SPB">
+            <EntityTypeMapping TypeName="SIM_PPICModel.TRN_SPB">
+              <MappingFragment StoreEntitySet="TRN_SPB">
+                <ScalarProperty Name="KEMASAN_DESC" ColumnName="KEMASAN_DESC" />
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CATATAN" ColumnName="CATATAN" />
+                <ScalarProperty Name="DOKUMEN_NOMOR" ColumnName="DOKUMEN_NOMOR" />
+                <ScalarProperty Name="DOKUMEN_PENDUKUNG_FILE" ColumnName="DOKUMEN_PENDUKUNG_FILE" />
+                <ScalarProperty Name="DOKUMEN_PENDUKUNG_DESC" ColumnName="DOKUMEN_PENDUKUNG_DESC" />
+                <ScalarProperty Name="DOKUMEN_PENDUKUNG" ColumnName="DOKUMEN_PENDUKUNG" />
+                <ScalarProperty Name="BATAS_KIRIM" ColumnName="BATAS_KIRIM" />
+                <ScalarProperty Name="LOKASI_KIRIM" ColumnName="LOKASI_KIRIM" />
+                <ScalarProperty Name="HARGA_LOKO" ColumnName="HARGA_LOKO" />
+                <ScalarProperty Name="PPN" ColumnName="PPN" />
+                <ScalarProperty Name="ONGKOS_KIRIM" ColumnName="ONGKOS_KIRIM" />
+                <ScalarProperty Name="HARGA_JUAL" ColumnName="HARGA_JUAL" />
+                <ScalarProperty Name="KUANTUM" ColumnName="KUANTUM" />
+                <ScalarProperty Name="CARA_PEMBAYARAN" ColumnName="CARA_PEMBAYARAN" />
+                <ScalarProperty Name="JENIS_PENJUALAN_DESC" ColumnName="JENIS_PENJUALAN_DESC" />
+                <ScalarProperty Name="JENIS_PENJUALAN" ColumnName="JENIS_PENJUALAN" />
+                <ScalarProperty Name="SEGMEN_PASAR" ColumnName="SEGMEN_PASAR" />
+                <ScalarProperty Name="CONTACT_PERSON" ColumnName="CONTACT_PERSON" />
+                <ScalarProperty Name="NO_TELP" ColumnName="NO_TELP" />
+                <ScalarProperty Name="ALAMAT_KONSUMEN" ColumnName="ALAMAT_KONSUMEN" />
+                <ScalarProperty Name="NAMA_KONSUMEN" ColumnName="NAMA_KONSUMEN" />
+                <ScalarProperty Name="KEMASAN" ColumnName="KEMASAN" />
+                <ScalarProperty Name="BENTUK_DESC" ColumnName="BENTUK_DESC" />
+                <ScalarProperty Name="BENTUK" ColumnName="BENTUK" />
+                <ScalarProperty Name="KOMPOSISI" ColumnName="KOMPOSISI" />
+                <ScalarProperty Name="NAMA_PRODUK" ColumnName="NAMA_PRODUK" />
+                <ScalarProperty Name="WILAYAH" ColumnName="WILAYAH" />
+                <ScalarProperty Name="SALES" ColumnName="SALES" />
+                <ScalarProperty Name="NO_SPB" ColumnName="NO_SPB" />
+                <ScalarProperty Name="TANGGAL" ColumnName="TANGGAL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

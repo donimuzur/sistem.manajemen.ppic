@@ -1,0 +1,81 @@
+﻿@model sistem.manajemen.ppic.website.Models.TrnSpbViewModel
+@{
+    ViewBag.Title = "Surat Permintaan Barang (SPB)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="data-table-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sparkline13-list">
+                    <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                            <h1>&nbsp;</h1>
+                        </div>
+                    </div>
+                    <div class="sparkline13-graph">
+                        <div>
+                            <div class="add-product">
+                                <a href="@Url.Action("Create","TrnSpb")">Tambah SPB</a>
+                            </div>
+                            <table id="table" class="stripe row-border order-column" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th style="min-width:50px">No</th>
+                                        <th style="min-width:100px;">Action</th>
+                                        <th style="min-width:100px">Tanggal</th>
+                                        <th style="min-width:150px">No SPB</th>
+                                        <th style="min-width:200px">Sales</th>
+                                        <th style="min-width:100px">Wilayah</th>
+                                        <th style="min-width:150px">Produk</th>
+                                        <th style="min-width:200px;">Konsumen</th>
+                                        <th style="min-width:100px;">Kwantum</th>
+                                        <th style="min-width:100px;">Harga Jual</th>
+                                        <th style="min-width:100px;">Harga Loko</th>
+                                        <th style="min-width:100px;">Batas Kirim</th>
+                                      
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ListData.OrderBy(x => x.TANGGAL).ToList())
+                                    {
+                                        <tr>
+                                            <td>@Html.Raw(Model.ListData.IndexOf(item) + 1)</td>
+                                            <td>
+                                                <a href="@Url.Action("Edit","TrnSpb",new {@id=item.ID})" data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                            </td>
+                                            <td>@Html.Raw(item.TANGGAL.ToString("dd MMM yyyy"))</td>
+                                            <td>@Html.Raw(item.NO_SPB)</td>
+                                            <td>@Html.Raw(item.SALES)</td>
+                                            <td>@Html.Raw(item.WILAYAH)</td>
+                                            <td>@Html.Raw(item.NAMA_PRODUK)</td>
+                                            <td>@Html.Raw(item.NAMA_KONSUMEN)</td>
+                                            <td>@Html.Raw(string.Format("{0:N}", item.KUANTUM))</td>
+                                            <td>@Html.Raw("Rp. "+string.Format("{0:N}", item.HARGA_JUAL))</td>
+                                            <td>@Html.Raw("Rp. "+string.Format("{0:N}", item.HARGA_LOKO))</td>
+                                            <td>@Html.Raw(item.BATAS_KIRIM.HasValue? item.BATAS_KIRIM.Value.ToString("dd MMM yyyy"):"")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#table').DataTable({
+                "dom": 'lf<"table-overflow"t>pi',
+                orderCellsTop: true,
+                scrollY: "300px",
+                scrollX: true,
+                scrollCollapse: true,
+                fixedColumns: true
+            });
+        });
+    </script>
+}

@@ -1,0 +1,38 @@
+﻿@model sistem.manajemen.ppic.website.Models.BaseModel
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Changes Logs
+                    <i class="fa fa-caret-down"></i>
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                <div class="table-container">
+                    <table id=" log" class="table table-bordered table-hover" style="table-layout: fixed;">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>User</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var data in Model.ChangesHistory)
+                            {
+                                <tr>
+                                    <td>@Html.Raw(data.MODIFIED_DATE.ToString("dd-MMM-yyyy HH:mm:ss"))</td>
+                                    <td>@Html.Raw(data.MODIFIED_BY)</td>
+                                    <td>@Html.Raw(data.ACTION)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

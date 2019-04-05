@@ -1,0 +1,351 @@
+﻿@model sistem.manajemen.ppic.website.Models.BaseModel
+
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>SIM-PPIC | @ViewBag.Title</title>
+    <meta name="description" content="Sistem Informasi Manajemen PPIC">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+        ============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/img/favicon.png">
+    <!-- Google Fonts
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
+    <!-- owl.carousel CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/Content/css/owl.theme.css">
+    <link rel="stylesheet" href="~/Content/css/owl.transitions.css">
+    <!-- animate CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/css/animate.css">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/css/normalize.css">
+    <!-- meanmenu icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/css/meanmenu.min.css">
+    <!-- main CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/css/main.css">
+    <!-- educate icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/css/educate-custon-icon.css">
+    <!-- morrisjs CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/css/morrisjs/morris.css">
+    <!-- mCustomScrollbar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- metisMenu CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/css/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="~/Content/css/metisMenu/metisMenu-vertical.css">
+    <!-- calendar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/css/calendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="~/Content/css/calendar/fullcalendar.print.min.css">
+    <!-- x-editor CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/css/editor/select2.css">
+    <link rel="stylesheet" href="~/Content/css/editor/datetimepicker.css">
+    <link rel="stylesheet" href="~/Content/css/editor/bootstrap-editable.css">
+    <link rel="stylesheet" href="~/Content/css/editor/bootstrap-editable.css">
+    <link rel="stylesheet" href="~/Content/css/editor/x-editor-style.css">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/css/data-table/bootstrap-table.css">
+    @*<link rel="stylesheet" href="~/Content/css/data-table/bootstrap-editable.css">*@
+    <link rel="stylesheet" href="~/Content/css/data-table/jquery.dataTables.min.css">
+    <!-- style CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/style.css">
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/css/responsive.css">
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="~/Content/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Start Left menu area -->
+    <div class="left-sidebar-pro">
+        <nav id="sidebar" class="">
+            <div class="sidebar-header" style="border-bottom:5px solid black;">
+                <a href="@Url.Action("Index","Home")"><img class="main-logo" src="~/Content/img/logo/logo.png" alt="" /></a>
+                <strong><a href="@Url.Action("Index","Home")"><img src="~/Content/img/logo/logosn.png" alt="" /></a></strong>
+            </div>
+            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+                <nav class="sidebar-nav left-sidebar-menu-pro">
+                    <ul class="metismenu" id="menu1">
+                        <li id="transaksi">
+                            <a class="has-arrow" title="Transaski">
+                                <span class="fa fa-file-o icon-wrap"></span>
+                                <span class="mini-click-non">Transaksi</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="SPB" href="index.html"  id="transaksi_SPB"><span class="mini-sub-pro">SPB</span></a></li>
+                                <li><a title="DO" href="index-1.html"  id="transaksi_DO"><span class="mini-sub-pro">DO</span></a></li>
+                                <li><a title="Pengiriman" href="index-2.html"  id="transaksi_Pengiriman"><span class="mini-sub-pro">Pengiriman</span></a></li>
+                            </ul>
+                        </li>
+                        <li  id="gudang">
+                            <a class="has-arrow" title="Gudang">
+                                <span class="fa fa-cubes icon-wrap"></span>
+                                <span class="mini-click-non">Gudang</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Barang Jadi" href="@Url.Action("Index","MstBarangJadi")"  id="gudang_barangjadi"><span class="mini-sub-pro">Barang Jadi</span></a></li>
+                                <li><a title="Barang Bahan Baku" href="#"><span class="mini-sub-pro" id="gudang_barangbb">Barang BB</span></a></li>
+                            </ul>
+                        </li>
+                        <li  id="master">
+                            <a class="has-arrow" title="Master">
+                                <span class="fa fa-align-justify icon-wrap"></span>
+                                <span class="mini-click-non">Master</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Master Wilayah" href="#"  id="master_wilayah"><span class="mini-sub-pro">Master Wilayah</span></a></li>
+                                <li><a title="Master Konsumen" href="#"  id="master_konsumen"><span class="mini-sub-pro">Master Konsumen</span></a></li>
+                                <li><a title="Master Transport" href="#" id="master_transport"><span class="mini-sub-pro">Master Transport</span></a></li>
+                            </ul>
+                        </li>
+                        <li  id="laporan">
+                            <a class="has-arrow" title="Laporan">
+                                <span class="fa fa-file-excel-o icon-wrap"></span>
+                                <span class="mini-click-non">Laporan</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Laporan Rekap Bulanan" href="index.html" id="laporan_rekapbulanan"><span class="mini-sub-pro">Laporan Rekap Bulanan</span></a></li>
+                                <li><a title="Laporan Outstanding" href="index-2.html" id="laporan_outstanding"><span class="mini-sub-pro">Laporan Outstanding</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </div>
+    <!-- End Left menu area -->
+    <!-- Start Welcome area -->
+    <div class="all-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="logo-pro" style="margin-bottom:50px;">
+                        @*<a href="index.html"><img class="main-logo" src="~/Content/img/logo/logo.png" alt="" /></a>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-advance-area">
+            <div class="header-top-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="header-top-wraper">
+                                <div class="row">
+                                    <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
+                                        <div class="menu-switcher-pro">
+                                            <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
+                                                <i class="educate-icon educate-nav"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                                        <div class="header-right-info" style="float:right;">
+                                            <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                                <li class="nav-item">
+                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                                        <img src="~/Content/img/product/no-pict.jpg" alt="" />
+                                                        @{
+                                                            var Name = Model.CurrentUser.FIRST_NAME + " " + Model.CurrentUser.LAST_NAME;
+                                                        }
+                                                        <span class="admin-name">@Name</span>
+                                                        <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
+                                                    </a>
+                                                    <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                                                        <li>
+                                                            <a href="@Url.Action("SignOut", "Login")"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu start -->
+            <div class="mobile-menu-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="mobile-menu">
+                                <nav id="dropdown">
+                                    <ul class="mobile-menu-nav">
+                                        <li>
+                                            <a data-toggle="collapse">Transaksi<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul class="collapse dropdown-header-top">
+                                                <li><a href="#">SPB</a></li>
+                                                <li><a href="#">DO</a></li>
+                                                <li><a href="#">Pengiriman</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="collapse">Gudang<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul class="collapse dropdown-header-top">
+                                                <li><a href="@Url.Action("Index","MstBarangJadi")">Barang Jadi</a></li>
+                                                <li><a href="#">Barang BB</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="collapse">Master<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul class="collapse dropdown-header-top">
+                                                <li><a href="#">Master Wilayah</a></li>
+                                                <li><a href="#">Master Konsumen</a></li>
+                                                <li><a href="#">Master Transport</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="collapse">Laporan<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul class="collapse dropdown-header-top">
+                                                <li><a href="#">Laporan Rekap Bulanan</a></li>
+                                                <li><a href="#">Laporan Outstanding</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu end -->
+            <div class="breadcome-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="breadcome-list">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="sparkline13-hd">
+                                            <div class="main-sparkline13-hd">
+                                                <h1>@Model.Menu</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+
+                                        <ul class="breadcome-menu">
+                                            <li>
+                                                <a href="@Url.Action("Index","Home")">Home</a> 
+                                            </li>
+                                            @if(!string.IsNullOrEmpty(Model.Menu))
+                                            {
+                                                <li>
+                                                    <span class="bread-slash">/</span><span class="bread-blod">@Model.Menu</span>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @RenderBody()
+        <div class="footer-copyright-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer-copy-right">
+                            <p>Copyright © 2018. All rights reserved</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jquery
+        ============================================ -->
+    <script src="~/Content/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS
+        ============================================ -->
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <!-- wow JS
+        ============================================ -->
+    <script src="~/Content/js/wow.min.js"></script>
+    <!-- price-slider JS
+        ============================================ -->
+    <script src="~/Content/js/jquery-price-slider.js"></script>
+    <!-- meanmenu JS
+        ============================================ -->
+    <script src="~/Content/js/jquery.meanmenu.js"></script>
+    <!-- owl.carousel JS
+        ============================================ -->
+    <script src="~/Content/js/owl.carousel.min.js"></script>
+    <!-- sticky JS
+        ============================================ -->
+    <script src="~/Content/js/jquery.sticky.js"></script>
+    <!-- scrollUp JS
+        ============================================ -->
+    <script src="~/Content/js/jquery.scrollUp.min.js"></script>
+    <!-- mCustomScrollbar JS
+        ============================================ -->
+    <script src="~/Content/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/Content/js/scrollbar/mCustomScrollbar-active.js"></script>
+    <!-- metisMenu JS
+        ============================================ -->
+    <script src="~/Content/js/metisMenu/metisMenu.min.js"></script>
+    <script src="~/Content/js/metisMenu/metisMenu-active.js"></script>
+    <!-- data table JS
+        ============================================ -->
+    <script src="~/Content/js/data-table/bootstrap-table.js"></script>
+    <script src="~/Content/js/data-table/tableExport.js"></script>
+    @*<script src="~/Content/js/data-table/data-table-active.js"></script>*@
+    @*<script src="~/Content/js/data-table/bootstrap-table-editable.js"></script>*@
+    @*<script src="~/Content/js/data-table/bootstrap-editable.js"></script>*@
+    @*<script src="~/Content/js/data-table/bootstrap-table-resizable.js"></script>*@
+    @*<script src="~/Content/js/data-table/colResizable-1.5.source.js"></script>*@
+    <script src="~/Content/js/data-table/bootstrap-table-export.js"></script>
+    <script src="~/Content/js/data-table/jquery.dataTables.min.js"></script>
+    <!--  editable JS
+        ============================================ -->
+    <script src="~/Content/js/editable/jquery.mockjax.js"></script>
+    <script src="~/Content/js/editable/mock-active.js"></script>
+    <script src="~/Content/js/editable/select2.js"></script>
+    <script src="~/Content/js/editable/moment.min.js"></script>
+    <script src="~/Content/js/editable/bootstrap-datetimepicker.js"></script>
+    <script src="~/Content/js/editable/bootstrap-editable.js"></script>
+    <script src="~/Content/js/editable/xediable-active.js"></script>
+    <!-- Chart JS
+        ============================================ -->
+    <script src="~/Content/js/chart/jquery.peity.min.js"></script>
+    <script src="~/Content/js/peity/peity-active.js"></script>
+    <!-- tab JS
+        ============================================ -->
+    <script src="~/Content/js/tab.js"></script>
+    <!-- plugins JS
+        ============================================ -->
+    <script src="~/Content/js/plugins.js"></script>
+    <!-- main JS
+        ============================================ -->
+    <script src="~/Content/js/main.js"></script>
+    @RenderSection("scripts",false)
+    @{ Html.RenderAction("MessageInfo", "Login");}
+</body>
+</html>
