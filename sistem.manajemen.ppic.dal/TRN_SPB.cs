@@ -49,5 +49,6 @@ namespace sistem.manajemen.ppic.dal
         public string MODIFIED_BY { get; set; }
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
         public string KEMASAN_DESC { get; set; }
+        public Nullable<core.Enums.StatusDocument> STATUS { get; set; }
     }
 }

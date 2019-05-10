@@ -16,6 +16,20 @@
           <Property Name="MODIFIED_DATE" Type="datetime" />
           <Property Name="ACTION" Type="varchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="HASIL_PRODUKSI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TANGGAL" Type="datetime" Nullable="false" />
+          <Property Name="ID_BARANG" Type="int" Nullable="false" />
+          <Property Name="JUMLAH" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CATATAN" Type="text" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="100" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="MODIFIED_BY" Type="nvarchar" MaxLength="100" />
+          <Property Name="MODIFIED_DATE" Type="datetime" />
+        </EntityType>
         <EntityType Name="Login">
           <Key>
             <PropertyRef Name="USER_ID" />
@@ -67,6 +81,55 @@
           <Property Name="MENU_NAME" Type="nvarchar" MaxLength="50" />
           <Property Name="PARENT_PAGE_ID" Type="int" />
         </EntityType>
+        <EntityType Name="TRN_DO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TANGGAL" Type="datetime" Nullable="false" />
+          <Property Name="NO_SPB" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NO_DO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NAMA_KONSUMEN" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ALAMAT_KONSUMEN" Type="text" />
+          <Property Name="JUMLAH" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NAMA_CP" Type="nvarchar" MaxLength="100" />
+          <Property Name="NO_TELP" Type="nvarchar" MaxLength="100" />
+          <Property Name="NO_FAX" Type="nvarchar" MaxLength="100" />
+          <Property Name="NAMA_BARANG" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="KOMPOSISI" Type="nvarchar" MaxLength="255" />
+          <Property Name="BENTUK" Type="nvarchar" MaxLength="100" />
+          <Property Name="KEMASAN" Type="nvarchar" MaxLength="100" />
+          <Property Name="KETERANGAN" Type="text" />
+          <Property Name="HARGA_LOKO" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="100" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="MODIFIED_BY" Type="nvarchar" MaxLength="100" />
+          <Property Name="MODIFIED_DATE" Type="datetime" />
+          <Property Name="STATUS" Type="int" />
+        </EntityType>
+        <EntityType Name="TRN_PENGIRIMAN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TANGGAL" Type="datetime" Nullable="false" />
+          <Property Name="SURAT_JALAN" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NO_DO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NO_SPB" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NO_TRUCK" Type="int" Nullable="false" />
+          <Property Name="JUMLAH" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NAMA_KONSUMEN" Type="nvarchar" MaxLength="255" />
+          <Property Name="NAMA_BARANG" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PARTY" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="AKUMULASI" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SISA" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="100" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="MODIFIED_BY" Type="nvarchar" MaxLength="100" />
+          <Property Name="MODIFIED_DATE" Type="datetime" />
+          <Property Name="STATUS" Type="int" />
+          <Property Name="CATATAN" Type="text" />
+        </EntityType>
         <EntityType Name="TRN_SPB">
           <Key>
             <PropertyRef Name="ID" />
@@ -106,14 +169,34 @@
           <Property Name="CREATED_DATE" Type="datetime" />
           <Property Name="MODIFIED_BY" Type="nvarchar" MaxLength="100" />
           <Property Name="MODIFIED_DATE" Type="datetime" />
+          <Property Name="STATUS" Type="int" />
         </EntityType>
+        <Association Name="FK_HASIL_PRODUKSI_MST_BARANG_JADI">
+          <End Role="MST_BARANG_JADI" Type="Self.MST_BARANG_JADI" Multiplicity="1" />
+          <End Role="HASIL_PRODUKSI" Type="Self.HASIL_PRODUKSI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MST_BARANG_JADI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HASIL_PRODUKSI">
+              <PropertyRef Name="ID_BARANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SIM_PPICModelStoreContainer">
           <EntitySet Name="CHANGES_HISTORY" EntityType="Self.CHANGES_HISTORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HASIL_PRODUKSI" EntityType="Self.HASIL_PRODUKSI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MST_BARANG_JADI" EntityType="Self.MST_BARANG_JADI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MST_WILAYAH" EntityType="Self.MST_WILAYAH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PAGE" EntityType="Self.PAGE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRN_DO" EntityType="Self.TRN_DO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRN_PENGIRIMAN" EntityType="Self.TRN_PENGIRIMAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRN_SPB" EntityType="Self.TRN_SPB" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_HASIL_PRODUKSI_MST_BARANG_JADI" Association="Self.FK_HASIL_PRODUKSI_MST_BARANG_JADI">
+            <End Role="MST_BARANG_JADI" EntitySet="MST_BARANG_JADI" />
+            <End Role="HASIL_PRODUKSI" EntitySet="HASIL_PRODUKSI" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -137,6 +220,13 @@
           <EntitySet Name="MST_WILAYAH" EntityType="SIM_PPICModel.MST_WILAYAH" />
           <EntitySet Name="CHANGES_HISTORY" EntityType="SIM_PPICModel.CHANGES_HISTORY" />
           <EntitySet Name="TRN_SPB" EntityType="SIM_PPICModel.TRN_SPB" />
+          <EntitySet Name="TRN_DO" EntityType="SIM_PPICModel.TRN_DO" />
+          <EntitySet Name="TRN_PENGIRIMAN" EntityType="SIM_PPICModel.TRN_PENGIRIMAN" />
+          <EntitySet Name="HASIL_PRODUKSI" EntityType="SIM_PPICModel.HASIL_PRODUKSI" />
+          <AssociationSet Name="FK_HASIL_PRODUKSI_MST_BARANG_JADI" Association="SIM_PPICModel.FK_HASIL_PRODUKSI_MST_BARANG_JADI">
+            <End Role="MST_BARANG_JADI" EntitySet="MST_BARANG_JADI" />
+            <End Role="HASIL_PRODUKSI" EntitySet="HASIL_PRODUKSI" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="PAGE">
           <Key>
@@ -164,6 +254,7 @@
           <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
           <Property Name="MODIFIED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="HASIL_PRODUKSI" Relationship="SIM_PPICModel.FK_HASIL_PRODUKSI_MST_BARANG_JADI" FromRole="MST_BARANG_JADI" ToRole="HASIL_PRODUKSI" />
         </EntityType>
         <EntityType Name="MST_WILAYAH">
           <Key>
@@ -228,7 +319,85 @@
           <Property Name="MODIFIED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
           <Property Name="KEMASAN_DESC" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="SIM_PPICModel.StatusDocument" />
         </EntityType>
+        <EnumType Name="StatusDocument" a:ExternalTypeName="core.Enums.StatusDocument" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        <EntityType Name="TRN_DO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TANGGAL" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NO_SPB" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NO_DO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NAMA_KONSUMEN" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="JUMLAH" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="NAMA_CP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NO_TELP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NAMA_BARANG" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KETERANGAN" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HARGA_LOKO" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="STATUS" Type="SIM_PPICModel.StatusDocument" />
+          <Property Name="KOMPOSISI" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BENTUK" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KEMASAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ALAMAT_KONSUMEN" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NO_FAX" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TRN_PENGIRIMAN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TANGGAL" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SURAT_JALAN" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NO_DO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NO_SPB" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NO_TRUCK" Type="Int32" Nullable="false" />
+          <Property Name="JUMLAH" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="NAMA_KONSUMEN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NAMA_BARANG" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PARTY" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="AKUMULASI" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SISA" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="STATUS" Type="SIM_PPICModel.StatusDocument" />
+          <Property Name="CATATAN" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HASIL_PRODUKSI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TANGGAL" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ID_BARANG" Type="Int32" Nullable="false" />
+          <Property Name="JUMLAH" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CATATAN" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MST_BARANG_JADI" Relationship="SIM_PPICModel.FK_HASIL_PRODUKSI_MST_BARANG_JADI" FromRole="HASIL_PRODUKSI" ToRole="MST_BARANG_JADI" />
+        </EntityType>
+        <Association Name="FK_HASIL_PRODUKSI_MST_BARANG_JADI">
+          <End Type="SIM_PPICModel.MST_BARANG_JADI" Role="MST_BARANG_JADI" Multiplicity="1" />
+          <End Type="SIM_PPICModel.HASIL_PRODUKSI" Role="HASIL_PRODUKSI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MST_BARANG_JADI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HASIL_PRODUKSI">
+              <PropertyRef Name="ID_BARANG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -305,6 +474,7 @@
           <EntitySetMapping Name="TRN_SPB">
             <EntityTypeMapping TypeName="SIM_PPICModel.TRN_SPB">
               <MappingFragment StoreEntitySet="TRN_SPB">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="KEMASAN_DESC" ColumnName="KEMASAN_DESC" />
                 <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
                 <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
@@ -338,6 +508,72 @@
                 <ScalarProperty Name="WILAYAH" ColumnName="WILAYAH" />
                 <ScalarProperty Name="SALES" ColumnName="SALES" />
                 <ScalarProperty Name="NO_SPB" ColumnName="NO_SPB" />
+                <ScalarProperty Name="TANGGAL" ColumnName="TANGGAL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRN_DO">
+            <EntityTypeMapping TypeName="SIM_PPICModel.TRN_DO">
+              <MappingFragment StoreEntitySet="TRN_DO">
+                <ScalarProperty Name="NO_FAX" ColumnName="NO_FAX" />
+                <ScalarProperty Name="ALAMAT_KONSUMEN" ColumnName="ALAMAT_KONSUMEN" />
+                <ScalarProperty Name="KEMASAN" ColumnName="KEMASAN" />
+                <ScalarProperty Name="BENTUK" ColumnName="BENTUK" />
+                <ScalarProperty Name="KOMPOSISI" ColumnName="KOMPOSISI" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="HARGA_LOKO" ColumnName="HARGA_LOKO" />
+                <ScalarProperty Name="KETERANGAN" ColumnName="KETERANGAN" />
+                <ScalarProperty Name="NAMA_BARANG" ColumnName="NAMA_BARANG" />
+                <ScalarProperty Name="NO_TELP" ColumnName="NO_TELP" />
+                <ScalarProperty Name="NAMA_CP" ColumnName="NAMA_CP" />
+                <ScalarProperty Name="JUMLAH" ColumnName="JUMLAH" />
+                <ScalarProperty Name="NAMA_KONSUMEN" ColumnName="NAMA_KONSUMEN" />
+                <ScalarProperty Name="NO_DO" ColumnName="NO_DO" />
+                <ScalarProperty Name="NO_SPB" ColumnName="NO_SPB" />
+                <ScalarProperty Name="TANGGAL" ColumnName="TANGGAL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRN_PENGIRIMAN">
+            <EntityTypeMapping TypeName="SIM_PPICModel.TRN_PENGIRIMAN">
+              <MappingFragment StoreEntitySet="TRN_PENGIRIMAN">
+                <ScalarProperty Name="CATATAN" ColumnName="CATATAN" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="SISA" ColumnName="SISA" />
+                <ScalarProperty Name="AKUMULASI" ColumnName="AKUMULASI" />
+                <ScalarProperty Name="PARTY" ColumnName="PARTY" />
+                <ScalarProperty Name="NAMA_BARANG" ColumnName="NAMA_BARANG" />
+                <ScalarProperty Name="NAMA_KONSUMEN" ColumnName="NAMA_KONSUMEN" />
+                <ScalarProperty Name="JUMLAH" ColumnName="JUMLAH" />
+                <ScalarProperty Name="NO_TRUCK" ColumnName="NO_TRUCK" />
+                <ScalarProperty Name="NO_SPB" ColumnName="NO_SPB" />
+                <ScalarProperty Name="NO_DO" ColumnName="NO_DO" />
+                <ScalarProperty Name="SURAT_JALAN" ColumnName="SURAT_JALAN" />
+                <ScalarProperty Name="TANGGAL" ColumnName="TANGGAL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HASIL_PRODUKSI">
+            <EntityTypeMapping TypeName="SIM_PPICModel.HASIL_PRODUKSI">
+              <MappingFragment StoreEntitySet="HASIL_PRODUKSI">
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CATATAN" ColumnName="CATATAN" />
+                <ScalarProperty Name="JUMLAH" ColumnName="JUMLAH" />
+                <ScalarProperty Name="ID_BARANG" ColumnName="ID_BARANG" />
                 <ScalarProperty Name="TANGGAL" ColumnName="TANGGAL" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

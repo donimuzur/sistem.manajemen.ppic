@@ -31,5 +31,8 @@ namespace sistem.manajemen.ppic.dal
         public DbSet<MST_WILAYAH> MST_WILAYAH { get; set; }
         public DbSet<CHANGES_HISTORY> CHANGES_HISTORY { get; set; }
         public DbSet<TRN_SPB> TRN_SPB { get; set; }
+        public DbSet<TRN_DO> TRN_DO { get; set; }
+        public DbSet<TRN_PENGIRIMAN> TRN_PENGIRIMAN { get; set; }
+        public DbSet<HASIL_PRODUKSI> HASIL_PRODUKSI { get; set; }
     }
 }

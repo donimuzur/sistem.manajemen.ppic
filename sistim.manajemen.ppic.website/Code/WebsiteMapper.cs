@@ -26,6 +26,12 @@ namespace sistem.manajemen.ppic.website.Code
                 cfg.CreateMap<TrnSpbModel, TrnSpbDto>().ReverseMap();
                 cfg.CreateMap<TrnSpbDto, TRN_SPB>().ReverseMap();
 
+                cfg.CreateMap<TrnDoModel, TrnDoDto>().ReverseMap();
+                cfg.CreateMap<TrnDoDto, TRN_DO>().ReverseMap();
+
+                cfg.CreateMap<TrnPengirimanModel, TrnPengirimanDto>().ReverseMap();
+                cfg.CreateMap<TrnPengirimanDto, TRN_PENGIRIMAN>().ReverseMap();
+
                 cfg.CreateMap<ChangesHistoryModel, ChangesHistoryDto>().ReverseMap();
                 cfg.CreateMap<ChangesHistoryDto, CHANGES_HISTORY>().ReverseMap();
             });

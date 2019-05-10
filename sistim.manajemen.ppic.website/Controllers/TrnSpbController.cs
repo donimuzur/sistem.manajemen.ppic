@@ -14,9 +14,13 @@ namespace sistem.manajemen.ppic.website.Controllers
     public class TrnSpbController : BaseController
     {
         private ITrnSpbBLL _trnSpbBLL;
-        public TrnSpbController(ITrnSpbBLL TrnSpbBLL,IPageBLL pageBll) : base(pageBll, Enums.MenuList.TrnSpb)
+        private IMstBarangJadiBLL _mstBarangJadiBLL;
+        private IMstWilayahBLL _mstWilayahBLL;
+        public TrnSpbController(ITrnSpbBLL TrnSpbBLL,IPageBLL pageBll, IMstBarangJadiBLL MstBarangJadiBLL, IMstWilayahBLL MstWilayahBLL) : base(pageBll, Enums.MenuList.TrnSpb)
         {
             _trnSpbBLL = TrnSpbBLL;
+            _mstBarangJadiBLL = MstBarangJadiBLL;
+            _mstWilayahBLL = MstWilayahBLL;
         }
         public ActionResult Index()
         {
@@ -97,11 +101,11 @@ namespace sistem.manajemen.ppic.website.Controllers
             {
                 try
                 {
-
                     model.TANGGAL = DateTime.Now;
                     model.CREATED_BY = CurrentUser.USERNAME;
                     model.CREATED_DATE = DateTime.Now;
-                    
+                    model.STATUS = Enums.StatusDocument.Open;
+
                     var CheckExist = _trnSpbBLL.GetBySPB(model.NO_SPB);
                     if(CheckExist != null)
                     {
@@ -128,13 +132,138 @@ namespace sistem.manajemen.ppic.website.Controllers
         #endregion
 
         #region --- Edit ---
-        public ActionResult Edit()
+        public ActionResult Edit(int? id)
         {
-            var model = new TrnSpbModel();
+            if(!id.HasValue)
+            {
+                return HttpNotFound();
+            }
 
-            model = Init(model);
-            return View(model);
+            try
+            {
+                var model = new TrnSpbModel();
+
+                model = Mapper.Map<TrnSpbModel>(_trnSpbBLL.GetById(id));
+
+                model = Init(model);
+                return View(model);
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
+                AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+                return RedirectToAction("Index", "TrnSpb");
+            }
+        }
+        [HttpPost]
+        public ActionResult Edit(TrnSpbModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.MODIFIED_BY = CurrentUser.USERNAME;
+                    model.MODIFIED_DATE = DateTime.Now;
+                    
+                    var Dto = Mapper.Map<TrnSpbDto>(model);
+                    _trnSpbBLL.Save(Dto,Mapper.Map<LoginDto>(CurrentUser));
+
+                    AddMessageInfo("Success Create SPB", Enums.MessageInfoType.Success);
+                    return RedirectToAction("Index", "TrnSpb");
+                }
+                catch (Exception exp)
+                {
+                    LogError.LogError.WriteError(exp);
+                    AddMessageInfo("Gagal Create SPB", Enums.MessageInfoType.Error);
+                    return RedirectToAction("Index", "TrnSpb");
+                }
+            }
+            AddMessageInfo("Gagal Create SPB", Enums.MessageInfoType.Error);
+            return View(Init(model));
         }
         #endregion
+
+        #region --- Details ---
+        public ActionResult Details(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return HttpNotFound();
+            }
+
+            try
+            {
+                var model = new TrnSpbModel();
+
+                model = Mapper.Map<TrnSpbModel>(_trnSpbBLL.GetById(id));
+
+                model = Init(model);
+                return View(model);
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
+                AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+                return RedirectToAction("Index", "TrnSpb");
+            }
+        }
+        #endregion
+
+        #region --- Json ---
+        public JsonResult GetProdukList()
+        {
+            var model = _mstBarangJadiBLL
+             .GetAll()
+             .Select(x
+                 => new
+                 {
+                     DATA = (x.NAMA_BARANG + " - " + (x.BENTUK == "Lain-Lain" ? x.BENTUK_LAIN : x.BENTUK) + " - " + x.KEMASAN),
+                     VALUE = x.ID
+                 })
+             .OrderBy(X => X.DATA)
+             .ToList();
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult GetProduk(string NoSpb)
+        {
+            var data = _trnSpbBLL.GetBySPB(NoSpb);
+            if (data == null)
+            {
+                data = new TrnSpbDto();
+            }
+            return Json(data);
+        }
+        public JsonResult GetCustomerList()
+        {
+            var model = _trnSpbBLL
+             .GetAll()
+             .Select(x
+                 => new 
+                 {
+                     DATA = (x.NAMA_KONSUMEN)
+                 })
+             .GroupBy(X => X.DATA)
+             .ToList();
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetWilayahList()
+        {
+            var model = _mstWilayahBLL
+             .GetAll()
+             .Select(x
+                 => new
+                 {
+                     DATA = (x.WILAYAH)
+                 })
+             .GroupBy(X => new { DATA = X.DATA })
+             .ToList();
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+        
     }
 }

@@ -32,7 +32,7 @@ namespace sistem.manajemen.ppic.dal
                 throw;
             }
         }
-        
+
         public Task SaveAsync()
         {
             try

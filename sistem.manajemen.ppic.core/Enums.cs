@@ -22,8 +22,9 @@ namespace sistem.manajemen.ppic.core
             TrnSpb=20,
             TrnDo=21,
             TrnPengiriman=22,
+            TrnHasilProduksi = 23,
 
-            GdgBarangJadi=30,
+            GdgBarangJadi =30,
             GdgBarangBB = 30,
 
             MasterWilayah = 40,
@@ -33,6 +34,11 @@ namespace sistem.manajemen.ppic.core
 
             LaporanOutstanding=50,
             LaporanRekapBulanan=51,
+        }
+        public enum StatusDocument
+        {
+            Open=0,
+            Closed=1
         }
         public enum Kemasan
         {

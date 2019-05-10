@@ -3,6 +3,7 @@ using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
 using sistem.manajemen.ppic.bll;
 using sistem.manajemen.ppic.bll.IBLL;
+using sistem.manajemen.ppic.BLL;
 using sistem.manajemen.ppic.dal;
 using sistem.manajemen.ppic.website.Code;
 using System;
@@ -22,7 +23,6 @@ namespace sistem.manajemen.ppic.website
         {
             return _container.GetInstance<TService>();
         }
-
         private static void StartMain()
         {
             WebsiteMapper.Initialize();
@@ -37,6 +37,9 @@ namespace sistem.manajemen.ppic.website
             container.Register<IMstBarangJadiBLL, MstBarangJadiBLL>();
             container.Register<IMstWilayahBLL, MstWilayahBLL>();
             container.Register<ITrnSpbBLL, TrnSpbBLL>();
+            container.Register<ITrnDoBLL, TrnDoBLL>();
+            container.Register<ITrnPengirimanBLL,TrnPengirimanBLL >();
+            container.Register<ITrnHasilProduksiBLL, TrnHasilProduksiBLL>();
 
             // 3. Optionally verify the container's configuration.
             container.Verify();
@@ -44,7 +47,6 @@ namespace sistem.manajemen.ppic.website
             // 4. Store the container for use by Page classes.
             _container = container;
         }
-        
         protected void Application_Start()
         {
             //SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));

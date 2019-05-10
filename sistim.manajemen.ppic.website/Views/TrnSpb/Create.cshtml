@@ -25,17 +25,17 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">No SPB<span class="red">*</span></label>
-                                            @Html.TextBoxFor(model => model.NO_SPB, new { @class = "form-control", @style="text-decoration:uppercase", @placeholder = "No SPB", @required = "required" })
+                                            @Html.TextBoxFor(model => model.NO_SPB, new { @class = "form-control", @style = "text-transform: uppercase;", @placeholder = "No SPB", @required = "required" })
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Sales Representative<span class="red">*</span></label>
-                                            @Html.TextBoxFor(model => model.SALES, new { @class = "form-control", @placeholder = "Sales Representative", @required = "required" })
+                                            @Html.TextBoxFor(model => model.SALES, new { @class = "form-control", @style = "text-transform: uppercase;", @placeholder = "Sales Representative", @required = "required" })
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Wilayah Pemasaran<span class="red">*</span></label>
-                                            @Html.TextBoxFor(model => model.WILAYAH, new { @class = "form-control", @placeholder = "Wilayah Pemasaran", @required = "required" })
+                                            @Html.TextBoxFor(model => model.WILAYAH, new { @class = "form-control", @style = "text-transform: uppercase;", @placeholder = "Wilayah Pemasaran", @required = "required" })
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Nama Produk<span class="red">*</span></label>
-                                            @Html.TextBoxFor(model => model.NAMA_PRODUK, new { @class = "form-control", @placeholder = "Nama Produk", @required = "required" })
+                                            @Html.TextBoxFor(model => model.NAMA_PRODUK, new { @class = "form-control", @style = "text-transform: uppercase;", @placeholder = "Nama Produk", @required = "required" })
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Komposisi Unsur<span class="red">*</span></label>
@@ -72,7 +72,7 @@
                                                     @Html.DropDownListFor(model => model.BENTUK, Model.BentukList, "Please Select", new { @class = "form-control", @placeholder = "Bentuk", @required = "required", onchange = " initilize()" })
                                                 </div>
                                                 <div class="col-lg-8 col-md-8 col-sm-8">
-                                                    @Html.TextBoxFor(model => model.BENTUK_DESC, new { @class = "form-control" , @style = "text-transform:uppercase", disabled ="disabled"})
+                                                    @Html.TextBoxFor(model => model.BENTUK_DESC, new { @class = "form-control" , @style = "text-transform: uppercase;", disabled ="disabled"})
                                                 </div>
                                             </div>
                                         </div>
@@ -83,7 +83,7 @@
                                                     @Html.DropDownListFor(model => model.KEMASAN, Model.KemasanList, "Please Select", new { @class = "form-control", @required = "required", onchange = " initilize()" })
                                                 </div>
                                                 <div class="col-lg-8 col-md-8 col-sm-8">
-                                                    @Html.TextBoxFor(model => model.KEMASAN_DESC, new { @class = "form-control", @style = "text-transform:uppercase", disabled = "disabled" })
+                                                    @Html.TextBoxFor(model => model.KEMASAN_DESC, new { @class = "form-control", @style = "text-transform: uppercase;", disabled = "disabled" })
                                                 </div>
                                             </div>
                                         </div>
@@ -109,11 +109,11 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Nama Konsumen<span class="red">*</span></label>
-                                            @Html.TextBoxFor(model => model.NAMA_KONSUMEN, new { @class = "form-control", @placeholder = "Nama Konsumen", @required = "required" })
+                                            @Html.TextBoxFor(model => model.NAMA_KONSUMEN, new { @class = "form-control", @style = "text-transform: uppercase;", @placeholder = "Nama Konsumen", @required = "required" })
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Alamat Konsumen<span class="red">*</span></label>
-                                            @Html.TextAreaFor(model => model.ALAMAT_KONSUMEN, new { @class = "form-control", @placeholder = "Alamat Konsumen", @required = "required" })
+                                            @Html.TextAreaFor(model => model.ALAMAT_KONSUMEN, new { @class = "form-control", @style = "text-transform: uppercase;", @placeholder = "Alamat Konsumen", @required = "required" })
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Telephone<span class="red">*</span></label>
@@ -127,7 +127,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Contact Person</label>
-                                            @Html.TextBoxFor(model => model.CONTACT_PERSON, new { @class = "form-control", @placeholder = "Contact Person" })
+                                            @Html.TextBoxFor(model => model.CONTACT_PERSON, new { @class = "form-control", @style = "text-transform: uppercase;", @placeholder = "Contact Person" })
                                         </div>
                                     </div>
                                 </div>
@@ -156,7 +156,7 @@
                                                     @Html.DropDownListFor(model => model.JENIS_PENJUALAN, Model.JenisPenjualanList, "Please Select", new { @class = "form-control", @placeholder = "Jenis Penjualan", @required = "required", @onchange = "initilize()" })
                                                 </div>
                                                 <div class="col-lg-8 col-md-8 col-sm-8">
-                                                    @Html.TextBoxFor(model => model.JENIS_PENJUALAN_DESC, new { @class = "form-control", @style = "text-transform:uppercase", @disabled ="disabled"})
+                                                    @Html.TextBoxFor(model => model.JENIS_PENJUALAN_DESC, new { @class = "form-control", @style = "text-transform: uppercase;", @disabled ="disabled"})
                                                 </div>
                                             </div>
                                         </div>
@@ -168,7 +168,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Lokasi Tujuan kirim<span class="red">*</span></label>
-                                            @Html.TextBoxFor(model => model.LOKASI_KIRIM, new { @class = "form-control", @placeholder = "Lokasi Tujuan Kirim", @required = "required" })
+                                            @Html.TextBoxFor(model => model.LOKASI_KIRIM, new { @class = "form-control", @style = "text-transform: uppercase;", @placeholder = "Lokasi Tujuan Kirim", @required = "required" })
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Batas Akhir Kirim<span class="red">*</span></label>
@@ -209,17 +209,26 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">harga Jual<span class="red">*</span></label>
-                                            @Html.TextBoxFor(model => model.HARGA_JUAL, new { @class = "decimal form-control", @placeholder = "Harga Jual (per Kg)", @required = "required" })
+                                            <div class="input-icon">
+                                                @Html.TextBoxFor(model => model.HARGA_JUAL, new { @class = "decimal form-control", @placeholder = "Harga Jual (per Kg)", @required = "required" })
+                                                <i>Rp.</i>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Harga Loko<span class="red">*</span></label>
-                                            @Html.TextBoxFor(model => model.HARGA_LOKO, new { @class = "decimal form-control", @placeholder = "Harga Loko", @required = "required" })
+                                            <div class="input-icon">
+                                                @Html.TextBoxFor(model => model.HARGA_LOKO, new { @class = "decimal form-control", @placeholder = "Harga Loko", @required = "required" })
+                                                <i>Rp.</i>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Ongkos Kirim</label>
-                                            @Html.TextBoxFor(model => model.ONGKOS_KIRIM, new { @class = "form-control", @placeholder = "Ongkos Kirim"})
+                                            <div class="input-icon">
+                                                @Html.TextBoxFor(model => model.ONGKOS_KIRIM, new { @class = "form-control", @placeholder = "Ongkos Kirim" })
+                                                <i>Rp.</i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -238,8 +247,8 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button>
-                            <a href="@Url.Action("Index","TrnSpb")" class="btn btn-default">Cancel</a>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light">Simpan</button>
+                            <a href="@Url.Action("Index","TrnSpb")" class="btn btn-default">Batal</a>
                         </div>
                     </div>
                 </div>
@@ -252,8 +261,23 @@
         $(document).ready()
         {
             initilize();
+            InitSpb('@Url.Action("GetWilayahList", "TrnSpb")');
         }
-
+        function InitSpb(url) {
+            var options = {
+                url: url,
+                getValue: "DATA",
+                list: {
+                    match: {
+                        enabled: true
+                    },
+                    sort: {
+                        enabled: true
+                    }
+                }
+            };
+            $("#WILAYAH").easyAutocomplete(options);
+        }
         $("#BENTUK").change(function () {
             initilize();
         });

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using sistem.manajemen.ppic.bll.IBLL;
+using sistem.manajemen.ppic.core;
 using sistem.manajemen.ppic.dal;
 using sistem.manajemen.ppic.dal.IServices;
 using sistem.manajemen.ppic.dal.Services;
@@ -47,7 +48,7 @@ namespace sistem.manajemen.ppic.bll
             try
             {
                 var db = Mapper.Map<TRN_SPB>(model);
-                _trnSpbServices.Save(db);
+                _trnSpbServices.Save(db, new Login { USERNAME="SYSTEM",USER_ID="SYSTEM"});
             }
             catch (Exception)
             {
@@ -58,10 +59,22 @@ namespace sistem.manajemen.ppic.bll
         {
             try
             {
-                
                 var db = Mapper.Map<TRN_SPB>(model);
                 var Login = Mapper.Map<Login>(LoginDto);
                 _trnSpbServices.Save(db, Login);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void CloseSpb(string NoSpb)
+        {
+            try
+            {
+                var db = Mapper.Map<TRN_SPB>(GetBySPB(NoSpb));
+                db.STATUS = Enums.StatusDocument.Closed;
+                _trnSpbServices.Save(db,new Login { USERNAME="SYSTEM", USER_ID="SYSTEM"});
             }
             catch (Exception)
             {

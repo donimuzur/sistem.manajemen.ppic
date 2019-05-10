@@ -1,0 +1,72 @@
+﻿@model sistem.manajemen.ppic.website.Models.TrnHasilProduksiViewModel
+@{
+    ViewBag.Title = "Hasil Produksi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="data-table-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sparkline13-list">
+                    <div class="sparkline13-hd">
+                        <div class="main-sparkline13-hd">
+                            <h1>&nbsp;</h1>
+                        </div>
+                    </div>
+                    <div class="sparkline13-graph">
+                        <div>
+                            <div class="add-product">
+                                <a href="@Url.Action("Create","TrnHasilProduksi")">Tambah</a>
+                            </div>
+                            <table id="table" class="stripe row-border order-column" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th style="min-width:30px">No</th>
+                                        <th style="min-width:50px">Action</th>
+                                        <th style="min-width:100px">Tanggal</th>
+                                        <th style="min-width:50px">Barang</th>
+                                        <th style="min-width:150px">Jumlah</th>
+                                        <th style="min-width:200px">Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ListData.OrderBy(x => x.TANGGAL).ToList())
+                                    {
+                                        <tr>
+                                            <td>@Html.Raw(Model.ListData.IndexOf(item) + 1)</td>
+                                            <td style="text-align:center;">
+                                                @if (Model.CurrentUser.USERNAME == item.CREATED_BY)
+                                                {
+                                                    <a href="@Url.Action("Edit","TrnHasilProduksi",new {@id=item.ID})" data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                }
+                                                <a href="@Url.Action("Details","TrnHasilProduksi",new {@id=item.ID})" data-toggle="tooltip" title="Details" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            </td>
+                                            <td>@Html.Raw(item.TANGGAL.ToString("dd MMM yyyy"))</td>
+                                            <td>@Html.Raw(item.MST_BARANG_JADI.NAMA_BARANG)</td>
+                                            <td>@Html.Raw(item.JUMLAH)</td>
+                                            <td>@Html.Raw(item.CATATAN)</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#table').DataTable({
+                "dom": 'lf<"table-overflow"t>pi',
+                orderCellsTop: true,
+                scrollY: "300px",
+                scrollX: true,
+                scrollCollapse: true,
+                fixedColumns: true
+            });
+        });
+    </script>
+}

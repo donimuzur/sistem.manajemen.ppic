@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace LogError
 {
@@ -12,7 +14,7 @@ namespace LogError
         public static void WriteError(Exception ex)
         {
             // this will be in a temp directory.
-            string path = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string path = HttpRuntime.AppDomainAppPath;
 
             //once you have the path you get the directory with:
             var directory = System.IO.Path.GetDirectoryName(path);

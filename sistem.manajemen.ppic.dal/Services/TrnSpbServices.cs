@@ -43,7 +43,7 @@ namespace sistem.manajemen.ppic.dal.Services
         {
             try
             {
-                _trnSpbRepo.InsertOrUpdate(Db, Login, Enums.MenuList.MasterWilayah);
+                _trnSpbRepo.InsertOrUpdate(Db, Login, Enums.MenuList.TrnSpb);
                 _uow.SaveChanges();
             }
             catch (Exception)

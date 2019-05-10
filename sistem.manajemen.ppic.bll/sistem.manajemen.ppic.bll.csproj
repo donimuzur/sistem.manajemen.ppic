@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\MstWilayahBLL.cs" />
+    <Compile Include="BLL\TrnPengirimanBLL.cs" />
     <Compile Include="IBLL\IMstBarangJadiBLL.cs" />
     <Compile Include="IBLL\ILoginBLL.cs" />
     <Compile Include="IBLL\IMstWilayahBLL.cs" />
@@ -53,11 +54,20 @@
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\PageBLL.cs" />
     <Compile Include="BLL\MstBarangJadiBLL.cs" />
+    <Compile Include="IBLL\ITrnDoBLL.cs" />
+    <Compile Include="IBLL\ITrnHasilProduksiBLL.cs" />
+    <Compile Include="IBLL\ITrnPengirimanBLL.cs" />
     <Compile Include="IBLL\ITrnSpbBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BLL\TrnSpbBLL.cs" />
+    <Compile Include="BLL\TrnDoBLL.cs" />
+    <Compile Include="BLL\TrnHasilProduksiBLL.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\sistem.manajemen.ppic.core\sistem.manajemen.ppic.core.csproj">
+      <Project>{fc389226-3dc1-4f4f-979b-fcccfa640883}</Project>
+      <Name>sistem.manajemen.ppic.core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\sistem.manajemen.ppic.dal\sistem.manajemen.ppic.dal.csproj">
       <Project>{9ed15ecf-fb2c-46b5-8f2a-ff443e290ab7}</Project>
       <Name>sistem.manajemen.ppic.dal</Name>

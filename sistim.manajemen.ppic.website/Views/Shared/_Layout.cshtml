@@ -69,9 +69,37 @@
     <!-- responsive CSS
         ============================================ -->
     <link rel="stylesheet" href="~/Content/css/responsive.css">
+
+    <!-- Autocomplete CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Content/plugin/EasyAutocomplete/easy-autocomplete.min.css">
+
     <!-- modernizr JS
         ============================================ -->
     <script src="~/Content/js/vendor/modernizr-2.8.3.min.js"></script>
+
+
+    <style>
+        .input-icon {
+          position: relative;
+        }
+
+        .input-icon > i {
+          position: absolute;
+          display: block;
+          transform: translate(0, -50%);
+          top: 50%;
+          pointer-events: none;
+          width: 25px;
+          text-align: center;
+	        font-style: normal;
+        }
+
+        .input-icon > input {
+          padding-left: 25px;
+	        padding-right: 0;
+        }
+    </style>
 </head>
 <body>
     <!--[if lt IE 8]>
@@ -93,9 +121,10 @@
                                 <span class="mini-click-non">Transaksi</span>
                             </a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="SPB" href="index.html"  id="transaksi_SPB"><span class="mini-sub-pro">SPB</span></a></li>
-                                <li><a title="DO" href="index-1.html"  id="transaksi_DO"><span class="mini-sub-pro">DO</span></a></li>
-                                <li><a title="Pengiriman" href="index-2.html"  id="transaksi_Pengiriman"><span class="mini-sub-pro">Pengiriman</span></a></li>
+                                <li><a title="SPB" href="@Url.Action("Index","TrnSpb")"  id="transaksi_SPB"><span class="mini-sub-pro">SPB</span></a></li>
+                                <li><a title="DO" href="@Url.Action("Index","TrnDo")"  id="transaksi_DO"><span class="mini-sub-pro">DO</span></a></li>
+                                <li><a title="Pengiriman" href="@Url.Action("Index","TrnPengiriman")"  id="transaksi_Pengiriman"><span class="mini-sub-pro">Pengiriman</span></a></li>
+                                <li><a title="Hasil Produksi" href="@Url.Action("Index","TrnHasilProduksi")" id="transaksi_Pengiriman"><span class="mini-sub-pro">Hasil Produksi</span></a></li>
                             </ul>
                         </li>
                         <li  id="gudang">
@@ -198,9 +227,9 @@
                                         <li>
                                             <a data-toggle="collapse">Transaksi<span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                             <ul class="collapse dropdown-header-top">
-                                                <li><a href="#">SPB</a></li>
-                                                <li><a href="#">DO</a></li>
-                                                <li><a href="#">Pengiriman</a></li>
+                                                <li><a href="@Url.Action("Index","TrnSpb")">SPB</a></li>
+                                                <li><a href="@Url.Action("Index","TrnDo")">DO</a></li>
+                                                <li><a href="@Url.Action("Index","TrnPengiriman")">Pengiriman</a></li>
                                             </ul>
                                         </li>
                                         <li>
@@ -342,6 +371,11 @@
     <!-- plugins JS
         ============================================ -->
     <script src="~/Content/js/plugins.js"></script>
+
+    <!-- autocomplete JS
+      ============================================ -->
+    <script src="~/Content/plugin/EasyAutocomplete/jquery.easy-autocomplete.min.js"></script>
+
     <!-- main JS
         ============================================ -->
     <script src="~/Content/js/main.js"></script>

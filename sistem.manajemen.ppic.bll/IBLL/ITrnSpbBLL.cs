@@ -12,6 +12,7 @@ namespace sistem.manajemen.ppic.bll.IBLL
         List<TrnSpbDto> GetAll();
         TrnSpbDto GetById(object Id);
         TrnSpbDto GetBySPB(string SPB);
+        void CloseSpb(string NoSpb);
         void Save(TrnSpbDto model);
         void Save(TrnSpbDto model, LoginDto LoginDto);
     }

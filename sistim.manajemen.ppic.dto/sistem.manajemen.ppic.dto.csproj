@@ -46,6 +46,15 @@
     <Compile Include="Dto\MstWilayahDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dto\TrnSpbDto.cs" />
+    <Compile Include="Dto\TrnDoDto.cs" />
+    <Compile Include="Dto\TrnPengirimanDto.cs" />
+    <Compile Include="Dto\TrnHasilProduksiDto.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\sistem.manajemen.ppic.core\sistem.manajemen.ppic.core.csproj">
+      <Project>{fc389226-3dc1-4f4f-979b-fcccfa640883}</Project>
+      <Name>sistem.manajemen.ppic.core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

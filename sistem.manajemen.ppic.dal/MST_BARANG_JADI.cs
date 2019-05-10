@@ -14,6 +14,11 @@ namespace sistem.manajemen.ppic.dal
     
     public partial class MST_BARANG_JADI
     {
+        public MST_BARANG_JADI()
+        {
+            this.HASIL_PRODUKSI = new HashSet<HASIL_PRODUKSI>();
+        }
+    
         public int ID { get; set; }
         public string NAMA_BARANG { get; set; }
         public string KOMPOSISI { get; set; }
@@ -26,5 +31,7 @@ namespace sistem.manajemen.ppic.dal
         public Nullable<System.DateTime> CREATED_DATE { get; set; }
         public string MODIFIED_BY { get; set; }
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
+    
+        public virtual ICollection<HASIL_PRODUKSI> HASIL_PRODUKSI { get; set; }
     }
 }
