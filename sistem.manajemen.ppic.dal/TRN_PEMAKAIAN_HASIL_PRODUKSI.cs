@@ -12,18 +12,22 @@ namespace sistem.manajemen.ppic.dal
     using System;
     using System.Collections.Generic;
     
-    public partial class HASIL_PRODUKSI
+    public partial class TRN_PEMAKAIAN_HASIL_PRODUKSI
     {
-        public int ID { get; set; }
-        public System.DateTime TANGGAL { get; set; }
-        public int ID_BARANG { get; set; }
-        public decimal JUMLAH { get; set; }
-        public string CATATAN { get; set; }
-        public string CREATED_BY { get; set; }
-        public Nullable<System.DateTime> CREATED_DATE { get; set; }
-        public string MODIFIED_BY { get; set; }
-        public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
+        public TRN_PEMAKAIAN_HASIL_PRODUKSI()
+        {
+            this.TRN_PEMAKAIAN_HASIL_PRODUKSI_DETAILS = new HashSet<TRN_PEMAKAIAN_HASIL_PRODUKSI_DETAILS>();
+        }
     
-        public virtual MST_BARANG_JADI MST_BARANG_JADI { get; set; }
+        public int ID { get; set; }
+        public string NOMOR { get; set; }
+        public System.DateTime TANGGAL { get; set; }
+        public string CATATAN { get; set; }
+        public System.DateTime CREATED_DATE { get; set; }
+        public string CREATED_BY { get; set; }
+        public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
+        public string MODIFIED_BY { get; set; }
+    
+        public virtual ICollection<TRN_PEMAKAIAN_HASIL_PRODUKSI_DETAILS> TRN_PEMAKAIAN_HASIL_PRODUKSI_DETAILS { get; set; }
     }
 }

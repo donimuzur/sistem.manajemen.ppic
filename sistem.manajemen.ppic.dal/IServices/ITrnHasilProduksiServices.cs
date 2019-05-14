@@ -8,9 +8,9 @@ namespace sistem.manajemen.ppic.dal.IServices
 {
     public interface ITrnHasilProduksiServices
     {
-        List<HASIL_PRODUKSI> GetAll();
-        HASIL_PRODUKSI GetById(object Id);
-        void Save(HASIL_PRODUKSI Db);
-        void Save(HASIL_PRODUKSI Db, Login Login);
+        List<TRN_HASIL_PRODUKSI> GetAll();
+        TRN_HASIL_PRODUKSI GetById(object Id);
+        void Save(TRN_HASIL_PRODUKSI Db);
+        void Save(TRN_HASIL_PRODUKSI Db, Login Login);
     }
 }

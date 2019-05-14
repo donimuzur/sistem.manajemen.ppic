@@ -381,8 +381,10 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MstBahanBakuController.cs" />
     <Compile Include="Controllers\MstBarangJadiController.cs" />
     <Compile Include="Controllers\MstWilayahController.cs" />
+    <Compile Include="Controllers\RptOutstandingController.cs" />
     <Compile Include="Controllers\TrnDoController.cs" />
     <Compile Include="Controllers\TrnHasilProduksiController.cs" />
     <Compile Include="Controllers\TrnPengirimanController.cs" />
@@ -393,6 +395,7 @@
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\ChangesHistoryModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\MstBahanBakuModel.cs" />
     <Compile Include="Models\MstBarangJadiModel.cs" />
     <Compile Include="Models\MstWilayahModel.cs" />
     <Compile Include="Models\TrnDoModel.cs" />
@@ -455,6 +458,10 @@
     <Content Include="Views\TrnHasilProduksi\Index.cshtml" />
     <Content Include="Views\TrnHasilProduksi\Create.cshtml" />
     <Content Include="Views\TrnHasilProduksi\Details.cshtml" />
+    <Content Include="Views\MstBahanBaku\Index.cshtml" />
+    <Content Include="Views\MstBahanBaku\Create.cshtml" />
+    <Content Include="Views\MstBahanBaku\Details.cshtml" />
+    <Content Include="Views\MstBahanBaku\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -464,6 +471,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\RptOutstanding\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sistem.manajemen.ppic.bll\sistem.manajemen.ppic.bll.csproj">

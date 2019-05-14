@@ -31,8 +31,6 @@
                                         <th style="min-width:200px">Nama Konsumen</th>
                                         <th style="min-width:200px">Nama Barang</th>
                                         <th style="min-width:200px">Party</th>
-                                        <th style="min-width:200px">Akumulasi</th>
-                                        <th style="min-width:200px">Sisa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,21 +41,18 @@
                                             <td style="text-align:center;">
                                                 @if (Model.CurrentUser.USERNAME == item.CREATED_BY)
                                                 {
-                                                    <a href="@Url.Action("Edit","TrnDo",new {@id=item.ID})" data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                    <a href="@Url.Action("Hapus","TrnPengiriman",new {@id=item.ID})" data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                 }
-                                                <a href="@Url.Action("Details","TrnDo",new {@id=item.ID})" data-toggle="tooltip" title="Details" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                <a href="@Url.Action("Details","TrnPengiriman",new {@id=item.ID})" data-toggle="tooltip" title="Details" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             </td>
                                             <td>@Html.Raw(item.TANGGAL.ToString("dd MMM yyyy"))</td>
                                             <td>@Html.Raw(item.SURAT_JALAN)</td>
                                             <td>@Html.Raw(item.NO_SPB)</td>
-                                            <td>@Html.Raw(item.NO_SPB)</td>
-                                            <td>@Html.Raw(item.NO_DO.ToString()+"/"+item.NO_TRUCK)</td>
+                                            <td>@Html.Raw(item.NO_DO.ToString())</td>
                                             <td>@Html.Raw(item.JUMLAH)</td>
                                             <td>@Html.Raw(item.NAMA_KONSUMEN)</td>
                                             <td>@Html.Raw(item.NAMA_BARANG)</td>
                                             <td>@Html.Raw(item.PARTY)</td>
-                                            <td>@Html.Raw(item.AKUMULASI)</td>
-                                            <td>@Html.Raw(item.SISA)</td>
                                         </tr>
                                     }
                                 </tbody>

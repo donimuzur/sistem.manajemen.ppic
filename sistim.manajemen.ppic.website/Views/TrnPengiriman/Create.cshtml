@@ -25,7 +25,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Surat Jalan<span class="red">*</span></label>
-                                            @Html.TextBoxFor(model => model.SURAT_JALAN, new { @class = "form-control", @placeholder="No Surat Jalan"})
+                                            @Html.TextBoxFor(model => model.SURAT_JALAN, new { @class = "form-control", @placeholder="No Surat Jalan",@required = "required"})
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">D/O Nomor<span class="red">*</span></label>
@@ -38,7 +38,7 @@
                                             @Html.TextBoxFor(model => model.NO_SPB, new { @class = "form-control", @style = "text-decoration:uppercase", @placeholder = "No SPB", @required = "required" })
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">Pengiriman<span class="red">*</span></label>
+                                            <label class="control-label">Pengiriman (Kg)<span class="red">*</span></label>
                                             @Html.TextBoxFor(model => model.JUMLAH, new { @class = "form-control", @style = "text-decoration:uppercase", @placeholder = "Kg"})
                                         </div>
                                     </div>
@@ -66,7 +66,7 @@
                                             @Html.TextBoxFor(model => model.NAMA_KONSUMEN, new { @class = "form-control", @placeholder = "Nama Konsumen", @readonly = "readonly", @required = "required" })
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">Party<span class="red">*</span></label>
+                                            <label class="control-label">Party (Kg)<span class="red">*</span></label>
                                             @Html.TextBoxFor(model => model.PARTY, new { @class = "form-control", @placeholder = "Party", @required = "required", @readonly = "readonly" })
                                         </div>
                                         <div class="form-group">
@@ -83,7 +83,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">Akumulasi<span class="red">*</span></label>
+                                            <label class="control-label">Akumulasi (Kg)<span class="red">*</span></label>
                                             <div class="row">
                                                 @Html.TextBoxFor(model => model.AKUMULASI, new { @class = "form-control", @placeholder = "Akumulasi", @readonly = "readonly", @required = "required" })
                                             </div>
@@ -154,6 +154,8 @@
                     $('#NAMA_BARANG').val(response.NAMA_BARANG);
                     $('#PARTY').val(response.JUMLAH);
                     $('#NAMA_KONSUMEN').val(response.NAMA_KONSUMEN);
+                    $('#AKUMULASI').val(response.AKUMULASI);
+                    $('#SISA').val(response.JUMLAH - response.AKUMULASI);
                 },
             });
         }

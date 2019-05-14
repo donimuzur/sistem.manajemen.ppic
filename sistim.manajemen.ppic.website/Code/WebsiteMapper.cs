@@ -20,6 +20,9 @@ namespace sistem.manajemen.ppic.website.Code
                 cfg.CreateMap<MstBarangJadiModel, MstBarangJadiDto>().ReverseMap();
                 cfg.CreateMap<MstBarangJadiDto, MST_BARANG_JADI>().ReverseMap();
 
+                cfg.CreateMap<MstBahanBakuModel, MstBahanBakuDto>().ReverseMap();
+                cfg.CreateMap<MstBahanBakuDto, MST_BAHAN_BAKU>().ReverseMap();
+            
                 cfg.CreateMap<MstWilayahModel, MstWilayahDto>().ReverseMap();
                 cfg.CreateMap<MstWilayahDto, MST_WILAYAH>().ReverseMap();
 
@@ -31,6 +34,9 @@ namespace sistem.manajemen.ppic.website.Code
 
                 cfg.CreateMap<TrnPengirimanModel, TrnPengirimanDto>().ReverseMap();
                 cfg.CreateMap<TrnPengirimanDto, TRN_PENGIRIMAN>().ReverseMap();
+
+                cfg.CreateMap<TrnHasilProduksiModel, TrnHasilProduksiDto>().ReverseMap();
+                cfg.CreateMap<TrnHasilProduksiDto, TRN_HASIL_PRODUKSI>().ReverseMap();
 
                 cfg.CreateMap<ChangesHistoryModel, ChangesHistoryDto>().ReverseMap();
                 cfg.CreateMap<ChangesHistoryDto, CHANGES_HISTORY>().ReverseMap();

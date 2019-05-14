@@ -33,6 +33,11 @@ namespace sistem.manajemen.ppic.dal
         public DbSet<TRN_SPB> TRN_SPB { get; set; }
         public DbSet<TRN_DO> TRN_DO { get; set; }
         public DbSet<TRN_PENGIRIMAN> TRN_PENGIRIMAN { get; set; }
-        public DbSet<HASIL_PRODUKSI> HASIL_PRODUKSI { get; set; }
+        public DbSet<MST_BAHAN_BAKU> MST_BAHAN_BAKU { get; set; }
+        public DbSet<TRN_PEMAKAIAN_HASIL_PRODUKSI> TRN_PEMAKAIAN_HASIL_PRODUKSI { get; set; }
+        public DbSet<TRN_PEMAKAIAN_HASIL_PRODUKSI_DETAILS> TRN_PEMAKAIAN_HASIL_PRODUKSI_DETAILS { get; set; }
+        public DbSet<TRN_PENERIMAAN_SUPPLIER> TRN_PENERIMAAN_SUPPLIER { get; set; }
+        public DbSet<TRN_PENERIMAAN_SUPPLIER_DETAILS> TRN_PENERIMAAN_SUPPLIER_DETAILS { get; set; }
+        public DbSet<TRN_HASIL_PRODUKSI> TRN_HASIL_PRODUKSI { get; set; }
     }
 }

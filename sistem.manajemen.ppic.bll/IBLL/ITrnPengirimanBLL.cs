@@ -13,7 +13,8 @@ namespace sistem.manajemen.ppic.bll.IBLL
         TrnPengirimanDto GetById(object Id);
         TrnPengirimanDto GetBySPB(string SPB);
         TrnPengirimanDto GetByDo(string DO);
-        decimal GetAkumulasi(string NoSpb, string NoDo);
+        TrnPengirimanDto GetBySj(string Sj);
+        decimal GetAkumulasi(string NoSpb);
         void Save(TrnPengirimanDto model);
         void Save(TrnPengirimanDto model, LoginDto LoginDto);
     }

@@ -44,10 +44,8 @@ namespace sistem.manajemen.ppic.website.Controllers
             model.ChangesHistory = GetChangesHistory((int)Enums.MenuList.TrnHasilProduksi, model.ID);
             model.Menu = "Hasil Produksi";
 
-
-            var ListBarang = new List<MstBarangJadiDto>();
-            ListBarang = _mstBarangJadiBLL.GetAll().Where(x => x.STATUS == true).ToList();          
-            model.BarangList = new SelectList(ListBarang);
+            var ListBarang =  _mstBarangJadiBLL.GetAll().Where(x => x.STATUS == true).Select(x => new { VALUE = x.ID, TEXT = x.NAMA_BARANG + " - "+ x.KEMASAN + " - "+ (x.BENTUK == "Lain-Lain"?x.BENTUK_LAIN:x.BENTUK)}).ToList();          
+            model.BarangList = new SelectList(ListBarang,"VALUE","TEXT");
 
             return model;
         }
@@ -57,6 +55,9 @@ namespace sistem.manajemen.ppic.website.Controllers
         {
             var model = new TrnHasilProduksiModel();
             model = Init(model);
+
+            model.TANGGAL = DateTime.Now;
+            
             return View(model);
         }
         [HttpPost]
@@ -71,17 +72,19 @@ namespace sistem.manajemen.ppic.website.Controllers
                     model.CREATED_DATE = DateTime.Now;
                     
                     var Dto = Mapper.Map<TrnHasilProduksiDto>(model);
+
                     _trnHasilProduksiBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
+                    _mstBarangJadiBLL.TambahSaldo(model.ID_BARANG, model.JUMLAH.Value);
 
                     AddMessageInfo("Data Telah Tersimpan", Enums.MessageInfoType.Success);
-                    return RedirectToAction("Index", "TrnSpb");
+                    return RedirectToAction("Index", "TrnHasilProduksi");
                 }
                 catch (Exception exp)
                 {
                     model = Init(model);
                     LogError.LogError.WriteError(exp);
                     AddMessageInfo("Gagal Simpan Data", Enums.MessageInfoType.Error);
-                    return RedirectToAction("Index", "TrnSpb");
+                    return RedirectToAction("Index", "TrnHasilProduksi");
                 }
             }
             model = Init(model);
@@ -111,7 +114,7 @@ namespace sistem.manajemen.ppic.website.Controllers
             {
                 LogError.LogError.WriteError(exp);
                 AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
-                return RedirectToAction("Index", "TrnSpb");
+                return RedirectToAction("Index", "TrnHasilProduksi");
             }
         }
 
@@ -128,29 +131,37 @@ namespace sistem.manajemen.ppic.website.Controllers
                     var Dto = Mapper.Map<TrnHasilProduksiDto>(model);
                     _trnHasilProduksiBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
 
-                    AddMessageInfo("Success Create SPB", Enums.MessageInfoType.Success);
-                    return RedirectToAction("Index", "TrnSpb");
+                    AddMessageInfo("Data Berhasil disimpan", Enums.MessageInfoType.Success);
+                    return RedirectToAction("Index", "TrnHasilProduksi");
                 }
                 catch (Exception exp)
                 {
                     LogError.LogError.WriteError(exp);
-                    AddMessageInfo("Gagal Create SPB", Enums.MessageInfoType.Error);
-                    return RedirectToAction("Index", "TrnSpb");
+                    AddMessageInfo("Data Gagal disimpan", Enums.MessageInfoType.Error);
+                    return RedirectToAction("Index", "TrnHasilProduksi");
                 }
             }
-            AddMessageInfo("Gagal Create SPB", Enums.MessageInfoType.Error);
+            AddMessageInfo("Data Gagal disimpan", Enums.MessageInfoType.Error);
             return View(Init(model));
         }
         #endregion
 
+        #region --- Hapus ---
+        public ActionResult Hapus(int Id)
+        {
+            AddMessageInfo("Gagal Simpan Data", Enums.MessageInfoType.Error);
+            return RedirectToAction("Index", "TrnHasilProduksi");
+        }
+        #endregion  
+
         #region --- Details ---
+
         public ActionResult Details(int? Id)
         {
             if (!Id.HasValue)
             {
                 return HttpNotFound();
             }
-
             try
             {
                 var model = new TrnHasilProduksiModel();
@@ -164,7 +175,7 @@ namespace sistem.manajemen.ppic.website.Controllers
             {
                 LogError.LogError.WriteError(exp);
                 AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
-                return RedirectToAction("Index", "TrnSpb");
+                return RedirectToAction("Index", "TrnHasilProduksi");
             }
         }
         #endregion
@@ -180,15 +191,22 @@ namespace sistem.manajemen.ppic.website.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetBarangJadi()
+        public JsonResult GetBarangJadi(int Id)
         {
-            var data = new List<string>();
-                data = _mstBarangJadiBLL.GetAll()
-                       .Where(x => x.STATUS == true)
-                       .Select(j=>j.NAMA_BARANG).ToList();
-
+            var data = new MstBarangJadiDto();
+            data = _mstBarangJadiBLL
+                    .GetById(Id);
+            
             return Json(data,JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetBahanBakuList()
+        {
+            var data = new List<string>();
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
         #endregion
+    
     }
 }

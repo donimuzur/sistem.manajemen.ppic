@@ -8,30 +8,31 @@ using System.Threading.Tasks;
 
 namespace sistem.manajemen.ppic.dal.Services
 {
-    public class TrnHasilProduksiServices : ITrnHasilProduksiServices
+    public class MstBahanBakuServices : IMstBahanBakuServices
     {
-        private IGenericRepository<TRN_HASIL_PRODUKSI> _trnHasilProduksiRepo;
         private IUnitOfWork _uow;
-        public TrnHasilProduksiServices (IUnitOfWork Uow)
+        private IGenericRepository<MST_BAHAN_BAKU> _repoMstBahanBaku;
+        public MstBahanBakuServices(IUnitOfWork Uow)
         {
             _uow = Uow;
-            _trnHasilProduksiRepo = _uow.GetGenericRepository<TRN_HASIL_PRODUKSI>();
+            _repoMstBahanBaku = _uow.GetGenericRepository<MST_BAHAN_BAKU>();
         }
-        public List<TRN_HASIL_PRODUKSI> GetAll()
+
+        public List<MST_BAHAN_BAKU> GetAll()
         {
-            var data = _trnHasilProduksiRepo.Get().ToList();
+            var data = _repoMstBahanBaku.Get().ToList();
             return data;
         }
-        public TRN_HASIL_PRODUKSI GetById(object Id)
+        public MST_BAHAN_BAKU GetById(object Id)
         {
-            var data = _trnHasilProduksiRepo.GetByID(Id);
+            var data = _repoMstBahanBaku.GetByID(Id);
             return data;
         }
-        public void Save(TRN_HASIL_PRODUKSI Db)
+        public void Save(MST_BAHAN_BAKU Db)
         {
             try
             {
-                _trnHasilProduksiRepo.InsertOrUpdate(Db);
+                _repoMstBahanBaku.InsertOrUpdate(Db);
                 _uow.SaveChanges();
             }
             catch (Exception)
@@ -39,11 +40,11 @@ namespace sistem.manajemen.ppic.dal.Services
                 throw;
             }
         }
-        public void Save(TRN_HASIL_PRODUKSI Db, Login Login)
+        public void Save(MST_BAHAN_BAKU Db, Login Login)
         {
             try
             {
-                _trnHasilProduksiRepo.InsertOrUpdate(Db, Login, Enums.MenuList.TrnHasilProduksi);
+                _repoMstBahanBaku.InsertOrUpdate(Db, Login, Enums.MenuList.GdgBarangJadi);
                 _uow.SaveChanges();
             }
             catch (Exception)

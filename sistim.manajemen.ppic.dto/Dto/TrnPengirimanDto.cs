@@ -18,13 +18,20 @@ namespace sistem.manajemen.ppic.dto
         public string NAMA_KONSUMEN { get; set; }
         public string NAMA_BARANG { get; set; }
         public decimal PARTY { get; set; }
-        public decimal AKUMULASI { get; set; }
-        public decimal SISA { get; set; }
+        public Nullable<decimal> AKUMULASI { get; set; }
+        public Nullable<decimal> SISA { get; set; }
         public string CREATED_BY { get; set; }
         public Nullable<System.DateTime> CREATED_DATE { get; set; }
         public string MODIFIED_BY { get; set; }
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
         public Nullable<core.Enums.StatusDocument> STATUS { get; set; }
         public string CATATAN { get; set; }
+        public int NO_SJ { get; set; }
+        public string TRUCK { get; set; }
+        public string GUDANG { get; set; }
+        public Nullable<int> COLLIE { get; set; }
+        public int ID_BARANG { get; set; }
+
+        public virtual MstBarangJadiDto MST_BARANG_JADI { get; set; }
     }
 }

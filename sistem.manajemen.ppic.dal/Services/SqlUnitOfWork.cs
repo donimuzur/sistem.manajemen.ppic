@@ -27,7 +27,11 @@ namespace sistem.manajemen.ppic.dal
             {
                 _context.SaveChanges();
             }
-            catch (DbEntityValidationException e)
+            catch (DbEntityValidationException)
+            {
+                throw;
+            }
+            catch(Exception )
             {
                 throw;
             }
@@ -39,7 +43,7 @@ namespace sistem.manajemen.ppic.dal
             {
                 return _context.SaveChangesAsync();
             }
-            catch (DbEntityValidationException e)
+            catch (DbEntityValidationException)
             {
                 throw;
             }

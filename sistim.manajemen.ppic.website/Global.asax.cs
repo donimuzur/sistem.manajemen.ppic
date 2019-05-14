@@ -35,6 +35,7 @@ namespace sistem.manajemen.ppic.website
             container.Register<ILoginBLL, LoginBLL>();
             container.Register<IPageBLL, PageBLL>();
             container.Register<IMstBarangJadiBLL, MstBarangJadiBLL>();
+            container.Register<IMstBahanBakuBLL, MstBahanBakuBLL>();
             container.Register<IMstWilayahBLL, MstWilayahBLL>();
             container.Register<ITrnSpbBLL, TrnSpbBLL>();
             container.Register<ITrnDoBLL, TrnDoBLL>();

@@ -16,11 +16,14 @@ namespace sistem.manajemen.ppic.website.Controllers
         private ITrnPengirimanBLL _trnPengirimanBLL;
         private ITrnSpbBLL _trnSpbBLL;
         private ITrnDoBLL _trnDoBLL;
-        public TrnPengirimanController(IPageBLL pageBll, ITrnPengirimanBLL TrnPengirimanBLL, ITrnSpbBLL TrnSpbBLL, ITrnDoBLL TrnDoBLL) : base(pageBll, Enums.MenuList.TrnPengiriman)
+        private IMstBarangJadiBLL _mstBarangJadiBLL;
+        public TrnPengirimanController(IPageBLL pageBll, ITrnPengirimanBLL TrnPengirimanBLL, IMstBarangJadiBLL MstBarangJadiBLL
+            , ITrnSpbBLL TrnSpbBLL, ITrnDoBLL TrnDoBLL) : base(pageBll, Enums.MenuList.TrnPengiriman)
         {
             _trnPengirimanBLL = TrnPengirimanBLL;
             _trnDoBLL = TrnDoBLL;
             _trnSpbBLL = TrnSpbBLL;
+            _mstBarangJadiBLL = MstBarangJadiBLL;
         }
         // GET: TrnPengiriman
         public ActionResult Index()
@@ -69,10 +72,31 @@ namespace sistem.manajemen.ppic.website.Controllers
                         return View(model);
                     }
                     
-                    var GetDataExist = _trnPengirimanBLL.GetBySPB(model.NO_SPB);
+                    var GetDataExist = _trnPengirimanBLL.GetBySj(model.SURAT_JALAN);
                     if (GetDataExist != null)
                     {
-                        AddMessageInfo("Gagal Create Pengiriman no SPB sudah terdaftar", Enums.MessageInfoType.Error);
+                        AddMessageInfo("Gagal Create Nomor Surat Jalan sudah ada", Enums.MessageInfoType.Error);
+                        model = Init(model);
+                        return View(model);
+                    }
+
+                    if (model.PARTY < model.AKUMULASI + model.JUMLAH)
+                    {
+                        AddMessageInfo("Jumlah Pengiriman tidak boleh lebih dari Party", Enums.MessageInfoType.Error);
+                        model = Init(model);
+                        return View(model);
+                    }
+                    
+                    var GetBarangExist = _mstBarangJadiBLL.GetByNama(model.NAMA_BARANG);
+                    if (GetBarangExist == null)
+                    {
+                        AddMessageInfo("Gagal Create Nama Barang Tersebut Tidak ada di Gudang", Enums.MessageInfoType.Error);
+                        model = Init(model);
+                        return View(model);
+                    }
+                    else if(GetBarangExist.STOCK < model.JUMLAH)
+                    {
+                        AddMessageInfo("Stock di Gudang Kurang", Enums.MessageInfoType.Error);
                         model = Init(model);
                         return View(model);
                     }
@@ -80,10 +104,11 @@ namespace sistem.manajemen.ppic.website.Controllers
                     model.CREATED_BY = CurrentUser.USERNAME;
                     model.CREATED_DATE = DateTime.Now;
                     model.TANGGAL = DateTime.Now;
-                    model.MODIFIED_BY = CurrentUser.USERNAME;
+                    model.ID_BARANG = GetBarangExist.ID;
 
                     _trnPengirimanBLL.Save(Mapper.Map<TrnPengirimanDto>(model), Mapper.Map<LoginDto>(CurrentUser));
-                    
+                    _mstBarangJadiBLL.KurangSaldo(GetBarangExist.ID, model.JUMLAH.Value);
+
                     AddMessageInfo("Sukses Create Pengiriman", Enums.MessageInfoType.Success);
                     return RedirectToAction("Index", "TrnPengiriman");
                 }
@@ -123,9 +148,12 @@ namespace sistem.manajemen.ppic.website.Controllers
         {
             var model = new TrnPengirimanModel();
 
-            model = Mapper.Map<TrnPengirimanModel>(_trnDoBLL.GetById(Id));
+            model = Mapper.Map<TrnPengirimanModel>(_trnPengirimanBLL.GetById(Id));
 
             model = Init(model);
+
+            model.AKUMULASI = _trnPengirimanBLL.GetAkumulasi(model.NO_SPB);
+            model.SISA = model.PARTY - model.AKUMULASI;
 
             return View(model);
         }
@@ -149,10 +177,13 @@ namespace sistem.manajemen.ppic.website.Controllers
         [HttpPost]
         public JsonResult GetSpb(string NoSpb)
         {
-            var data = _trnDoBLL.GetBySPB(NoSpb);
+            var data = new TrnDoModel();
+            data = Mapper.Map<TrnDoModel>(_trnDoBLL.GetBySPB(NoSpb));
+            data.AKUMULASI = _trnPengirimanBLL.GetAkumulasi(NoSpb);
+
             if (data == null)
             {
-                data = new TrnDoDto();
+                data = new TrnDoModel();
             }
             return Json(data);
         }

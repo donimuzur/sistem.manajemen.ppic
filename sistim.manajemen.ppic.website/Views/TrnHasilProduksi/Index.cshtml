@@ -37,13 +37,13 @@
                                             <td style="text-align:center;">
                                                 @if (Model.CurrentUser.USERNAME == item.CREATED_BY)
                                                 {
-                                                    <a href="@Url.Action("Edit","TrnHasilProduksi",new {@id=item.ID})" data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                    <a href="@Url.Action("Hapus","TrnHasilProduksi",new {@id=item.ID})" data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                                 }
                                                 <a href="@Url.Action("Details","TrnHasilProduksi",new {@id=item.ID})" data-toggle="tooltip" title="Details" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             </td>
                                             <td>@Html.Raw(item.TANGGAL.ToString("dd MMM yyyy"))</td>
-                                            <td>@Html.Raw(item.MST_BARANG_JADI.NAMA_BARANG)</td>
-                                            <td>@Html.Raw(item.JUMLAH)</td>
+                                            <td>@Html.Raw(item.MST_BARANG_JADI == null ? "" : item.MST_BARANG_JADI.NAMA_BARANG)</td>
+                                            <td>@Html.Raw(string.Format("{0:N}",item.JUMLAH))</td>
                                             <td>@Html.Raw(item.CATATAN)</td>
                                         </tr>
                                     }

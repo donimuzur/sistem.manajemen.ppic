@@ -15,11 +15,13 @@ namespace sistem.manajemen.ppic.bll
     public class TrnHasilProduksiBLL : ITrnHasilProduksiBLL
     {
         private ITrnHasilProduksiServices _trnHasilProduksiServices;
+        private IMstBarangJadiServices _mstBarangJadiServices;
         private IUnitOfWork _uow;
         public TrnHasilProduksiBLL(IUnitOfWork Uow)
         {
             _uow = Uow;
             _trnHasilProduksiServices = new TrnHasilProduksiServices(_uow);
+            _mstBarangJadiServices = new MstBarangJadiServices(_uow);
         }
         public List<TrnHasilProduksiDto> GetAll()
         {
@@ -46,7 +48,7 @@ namespace sistem.manajemen.ppic.bll
         {
             try
             {
-                var db = Mapper.Map<HASIL_PRODUKSI>(model);
+                var db = Mapper.Map<TRN_HASIL_PRODUKSI>(model);
                 _trnHasilProduksiServices.Save(db);
             }
             catch (Exception)
@@ -58,9 +60,11 @@ namespace sistem.manajemen.ppic.bll
         {
             try
             {
-                var db = Mapper.Map<HASIL_PRODUKSI>(model);
+                var db = Mapper.Map<TRN_HASIL_PRODUKSI>(model);
                 var Login = Mapper.Map<Login>(LoginDto);
+                
                 _trnHasilProduksiServices.Save(db, Login);
+                
             }
             catch (Exception)
             {

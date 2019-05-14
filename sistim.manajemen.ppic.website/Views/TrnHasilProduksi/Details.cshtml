@@ -27,11 +27,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Nama Barang<span class="red">*</span></label>
-                                        @Html.DropDownListFor(model => model.ID_BARANG, Model.BarangList, "--- Please Select ---", new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.DropDownListFor(model => model.ID_BARANG, Model.BarangList, "--- Please Select ---", new { @class = "form-control", @disabled = "disabled" })
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label">Jumlah<span class="red">*</span></label>
-                                        @Html.TextBoxFor(model => model.JUMLAH, new { @class = "form-control", @placeholder = "Jumlah (Kg)", @readonly = "readonly" })
+                                        <label class="control-label">Jumlah (Kg)<span class="red">*</span></label>
+                                        @Html.TextBox("model", string.Format("{0:N}", Model.JUMLAH), new { @class = "form-control", @placeholder = "Jumlah (Kg)", @readonly = "readonly" })
                                     </div>
                                 </div>
                             </div>
@@ -50,8 +50,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary waves-effect waves-light">Simpan</button>
-                        <a href="@Url.Action("Index","TrnHasilProduksi")" class="btn btn-default">Batal</a>
+                        <a href="@Url.Action("Index","TrnHasilProduksi")" class="btn btn-default">Kembali</a>
                     </div>
                 </div>
             </div>

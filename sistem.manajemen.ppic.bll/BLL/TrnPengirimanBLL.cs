@@ -49,6 +49,13 @@ namespace sistem.manajemen.ppic.BLL
 
             return ReData;
         }
+        public TrnPengirimanDto GetBySj(string Sj)
+        {
+            var Data = _trnPengirimanServices.GetAll().Where(x => x.SURAT_JALAN.ToUpper() == Sj.ToUpper()).FirstOrDefault();
+            var ReData = Mapper.Map<TrnPengirimanDto>(Data);
+
+            return ReData;
+        }
         public void Save(TrnPengirimanDto model)
         {
             try
@@ -74,11 +81,11 @@ namespace sistem.manajemen.ppic.BLL
                 throw;
             }
         }
-        public decimal GetAkumulasi(string NoSpb, string NoDo)
+        public decimal GetAkumulasi(string NoSpb)
         {
             try
             {
-                var data = _trnPengirimanServices.GetAll().Where(x=> x.NO_SPB== NoSpb && x.NO_DO == NoDo).ToList().Sum(x => x.PARTY);
+                var data = _trnPengirimanServices.GetAll().Where(x=> x.NO_SPB== NoSpb).ToList().Sum(x => x.JUMLAH);
                 return data;
             }
             catch (Exception)

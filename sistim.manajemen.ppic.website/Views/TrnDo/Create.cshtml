@@ -75,7 +75,11 @@
                                         <div class="form-group">
                                             <label class="control-label">Kuantum Permintaan<span class="red">*</span></label>
                                             <div class="row">
-                                                @Html.TextBoxFor(model => model.JUMLAH, new { @class = "form-control", @placeholder = "Kg", @required = "required" })
+                                                <div class="input-icon">
+                                                    @Html.TextBoxFor(model => model.JUMLAH, new { @class = "form-control", @placeholder = "Kg", @required = "required" })
+                                                    <i>Kg</i>
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
