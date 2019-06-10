@@ -34,6 +34,7 @@
       <HintPath>..\packages\AutoMapper.6.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -55,6 +56,7 @@
     <Compile Include="BLL\LoginBLL.cs" />
     <Compile Include="BLL\PageBLL.cs" />
     <Compile Include="BLL\MstBarangJadiBLL.cs" />
+    <Compile Include="IBLL\IRptOutstandingBLL.cs" />
     <Compile Include="IBLL\ITrnDoBLL.cs" />
     <Compile Include="IBLL\ITrnHasilProduksiBLL.cs" />
     <Compile Include="IBLL\ITrnPengirimanBLL.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="BLL\TrnSpbBLL.cs" />
     <Compile Include="BLL\TrnDoBLL.cs" />
     <Compile Include="BLL\TrnHasilProduksiBLL.cs" />
+    <Compile Include="BLL\RptOutstandingBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sistem.manajemen.ppic.core\sistem.manajemen.ppic.core.csproj">

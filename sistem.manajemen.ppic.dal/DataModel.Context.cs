@@ -11,8 +11,10 @@ namespace sistem.manajemen.ppic.dal
 {
     using System;
     using System.Data.Entity;
+    using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Linq;
+
     public partial class PPICEntities : DbContext
     {
         public PPICEntities()
@@ -39,5 +41,18 @@ namespace sistem.manajemen.ppic.dal
         public DbSet<TRN_PENERIMAAN_SUPPLIER> TRN_PENERIMAAN_SUPPLIER { get; set; }
         public DbSet<TRN_PENERIMAAN_SUPPLIER_DETAILS> TRN_PENERIMAAN_SUPPLIER_DETAILS { get; set; }
         public DbSet<TRN_HASIL_PRODUKSI> TRN_HASIL_PRODUKSI { get; set; }
+    
+        public virtual ObjectResult<SP_GetRptOutstanding_Result> SP_GetRptOutstanding(string dateFrom, string dateTo)
+        {
+            var dateFromParameter = dateFrom != null ?
+                new ObjectParameter("DateFrom", dateFrom) :
+                new ObjectParameter("DateFrom", typeof(string));
+    
+            var dateToParameter = dateTo != null ?
+                new ObjectParameter("DateTo", dateTo) :
+                new ObjectParameter("DateTo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetRptOutstanding_Result>("SP_GetRptOutstanding", dateFromParameter, dateToParameter);
+        }
     }
 }

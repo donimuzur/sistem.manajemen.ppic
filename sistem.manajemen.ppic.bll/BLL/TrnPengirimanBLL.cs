@@ -56,6 +56,13 @@ namespace sistem.manajemen.ppic.BLL
 
             return ReData;
         }
+        public TrnPengirimanDto GetBySj(string NoSpb, string Sj)
+        {
+            var Data = _trnPengirimanServices.GetAll().Where(x => x.SURAT_JALAN.ToUpper() == Sj.ToUpper() && x.NO_SPB.ToUpper() == NoSpb.ToUpper()).FirstOrDefault();
+            var ReData = Mapper.Map<TrnPengirimanDto>(Data);
+
+            return ReData;
+        }
         public void Save(TrnPengirimanDto model)
         {
             try
@@ -93,6 +100,5 @@ namespace sistem.manajemen.ppic.BLL
                 throw;
             }
         }
-        
     }
 }

@@ -203,6 +203,7 @@
     <Content Include="Content\img\favicon.png" />
     <Content Include="Content\img\product\no-pict.jpg" />
     <Content Include="Content\js\data-table\jquery.dataTables.min.js" />
+    <Content Include="Content\js\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Content\js\thousand-separator.js" />
     <Content Include="Content\plugin\EasyAutocomplete\easy-autocomplete.css" />
     <Content Include="Content\plugin\EasyAutocomplete\easy-autocomplete.min.css" />
@@ -398,6 +399,7 @@
     <Compile Include="Models\MstBahanBakuModel.cs" />
     <Compile Include="Models\MstBarangJadiModel.cs" />
     <Compile Include="Models\MstWilayahModel.cs" />
+    <Compile Include="Models\RptOutstandingModel.cs" />
     <Compile Include="Models\TrnDoModel.cs" />
     <Compile Include="Models\TrnHasilProduksiModel.cs" />
     <Compile Include="Models\TrnPengirimanModel.cs" />
@@ -462,6 +464,8 @@
     <Content Include="Views\MstBahanBaku\Create.cshtml" />
     <Content Include="Views\MstBahanBaku\Details.cshtml" />
     <Content Include="Views\MstBahanBaku\Edit.cshtml" />
+    <Content Include="Views\RptOutstanding\Index.cshtml" />
+    <Content Include="Views\RptOutstanding\_listRptOutstanding.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -471,7 +475,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\RptOutstanding\" />
+    <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sistem.manajemen.ppic.bll\sistem.manajemen.ppic.bll.csproj">

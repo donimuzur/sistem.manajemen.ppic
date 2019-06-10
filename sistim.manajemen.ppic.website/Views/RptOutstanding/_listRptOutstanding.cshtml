@@ -1,0 +1,32 @@
+﻿@model sistem.manajemen.ppic.website.Models.RptOutstandingListModel
+
+<table id="table" class="stripe row-border order-column" style="width:100%">
+    <thead>
+        <tr>
+            <th style="min-width: 100px">Tanggal</th>
+            <th style="min-width: 100px">No SPB</th>
+            <th style="min-width: 100px">No DO</th>
+            <th style="min-width: 100px">Nama Konsumen</th>
+            <th style="min-width: 120px">Batas Kirim</th>
+            <th style="min-width: 100px">Party</th>
+            <th style="min-width: 100px">Akumulasi</th>
+            <th style="min-width: 100px">Sisa</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var data in Model.ListRptOutstanding)
+        {
+            <tr>
+                <td>@Html.Raw(Model.ListRptOutstanding.IndexOf(data) + 1)</td>
+                <td>@Html.Raw(data.TANGGAL.ToString("dd MMM yyyy"))</td>
+                <td>@Html.Raw(data.NO_SPB)</td>
+                <td>@Html.Raw(data.NO_DO)</td>
+                <td>@Html.Raw(data.NAMA_KONSUMEN)</td>
+                <td>@Html.Raw(data.BATAS_KIRIM.ToString("dd MMM yyyy"))</td>
+                <td>@Html.Raw(data.PARTY)</td>
+                <td>@Html.Raw(data.AKUMULASI)</td>
+                <td>@Html.Raw(data.SISA)</td>
+            </tr>
+        }
+    </tbody>
+</table>

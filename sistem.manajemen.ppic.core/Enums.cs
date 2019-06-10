@@ -34,6 +34,8 @@ namespace sistem.manajemen.ppic.core
 
             LaporanOutstanding=50,
             LaporanRekapBulanan=51,
+
+            Timbangan = 60,
         }
         public enum StatusDocument
         {

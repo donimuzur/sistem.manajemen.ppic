@@ -20,7 +20,6 @@ namespace sistem.manajemen.ppic.website.Controllers
         public LoginController(ILoginBLL LoginBLL,IPageBLL pageBll) : base(pageBll, Enums.MenuList.Login)
         {
             _loginBLL = LoginBLL;
-
         }
         public ActionResult Index()
         {
@@ -28,7 +27,6 @@ namespace sistem.manajemen.ppic.website.Controllers
 
             return View(model);
         }
-     
         [HttpPost]
         public ActionResult Index(LoginModel login)
         {

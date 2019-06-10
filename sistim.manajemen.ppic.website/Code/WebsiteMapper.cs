@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using sistem.manajemen.ppic.dal;
 using sistem.manajemen.ppic.dto;
+using sistem.manajemen.ppic.dto.Input;
 using sistem.manajemen.ppic.website.Models;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,12 @@ namespace sistem.manajemen.ppic.website.Code
 
                 cfg.CreateMap<ChangesHistoryModel, ChangesHistoryDto>().ReverseMap();
                 cfg.CreateMap<ChangesHistoryDto, CHANGES_HISTORY>().ReverseMap();
+
+                cfg.CreateMap<RptOutstandingModelSearchView, RptOutstandingInput>().ReverseMap();
+
+                cfg.CreateMap<RptOutstandingModel, RptOutstandingDto>().ReverseMap();
+                cfg.CreateMap<RptOutstandingDto, SP_GetRptOutstanding_Result>().ReverseMap();
+
             });
         }
     }

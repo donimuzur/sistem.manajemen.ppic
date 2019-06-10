@@ -109,6 +109,9 @@
     <Compile Include="Services\TrnHasilProduksiServices.cs" />
     <Compile Include="Services\TrnPengirimanServices.cs" />
     <Compile Include="Services\TrnSpbServices.cs" />
+    <Compile Include="SP_GetRptOutstanding_Result.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TRN_DO.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>

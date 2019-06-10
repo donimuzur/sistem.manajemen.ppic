@@ -72,7 +72,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                         return View(model);
                     }
                     
-                    var GetDataExist = _trnPengirimanBLL.GetBySj(model.SURAT_JALAN);
+                    var GetDataExist = _trnPengirimanBLL.GetBySj(model.NO_SPB,model.SURAT_JALAN);
                     if (GetDataExist != null)
                     {
                         AddMessageInfo("Gagal Create Nomor Surat Jalan sudah ada", Enums.MessageInfoType.Error);

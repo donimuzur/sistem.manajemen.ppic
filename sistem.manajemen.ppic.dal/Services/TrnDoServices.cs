@@ -46,7 +46,7 @@ namespace sistem.manajemen.ppic.dal.Services
                 if(Db.ID == 0)
                 {
                     int Id = 0;
-                    var GetAll = _trnDoRepo.Get();
+                    var GetAll = _trnDoRepo.Get().Where(x => x.TANGGAL.Month == DateTime.Now.Month && x.TANGGAL.Year == DateTime.Now.Year).ToList();
                     if(GetAll.Count() > 0)
                     {
                         Id = GetAll.Max(x => int.Parse(x.NO_DO));

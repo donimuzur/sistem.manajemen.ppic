@@ -41,6 +41,7 @@ namespace sistem.manajemen.ppic.website
             container.Register<ITrnDoBLL, TrnDoBLL>();
             container.Register<ITrnPengirimanBLL,TrnPengirimanBLL >();
             container.Register<ITrnHasilProduksiBLL, TrnHasilProduksiBLL>();
+            container.Register<IRptOutstandingBLL, RptOutstandingBLL>();
 
             // 3. Optionally verify the container's configuration.
             container.Verify();

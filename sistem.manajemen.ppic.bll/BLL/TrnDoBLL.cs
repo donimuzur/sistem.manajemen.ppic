@@ -68,8 +68,6 @@ namespace sistem.manajemen.ppic.bll
                 var db = Mapper.Map<TRN_DO>(model);
                 var Login = Mapper.Map<Login>(LoginDto);
                 _trnDoServices.Save(db, Login);
-
-
             }
             catch (Exception)
             {
