@@ -64,13 +64,6 @@ namespace sistem.manajemen.ppic.website.Controllers
                         model = Init(model);
                         return View(model);
                     }
-                    var GetDataExist = _trnDoBLL.GetBySPB(model.NO_SPB);
-                    if (GetDataExist != null)
-                    {
-                        AddMessageInfo("Gagal Create Do, no SPB sudah terdaftar", Enums.MessageInfoType.Error);
-                        model = Init(model);
-                        return View(model);
-                    }
 
                     model.CREATED_BY = CurrentUser.USERNAME;
                     model.CREATED_DATE = DateTime.Now;
@@ -117,14 +110,6 @@ namespace sistem.manajemen.ppic.website.Controllers
                     if (CheckDataExist == null)
                     {
                         AddMessageInfo("No SPB tersebut tidak ada", Enums.MessageInfoType.Error);
-                        model = Init(model);
-                        return View(model);
-                    }
-
-                    var GetDataExist = _trnDoBLL.GetBySPB(model.NO_SPB);
-                    if (GetDataExist != null && GetDataExist.ID != model.ID)
-                    {
-                        AddMessageInfo("Gagal Create Do, No SPB sudah terdaftar", Enums.MessageInfoType.Error);
                         model = Init(model);
                         return View(model);
                     }
@@ -189,7 +174,6 @@ namespace sistem.manajemen.ppic.website.Controllers
                     })
                     .OrderBy(X => X.DATA)
                 .ToList();
-            
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion

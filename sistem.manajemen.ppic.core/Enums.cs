@@ -12,14 +12,24 @@ namespace sistem.manajemen.ppic.core
     {
         public enum MenuList
         {
-            Login=0,
-            Home=1,
-            Transaction=2,
-            Gudang=3,
-            Master=4,
-            Report=5,
-           
-            TrnSpb=20,
+            [Description("Login")]
+            Login =0,
+            [Description("Home")]
+            Home =1,
+            [Description("Transaksi")]
+            Transaction =2,
+            [Description("Gudang")]
+            Gudang =3,
+            [Description("Master")]
+            Master =4,
+            [Description("Report")]
+            Report =5,
+            [Description("Error")]
+            Error =6,
+            [Description("Setting")]
+            Setting = 7,
+
+            TrnSpb =20,
             TrnDo=21,
             TrnPengiriman=22,
             TrnHasilProduksi = 23,
@@ -31,6 +41,8 @@ namespace sistem.manajemen.ppic.core
             MasterSupplier=41,
             MasterKonsumen=42,
             MasterTransportir = 43,
+            MasterUom =44,
+            MasterKemasan=45,
 
             LaporanOutstanding=50,
             LaporanRekapBulanan=51,
@@ -40,7 +52,9 @@ namespace sistem.manajemen.ppic.core
         public enum StatusDocument
         {
             Open=0,
-            Closed=1
+            Closed=1,
+            Cancel=2,
+            Delete=3,
         }
         public enum Kemasan
         {
@@ -63,6 +77,8 @@ namespace sistem.manajemen.ppic.core
             Briket,
             [Description("Prill")]
             Prill,
+            [Description("Lain-Lain")]
+            LainLain,
         }
         public static string GetEnumDescription(Enum value)
         {

@@ -44,5 +44,6 @@ namespace sistem.manajemen.ppic.dto
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
         public string KEMASAN_DESC { get; set; }
         public Nullable<core.Enums.StatusDocument> STATUS { get; set; }
+        public Nullable<int> DOKUMEN_PENDUKUNG_TYPE { get; set; }
     }
 }

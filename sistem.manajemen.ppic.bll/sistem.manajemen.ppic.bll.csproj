@@ -51,6 +51,8 @@
     <Compile Include="IBLL\IMstBahanBakuBLL.cs" />
     <Compile Include="IBLL\IMstBarangJadiBLL.cs" />
     <Compile Include="IBLL\ILoginBLL.cs" />
+    <Compile Include="IBLL\IMstKemasanBLL.cs" />
+    <Compile Include="IBLL\IMstUomBLL.cs" />
     <Compile Include="IBLL\IMstWilayahBLL.cs" />
     <Compile Include="IBLL\IPageBLL.cs" />
     <Compile Include="BLL\LoginBLL.cs" />
@@ -62,6 +64,8 @@
     <Compile Include="IBLL\ITrnPengirimanBLL.cs" />
     <Compile Include="IBLL\ITrnSpbBLL.cs" />
     <Compile Include="BLL\MstBahanBakuBLL.cs" />
+    <Compile Include="BLL\MstUomBLL.cs" />
+    <Compile Include="BLL\MstKemasanBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BLL\TrnSpbBLL.cs" />
     <Compile Include="BLL\TrnDoBLL.cs" />

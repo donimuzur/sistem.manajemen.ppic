@@ -16,83 +16,84 @@ namespace sistem.manajemen.ppic.BLL
     {
         private ITrnPengirimanServices _trnPengirimanServices;
         private IUnitOfWork _uow;
-        public TrnPengirimanBLL(IUnitOfWork Uow)
+        public TrnPengirimanBLL()
         {
-            _uow = Uow;
+            _uow = new SqlUnitOfWork();
             _trnPengirimanServices = new TrnPengirimanServices(_uow);
         }
-        public List<TrnPengirimanDto> GetAll()
+        public List<TrnPengirimanMasterDto> GetAll()
         {
             var Data = _trnPengirimanServices.GetAll();
-            var ReData = Mapper.Map<List<TrnPengirimanDto>>(Data);
+            var ReData = Mapper.Map<List<TrnPengirimanMasterDto>>(Data);
 
             return ReData;
         }
-        public TrnPengirimanDto GetById(object Id)
+        public List<TrnPengirimanMasterDto> GetAllByDoAndSPB(int Do, string NoSPB)
         {
-            var Data = _trnPengirimanServices.GetById(Id);
-            var ReData = Mapper.Map<TrnPengirimanDto>(Data);
+            var Data = _trnPengirimanServices.GetAll().Where(x => x.NO_DO == Do && x.NO_SPB.ToUpper() == NoSPB.ToUpper()).ToList();
+            var ReData = Mapper.Map<List<TrnPengirimanMasterDto>>(Data);
 
             return ReData;
         }
-        public TrnPengirimanDto GetBySPB(string SPB)
+        public TrnPengirimanMasterDto GetById(object Id)
         {
-            var Data = _trnPengirimanServices.GetAll().Where(x => x.NO_SPB.ToUpper() == SPB.ToUpper()).FirstOrDefault();
-            var ReData = Mapper.Map<TrnPengirimanDto>(Data);
+            var Data = _trnPengirimanServices.GetTrnPengirimanMasterById(Id);
+            var ReData = Mapper.Map<TrnPengirimanMasterDto>(Data);
 
             return ReData;
         }
-        public TrnPengirimanDto GetByDo(string DO)
-        {
-            var Data = _trnPengirimanServices.GetAll().Where(x => x.NO_DO.ToUpper() == DO.ToUpper()).FirstOrDefault();
-            var ReData = Mapper.Map<TrnPengirimanDto>(Data);
-
-            return ReData;
-        }
-        public TrnPengirimanDto GetBySj(string Sj)
-        {
-            var Data = _trnPengirimanServices.GetAll().Where(x => x.SURAT_JALAN.ToUpper() == Sj.ToUpper()).FirstOrDefault();
-            var ReData = Mapper.Map<TrnPengirimanDto>(Data);
-
-            return ReData;
-        }
-        public TrnPengirimanDto GetBySj(string NoSpb, string Sj)
-        {
-            var Data = _trnPengirimanServices.GetAll().Where(x => x.SURAT_JALAN.ToUpper() == Sj.ToUpper() && x.NO_SPB.ToUpper() == NoSpb.ToUpper()).FirstOrDefault();
-            var ReData = Mapper.Map<TrnPengirimanDto>(Data);
-
-            return ReData;
-        }
-        public void Save(TrnPengirimanDto model)
+        public bool Save(TrnPengirimanMasterDto Dto)
         {
             try
             {
-                var db = Mapper.Map<TRN_PENGIRIMAN>(model);
-                _trnPengirimanServices.Save(db);
+                _trnPengirimanServices.Save(Mapper.Map<TRN_PENGIRIMAN_MASTER>(Dto));
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public bool Save(TrnPengirimanMasterDto Dto, LoginDto Login)
+        {
+            try
+            {
+                _trnPengirimanServices.Save(Mapper.Map<TRN_PENGIRIMAN_MASTER>(Dto)
+                    , Mapper.Map<Login>(Login));
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public void SaveChanges()
+        {
+            _uow.SaveChanges();
+        }
+        public int GenerateNoSJ()
+        {
+            try
+            {
+                var PengirimanList = _trnPengirimanServices.GetAll().Where(x => x.TANGGAL.Month == DateTime.Now.Month && x.TANGGAL.Year == DateTime.Now.Year).ToList();
+                var GetNomorSJCount = PengirimanList.Count();
+                GetNomorSJCount = GetNomorSJCount + 1;
+
+                return GetNomorSJCount;
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        public void Save(TrnPengirimanDto model, LoginDto LoginDto)
+        public decimal GetAkumulasi(int Do, string NoSPB)
         {
             try
             {
-                var db = Mapper.Map<TRN_PENGIRIMAN>(model);
-                var Login = Mapper.Map<Login>(LoginDto);
-                _trnPengirimanServices.Save(db, Login);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        public decimal GetAkumulasi(string NoSpb)
-        {
-            try
-            {
-                var data = _trnPengirimanServices.GetAll().Where(x=> x.NO_SPB== NoSpb).ToList().Sum(x => x.JUMLAH);
+                var GetAll = _trnPengirimanServices.GetAllDetails().Where(x => x.TRN_PENGIRIMAN_MASTER != null && x.TRN_PENGIRIMAN_MASTER.NO_DO == Do && x.TRN_PENGIRIMAN_MASTER.NO_SPB.ToUpper() == NoSPB.ToUpper());
+                var data = GetAll.Sum(x => x.KUANTUM);
                 return data;
             }
             catch (Exception)

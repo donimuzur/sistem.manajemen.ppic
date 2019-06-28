@@ -20,6 +20,7 @@ namespace sistem.manajemen.ppic.website.Controllers
             var model = new BaseModel();
 
             model.CurrentUser = CurrentUser;
+            model.Menu = Enums.GetEnumDescription(Enums.MenuList.Home);
 
             return View(model);
         }

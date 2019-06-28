@@ -20,6 +20,7 @@ namespace sistem.manajemen.ppic.website.Models
         public string SuccesMessage { get; set; }
         public string MessageTitle { get; set; }
         public string Menu { get; set; }
+        public string Tittle { set; get; }
         public List<string> MessageBody { get; set; }
 
         public bool IsShowNewButton { get; set; }

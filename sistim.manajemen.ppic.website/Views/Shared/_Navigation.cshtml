@@ -1,0 +1,70 @@
+﻿@using sistem.manajemen.ppic.website.Helpers
+@model sistem.manajemen.ppic.website.Models.BaseModel
+
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <img alt="image" class="rounded-circle" src="~/Images/no-pict.jpg" width="48" height="48"/>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="block m-t-xs font-bold">
+                            @{
+                                var Name = Model.CurrentUser.FIRST_NAME + " " + Model.CurrentUser.LAST_NAME;
+                            }
+                            @Name
+                        </span>
+                        <span class="text-muted text-xs block">@Model.CurrentUser.POSITION<b class="caret"></b></span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs" style="position: absolute; top: 91px; left: 0px; will-change: top, left;">
+                        <li><a class="dropdown-item" href="@Url.Action("Profile", "AppViews")">Setting Akun</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("Profile", "AppViews")">Ganti Password</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="@Url.Action("Login", "Pages")">Keluar</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    <img src="~/Images/favicon.png" style="width:auto;height:45px" />
+                </div>
+            </li>
+            
+            <li class="@Html.IsSelectedMenu(Menu: "Transaksi", CurrentMenu : Model.Menu)">
+                <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Transaksi</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Transaksi", CurrentMenu : Model.Menu, cssClass: "in")">
+                    <li class="@Html.IsSelected(controller:"TrnSpb",action: "Index")"><a href="@Url.Action("Index", "TrnSpb")">SPB</a></li>
+                    <li class="@Html.IsSelected(controller:"TrnDo",action: "Index")"><a href="@Url.Action("Index", "TrnDo")">DO</a></li>
+                </ul>
+            </li>
+            <li class="@Html.IsSelectedMenu(Menu: "Gudang", CurrentMenu : Model.Menu)">
+                <a href="#"><i class="fa fa-cubes"></i> <span class="nav-label">Gudang</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Gudang", CurrentMenu : Model.Menu, cssClass: "in")">
+                    <li class="@Html.IsSelected(controller:"GdgBarangJadi",action: "Index")"><a href="@Url.Action("Index","GdgBarangJadi")">Barang Jadi</a></li>
+                    <li class="#"><a href="#">Bahan Baku</a></li>
+                </ul>
+            </li>
+            <li class="@Html.IsSelectedMenu(Menu: "Master", CurrentMenu : Model.Menu)">
+                <a href="#"><i class="fa fa-database"></i> <span class="nav-label">Master</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Master", CurrentMenu : Model.Menu, cssClass: "in")">
+                    <li class="@Html.IsSelected(controller:"MstBarangJadi",action: "Index")"><a href="@Url.Action("Index","MstBarangJadi")">Master Barang Jadi</a></li>
+                    <li class="#"><a href="#">Master Bahan Baku</a></li>
+                    <li class="#"><a href="#">Master Wilayah</a></li>
+                    <li class="#"><a href="#">Master Konsumen</a></li>
+                    <li class="#"><a href="#">Master Kemasan</a></li>
+                    <li class="#"><a href="#">Master Bentuk</a></li>
+                    <li class="#"><a href="#">Master UOM</a></li>
+                </ul>
+            </li>
+            <li class="@Html.IsSelectedMenu(Menu: "Laporan", CurrentMenu : Model.Menu)">
+                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Laporan</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Laporan", CurrentMenu : Model.Menu, cssClass: "in")">
+                    <li class="#"><a href="#">Laporan Rekap Bulanan</a></li>
+                    <li class="@Html.IsSelected(controller:"RptOutstanding",action: "Index")"><a href="@Url.Action("Index","RptOutstanding")">Laporan Outstanding</a></li>
+                    <li class="#"><a href="#">Laporan Stock</a></li>
+                </ul>
+            </li>
+            <li class="@Html.IsSelectedMenu(Menu: "Setting", CurrentMenu : Model.Menu)">
+                <a href="@Url.Action("Index", "Setting")"><i class="fa fa-gears"></i> <span class="nav-label">Setting</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>

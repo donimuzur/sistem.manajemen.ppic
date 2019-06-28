@@ -26,11 +26,11 @@ namespace sistem.manajemen.ppic.website.Models
         public string JENIS_PENJUALAN { get; set; }
         public string JENIS_PENJUALAN_DESC { get; set; }
         public string CARA_PEMBAYARAN { get; set; }
-        public decimal? KUANTUM { get; set; }
-        public decimal? HARGA_JUAL { get; set; }
+        public decimal KUANTUM { get; set; }
+        public decimal HARGA_JUAL { get; set; }
         public Nullable<decimal> ONGKOS_KIRIM { get; set; }
         public string PPN { get; set; }
-        public decimal? HARGA_LOKO { get; set; }
+        public decimal HARGA_LOKO { get; set; }
         public string LOKASI_KIRIM { get; set; }
         public System.DateTime? BATAS_KIRIM { get; set; }
         public string DOKUMEN_PENDUKUNG { get; set; }
@@ -44,6 +44,7 @@ namespace sistem.manajemen.ppic.website.Models
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
         public string KEMASAN_DESC { get; set; }
         public Nullable<core.Enums.StatusDocument> STATUS { get; set; }
+        public Nullable<int> DOKUMEN_PENDUKUNG_TYPE { get; set; }
 
         public SelectList SegmenPasarList {get;set;}
         public SelectList BentukList {get;set;}

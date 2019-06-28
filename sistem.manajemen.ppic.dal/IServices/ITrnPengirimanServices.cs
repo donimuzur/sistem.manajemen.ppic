@@ -8,9 +8,12 @@ namespace sistem.manajemen.ppic.dal.IServices
 {
     public interface ITrnPengirimanServices
     {
-        List<TRN_PENGIRIMAN> GetAll();
-        TRN_PENGIRIMAN GetById(object Id);
-        void Save(TRN_PENGIRIMAN Db);
-        void Save(TRN_PENGIRIMAN Db, Login Login);
+        List<TRN_PENGIRIMAN_MASTER> GetAll();
+        List<TRN_PENGIRIMAN_DETAILS> GetAllDetails();
+        TRN_PENGIRIMAN_MASTER GetTrnPengirimanMasterById(Object Id);
+        TRN_PENGIRIMAN_DETAILS GetTrnPengirimanDetailsById(Object Id);
+        TRN_PENGIRIMAN_DETAILS GetTrnPengirimanDetailsByPengiriman(int Id);
+        void Save(TRN_PENGIRIMAN_MASTER Db, Login Login);
+        void Save(TRN_PENGIRIMAN_MASTER Db);
     }
 }

@@ -18,17 +18,18 @@
                             <div class="add-product">
                                 <a href="@Url.Action("Create","MstBarangJadi")">Tambah Barang Jadi</a>
                             </div>
-                            <table id="table" class="stripe row-border order-column" style="width:100%">
+                            <table id="table" class="display nowrap" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Action</th>
-                                        <th>Nama</th>
-                                        <th>Komposisi</th>
+                                        <th style="width:100px">Nama</th>
+                                        <th style="width:150px">Komposisi</th>
                                         <th>Bentuk</th>
                                         <th>Bentuk Lain</th>
                                         <th>Kemasan</th>
-                                        <th>Stock(KG)</th>
+                                        <th>Stock Awal</th>
+                                        <th>Stock</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -45,6 +46,7 @@
                                             <td>@Html.Raw(item.BENTUK)</td>
                                             <td>@Html.Raw(item.BENTUK_LAIN)</td>
                                             <td>@Html.Raw(item.KEMASAN)</td>
+                                            <td>@Html.Raw(String.Format("{0:N}", item.STOCK_AWAL == null ? 0:item.STOCK_AWAL.Value))</td>
                                             <td>@Html.Raw(String.Format("{0:N}", item.STOCK))</td>
                                             <td>@Html.Raw(item.STATUS ? "Aktif" : "Tidak Aktif")</td>
                                         </tr>

@@ -23,24 +23,50 @@ namespace sistem.manajemen.ppic.bll
         }
         public List<MstBarangJadiDto> GetAll()
         {
-            var Data = _mstBarangServices.GetAll();
-            var ReData = Mapper.Map<List<MstBarangJadiDto>>(Data);
+            try
+            {
+                var Data = _mstBarangServices.GetAll();
+                var ReData = Mapper.Map<List<MstBarangJadiDto>>(Data);
 
-            return ReData;
+                return ReData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+          
         }
         public MstBarangJadiDto GetById(object Id)
         {
-            var Data = _mstBarangServices.GetById(Id);
-            var ReData = Mapper.Map<MstBarangJadiDto>(Data);
+            try
+            {
+                var Data = _mstBarangServices.GetById(Id);
+                var ReData = Mapper.Map<MstBarangJadiDto>(Data);
 
-            return ReData;
+                return ReData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         public MstBarangJadiDto GetByNama(string NamaBarang)
         {
-            var Data = _mstBarangServices.GetAll().Where(x => x.NAMA_BARANG.ToUpper() == NamaBarang.ToUpper()).FirstOrDefault();
-            var ReData = Mapper.Map<MstBarangJadiDto>(Data);
+            try
+            {
+                var Data = _mstBarangServices.GetAll().Where(x => x.NAMA_BARANG.ToUpper() == NamaBarang.ToUpper()).FirstOrDefault();
+                var ReData = Mapper.Map<MstBarangJadiDto>(Data);
 
-            return ReData;
+                return ReData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+         
         }
         public void Save(MstBarangJadiDto model)
         {

@@ -5,12 +5,14 @@ using sistem.manajemen.ppic.bll;
 using sistem.manajemen.ppic.bll.IBLL;
 using sistem.manajemen.ppic.BLL;
 using sistem.manajemen.ppic.dal;
+using sistem.manajemen.ppic.website.App_Start;
 using sistem.manajemen.ppic.website.Code;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace sistem.manajemen.ppic.website
@@ -42,6 +44,8 @@ namespace sistem.manajemen.ppic.website
             container.Register<ITrnPengirimanBLL,TrnPengirimanBLL >();
             container.Register<ITrnHasilProduksiBLL, TrnHasilProduksiBLL>();
             container.Register<IRptOutstandingBLL, RptOutstandingBLL>();
+            container.Register<IMstKemasanBLL, MstKemasanBLL>();
+            container.Register<IMstUomBLL,MstUomBLL >();
 
             // 3. Optionally verify the container's configuration.
             container.Verify();
@@ -51,12 +55,12 @@ namespace sistem.manajemen.ppic.website
         }
         protected void Application_Start()
         {
-            //SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));
-            //DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes = false;
             AreaRegistration.RegisterAllAreas();
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            StartMain();
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            StartMain();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(_container));
         }
     }

@@ -15,30 +15,47 @@ namespace sistem.manajemen.ppic.website.Controllers
     public class MstBarangJadiController : BaseController
     {
         private IMstBarangJadiBLL _mstBarangJadiBLL;
-        public MstBarangJadiController(IMstBarangJadiBLL MstBarangJadiBLL, IPageBLL pageBll) : base(pageBll, Enums.MenuList.GdgBarangJadi)
+        private IMstKemasanBLL _mstKemasanBLL;
+        public MstBarangJadiController(IMstBarangJadiBLL MstBarangJadiBLL, IMstKemasanBLL MstKemasanBLL, IPageBLL pageBll) : base(pageBll, Enums.MenuList.GdgBarangJadi)
         {
             _mstBarangJadiBLL = MstBarangJadiBLL;
+            _mstKemasanBLL = MstKemasanBLL;
         }
+
         public MstBarangJadiModel Init(MstBarangJadiModel model)
         {
+            var ListKemasan = new List<string>();
+            ListKemasan = _mstKemasanBLL.GetAll().Select(x => x.KEMASAN).ToList();
+            model.KemasanList = new SelectList(ListKemasan);
+
             model.CurrentUser = CurrentUser;
             model.Menu = "Barang Jadi";
             model.ChangesHistory = GetChangesHistory((int)Enums.MenuList.GdgBarangJadi, model.ID);
 
             return model;
         }
+
         public ActionResult Index()
         {
-            var model = new MstBarangJadiViewModel();
-            var data = _mstBarangJadiBLL.GetAll();
+            try
+            {
+                var model = new MstBarangJadiViewModel();
+                var data = _mstBarangJadiBLL.GetAll();
 
-            model.ListData = Mapper.Map <List<MstBarangJadiModel>>(data);
+                model.ListData = Mapper.Map<List<MstBarangJadiModel>>(data);
 
-            model.CurrentUser = CurrentUser;
-            model.Menu = "Barang Jadi";
+                model.CurrentUser = CurrentUser;
+                model.Menu = "Barang Jadi";
 
-            return View(model);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+         
         }
+
         #region --- Create ---
         public ActionResult Create()
         {
@@ -49,6 +66,7 @@ namespace sistem.manajemen.ppic.website.Controllers
 
             return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(MstBarangJadiModel model)
@@ -61,6 +79,8 @@ namespace sistem.manajemen.ppic.website.Controllers
 
                     Dto.CREATED_BY = CurrentUser.USERNAME;
                     Dto.CREATED_DATE = DateTime.Now;
+                    Dto.STOCK = model.STOCK_AWAL == null ? 0 : model.STOCK_AWAL.Value;
+                    
                     Dto.STATUS = true;
                     
                     _mstBarangJadiBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
@@ -131,6 +151,7 @@ namespace sistem.manajemen.ppic.website.Controllers
             }
         }
         #endregion
+
         #region --- Json ---
 
         #endregion

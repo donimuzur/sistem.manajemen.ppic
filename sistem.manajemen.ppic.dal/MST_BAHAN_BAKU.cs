@@ -22,5 +22,8 @@ namespace sistem.manajemen.ppic.dal
         public string CREATED_BY { get; set; }
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
         public string MODIFIED_BY { get; set; }
+        public Nullable<decimal> STOCK_AWAL { get; set; }
+        public Nullable<decimal> STOCK_AKHIR { get; set; }
+        public string SATUAN { get; set; }
     }
 }

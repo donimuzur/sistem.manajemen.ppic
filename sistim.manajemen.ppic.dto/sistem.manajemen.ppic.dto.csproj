@@ -41,17 +41,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\ChangesHistoryDto.cs" />
+    <Compile Include="Dto\KemasanDto.cs" />
     <Compile Include="Dto\LoginDto.cs" />
     <Compile Include="Dto\MstBarangJadiDto.cs" />
     <Compile Include="Dto\MstWilayahDto.cs" />
     <Compile Include="Dto\MstBahanBakuDto.cs" />
     <Compile Include="Dto\RptOutstandingDto.cs" />
+    <Compile Include="Dto\TrnPengirimanDetailsDto.cs" />
+    <Compile Include="Dto\TrnPengirimanMasterDto.cs" />
+    <Compile Include="Dto\UomDto.cs" />
     <Compile Include="Input\RptOutstandingInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dto\TrnSpbDto.cs" />
     <Compile Include="Dto\TrnDoDto.cs" />
-    <Compile Include="Dto\TrnPengirimanDto.cs" />
     <Compile Include="Dto\TrnHasilProduksiDto.cs" />
+    <Compile Include="Dto\SoBarangJadiDetailsDto.cs" />
+    <Compile Include="Dto\SoBarangJadiDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sistem.manajemen.ppic.core\sistem.manajemen.ppic.core.csproj">

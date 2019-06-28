@@ -43,6 +43,10 @@ namespace sistem.manajemen.ppic.website.Controllers
                     CurrentUser.STATUS = GetData.STATUS;
                     CurrentUser.USERNAME = GetData.USERNAME;
                     CurrentUser.USER_ID = GetData.USER_ID;
+                    CurrentUser.EMAIL = GetData.EMAIL;
+                    CurrentUser.LAST_ONLINE = GetData.LAST_ONLINE;
+                    CurrentUser.POSITION = GetData.POSITION;
+                    CurrentUser.ROLE_ID = GetData.ROLE_ID;
 
                     return RedirectToAction("Index","Home");
                 }

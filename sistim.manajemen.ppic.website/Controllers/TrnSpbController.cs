@@ -28,7 +28,8 @@ namespace sistem.manajemen.ppic.website.Controllers
             model.ListData = Mapper.Map<List<TrnSpbModel>>(_trnSpbBLL.GetAll());
 
             model.CurrentUser = CurrentUser;
-            model.Menu = "Surat Permintaan Barang (SPB)";
+            model.Menu = Enums.GetEnumDescription(Enums.MenuList.Transaction);
+            model.Tittle = "Surat Permintaan Barang (SPB)";
 
             return View(model);
         }
@@ -217,22 +218,20 @@ namespace sistem.manajemen.ppic.website.Controllers
              .Select(x
                  => new
                  {
-                     DATA = (x.NAMA_BARANG + " - " + (x.BENTUK == "Lain-Lain" ? x.BENTUK_LAIN : x.BENTUK) + " - " + x.KEMASAN),
-                     VALUE = x.ID
+                     DATA = x.NAMA_BARANG.ToUpper(),
+                     DESKRIPSI = ((x.BENTUK == "Lain-Lain" ? x.BENTUK_LAIN.ToUpper() : x.BENTUK.ToUpper()) + " - " + x.KEMASAN.ToUpper()),
                  })
+             .Distinct()
              .OrderBy(X => X.DATA)
              .ToList();
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult GetProduk(string NoSpb)
+        public JsonResult GetProduk(string Produk)
         {
-            var data = _trnSpbBLL.GetBySPB(NoSpb);
-            if (data == null)
-            {
-                data = new TrnSpbDto();
-            }
+            var data = _mstBarangJadiBLL.GetByNama(Produk);
+            
             return Json(data);
         }
         public JsonResult GetCustomerList()
@@ -240,30 +239,45 @@ namespace sistem.manajemen.ppic.website.Controllers
             var model = _trnSpbBLL
              .GetAll()
              .Select(x
-                 => new 
-                 {
-                     DATA = (x.NAMA_KONSUMEN)
-                 })
-             .GroupBy(X => X.DATA)
+                => new 
+                {
+                    DATA = (x.NAMA_KONSUMEN.ToUpper())
+                })
+             .Distinct()
+             .OrderBy(X => X.DATA)
              .ToList();
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
         public JsonResult GetWilayahList()
         {
             var model = _mstWilayahBLL
              .GetAll()
+             .Where(x => x.STATUS)
              .Select(x
-                 => new
-                 {
-                     DATA = (x.WILAYAH)
-                 })
-             .GroupBy(X => new { DATA = X.DATA })
+                => new
+                {
+                    DATA = (x.WILAYAH.ToUpper())
+                })
+                .OrderBy(X => X.DATA)
              .ToList();
-
+            return Json(model,JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetSalesRef()
+        {
+            var model = _trnSpbBLL
+            .GetAll()
+            .Select(x
+               => new
+               {
+                   DATA = (x.SALES.ToUpper())
+               })
+            .Distinct()
+            .OrderBy(X => X.DATA)
+            .ToList();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion
-        
     }
 }

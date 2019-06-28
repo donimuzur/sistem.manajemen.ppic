@@ -26,6 +26,10 @@
                             @Html.TextBoxFor(model => model.KOMPOSISI, new { @class = "form-control", @placeholder = "Komposisi", @required = "required", @disabled = "disabled" })
                         </div>
                         <div class="form-group">
+                            <label class="control-label">Stock Awal</label>
+                            @Html.TextBoxFor(model => model.STOCK_AWAL, new { @class = "form-control", @placeholder = "Stock", @disabled = "disabled" })
+                        </div>
+                        <div class="form-group">
                             <label class="control-label">Stock</label>
                             @Html.TextBoxFor(model => model.STOCK, new { @class = "form-control", @placeholder = "Stock", @disabled = "disabled" })
                         </div>
@@ -64,3 +68,26 @@
         @Html.Partial("_ChangesLog")       
     </div>
 </div>
+@section scripts {
+    <script type="text/javascript">
+       $(document).ready()
+       {
+           initilize();
+       }
+
+       $("#BENTUK").change(function () {
+           initilize();
+       });
+
+       function initilize() {
+           $('#BENTUK_LAIN').prop('disabled', true);
+           $('#BENTUK_LAIN').prop('required', false);
+
+           var Bentuk = $('#BENTUK').val();
+           if (Bentuk == "Lain-Lain") {
+               $('#BENTUK_LAIN').prop('disabled', false);
+               $('#BENTUK_LAIN').prop('required', true);
+           }
+       }
+    </script>
+}

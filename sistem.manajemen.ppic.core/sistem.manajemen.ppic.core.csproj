@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckConnection.cs" />
     <Compile Include="Constans.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="LogError.cs" />

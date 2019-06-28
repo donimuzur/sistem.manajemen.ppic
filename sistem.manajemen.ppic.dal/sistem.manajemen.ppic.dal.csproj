@@ -71,11 +71,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DOCUMENT_NUMBER.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="IServices\IChangesHistoryServices.cs" />
     <Compile Include="IServices\IGenericRepository.cs" />
     <Compile Include="IServices\ILoginServices.cs" />
     <Compile Include="IServices\IMstBahanBakuServices.cs" />
     <Compile Include="IServices\IMstBarangJadiServices.cs" />
+    <Compile Include="IServices\IMstKemasanServices.cs" />
+    <Compile Include="IServices\IMstUomServices.cs" />
     <Compile Include="IServices\IMstWilayahServices.cs" />
     <Compile Include="IServices\ITrnDoServices.cs" />
     <Compile Include="IServices\ITrnHasilProduksiServices.cs" />
@@ -91,6 +96,12 @@
     <Compile Include="MST_BARANG_JADI.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MST_KEMASAN.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MST_UOM.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MST_WILAYAH.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -102,6 +113,8 @@
     <Compile Include="Services\LoginServices.cs" />
     <Compile Include="Services\MstBahanBakuServices.cs" />
     <Compile Include="Services\MstBarangJadiServices.cs" />
+    <Compile Include="Services\MstKemasanServices.cs" />
+    <Compile Include="Services\MstUomServices.cs" />
     <Compile Include="Services\MstWilayahServices.cs" />
     <Compile Include="Services\SqlGenericRepository.cs" />
     <Compile Include="Services\SqlUnitOfWork.cs" />
@@ -109,6 +122,12 @@
     <Compile Include="Services\TrnHasilProduksiServices.cs" />
     <Compile Include="Services\TrnPengirimanServices.cs" />
     <Compile Include="Services\TrnSpbServices.cs" />
+    <Compile Include="SO_BARANG_JADI.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SO_BARANG_JADI_DETAILS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_GetRptOutstanding_Result.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -130,10 +149,16 @@
     <Compile Include="TRN_PENERIMAAN_SUPPLIER_DETAILS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TRN_PENGIRIMAN.cs">
+    <Compile Include="TRN_PENGIRIMAN_DETAILS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TRN_PENGIRIMAN_MASTER.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TRN_SPB.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WORKING_HOURS.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
