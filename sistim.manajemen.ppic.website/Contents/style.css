@@ -1554,22 +1554,22 @@ button:focus {
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary.focus {
-  background-color: #18a689;
-  border-color: #18a689;
+  background-color: #1a7bb9;
+  border-color: #1a7bb9;
   color: #FFFFFF;
 }
 .btn-primary.disabled,
 .btn-primary:disabled {
   color: #fff;
-  background-color: #18a689;
-  border-color: #18a689;
+  background-color: #1a7bb9;
+  border-color: #1a7bb9;
 }
 .btn-primary:not(:disabled):not(.disabled):active,
 .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #18a689;
-  border-color: #18a689;
+  background-color: #1a7bb9;
+  border-color: #1a7bb9;
 }
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .btn-primary:not(:disabled):not(.disabled).active:focus,
@@ -2825,6 +2825,11 @@ select.form-control:not([size]):not([multiple]) {
 .slider_red .noUi-connect {
   background: none repeat scroll 0 0 #ed5565;
   box-shadow: none;
+}
+.easy-autocomplete input {
+  border-radius:1px;
+  border-color:#e5e6e7;
+  box-shadow:none;
 }
 /* UI Sortable */
 .ui-sortable .ibox-title {
@@ -4481,6 +4486,11 @@ video {
   margin-bottom: 0;
 }
 /* MODAL */
+.modal-header{
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  background-color:#1C84C6;
+}
 .modal-content {
   background-clip: padding-box;
   background-color: #FFFFFF;
@@ -5034,6 +5044,9 @@ table.table-mail tr td {
 }
 .panel-primary {
   border-color: #1c84c6;
+}
+.text-red{
+    color:red !important;
 }
 .panel-primary > .panel-heading {
   background-color: #1c84c6;

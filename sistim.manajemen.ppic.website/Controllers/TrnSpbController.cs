@@ -8,6 +8,8 @@ using sistem.manajemen.ppic.core;
 using sistem.manajemen.ppic.website.Models;
 using AutoMapper;
 using sistem.manajemen.ppic.dto;
+using System.Configuration;
+
 
 namespace sistem.manajemen.ppic.website.Controllers
 {
@@ -16,11 +18,14 @@ namespace sistem.manajemen.ppic.website.Controllers
         private ITrnSpbBLL _trnSpbBLL;
         private IMstBarangJadiBLL _mstBarangJadiBLL;
         private IMstWilayahBLL _mstWilayahBLL;
-        public TrnSpbController(ITrnSpbBLL TrnSpbBLL,IPageBLL pageBll, IMstBarangJadiBLL MstBarangJadiBLL, IMstWilayahBLL MstWilayahBLL) : base(pageBll, Enums.MenuList.TrnSpb)
+        private IMstKemasanBLL _mstKemasanBLL;
+        public TrnSpbController(ITrnSpbBLL TrnSpbBLL,IPageBLL pageBll, IMstBarangJadiBLL MstBarangJadiBLL, IMstWilayahBLL MstWilayahBLL,
+            IMstKemasanBLL MstKemasanBLL) : base(pageBll, Enums.MenuList.TrnSpb)
         {
             _trnSpbBLL = TrnSpbBLL;
             _mstBarangJadiBLL = MstBarangJadiBLL;
             _mstWilayahBLL = MstWilayahBLL;
+            _mstKemasanBLL = MstKemasanBLL;
         }
         public ActionResult Index()
         {
@@ -36,7 +41,8 @@ namespace sistem.manajemen.ppic.website.Controllers
         public TrnSpbModel Init(TrnSpbModel model)
         {
             model.CurrentUser = CurrentUser;
-            model.Menu = "Surat Permintaan Barang (SPB)";
+            model.Menu = Enums.GetEnumDescription(Enums.MenuList.Transaction);
+            model.Tittle = "Surat Permintaan Barang (SPB)";
             model.ChangesHistory = GetChangesHistory((int)Enums.MenuList.TrnSpb, model.ID);
 
             var ListBentuk = new List<string>();
@@ -77,12 +83,19 @@ namespace sistem.manajemen.ppic.website.Controllers
             ListCaraPembayaran.Add("Tunai");
             ListCaraPembayaran.Add("Kredit");
             model.CaraPembayaranList = new SelectList(ListCaraPembayaran);
-            
+
             var ListKemasan = new List<string>();
-            ListKemasan.Add("50 Kg");
-            ListKemasan.Add("25 Kg");
+            ListKemasan = _mstKemasanBLL.GetAll().Select(x => x.KEMASAN).ToList();
             ListKemasan.Add("Lain-Lain");
             model.KemasanList = new SelectList(ListKemasan);
+
+            var DokumenList = new List<string>();
+            DokumenList.Add("MOU");
+            DokumenList.Add("SPK");
+            DokumenList.Add("Kontrak");
+            DokumenList.Add("PO");
+            DokumenList.Add("Lain-Lain");
+            model.DokumenList = new SelectList(DokumenList);
 
             return model;
         }
@@ -107,6 +120,24 @@ namespace sistem.manajemen.ppic.website.Controllers
                     model.CREATED_DATE = DateTime.Now;
                     model.STATUS = Enums.StatusDocument.Open;
 
+                    model.NO_SPB = model.NO_SPB.ToUpper();
+                    model.NO_SPB = model.NO_SPB.TrimEnd('\r', '\n', ' ');
+                    model.NO_SPB = model.NO_SPB.TrimStart('\r', '\n', ' ');
+
+                    if (model.Fileupload !=null)
+                    {
+                        var FilesUploadPath = ConfigurationManager.AppSettings["FilesUpload"];
+                        var fileName = System.IO.Path.GetFileName(model.Fileupload.FileName);
+                        if (System.IO.File.Exists(System.IO.Path.Combine(@FilesUploadPath, fileName)))
+                        {
+                            var a = fileName.Split('.').ToList();
+                            a[0] = a[0] + DateTime.Now.ToString("yyyyMMddHHmmss");
+                            fileName = string.Join(".", a);
+                        }
+                        model.DOKUMEN_PENDUKUNG_FILE = fileName;
+                        model.Fileupload.SaveAs(System.IO.Path.Combine(@FilesUploadPath, fileName));
+                    }
+
                     var CheckExist = _trnSpbBLL.GetBySPB(model.NO_SPB);
                     if(CheckExist != null)
                     {
@@ -117,7 +148,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                     var Dto = Mapper.Map<TrnSpbDto>(model);
                     _trnSpbBLL.Save(Dto,Mapper.Map<LoginDto>(CurrentUser));
 
-                    AddMessageInfo("Success Create SPB", Enums.MessageInfoType.Success);
+                    AddMessageInfo("Sukses Create SPB", Enums.MessageInfoType.Success);
                     return RedirectToAction("Index", "TrnSpb");
                 }
                 catch (Exception exp)
@@ -165,21 +196,35 @@ namespace sistem.manajemen.ppic.website.Controllers
                 {
                     model.MODIFIED_BY = CurrentUser.USERNAME;
                     model.MODIFIED_DATE = DateTime.Now;
-                    
+
+                    if (model.Fileupload != null)
+                    {
+                        var FilesUploadPath = ConfigurationManager.AppSettings["FilesUpload"];
+                        var fileName = System.IO.Path.GetFileName(model.Fileupload.FileName);
+                        if (System.IO.File.Exists(System.IO.Path.Combine(@FilesUploadPath, fileName)))
+                        {
+                            var a = fileName.Split('.').ToList();
+                            a[0] = a[0] + DateTime.Now.ToString("yyyyMMddHHmmss");
+                            fileName = string.Join(".", a);
+                        }
+                        model.DOKUMEN_PENDUKUNG_FILE = fileName;
+                        model.Fileupload.SaveAs(System.IO.Path.Combine(@FilesUploadPath, fileName));
+                    }
+
                     var Dto = Mapper.Map<TrnSpbDto>(model);
                     _trnSpbBLL.Save(Dto,Mapper.Map<LoginDto>(CurrentUser));
 
-                    AddMessageInfo("Success Create SPB", Enums.MessageInfoType.Success);
+                    AddMessageInfo("Success Update SPB", Enums.MessageInfoType.Success);
                     return RedirectToAction("Index", "TrnSpb");
                 }
                 catch (Exception exp)
                 {
                     LogError.LogError.WriteError(exp);
-                    AddMessageInfo("Gagal Create SPB", Enums.MessageInfoType.Error);
+                    AddMessageInfo("Gagal Update SPB", Enums.MessageInfoType.Error);
                     return RedirectToAction("Index", "TrnSpb");
                 }
             }
-            AddMessageInfo("Gagal Create SPB", Enums.MessageInfoType.Error);
+            AddMessageInfo("Gagal Update SPB", Enums.MessageInfoType.Error);
             return View(Init(model));
         }
         #endregion
@@ -278,6 +323,14 @@ namespace sistem.manajemen.ppic.website.Controllers
             .ToList();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+
+        [HttpPost]
+        public JsonResult DeleteFileDokumen(string id)
+        {
+            return Json("");
+        }
         #endregion
+
     }
 }

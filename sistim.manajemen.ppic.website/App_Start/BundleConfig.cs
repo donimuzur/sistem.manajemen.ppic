@@ -171,12 +171,12 @@ namespace sistem.manajemen.ppic.website.App_Start
                       "~/Scripts/plugins/ionRangeSlider/ion.rangeSlider.min.js"));
 
             // dataPicker styles
-            bundles.Add(new StyleBundle("~/plugins/dataPickerStyles").Include(
-                      "~/Contents/plugins/datapicker/datepicker3.css"));
+            bundles.Add(new StyleBundle("~/plugins/datePickerStyles").Include(
+                      "~/Contents/plugins/datepicker/datepicker3.css"));
 
             // dataPicker 
-            bundles.Add(new ScriptBundle("~/plugins/dataPicker").Include(
-                      "~/Scripts/plugins/datapicker/bootstrap-datepicker.js"));
+            bundles.Add(new ScriptBundle("~/plugins/datePicker").Include(
+                      "~/Scripts/plugins/datepicker/bootstrap-datepicker.js"));
 
             // nouiSlider styles
             bundles.Add(new StyleBundle("~/plugins/nouiSliderStyles").Include(
@@ -462,6 +462,54 @@ namespace sistem.manajemen.ppic.website.App_Start
             bundles.Add(new StyleBundle("~/plugins/passwordMeter").Include(
                         "~/Scripts/plugins/pwstrength/pwstrength-bootstrap.min.js",
                         "~/Scripts/plugins/pwstrength/zxcvbn.js"));
+
+
+            // Easy Autocomplete Style
+            bundles.Add(new StyleBundle("~/plugins/easyautocompleteStyle").Include(
+                       "~/Contents/plugins/easyautocomplete/easy-autocomplete.min.css"));
+
+            // Easy Autocomplete
+            bundles.Add(new ScriptBundle("~/plugins/easyautocomplete").Include(
+                       "~/Scripts/plugins/easyautocomplete/jquery.easy-autocomplete.min.js"));
+
+            // Filepond Style
+            bundles.Add(new StyleBundle("~/plugins/filepondStyle").Include(
+                       "~/Contents/plugins/filepond/filepond.min.css"));
+
+            // Filepond
+            bundles.Add(new ScriptBundle("~/plugins/filepond").Include(
+                       "~/Scripts/plugins/filepond/filepond.min.js"));
+
+            // fine-uploader Style
+            bundles.Add(new StyleBundle("~/plugins/fine-uploaderStyle").Include(
+                       "~/Contents/plugins/fine-uploader/fine-uploader-new.css"));
+
+            // fine-uploader
+            bundles.Add(new ScriptBundle("~/plugins/fine-uploader").Include(
+                       "~/Scripts/plugins/fine-uploader/jquery.fine-uploader.js"));
+
+            // bootstrap-fileinput Style
+            bundles.Add(new StyleBundle("~/plugins/bootstrap-fileinputStyle").Include(
+                       "~/Contents/plugins/bootstrap-fileinput/fileinput.css"));
+
+            // bootstrap-fileinput
+            bundles.Add(new ScriptBundle("~/plugins/bootstrap-fileinput").Include(
+                        "~/Scripts/plugins/bootstrap-fileinput/plugins/sortable.js",
+                        "~/Scripts/plugins/bootstrap-fileinput/plugins/purify.js",
+                        "~/Scripts/plugins/bootstrap-fileinput/fileinput.js"));
+
+            // autonumeric
+            bundles.Add(new ScriptBundle("~/plugins/autonumeric").Include(
+                       "~/Scripts/plugins/autonumeric/AutoNumeric.js"));
+
+            // jquery-confirm Style
+            bundles.Add(new StyleBundle("~/plugins/jquery-confirmStyle").Include(
+                       "~/Contents/plugins/jquery-confirm/jquery-confirm.min.css"));
+
+            // jquery-confirm
+            bundles.Add(new ScriptBundle("~/plugins/jquery-confirm").Include(
+                        "~/Scripts/plugins/jquery-confirm/jquery-confirm.min.js"));
+
         }
     }
 }

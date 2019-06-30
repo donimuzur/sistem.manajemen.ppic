@@ -1,4 +1,5 @@
 ﻿using sistem.manajemen.ppic.core;
+using sistem.manajemen.ppic.dal;
 using sistem.manajemen.ppic.dal.IServices;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,11 @@ namespace sistem.manajemen.ppic.dal.Services
     {
         private IUnitOfWork _uow;
         private IGenericRepository<TRN_DO> _trnDoRepo;
+        private IGenericRepository<DOCUMENT_NUMBER> _dokumenRepo;
         public TrnDoServices(IUnitOfWork Uow)
         {
             _uow = Uow;
+            _dokumenRepo = _uow.GetGenericRepository<DOCUMENT_NUMBER>();
             _trnDoRepo = _uow.GetGenericRepository<TRN_DO>();
         }
         public List<TRN_DO> GetAll()
@@ -46,12 +49,19 @@ namespace sistem.manajemen.ppic.dal.Services
                 if(Db.ID == 0)
                 {
                     int Id = 0;
-                    var GetAll = _trnDoRepo.Get().Where(x => x.TANGGAL.Month == DateTime.Now.Month && x.TANGGAL.Year == DateTime.Now.Year).ToList();
-                    if(GetAll.Count() > 0)
+                    var GetLatestNumber = _dokumenRepo.Get().Where(x => x.TANGGAL.Month == DateTime.Now.Month && x.TANGGAL.Year == DateTime.Now.Year && x.FORM_ID == (int)Enums.MenuList.TrnDo).ToList();
+                    if(GetLatestNumber.Count() > 0)
                     {
-                        Id = GetAll.Max(x => int.Parse(x.NO_DO));
+                        Id = GetLatestNumber.Max(x => x.NO.Value);
                     }
                     Db.NO_DO = (Id + 1).ToString();
+
+                    DOCUMENT_NUMBER DbDocNumber = new DOCUMENT_NUMBER();
+                    DbDocNumber.NO = Id + 1;
+                    DbDocNumber.FORM_ID = (int)Enums.MenuList.TrnDo;
+                    DbDocNumber.TANGGAL = DateTime.Now;
+                    
+                    _dokumenRepo.InsertOrUpdate(DbDocNumber, Login, Enums.MenuList.TrnDo);
                     _trnDoRepo.InsertOrUpdate(Db, Login, Enums.MenuList.TrnDo);
                 }
                 else

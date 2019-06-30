@@ -501,7 +501,7 @@
           <Property Name="STATUS" Type="Boolean" Nullable="false" />
           <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ROLE_ID" Type="Int32" />
+          <Property Name="ROLE_ID" Type="SIM_PPICModel.Role" />
           <Property Name="POSITION" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LAST_ONLINE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -996,6 +996,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EnumType Name="Role" a:ExternalTypeName="core.Enums.Role" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

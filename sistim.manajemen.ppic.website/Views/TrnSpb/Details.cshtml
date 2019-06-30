@@ -1,92 +1,139 @@
-﻿@model sistem.manajemen.ppic.website.Models.TrnSpbModel
+﻿@using System.Web.Optimization
+
+@model sistem.manajemen.ppic.website.Models.TrnSpbModel
 @{
     ViewBag.Title = "Surat Permintaan Barang (SPB)";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container-fluid">
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>@Model.Tittle</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")">Home</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <a href="@Url.Action("Index", "TrnSpb")">SPB</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>Details</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+            <a href="@Url.Action("Index", "TrnSpb")" class="btn btn-danger">Kembali</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content">
+    <div class="alert alert-danger alert-notification" style="display:none">
+        Submit error, Silahkan check kembali !
+    </div>
+
     <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            @Html.AntiForgeryToken()
-            <div id="Information" class="panel-group" role="tabpanel" aria-multiselectable="true">
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingOne">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#Information" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Informasi
-                                <i class="fa fa-caret-down"></i>
-                            </a>
-                        </h4>
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Informasi</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
                     </div>
-                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                        <div class="panel-body">
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        <label class="control-label">No SPB<span class="red">*</span></label>
                                         @Html.HiddenFor(model => model.ID)
+                                        @Html.HiddenFor(model => model.TANGGAL)
                                         @Html.HiddenFor(model => model.CREATED_BY)
                                         @Html.HiddenFor(model => model.CREATED_DATE)
-                                        @Html.HiddenFor(model => model.TANGGAL)
+                                        @Html.HiddenFor(model => model.DOKUMEN_PENDUKUNG_FILE)
+                                        <label class="control-label">No SPB<span class="text-red">*</span></label>
+                                        @Html.TextBoxFor(model => model.NO_SPB, new { @class = "form-control", @tabindex = "1", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Sales Representative<span class="text-red">*</span></label>
+                                        @Html.TextBoxFor(model => model.SALES, new { @class = "form-control", @tabindex = "2", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Wilayah Pemasaran<span class="text-red">*</span></label>
+                                        @Html.TextBoxFor(model => model.WILAYAH, new { @class = "form-control", @tabindex = "3", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-footer">
+                    <span style="color:red">
+                        *
+                    </span>
+                    harus diisi
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                        @Html.TextBoxFor(model => model.NO_SPB, new { @class = "form-control", @style = "text-decoration:uppercase", @placeholder = "No SPB", @readonly = "readonly" })
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Sales Representative<span class="red">*</span></label>
-                                        @Html.TextBoxFor(model => model.SALES, new { @class = "form-control", @placeholder = "Sales Representative", @readonly = "readonly" })
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Wilayah Pemasaran<span class="red">*</span></label>
-                                        @Html.TextBoxFor(model => model.WILAYAH, new { @class = "form-control", @placeholder = "Wilayah Pemasaran", @readonly = "readonly" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Produk</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
                     </div>
                 </div>
-            </div>
-            <div id="Produk" class="panel-group" role="tabpanel" aria-multiselectable="true">
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingTwo">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#Produk" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                Produk
-                                <i class="fa fa-caret-down"></i>
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-                        <div class="panel-body">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        <label class="control-label">Nama Produk<span class="red">*</span></label>
-                                        @Html.TextBoxFor(model => model.NAMA_PRODUK, new { @class = "form-control", @placeholder = "Nama Produk", @readonly = "readonly" })
+                                        <label class="control-label">Nama Produk<span class="text-red">*</span></label>
+                                        @Html.TextBoxFor(model => model.NAMA_PRODUK, new { @class = "form-control", @tabindex = "4", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly" })
                                     </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        <label class="control-label">Komposisi Unsur<span class="red">*</span></label>
-                                        @Html.TextBoxFor(model => model.KOMPOSISI, new { @class = "form-control", @placeholder = "Komposisi", @readonly = "readonly" })
+                                        <label class="control-label">Komposisi Unsur<span class="text-red">*</span></label>
+                                        @Html.TextBoxFor(model => model.KOMPOSISI, new { @class = "form-control", @tabindex = "5", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly" })
                                     </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        <label class="control-label">Bentuk<span class="red">*</span></label>
+                                        <label class="control-label">Bentuk<span class="text-red">*</span></label>
                                         <div class="row">
                                             <div class="col-lg-4 col-md-4 col-sm-4">
-                                                @Html.DropDownListFor(model => model.BENTUK, Model.BentukList, "Please Select", new { @class = "form-control", @placeholder = "Bentuk", @disabled = "disabled", onchange = " initilize()" })
+                                                @Html.DropDownListFor(model => model.BENTUK, Model.BentukList, "Please Select", new { @class = "form-control", @tabindex = "6", @required = "required", onchange = " initilize()", @disabled = "disabled" })
                                             </div>
                                             <div class="col-lg-8 col-md-8 col-sm-8">
-                                                @Html.TextBoxFor(model => model.BENTUK_DESC, new { @class = "form-control", @style = "text-transform:uppercase", disabled = "disabled" })
+                                                @Html.TextBoxFor(model => model.BENTUK_DESC, new { @class = "form-control", @tabindex = "7", @style = "text-transform: uppercase;", disabled = "disabled" })
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
-                                        <label class="control-label">Kemasan<span class="red">*</span></label>
+                                        <label class="control-label">Kemasan<span class="text-red">*</span></label>
                                         <div class="row">
                                             <div class="col-lg-4 col-md-4 col-sm-4">
-                                                @Html.DropDownListFor(model => model.KEMASAN, Model.KemasanList, "Please Select", new { @class = "form-control", @disabled = "disabled", onchange = " initilize()" })
+                                                @Html.DropDownListFor(model => model.KEMASAN, Model.KemasanList, "Please Select", new { @class = "form-control", @tabindex = "8", @required = "required", onchange = " initilize()", @disabled = "disabled" })
                                             </div>
                                             <div class="col-lg-8 col-md-8 col-sm-8">
-                                                @Html.TextBoxFor(model => model.KEMASAN_DESC, new { @class = "form-control", @style = "text-transform:uppercase", disabled = "disabled" })
+                                                @Html.TextBoxFor(model => model.KEMASAN_DESC, new { @class = "form-control", @tabindex = "9", @style = "text-transform: uppercase;", disabled = "disabled" })
                                             </div>
                                         </div>
                                     </div>
@@ -95,175 +142,314 @@
                         </div>
                     </div>
                 </div>
+                <div class="ibox-footer">
+                    <span style="color:red">
+                        *
+                    </span>
+                    harus diisi
+                </div>
             </div>
-            <div id="Konsumen" class="panel-group" role="tabpanel" aria-multiselectable="true">
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingThree">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#Konsumen" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                Data Konsumen
-                                <i class="fa fa-caret-down"></i>
-                            </a>
-                        </h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Data Konsumen</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
                     </div>
-                    <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Nama Konsumen<span class="red">*</span></label>
-                                        @Html.TextBoxFor(model => model.NAMA_KONSUMEN, new { @class = "form-control", @placeholder = "Nama Konsumen", @readonly = "readonly" })
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Nama Konsumen<span class="text-red">*</span></label>
+                                @Html.TextBoxFor(model => model.NAMA_KONSUMEN, new { @class = "form-control", @tabindex = "10", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Alamat Konsumen<span class="text-red">*</span></label>
+                                @Html.TextAreaFor(model => model.ALAMAT_KONSUMEN, new { @class = "form-control", @tabindex = "11", @style = "text-transform: uppercase;height:125px", @required = "required", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Segmen Pasar<span class="text-red">*</span></label>
+                                @Html.DropDownListFor(model => model.SEGMEN_PASAR, Model.SegmenPasarList, "Please Select", new { @class = "form-control", @tabindex = "13", @required = "required", @disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Telephone<span class="text-red">*</span></label>
+                                @Html.TextBoxFor(model => model.NO_TELP, new { @class = "form-control", @tabindex = "12", @required = "required", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Contact Person</label>
+                                @Html.TextBoxFor(model => model.CONTACT_PERSON, new { @class = "form-control", @tabindex = "14", @style = "text-transform: uppercase;", @readonly = "readonly" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-footer">
+                    <span style="color:red">
+                        *
+                    </span>
+                    harus diisi
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Data Penjualan</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Jenis Penjualan<span class="text-red">*</span></label>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        @Html.DropDownListFor(model => model.JENIS_PENJUALAN, Model.JenisPenjualanList, "Please Select", new { @class = "form-control", @tabindex = "15", @required = "required", @onchange = "initilize()", @disabled = "disabled" })
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Alamat Konsumen<span class="red">*</span></label>
-                                        @Html.TextAreaFor(model => model.ALAMAT_KONSUMEN, new { @class = "form-control", @placeholder = "Alamat Konsumen", @readonly = "readonly" })
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Telephone<span class="red">*</span></label>
-                                        @Html.TextBoxFor(model => model.NO_TELP, new { @class = "form-control", @placeholder = "Telephone", @readonly = "readonly" })
+                                    <div class="col-lg-8 col-md-8 col-sm-8">
+                                        @Html.TextBoxFor(model => model.JENIS_PENJUALAN_DESC, new { @class = "form-control", @tabindex = "15", @style = "text-transform: uppercase;", @disabled = "disabled" })
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Segmen Pasar<span class="red">*</span></label>
-                                        @Html.DropDownListFor(model => model.SEGMEN_PASAR, Model.SegmenPasarList, "Please Select", new { @class = "form-control", @placeholder = "Segmen Pasar", @disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Kuantum Penjualan<span class="text-red">*</span></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-addon">Kg</span>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Contact Person</label>
-                                        @Html.TextBoxFor(model => model.CONTACT_PERSON, new { @class = "form-control", @placeholder = "Contact Person", @readonly = "readonly" })
-                                    </div>
+                                    @Html.TextBoxFor(model => model.KUANTUM, new { @class = "form-control numeric", @tabindex = "16", @required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Lokasi Tujuan kirim<span class="text-red">*</span></label>
+                                @Html.TextBoxFor(model => model.LOKASI_KIRIM, new { @class = "form-control", @tabindex = "17", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Batas Akhir Kirim<span class="text-red">*</span></label>
+                                <div class="input-group date" id="BatasKirim">
+                                    @Html.TextBoxFor(model => model.BATAS_KIRIM, "{0:dd-MMM-yyyy}", new { @class = "form-control", @tabindex = "18", required = "required", @readonly = "readonly" })
+                                    <span class="input-group-addon btn btn-success">
+                                        <i class="fa fa-calendar "></i>
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="ibox-footer">
+                    <span style="color:red">
+                        *
+                    </span>
+                    harus diisi
+                </div>
             </div>
-            <div id="DataPenjualan" class="panel-group" role="tabpanel" aria-multiselectable="true">
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingFour">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#DataPenjualan" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                                Data Penjualan
-                                <i class="fa fa-caret-down"></i>
-                            </a>
-                        </h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Data Harga dan Pembayaran</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
                     </div>
-                    <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Jenis Penjualan<span class="red">*</span></label>
-                                        <div class="row">
-                                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                                @Html.DropDownListFor(model => model.JENIS_PENJUALAN, Model.JenisPenjualanList, "Please Select", new { @class = "form-control", @placeholder = "Jenis Penjualan", @disabled = "disabled", @onchange = "initilize()" })
-                                            </div>
-                                            <div class="col-lg-8 col-md-8 col-sm-8">
-                                                @Html.TextBoxFor(model => model.JENIS_PENJUALAN_DESC, new { @class = "form-control", @style = "text-transform:uppercase", @disabled = "disabled" })
-                                            </div>
-                                        </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Cara Pembayaran<span class="text-red">*</span></label>
+                                @Html.DropDownListFor(model => model.CARA_PEMBAYARAN, Model.CaraPembayaranList, "Please Select", new { @class = "form-control", @tabindex = "19", @required = "required", @disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">PPN<span class="text-red">*</span></label>
+                                @Html.DropDownListFor(model => model.PPN, Model.PPNList, "Please Select", new { @class = "form-control", @tabindex = "20", @required = "required", @disabled = "disabled" })
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">harga Jual<span class="text-red">*</span></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-addon">Rp</span>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Kuantum Penjualan<span class="red">*</span></label>
-                                        @Html.TextBoxFor(model => model.KUANTUM, new { @class = "form-control", @placeholder = "0.00", @readonly = "readonly" })
-                                    </div>
+                                    @Html.TextBoxFor(model => model.HARGA_JUAL, new { @class = "form-control numeric", @tabindex = "21", @required = "required", @readonly = "readonly" })
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Lokasi Tujuan kirim<span class="red">*</span></label>
-                                        @Html.TextBoxFor(model => model.LOKASI_KIRIM, new { @class = "form-control", @placeholder = "Lokasi Tujuan Kirim", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Harga Loko<span class="text-red">*</span></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-addon">Rp</span>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Batas Akhir Kirim<span class="red">*</span></label>
-                                        <div class="input-group" id="BatasKirim">
-                                            @Html.TextBoxFor(model => model.BATAS_KIRIM, "{0:dd-MMM-yyyy}", new { @class = "form-control", @placeholder = "Batas Akhir Kirim", @readonly = "readonly" })
-                                            <span class="input-group-addon btn btn-primary">
-                                                <i class="fa fa-calendar "></i>
-                                            </span>
-                                        </div>
+                                    @Html.TextBoxFor(model => model.HARGA_LOKO, new { @class = "form-control numeric", @tabindex = "22", @required = "required", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Ongkos Kirim</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-addon">Rp</span>
                                     </div>
+                                    @Html.TextBoxFor(model => model.ONGKOS_KIRIM, new { @class = "form-control numeric", @tabindex = "23", @readonly = "readonly" })
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="ibox-footer">
+                    <span style="color:red">
+                        *
+                    </span>
+                    harus diisi
+                </div>
             </div>
-            <div id="BiayaPenjualan" class="panel-group" role="tabpanel" aria-multiselectable="true">
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingFive">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#BiayaPenjualan" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-                                Data Harga dan Pembayaran
-                                <i class="fa fa-caret-down"></i>
-                            </a>
-                        </h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Dokumen Pendukung</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
                     </div>
-                    <div id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Cara Pembayaran<span class="red">*</span></label>
-                                        @Html.DropDownListFor(model => model.CARA_PEMBAYARAN, Model.CaraPembayaranList, "Please Select", new { @class = "form-control", @placeholder = "Cara Pembayaran", @disabled = "disabled" })
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Jenis Dokumen</label>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        @Html.DropDownListFor(model => model.DOKUMEN_PENDUKUNG, Model.DokumenList, "Please Select", new { @class = "form-control", @tabindex = "24", @onchange = "initilize()", @disabled = "disabled" })
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label">PPN<span class="red">*</span></label>
-                                        @Html.DropDownListFor(model => model.PPN, Model.PPNList, "Please Select", new { @class = "form-control", @disabled = "disabled" })
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">harga Jual<span class="red">*</span></label>
-                                        <div class="input-icon">
-                                            @Html.TextBoxFor(model => model.HARGA_JUAL, new { @class = "decimal form-control", @placeholder = "Harga Jual (per Kg)", @readonly = "readonly" })
-                                            <i>Rp.</i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Harga Loko<span class="red">*</span></label>
-                                        <div class="input-icon">
-                                            @Html.TextBoxFor(model => model.HARGA_LOKO, new { @class = "decimal form-control", @placeholder = "Harga Loko", @readonly = "readonly" })
-                                            <i>Rp.</i>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Ongkos Kirim</label>
-                                        <div class="input-icon">
-                                            @Html.TextBoxFor(model => model.ONGKOS_KIRIM, new { @class = "form-control", @placeholder = "Ongkos Kirim", @readonly = "readonly" })
-                                            <i>Rp.</i>
-                                        </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8">
+                                        @Html.TextBoxFor(model => model.DOKUMEN_PENDUKUNG_DESC, new { @class = "form-control", @tabindex = "25", @style = "text-transform: uppercase;", @disabled = "disabled" })
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Nomer Dokumen</label>
+                                @Html.TextBoxFor(model => model.DOKUMEN_NOMOR, new { @class = "form-control", @tabindex = "26", @style = "text-transform: uppercase;", @readonly = "readonly" })
+                            </div>
+                        </div>
                     </div>
+                    <input id="input-file" name="Fileupload" type="file" data-browse-on-zone-click="true" readonly="readonly">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-group">
-                        <label class="control-label">Catatan</label>
-                        @Html.TextAreaFor(model => model.CATATAN, new { @class = "form-control", @placeholder = "Keterangan", @readonly = "readonly" })
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="form-group">
-                        <a href="@Url.Action("Index","TrnSpb")" class="btn btn-default">Kembali</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Catatan</label>
+                                @Html.TextAreaFor(model => model.CATATAN, new { @class = "form-control", style = "height:200px", @readonly="readonly" })
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="changes" class="panel-body">
+
+    <div id="changes">
         @Html.Partial("_ChangesLog")
     </div>
+
 </div>
-@section scripts {
+
+
+@section Styles {
+    @Styles.Render("~/plugins/bootstrap-fileinputStyle")
+}
+
+@section Scripts {
+    
+    @Scripts.Render("~/plugins/bootstrap-fileinput")
+    @Scripts.Render("~/plugins/validate")
+    @Scripts.Render("~/plugins/autonumeric")
+
     <script type="text/javascript">
         $(document).ready()
         {
+            new AutoNumeric.multiple('.numeric', { unformatOnSubmit: true })
+
+            var fileInputOptions = null;
+            var FilePendukung = $('#DOKUMEN_PENDUKUNG_FILE').val();
+            if (FilePendukung == '')
+            {
+                fileInputOptions =
+                {
+                    showUpload: false,
+                    showCancel: false,
+                    purifyHtml: true,
+                };
+            }
+            else {
+                fileInputOptions =
+                {
+                    showUpload: false,
+                    showCancel: false,
+                    showRemove:true,
+                    initialPreview: [
+                        '<img src="/files_upload/Dokumen/aa.png" class="kv-preview-data file-preview-image">',
+                     ],
+                    initialPreviewAsData: false, // allows you to set a raw markup
+                    initialPreviewConfig: [
+                        { caption: "aa.png", url: "/TrnSpb/DeleteFileDokumen", key: 1, initialPreviewShowDelete:false },
+                    ]
+                };
+            }
+            $("#input-file").fileinput(fileInputOptions);
+
+
             initilize();
         }
 
@@ -301,10 +487,6 @@
                 $('#KEMASAN_DESC').prop('required', true);
             }
         }
-
-        $('.date').datepicker({
-            format: 'dd-M-yyyy'
-        });
     </script>
 }
 

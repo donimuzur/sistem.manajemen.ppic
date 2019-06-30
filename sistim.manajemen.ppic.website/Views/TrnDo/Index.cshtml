@@ -1,79 +1,149 @@
-﻿@model sistem.manajemen.ppic.website.Models.TrnDoViewModel
+﻿@using System.Web.Optimization
+@model sistem.manajemen.ppic.website.Models.TrnDoViewModel
+
 @{
     ViewBag.Title = "Surat Delivery Order (DO)";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="data-table-area mg-b-15">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="sparkline13-list">
-                    <div class="sparkline13-hd">
-                        <div class="main-sparkline13-hd">
-                            <h1>&nbsp;</h1>
-                        </div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>@Model.Tittle</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")">Home</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>DO</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+            <a href="#" class="ladda-button ladda-button-import btn btn-success" data-style="zoom-in">Import .xls</a>
+            <a href="#" class="ladda-button ladda-button-export btn btn-success" data-style="zoom-in">Export .xls</a>
+            <a href="@Url.Action("Create","TrnDo")" class="ladda-button ladda-button-tambah btn btn-success" data-style="zoom-in">Tambah</a>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>List DO</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
                     </div>
-                    <div class="sparkline13-graph">
-                        <div>
-                            <div class="add-product">
-                                <a href="@Url.Action("Create","TrnDo")">Tambah DO</a>
-                            </div>
-                            <table id="table" class="stripe row-border order-column" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th style="min-width:30px">No</th>
-                                        <th style="min-width:50px">Action</th>
-                                        <th style="min-width:100px">Tanggal</th>
-                                        <th style="min-width:50px">No DO</th>
-                                        <th style="min-width:150px">No SPB</th>
-                                        <th style="min-width:200px">Nama Konsumen</th>
-                                        <th style="min-width:150px">Jumlah</th>
-                                        <th style="min-width:200px">Nama CP</th>
-                                        <th style="min-width:100px">No Telephone</th>
-                                        <th style="min-width:100px">Produk</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.ListData.OrderBy(x => x.NO_DO).ToList())
-                                    {
-                                        <tr>
-                                            <td>@Html.Raw(Model.ListData.IndexOf(item) + 1)</td>
-                                            <td style="text-align:center;">
-                                                @if (Model.CurrentUser.USERNAME == item.CREATED_BY)
-                                                {
-                                                    <a href="@Url.Action("Edit","TrnDo",new {@id=item.ID})" data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                }
-                                                <a href="@Url.Action("Details","TrnDo",new {@id=item.ID})" data-toggle="tooltip" title="Details" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                            </td>
-                                            <td>@Html.Raw(item.TANGGAL.ToString("dd MMM yyyy"))</td>
-                                            <td>@Html.Raw(item.NO_DO)</td>
-                                            <td>@Html.Raw(item.NO_SPB)</td>
-                                            <td>@Html.Raw(item.NAMA_KONSUMEN)</td>
-                                            <td>@Html.Raw(string.Format("{0:N}", item.JUMLAH))</td>
-                                            <td>@Html.Raw(item.NAMA_CP)</td>
-                                            <td>@Html.Raw(item.NO_TELP)</td>
-                                            <td>@Html.Raw(item.NAMA_BARANG)</td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-striped table-bordered table-hover dataTables-List">
+                        <thead>
+                            <tr>
+                                <th style="min-width:20px">No</th>
+                                <th style="min-width:50px">Action</th>
+                                <th style="min-width:80px">Tanggal</th>
+                                <th style="min-width:150px">No SPB</th>
+                                <th style="min-width:50px">No DO</th>
+                                <th style="min-width:150px">Produk</th>
+                                <th style="min-width:200px">Konsumen</th>
+                                <th style="min-width:100px">Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ListData.OrderBy(x => x.TANGGAL).ToList())
+                            {
+                                <tr>
+                                    <td style="text-align:center;">@Html.Raw(Model.ListData.IndexOf(item) + 1)</td>
+                                    <td style="text-align:center;">
+                                        @if (Model.CurrentUser.USERNAME == item.CREATED_BY)
+                                        {
+                                            <a href="@Url.Action("Edit","TrnSpb",new {@id=item.ID})" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                        }
+                                        <a href="@Url.Action("Details","TrnSpb",new {@id=item.ID})" data-toggle="tooltip" data-placement="bottom" title="Details"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    </td>
+                                    <td>@Html.Raw(item.TANGGAL.ToString("dd MMM yyyy"))</td>
+                                    <td>@Html.Raw(item.NO_SPB)</td>
+                                    <td>@Html.Raw(item.NO_DO)</td>
+                                    <td class="text-uppercase">@Html.Raw(item.NAMA_BARANG)</td>
+                                    <td class="text-uppercase">@Html.Raw(item.NAMA_KONSUMEN)</td>
+                                    <td>@Html.Raw(string.Format("{0:N}", item.JUMLAH))</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@section scripts {
+
+@section Styles {
+    @Styles.Render("~/Contents/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/plugins/laddaStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/ladda")
+
     <script type="text/javascript">
         $(document).ready(function () {
-            var table = $('#table').DataTable({
-                "dom": 'lf<"table-overflow"t>pi',
-                orderCellsTop: true,
-                scrollY: "300px",
-                scrollX: true,
+
+            var l_ladda_export = $('.ladda-button-export').ladda();
+            l_ladda_export.click(function () {
+                // Start loading
+                l_ladda_export.ladda('start');
+                // Do something in backend and then stop ladda
+                // setTimeout() is only for demo purpose
+                setTimeout(function () {
+                    l_ladda_export.ladda('stop');
+                }, 20000)
+            });
+
+            var l_ladda_import = $('.ladda-button-import').ladda();
+            l_ladda_import.click(function () {
+                // Start loading
+                l_ladda_import.ladda('start');
+                // Do something in backend and then stop ladda
+                // setTimeout() is only for demo purpose
+                setTimeout(function () {
+                    l_ladda_import.ladda('stop');
+                }, 20000)
+            });
+
+            var l_ladda_tambah = $('.ladda-button-tambah').ladda();
+            l_ladda_tambah.click(function () {
+                // Start loading
+                l_ladda_tambah.ladda('start');
+                // Do something in backend and then stop ladda
+                // setTimeout() is only for demo purpose
+            });
+
+            $('.dataTables-List').DataTable({
+                pageLength: 25,
+                dom: '<"html5buttons"B>lTfgitp',
+                scrollX:        true,
                 scrollCollapse: true,
-                fixedColumns: true
+                buttons: [
+                    { extend: 'copy' },
+                    { extend: 'csv' },
+                    { extend: 'excel', title: 'ExampleFile' },
+                    { extend: 'pdf', title: 'ExampleFile' },
+                    {
+                        extend: 'print',
+                        customize: function (win) {
+                            $(win.document.body).addClass('white-bg');
+                            $(win.document.body).css('font-size', '10px');
+
+                            $(win.document.body).find('table')
+                                    .addClass('compact')
+                                    .css('font-size', 'inherit');
+                        }
+                    }
+                ]
             });
         });
     </script>

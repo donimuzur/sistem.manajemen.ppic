@@ -13,7 +13,6 @@ namespace sistem.manajemen.ppic.dal
     using System.Data.Entity;
     using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Infrastructure;
-
     using System.Linq;
 
     public partial class PPICEntities : DbContext

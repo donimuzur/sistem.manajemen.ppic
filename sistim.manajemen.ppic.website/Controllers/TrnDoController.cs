@@ -15,16 +15,20 @@ namespace sistem.manajemen.ppic.website.Controllers
     {
         private ITrnDoBLL _trnDoBLL;
         private ITrnSpbBLL _trnSpbBLL;
-        public TrnDoController(IPageBLL pageBll, ITrnDoBLL TrnDoBLL, ITrnSpbBLL TrnSpbBLL) : base(pageBll, Enums.MenuList.TrnDo)
+        private IMstBarangJadiBLL _mstBarangJadiBLL;
+        public TrnDoController(IPageBLL pageBll, ITrnDoBLL TrnDoBLL, ITrnSpbBLL TrnSpbBLL, IMstBarangJadiBLL MstBarangJadiBLL) : base(pageBll, Enums.MenuList.TrnDo)
         {
             _trnDoBLL = TrnDoBLL;
             _trnSpbBLL = TrnSpbBLL;
+            _mstBarangJadiBLL = MstBarangJadiBLL;
         }
         public TrnDoModel Init(TrnDoModel model)
         {
             model.CurrentUser = CurrentUser;
-            model.MainMenu = Enums.MenuList.TrnDo;
-            model.Menu = "Delivery Order (DO)";
+
+            model.Menu = Enums.GetEnumDescription(Enums.MenuList.Transaction);
+            model.Tittle = "Delivery Order (DO)";
+
             model.ChangesHistory = GetChangesHistory((int)Enums.MenuList.TrnDo, model.ID);
 
             return model;
@@ -37,7 +41,8 @@ namespace sistem.manajemen.ppic.website.Controllers
 
             model.CurrentUser = CurrentUser;
             model.MainMenu = Enums.MenuList.TrnDo;
-            model.Menu = "Delivery Order (DO)";
+            model.Menu = Enums.GetEnumDescription(Enums.MenuList.Transaction);
+            model.Tittle = "Delivery Order (DO)";
 
             return View(model);
         }
@@ -57,37 +62,29 @@ namespace sistem.manajemen.ppic.website.Controllers
             {
                 try
                 {
-                    var CheckDataExist = _trnSpbBLL.GetBySPB(model.NO_SPB);
-                    if(CheckDataExist == null)
-                    {
-                        AddMessageInfo("No SPB tersebut tidak ada", Enums.MessageInfoType.Error);
-                        model = Init(model);
-                        return View(model);
-                    }
-
                     model.CREATED_BY = CurrentUser.USERNAME;
                     model.CREATED_DATE = DateTime.Now;
                     model.TANGGAL = DateTime.Now;
+                    model.STATUS = Enums.StatusDocument.Open;
 
                     _trnDoBLL.Save(Mapper.Map<TrnDoDto>(model), Mapper.Map<LoginDto>(CurrentUser));
-                    _trnSpbBLL.CloseSpb(model.NO_SPB);
 
-                    AddMessageInfo("Sukses Create Do",Enums.MessageInfoType.Success);
+                    AddMessageInfo("Sukses Create DO",Enums.MessageInfoType.Success);
                     return RedirectToAction("Index", "TrnDo");
                 }
                 catch (Exception exp)
                 {
                     LogError.LogError.WriteError(exp);
-                    AddMessageInfo("Telah terjadi kesalahan", Enums.MessageInfoType.Error);
+                    AddMessageInfo("Gagal Create DO", Enums.MessageInfoType.Error);
                     return RedirectToAction("Index", "TrnDo");
                 }
             }
-            model = Init(model);
-            return View(model);
+            AddMessageInfo("Gagal Create DO", Enums.MessageInfoType.Error);
+            return View(Init(model));
         }
         #endregion
 
-        #region --- Edit ---k
+        #region --- Edit ---
         public ActionResult Edit(int Id)
         {
             var model = new TrnDoModel();
@@ -175,6 +172,30 @@ namespace sistem.manajemen.ppic.website.Controllers
                     .OrderBy(X => X.DATA)
                 .ToList();
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetProdukList()
+        {
+            var model = _mstBarangJadiBLL
+             .GetAll()
+             .Select(x
+                 => new
+                 {
+                     DATA = x.NAMA_BARANG.ToUpper(),
+                     DESKRIPSI = ((x.BENTUK == "Lain-Lain" ? x.BENTUK_LAIN.ToUpper() : x.BENTUK.ToUpper()) + " - " + x.KEMASAN.ToUpper()),
+                 })
+             .Distinct()
+             .OrderBy(X => X.DATA)
+             .ToList();
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult GetProduk(string Produk)
+        {
+            var data = _mstBarangJadiBLL.GetByNama(Produk);
+
+            return Json(data);
         }
         #endregion
     }

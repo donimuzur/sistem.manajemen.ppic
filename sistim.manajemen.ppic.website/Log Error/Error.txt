@@ -372,3 +372,54 @@ StackTrace :    at System.Data.SqlClient.SqlConnection.OnError(SqlException exce
    at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.Reader(DbCommand command, DbCommandInterceptionContext interceptionContext)
    at System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.Execute(Dictionary`2 identifierValues, List`1 generatedValues)
    at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+-----------------------------------------------------------------------------
+Date : 2019-54-30 11:06:15
+
+System.IO.DirectoryNotFoundException
+Message : Could not find a part of the path 'D:\Project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Documents\Capture asd.JPG'.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at System.Web.HttpPostedFile.SaveAs(String filename)
+   at sistem.manajemen.ppic.website.Controllers.TrnSpbController.Create(TrnSpbModel model) in D:\Project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnSpbController.cs:line 138
+-----------------------------------------------------------------------------
+Date : 2019-00-30 12:06:31
+
+System.IO.DirectoryNotFoundException
+Message : Could not find a part of the path 'D:\Project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Document\Capture asd.JPG'.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at System.Web.HttpPostedFile.SaveAs(String filename)
+   at sistem.manajemen.ppic.website.Controllers.TrnSpbController.Create(TrnSpbModel model) in D:\Project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnSpbController.cs:line 138
+-----------------------------------------------------------------------------
+Date : 2019-03-30 12:06:38
+
+System.IO.DirectoryNotFoundException
+Message : Could not find a part of the path 'D:\Project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Document\Capture asd.JPG'.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at System.Web.HttpPostedFile.SaveAs(String filename)
+   at sistem.manajemen.ppic.website.Controllers.TrnSpbController.Create(TrnSpbModel model) in D:\Project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnSpbController.cs:line 138
+-----------------------------------------------------------------------------
+Date : 2019-06-30 12:06:51
+
+System.IO.DirectoryNotFoundException
+Message : Could not find a part of the path 'D:\Project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Documen\Capture asd.JPG'.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at System.Web.HttpPostedFile.SaveAs(String filename)
+   at sistem.manajemen.ppic.website.Controllers.TrnSpbController.Create(TrnSpbModel model) in D:\Project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnSpbController.cs:line 138
+-----------------------------------------------------------------------------
+Date : 2019-47-30 18:06:34
+
+System.NullReferenceException
+Message : Object reference not set to an instance of an object.
+StackTrace :    at sistem.manajemen.ppic.website.Controllers.TrnSpbController.Init(TrnSpbModel model) in D:\Project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnSpbController.cs:line 43
+   at sistem.manajemen.ppic.website.Controllers.TrnSpbController.Details(Nullable`1 id) in D:\Project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnSpbController.cs:line 246

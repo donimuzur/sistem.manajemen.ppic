@@ -10,6 +10,13 @@ namespace sistem.manajemen.ppic.core
 {
     public class Enums
     {
+        public enum Role
+        {
+            Administrator = 1000,
+            Manager = 5000,
+            Operator = 50001,
+            Timbangan = 50002,
+        }
         public enum MenuList
         {
             [Description("Login")]

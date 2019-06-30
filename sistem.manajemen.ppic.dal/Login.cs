@@ -21,7 +21,7 @@ namespace sistem.manajemen.ppic.dal
         public bool STATUS { get; set; }
         public string PASSWORD { get; set; }
         public string EMAIL { get; set; }
-        public Nullable<int> ROLE_ID { get; set; }
+        public Nullable<core.Enums.Role> ROLE_ID { get; set; }
         public string POSITION { get; set; }
         public string LAST_ONLINE { get; set; }
     }
