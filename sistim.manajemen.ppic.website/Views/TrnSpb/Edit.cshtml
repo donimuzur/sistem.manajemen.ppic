@@ -190,14 +190,14 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label class="control-label">Telephone<span class="text-red">*</span></label>
-                                    @Html.TextBoxFor(model => model.NO_TELP, new { @class = "form-control", @tabindex = "13", @required = "required" })
+                                    <label class="control-label">Contact Person</label>
+                                    @Html.TextBoxFor(model => model.CONTACT_PERSON, new { @class = "form-control", @tabindex = "13", @style = "text-transform: uppercase;" })
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label class="control-label">Contact Person</label>
-                                    @Html.TextBoxFor(model => model.CONTACT_PERSON, new { @class = "form-control", @tabindex = "14", @style = "text-transform: uppercase;" })
+                                    <label class="control-label">Telephone<span class="text-red">*</span></label>
+                                    @Html.TextBoxFor(model => model.NO_TELP, new { @class = "form-control", @tabindex = "14", @required = "required" })
                                 </div>
                             </div>
                         </div>
@@ -470,7 +470,7 @@
                     showUpload: false,
                     showCancel: false,
                     initialPreview: [
-                        '<img src="/files_upload/Dokumen/aa.png" class="kv-preview-data file-preview-image">',
+                        '<img src="/files_upload/Dokumen/' + FilePendukung + '" class="kv-preview-data file-preview-image">',
                     ],
                     initialPreviewConfig: [
                         { caption: "aa.png", url: "/TrnSpb/DeleteFileDokumen", key: 1 },

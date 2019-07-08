@@ -51,5 +51,6 @@ namespace sistem.manajemen.ppic.dal
         public string KEMASAN_DESC { get; set; }
         public Nullable<core.Enums.StatusDocument> STATUS { get; set; }
         public Nullable<int> DOKUMEN_PENDUKUNG_TYPE { get; set; }
+        public string REMARK { get; set; }
     }
 }

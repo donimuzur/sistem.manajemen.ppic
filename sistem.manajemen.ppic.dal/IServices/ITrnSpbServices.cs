@@ -12,5 +12,6 @@ namespace sistem.manajemen.ppic.dal.IServices
         TRN_SPB GetById(object Id);
         void Save(TRN_SPB Db);
         void Save(TRN_SPB Db, Login Login);
+        void SaveList(List<TRN_SPB> Db, Login Login);
     }
 }

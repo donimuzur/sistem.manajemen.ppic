@@ -51,5 +51,17 @@ namespace sistem.manajemen.ppic.dal.Services
                 throw;
             }
         }
+        public void SaveList(List<TRN_SPB> Db, Login Login)
+        {
+            try
+            {
+                _trnSpbRepo.InsertOrUpdateBulk(Db, Login, Enums.MenuList.TrnSpb);
+                _uow.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

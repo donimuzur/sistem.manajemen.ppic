@@ -36,5 +36,6 @@ namespace sistem.manajemen.ppic.dal
         public string ALAMAT_KONSUMEN { get; set; }
         public string NO_FAX { get; set; }
         public string TUJUAN_KIRIM { get; set; }
+        public string REMARK { get; set; }
     }
 }

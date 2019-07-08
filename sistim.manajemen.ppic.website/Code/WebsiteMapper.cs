@@ -33,11 +33,8 @@ namespace sistem.manajemen.ppic.website.Code
                 cfg.CreateMap<TrnDoModel, TrnDoDto>().ReverseMap();
                 cfg.CreateMap<TrnDoDto, TRN_DO>().ReverseMap();
 
-                cfg.CreateMap<TrnPengirimanDetailsModel, TrnPengirimanDetailsDto>().ReverseMap();
-                cfg.CreateMap<TrnPengirimanDetailsDto, TRN_PENGIRIMAN_DETAILS>().ReverseMap();
-
-                cfg.CreateMap<TrnPengirimanMasterModel, TrnPengirimanMasterDto>().ReverseMap();
-                cfg.CreateMap<TrnPengirimanMasterDto, TRN_PENGIRIMAN_DETAILS>().ReverseMap();
+                cfg.CreateMap<TrnPengirimanModel, TrnPengirimanDto>().ReverseMap();
+                cfg.CreateMap<TrnPengirimanDto, TRN_PENGIRIMAN>().ReverseMap();
 
                 cfg.CreateMap<TrnHasilProduksiModel, TrnHasilProduksiDto>().ReverseMap();
                 cfg.CreateMap<TrnHasilProduksiDto, TRN_HASIL_PRODUKSI>().ReverseMap();
@@ -45,10 +42,13 @@ namespace sistem.manajemen.ppic.website.Code
                 cfg.CreateMap<ChangesHistoryModel, ChangesHistoryDto>().ReverseMap();
                 cfg.CreateMap<ChangesHistoryDto, CHANGES_HISTORY>().ReverseMap();
 
+                cfg.CreateMap<TrnSuratPengantarBongkarMuatModel, TrnSuratPengantarBongkarMuatDto>().ReverseMap();
+                cfg.CreateMap<TrnSuratPengantarBongkarMuatDto, TRN_SURAT_PENGANTAR_BONGKAR_MUAT>().ReverseMap();
+
                 cfg.CreateMap<RptOutstandingModelSearchView, RptOutstandingInput>().ReverseMap();
 
                 cfg.CreateMap<RptOutstandingModel, RptOutstandingDto>().ReverseMap();
-                cfg.CreateMap<RptOutstandingDto, SP_GetRptOutstanding_Result>().ReverseMap();
+                //cfg.CreateMap<RptOutstandingDto, SP_GetRptOutstanding_Result>().ReverseMap();
 
             });
         }

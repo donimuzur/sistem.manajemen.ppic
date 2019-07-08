@@ -109,12 +109,14 @@ namespace sistem.manajemen.ppic.website.App_Start
 
             // dataTables css styles
             bundles.Add(new StyleBundle("~/Contents/plugins/dataTables/dataTablesStyles").Include(
-                      "~/Contents/plugins/dataTables/datatables.min.css"));
+                      "~/Contents/plugins/dataTables/datatables.min.css",
+                      "~/Contents/plugins/dataTables/datatables.fixedColumns.min.css"));
 
             // dataTables 
             bundles.Add(new ScriptBundle("~/plugins/dataTables").Include(
                       "~/Scripts/plugins/dataTables/datatables.min.js",
-                      "~/Scripts/plugins/dataTables/dataTables.bootstrap4.min.js"));
+                      "~/Scripts/plugins/dataTables/dataTables.bootstrap4.min.js",
+                      "~/Scripts/plugins/dataTables/dataTables.fixedColumns.min.js"));
 
             // jeditable 
             bundles.Add(new ScriptBundle("~/plugins/jeditable").Include(

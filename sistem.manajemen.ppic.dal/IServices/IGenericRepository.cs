@@ -36,5 +36,6 @@ namespace sistem.manajemen.ppic.dal
         void ExecuteQuery(string sql);
 
         void InsertOrUpdateBulk(IEnumerable<TEntity> entities);
+        void InsertOrUpdateBulk(IEnumerable<TEntity> entities, Login userLogin, Enums.MenuList menuId);
     }
 }

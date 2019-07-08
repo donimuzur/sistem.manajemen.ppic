@@ -55,6 +55,18 @@ namespace sistem.manajemen.ppic.bll
                 throw;
             }
         }
+        public void Savelist(List<TrnSpbDto> model, LoginDto LoginDto)
+        {
+            try
+            {
+                var db = Mapper.Map<List<TRN_SPB>>(model);
+                _trnSpbServices.SaveList(db, new Login { USERNAME = "SYSTEM", USER_ID = "SYSTEM" });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public void Save(TrnSpbDto model, LoginDto LoginDto)
         {
             try

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using sistem.manajemen.ppic.bll.IBLL;
+using sistem.manajemen.ppic.core;
 using sistem.manajemen.ppic.dal;
 using sistem.manajemen.ppic.dal.IServices;
 using sistem.manajemen.ppic.dal.Services;
@@ -21,78 +22,75 @@ namespace sistem.manajemen.ppic.BLL
             _uow = new SqlUnitOfWork();
             _trnPengirimanServices = new TrnPengirimanServices(_uow);
         }
-        public List<TrnPengirimanMasterDto> GetAll()
+        public List<TrnPengirimanDto> GetAll()
         {
             var Data = _trnPengirimanServices.GetAll();
-            var ReData = Mapper.Map<List<TrnPengirimanMasterDto>>(Data);
+            var ReData = Mapper.Map<List<TrnPengirimanDto>>(Data);
 
             return ReData;
         }
-        public List<TrnPengirimanMasterDto> GetAllByDoAndSPB(int Do, string NoSPB)
+        public List<TrnPengirimanDto> GetActiveAll()
+        {
+            var Data = _trnPengirimanServices.GetActiveAll();
+            var ReData = Mapper.Map<List<TrnPengirimanDto>>(Data);
+
+            return ReData;
+        }
+        public List<TrnPengirimanDto> GetAllByDoAndSPB(int Do, string NoSPB)
         {
             var Data = _trnPengirimanServices.GetAll().Where(x => x.NO_DO == Do && x.NO_SPB.ToUpper() == NoSPB.ToUpper()).ToList();
-            var ReData = Mapper.Map<List<TrnPengirimanMasterDto>>(Data);
+            var ReData = Mapper.Map<List<TrnPengirimanDto>>(Data);
 
             return ReData;
         }
-        public TrnPengirimanMasterDto GetById(object Id)
+        public TrnPengirimanDto GetById(object Id)
         {
             var Data = _trnPengirimanServices.GetTrnPengirimanMasterById(Id);
-            var ReData = Mapper.Map<TrnPengirimanMasterDto>(Data);
+            var ReData = Mapper.Map<TrnPengirimanDto>(Data);
 
             return ReData;
         }
-        public bool Save(TrnPengirimanMasterDto Dto)
+        public void Save(TrnPengirimanDto Dto)
         {
             try
             {
-                _trnPengirimanServices.Save(Mapper.Map<TRN_PENGIRIMAN_MASTER>(Dto));
-
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-        public bool Save(TrnPengirimanMasterDto Dto, LoginDto Login)
-        {
-            try
-            {
-                _trnPengirimanServices.Save(Mapper.Map<TRN_PENGIRIMAN_MASTER>(Dto)
-                    , Mapper.Map<Login>(Login));
-
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-        public void SaveChanges()
-        {
-            _uow.SaveChanges();
-        }
-        public int GenerateNoSJ()
-        {
-            try
-            {
-                var PengirimanList = _trnPengirimanServices.GetAll().Where(x => x.TANGGAL.Month == DateTime.Now.Month && x.TANGGAL.Year == DateTime.Now.Year).ToList();
-                var GetNomorSJCount = PengirimanList.Count();
-                GetNomorSJCount = GetNomorSJCount + 1;
-
-                return GetNomorSJCount;
+                _trnPengirimanServices.Save(Mapper.Map<TRN_PENGIRIMAN>(Dto));
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        public decimal GetAkumulasi(int Do, string NoSPB)
+        public void Save(TrnPengirimanDto Dto, LoginDto Login)
         {
             try
             {
-                var GetAll = _trnPengirimanServices.GetAllDetails().Where(x => x.TRN_PENGIRIMAN_MASTER != null && x.TRN_PENGIRIMAN_MASTER.NO_DO == Do && x.TRN_PENGIRIMAN_MASTER.NO_SPB.ToUpper() == NoSPB.ToUpper());
+                _trnPengirimanServices.Save(Mapper.Map<TRN_PENGIRIMAN>(Dto)
+                    , Mapper.Map<Login>(Login));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void Delete(int id, string Remarks)
+        {
+            try
+            {
+                _trnPengirimanServices.Delete(id, Remarks);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public decimal? GetAkumulasi(int Do, string NoSPB)
+        {
+            try
+            {
+                var GetAll = _trnPengirimanServices.GetAll().Where(x =>  x.NO_DO == Do && x.NO_SPB.ToUpper() == NoSPB.ToUpper() && x
+                                        .STATUS != (int)Enums.StatusDocument.Cancel);
                 var data = GetAll.Sum(x => x.KUANTUM);
                 return data;
             }

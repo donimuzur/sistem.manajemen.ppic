@@ -45,6 +45,7 @@
     <Compile Include="CheckConnection.cs" />
     <Compile Include="Constans.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="IntToRomanConverter.cs" />
     <Compile Include="LogError.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

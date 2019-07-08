@@ -29,7 +29,7 @@ namespace sistem.manajemen.ppic.website.Models
         public string ALAMAT_KONSUMEN { get; set; }
         public string NO_FAX { get; set; }
         public string TUJUAN_KIRIM { get; set; }
-
+        public string REMARK { get; set; }
         public decimal? AKUMULASI { get; set; }
     }
     public class TrnDoViewModel : BaseModel

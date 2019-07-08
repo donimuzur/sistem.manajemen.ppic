@@ -15,5 +15,6 @@ namespace sistem.manajemen.ppic.bll.IBLL
         void CloseSpb(string NoSpb);
         void Save(TrnSpbDto model);
         void Save(TrnSpbDto model, LoginDto LoginDto);
+        void Savelist(List<TrnSpbDto> model, LoginDto LoginDto);
     }
 }

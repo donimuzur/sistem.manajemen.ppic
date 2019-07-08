@@ -35,16 +35,23 @@ namespace sistem.manajemen.ppic.bll
 
             return ReData;
         }
-        public TrnDoDto GetBySPB(string SPB)
+        public List<TrnDoDto> GetBySPB(string SPB)
         {
-            var Data = _trnDoServices.GetAll().Where(x => x.NO_SPB.ToUpper() == SPB.ToUpper()).FirstOrDefault();
-            var ReData = Mapper.Map<TrnDoDto>(Data);
+            var Data = _trnDoServices.GetAll().Where(x => x.NO_SPB.ToUpper() == SPB.ToUpper()).ToList();
+            var ReData = Mapper.Map<List<TrnDoDto>>(Data);
 
             return ReData;
         }
         public TrnDoDto GetByDo(string DO)
         {
             var Data = _trnDoServices.GetAll().Where(x => x.NO_DO.ToUpper() == DO.ToUpper()).FirstOrDefault();
+            var ReData = Mapper.Map<TrnDoDto>(Data);
+
+            return ReData;
+        }
+        public TrnDoDto GetBySpbAndDo(string SPB, string DO)
+        {
+            var Data = _trnDoServices.GetAll().Where(x => x.NO_SPB.ToUpper() == SPB.ToUpper() && x.NO_DO.ToUpper() == DO.ToUpper()).FirstOrDefault();
             var ReData = Mapper.Map<TrnDoDto>(Data);
 
             return ReData;

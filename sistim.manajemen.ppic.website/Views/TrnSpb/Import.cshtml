@@ -1,20 +1,300 @@
-﻿
+﻿@using System.Web.Optimization
+@model sistem.manajemen.ppic.website.Models.TrnSpbModel
+
 @{
-    ViewBag.Title = "Import";
+    ViewBag.Title = "Surat Permintaan Barang (SPB)";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <div class="form-control">  </div>
-            </div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>@Model.Tittle</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a>SPB</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>Import</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+            <button type="button" class="ladda-button ladda-button-upload btn btn-success" onclick="UploadFileExcel()" data-style="zoom-in">Upload</button>
+            <button type="button" id="btnSave" class="ladda-button ladda-button-save btn btn-success"  onclick="preSubmit()" data-style="zoom-in" disabled>Save</button>
         </div>
     </div>
 </div>
-
-@section scripts {
-    <script type="text/javascript">
-    
-    </script>
+<div class="wrapper wrapper-content">
+    @using (Html.BeginForm("Import", "TrnSpb", FormMethod.Post, new { @id = "FormCreate", enctype = "multipart/form-data"}))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Download Template</h5>
+                        <div class="ibox-tools">
+                            <a href="~/files_upload/Template/Template Spb.xlsx"><i class="fa fa-file-excel-o"  style="color: blue;"></i> <span class="nav-label" style="color:cornflowerblue">Click ini</span></a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="custom-file">
+                                @Html.Hidden("nama","sata")
+                                <input id="Fileupload" name="Fileupload" type="file" class="custom-file-input" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" >
+                                <button type="submit" id="btnSubmit" style="display:none">  </button>
+                                <label for="Fileupload" class="custom-file-label">Choose file Excel...</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     }
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>List SPB</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-striped table-bordered dataTables-List">
+                        <thead>
+                            <tr>
+                                <th style="min-width:150px">No SPB</th>
+                                <th style="min-width:150px">Sales Representative</th>
+                                <th style="min-width:150px">Wilayah</th>
+                                <th style="min-width:150px">Nama Produk</th>
+                                <th style="min-width:150px">Komposisi Unsur</th>
+                                <th style="min-width:150px">Bentuk</th>
+                                <th style="min-width:150px">Kemasan</th>
+                                <th style="min-width:150px">Nama Konsumen</th>
+                                <th style="min-width:150px">Alamat Konsumen</th>
+                                <th style="min-width:150px">Segmen Pasar</th>
+                                <th style="min-width:150px">Contact Person</th>
+                                <th style="min-width:150px">Telepon</th>
+                                <th style="min-width:150px">Jenis Penjualan</th>
+                                <th style="min-width:150px">Kuantum Penjualan</th>
+                                <th style="min-width:150px">Lokasi Tujuan Kirim</th>
+                                <th style="min-width:150px">Batas Akhir Kirim</th>
+                                <th style="min-width:150px">Cara Pembayaran</th>
+                                <th style="min-width:150px">PPN</th>
+                                <th style="min-width:150px">Harga Jual</th>
+                                <th style="min-width:150px">Harga Loko</th>
+                                <th style="min-width:150px">Ongkos Kirim</th>
+                                <th style="min-width:150px">Jenis Dokumen</th>
+                                <th style="min-width:150px">Nomer Dokumen</th>
+                                <th style="min-width:150px">Message</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tb-upload-excel">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Styles {
+    @Styles.Render("~/Contents/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/plugins/laddaStyles")
+    @Styles.Render("~/plugins/jquery-confirmStyle")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/ladda")
+    @Scripts.Render("~/plugins/jquery-confirm")
+
+    <script type="text/javascript">
+        var l_ladda_upload = null;
+        var l_ladda_save = null;
+        var TableData = null;
+
+        $(document).ready(function () {
+            $('.custom-file-input').on('change', function () {
+                let fileName = $(this).val().split('\\').pop();
+                $('.custom-file-label').html(fileName);
+            });
+
+            l_ladda_upload = $('.ladda-button-upload').ladda();
+            l_ladda_save = $('.ladda-button-save').ladda();
+          
+            TableData = $('.dataTables-List').DataTable({
+                pageLength: 25,
+                scrollX:        true,
+                scrollCollapse: true,
+                paging: true,
+                ordering: false,
+                searching: true
+            });
+        });
+
+        function preSubmit()
+        {
+            l_ladda_save.ladda('start');
+            $("#btnSubmit").trigger('click');
+            event.preventDefault();
+        }
+
+        function jsonDateToDatetime(str) {
+            try {
+                var dt = new Date(parseInt(str.substr(6)));
+                var dtStr = dt.toString();
+                var date = dtStr.substr(8, 2) + " " + (dtStr.substr(4, 3)) + " " + dtStr.substr(11, 4);
+                var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                var str = dt.getDate() + '-' + (months[dt.getMonth()]) + '-' + dt.getFullYear();
+            } catch (e) {
+                return '';
+            }
+
+            return str;
+        }
+
+        function UploadFileExcel()
+        {
+            l_ladda_upload.ladda('start');
+            var postUrl = '@Url.Action("UploadFile", "TrnSpb")';
+            var fileName = $('[id="Fileupload"]').val().trim();
+            var pos = fileName.lastIndexOf('.');
+            var extension = (pos <= 0) ? '' : fileName.substring(pos);
+            if (fileName == '')
+            {
+                l_ladda_upload.ladda('stop');
+                $.confirm({
+                    title: 'Perhatian !',
+                    content: 'pilih file terlebih dahulu',
+                    type: 'red',
+                    buttons: {
+                        Ok: {
+                            btnClass: 'btn-primary text-white',
+                            keys: ['enter'],
+                            action: function () {
+                            }
+                        }
+                    }
+                });
+                return false;
+            }
+
+            if (extension != '.xlsx' && extension != '.csv') {
+                l_ladda_upload.ladda('stop');
+                $.confirm({
+                    title: 'Perhatian !',
+                    content: 'Silahkan cek kembali, file yang di upload harus file excel',
+                    type: 'red',
+                    buttons: {
+                        Ok: {
+                                btnClass: 'btn-primary text-white',
+                                keys: ['enter'],
+                                action: function () {
+                            }
+                        }
+                    }
+                });
+                return false;
+            }
+
+            var formData = new FormData();
+            var totalFiles = document.getElementById("Fileupload").files.length;
+
+            for (var i = 0; i < totalFiles; i++) {
+                var file = document.getElementById("Fileupload").files[i];
+                formData.append("Fileupload", file);
+            }
+            $.ajax({
+                type: "POST",
+                url: postUrl,
+                data: formData,
+                dataType: 'html',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    $('#tb-upload-excel').html('');
+                    uploaditems = JSON.parse(response);
+                    var Data = [];
+                    var error = "";
+                    for (var i = 0; i < uploaditems.length; i++) {
+                        //var tr =
+                        //    '<tr>' +
+                        //        '<td>' + (i + 1) + '</td>' +
+                        //        '<td>' + uploaditems[i].NO_SPB + '</td>' +
+                        //        '<td>' + uploaditems[i].SALES + '</td>' +
+                        //        '<td>' + uploaditems[i].WILAYAH + '</td>' +
+                        //        '<td>' + uploaditems[i].NAMA_PRODUK + '</td>' +
+                        //        '<td>' + uploaditems[i].KOMPOSISI + '</td>' +
+                        //        '<td>' + (uploaditems[i].BENTUK == "Lain-Lain"? uploaditems[i].BENTUK_DESC : uploaditems[i].BENTUK ) + '</td>' +
+                        //        '<td>' + (uploaditems[i].KEMASAN == "Lain-Lain"? uploaditems[i].KEMASAN_DESC : uploaditems[i].KEMASAN) + '</td>' +
+                        //        '<td>' + uploaditems[i].NAMA_KONSUMEN + '</td>' +
+                        //        '<td>' + uploaditems[i].ALAMAT_KONSUMEN + '</td>' +
+                        //        '<td>' + uploaditems[i].SEGMEN_PASAR + '</td>' +
+                        //        '<td>' + uploaditems[i].CONTACT_PERSON + '</td>' +
+                        //        '<td>' + uploaditems[i].NO_TELP + '</td>' +
+                        //        '<td>' + (uploaditems[i].JENIS_PENJUALAN == "Lain-Lain"? uploaditems[i].JENIS_PENJUALAN_DESC : uploaditems[i].JENIS_PENJUALAN) + '</td>' +
+                        //        '<td>' + uploaditems[i].KUANTUM + '</td>' +
+                        //        '<td>' + uploaditems[i].LOKASI_KIRIM + '</td>' +
+                        //        '<td>' + jsonDateToDatetime(uploaditems[i].BATAS_KIRIM) + '</td>' +
+                        //        '<td>' + uploaditems[i].CARA_PEMBAYARAN + '</td>' +
+                        //        '<td>' + uploaditems[i].PPN + '</td>' +
+                        //        '<td>' + uploaditems[i].HARGA_JUAL + '</td>' +
+                        //        '<td>' + uploaditems[i].HARGA_LOKO + '</td>' +
+                        //        '<td>' + uploaditems[i].ONGKOS_KIRIM + '</td>' +
+                        //        '<td>' + uploaditems[i].HARGA_LOKO + '</td>' +
+                        //        '<td>' + (uploaditems[i].DOKUMEN_PENDUKUNG == "Lain-Lain" ? uploaditems[i].DOKUMEN_PENDUKUNG_DESC : uploaditems[i].DOKUMEN_PENDUKUNG) + '</td>' +
+                        //        '<td>' + uploaditems[i].MessageError + '</td>' +
+                        //    '</tr>';
+                        Data.push(uploaditems[i].NO_SPB);
+                        Data.push(uploaditems[i].SALES);
+                        Data.push(uploaditems[i].WILAYAH);
+                        Data.push(uploaditems[i].NAMA_PRODUK);
+                        Data.push(uploaditems[i].KOMPOSISI);
+                        Data.push((uploaditems[i].BENTUK == "Lain-Lain" ? uploaditems[i].BENTUK_DESC : uploaditems[i].BENTUK));
+                        Data.push((uploaditems[i].KEMASAN == "Lain-Lain" ? uploaditems[i].KEMASAN_DESC : uploaditems[i].KEMASAN));
+                        Data.push(uploaditems[i].NAMA_KONSUMEN);
+                        Data.push(uploaditems[i].ALAMAT_KONSUMEN);
+                        Data.push(uploaditems[i].SEGMEN_PASAR);
+                        Data.push(uploaditems[i].CONTACT_PERSON);
+                        Data.push(uploaditems[i].NO_TELP);
+                        Data.push((uploaditems[i].JENIS_PENJUALAN == "Lain-Lain" ? uploaditems[i].JENIS_PENJUALAN_DESC : uploaditems[i].JENIS_PENJUALAN));
+                        Data.push(uploaditems[i].KUANTUM);
+                        Data.push(uploaditems[i].LOKASI_KIRIM);
+                        Data.push(jsonDateToDatetime(uploaditems[i].BATAS_KIRIM));
+                        Data.push(uploaditems[i].CARA_PEMBAYARAN);
+                        Data.push(uploaditems[i].PPN);
+                        Data.push(uploaditems[i].HARGA_JUAL);
+                        Data.push(uploaditems[i].HARGA_LOKO);
+                        Data.push(uploaditems[i].ONGKOS_KIRIM);
+                        Data.push(uploaditems[i].HARGA_LOKO);
+                        Data.push((uploaditems[i].DOKUMEN_PENDUKUNG == "Lain-Lain" ? uploaditems[i].DOKUMEN_PENDUKUNG_DESC : uploaditems[i].DOKUMEN_PENDUKUNG));
+                        Data.push(uploaditems[i].MessageError);
+                        TableData.row.add(Data).draw();
+
+                        error += uploaditems[i].MessageError;
+                    }
+                    if (error == '') {
+                        $('#btnSave').prop('disabled', false);
+                    }
+                    else {
+                        $('#btnSave').prop('disabled', true);
+                    }
+                    l_ladda_upload.ladda('stop');
+                },
+                error: function () {
+                    l_ladda_upload.ladda('stop');
+                }
+            });
+        };
+    </script>
+}

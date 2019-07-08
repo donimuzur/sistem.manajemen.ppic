@@ -239,7 +239,7 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="ladda-button ladda-button-submit btn btn-success" data-style="zoom-in" onclick="Confirm()">Submit</button>
+                <button type="button" class="ladda-button ladda-button-submit btn btn-success" data-style="zoom-in" onclick="Confirm()">Ok</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
             </div>
         </div>
@@ -262,8 +262,19 @@
         {
             new AutoNumeric('.numeric', { unformatOnSubmit: true })
 
+            var l = $('.ladda-button-submit').ladda();
+            l.click(function () {
+                // Start loading
+                l.ladda('start');
+                // Do something in backend and then stop ladda
+                // setTimeout() is only for demo purpose
+                setTimeout(function () {
+                    l.ladda('stop');
+                }, 2000)
+            });
+
             InitSpb('@Url.Action("GetSpbList", "TrnDo")');
-            InitProduk('@Url.Action("GetProdukList", "TrnSpb")')
+            InitProduk('@Url.Action("GetProdukList", "TrnDo")')
             initilize();
         }
 
@@ -401,7 +412,7 @@
         function GetProduk() {
             var Produk = document.getElementById("NAMA_BARANG").value;
             $.ajax({
-                url: '@Url.Action("GetProduk", "TrnSpb")',
+                url: '@Url.Action("GetProduk", "TrnDo")',
                 type: "POST",
                 dataType: "JSON",
                 data: { Produk: Produk },

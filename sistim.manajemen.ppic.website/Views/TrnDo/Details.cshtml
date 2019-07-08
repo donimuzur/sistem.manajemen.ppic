@@ -1,159 +1,326 @@
-﻿@model sistem.manajemen.ppic.website.Models.TrnDoModel
+﻿@using System.Web.Optimization
+
+@model sistem.manajemen.ppic.website.Models.TrnDoModel
 @{
-    ViewBag.Title = "Surat Delivery Order (DO)";
+    ViewBag.Title = "Delivery Order (DO)";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div id="Information" class="panel-group" role="tabpanel" aria-multiselectable="true">
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingOne">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#Information" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Informasi
-                                <i class="fa fa-caret-down"></i>
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label class="control-label">D/O Nomor<span class="red">*</span></label>
-                                        @Html.HiddenFor(model => model.ID)
-                                        @Html.HiddenFor(model => model.TANGGAL)
-                                        @Html.HiddenFor(model => model.CREATED_BY)
-                                        @Html.HiddenFor(model => model.CREATED_DATE)
-                                        @Html.TextBoxFor(model => model.NO_DO, new { @class = "form-control", @readonly = "readonly" })
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">SPB Nomor<span class="red">*</span></label>
-                                        @Html.TextBoxFor(model => model.NO_SPB, new { @class = "form-control", @style = "text-decoration:uppercase", @placeholder = "No SPB", @readonly = "readonly" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="Produk" class="panel-group" role="tabpanel" aria-multiselectable="true">
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingTwo">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#Produk" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                Spesifikasi Produk
-                                <i class="fa fa-caret-down"></i>
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Nama Barang<span class="red">*</span></label>
-                                        @Html.TextBoxFor(model => model.NAMA_BARANG, new { @class = "form-control", @placeholder = "Nama Produk", @readonly = "readonly", @required = "required" })
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Komposisi Unsur<span class="red">*</span></label>
-                                        @Html.TextBoxFor(model => model.KOMPOSISI, new { @class = "form-control", @placeholder = "Komposisi", @readonly = "readonly", @required = "required" })
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Bentuk<span class="red">*</span></label>
-                                        @Html.TextBoxFor(model => model.BENTUK, new { @class = "form-control", @placeholder = "Bentuk", @readonly = "readonly", @required = "required" })
-                                    </div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>@Model.Tittle</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")">Home</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <a href="@Url.Action("Index", "TrnDo")">DO</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>Details</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+            <a href="@Url.Action("Index", "TrnDo")" class="btn btn-danger">Kembali</a>
+        </div>
+    </div>
+</div>
 
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Kemasan<span class="red">*</span></label>
-                                        <div class="row">
-                                            @Html.TextBoxFor(model => model.KEMASAN, new { @class = "form-control", @placeholder = "Kemasan", @readonly = "readonly", @required = "required" })
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Kuantum Permintaan<span class="red">*</span></label>
-                                        <div class="row">
-                                            @Html.TextBoxFor(model => model.JUMLAH, new { @class = "form-control", @placeholder = "Kg", @required = "required", @readonly = "readonly" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="Konsumen" class="panel-group" role="tabpanel" aria-multiselectable="true">
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingThree">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#Konsumen" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                Data Konsumen
-                                <i class="fa fa-caret-down"></i>
+<div class="wrapper wrapper-content">
+        <div class="alert alert-danger alert-notification" style="display:none">
+            Submit error, Silahkan check kembali !
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Informasi</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
                             </a>
-                        </h4>
+                        </div>
                     </div>
-                    <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Nama Konsumen<span class="red">*</span></label>
-                                        @Html.TextBoxFor(model => model.NAMA_KONSUMEN, new { @class = "form-control", @placeholder = "Nama Konsumen", @readonly = "readonly" })
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">No SPB<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.NO_SPB, new { @class = "form-control", @tabindex = "1", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly" })
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Alamat Konsumen<span class="red">*</span></label>
-                                        @Html.TextAreaFor(model => model.ALAMAT_KONSUMEN, new { @class = "form-control", @placeholder = "Alamat Konsumen", @readonly = "readonly" })
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Telephone<span class="red">*</span></label>
-                                        @Html.TextBoxFor(model => model.NO_TELP, new { @class = "form-control", @placeholder = "Telephone", @readonly = "readonly" })
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Contact Person</label>
-                                        @Html.TextBoxFor(model => model.NAMA_CP, new { @class = "form-control", @placeholder = "Contact Person", @readonly = "readonly" })
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">Fax</label>
-                                        @Html.TextBoxFor(model => model.NO_FAX, new { @class = "form-control", @placeholder = "Fax", @readonly = "readonly" })
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">No DO<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.NO_DO, new { @class = "form-control", @tabindex = "2", @style = "text-transform: uppercase;", @readonly = "readonly" })
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-group">
-                        <label class="control-label">Catatan</label>
-                        @Html.TextAreaFor(model => model.KETERANGAN, new { @class = "form-control", @placeholder = "Catatan" ,@readonly = "readonly" })
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <div class="form-group">
-                        <a href="@Url.Action("Index","TrnDo")" class="btn btn-default">Kembali</a>
+                    <div class="ibox-footer">
+                        <span style="color:red">
+                            *
+                        </span>
+                        harus diisi
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Data Konsumen</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Konsumen<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.NAMA_KONSUMEN, new { @class = "form-control", @tabindex = "3", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Alamat Konsumen<span class="text-red">*</span></label>
+                                            @Html.TextAreaFor(model => model.ALAMAT_KONSUMEN, new { @class = "form-control", @tabindex = "4", @style = "text-transform: uppercase;height:125px", @required = "required", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Tujuan Kirim<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.TUJUAN_KIRIM, new { @class = "form-control", @tabindex = "5", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Contact Person</label>
+                                            @Html.TextBoxFor(model => model.NAMA_CP, new { @class = "form-control", @tabindex = "6", @style = "text-transform: uppercase;", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Telephone</label>
+                                            @Html.TextBoxFor(model => model.NO_TELP, new { @class = "form-control", @tabindex = "7", @style = "text-transform: uppercase;", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">No Fax</label>
+                                            @Html.TextBoxFor(model => model.NO_FAX, new { @class = "form-control", @tabindex = "8", @style = "text-transform: uppercase;", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-footer">
+                        <span style="color:red">
+                            *
+                        </span>
+                        harus diisi
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Produk</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Nama Barang<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.NAMA_BARANG, new { @class = "form-control", @tabindex = "9", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Komposisi<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.KOMPOSISI, new { @class = "form-control", @tabindex = "10", @style = "text-transform: uppercase;", @readonly = "readonly", @required = "required" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Bentuk<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.BENTUK, new { @class = "form-control", @tabindex = "11", @style = "text-transform: uppercase;", @readonly = "readonly", @required = "required" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Kemasan<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.KEMASAN, new { @class = "form-control", @tabindex = "12", @style = "text-transform: uppercase;", @readonly = "readonly", @required = "required" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Jumlah<span class="text-red">*</span></label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-addon">Kg</span>
+                                                </div>
+                                                @Html.TextBoxFor(model => model.JUMLAH, new { @class = "form-control numeric", @tabindex = "13", @required = "required", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-footer">
+                        <span style="color:red">
+                            *
+                        </span>
+                        harus diisi
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label">Catatan</label>
+                                    @Html.TextAreaFor(model => model.KETERANGAN, new { @class = "form-control", style = "height:200px", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="changes">
+            @Html.Partial("_ChangesLog")
+        </div>
     </div>
-    <div id="changes" class="panel-body">
-        @Html.Partial("_ChangesLog")
+
+<div id="modalSubmit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="color:white">Submit Form</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Apakah anda yakin data sudah benar?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="ladda-button ladda-button-submit btn btn-success" data-style="zoom-in" onclick="Confirm()">Ok</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
     </div>
 </div>
-@section scripts {
+
+@section Styles {
+    @Styles.Render("~/plugins/laddaStyles")
+    @Styles.Render("~/plugins/easyautocompleteStyle")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/ladda")
+    @Scripts.Render("~/plugins/easyautocomplete")
+    @Scripts.Render("~/plugins/validate")
+    @Scripts.Render("~/plugins/autonumeric")
+
     <script type="text/javascript">
         $(document).ready()
         {
-            InitSpb('@Url.Action("GetSpbList", "TrnDo")');
+            new AutoNumeric('.numeric', { unformatOnSubmit: true })
+
+            var l = $('.ladda-button-submit').ladda();
+            l.click(function () {
+                // Start loading
+                l.ladda('start');
+                // Do something in backend and then stop ladda
+                // setTimeout() is only for demo purpose
+                setTimeout(function () {
+                    l.ladda('stop');
+                }, 2000)
+            });
+
             initilize();
+        }
+
+        //SubmitButton
+        function PreSubmit(event) {
+            var validate = $('#FormCreate').validate({
+                errorPlacement: function (error, element) {
+
+                    if (element.parent().attr("class") == "form-group")
+                        error.insertAfter(element);
+                    else if (element.parent().attr("class") == 'input-group')
+                        error.insertAfter(element.parent());
+                    else if (element.parent().attr("class").search('easy-autocomplete') >= 0 || element.parent().attr("class") == "row" || element.parent().attr("class") == 'input-group date')
+                        error.insertAfter(element.parent());
+                    else
+                        error.insertAfter(element.parent().parent());
+                }
+            });
+
+            jQuery.extend(jQuery.validator.messages, {
+                required: "Tidak boleh kosong",
+                remote: "Please fix this field.",
+                email: "Please enter a valid email address.",
+                url: "Please enter a valid URL.",
+                date: "Please enter a valid date.",
+                dateISO: "Please enter a valid date (ISO).",
+                number: "Please enter a valid number.",
+                digits: "Please enter only digits.",
+                creditcard: "Please enter a valid credit card number.",
+                equalTo: "Please enter the same value again.",
+                accept: "Please enter a value with a valid extension.",
+                maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
+                minlength: jQuery.validator.format("Please enter at least {0} characters."),
+                rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
+                range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+                max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+                min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+            });
+            var isValid = validate.checkForm();
+            if (isValid) {
+                $('.alert-notification').hide();
+                $('#modalSubmit').modal('show');
+            }
+            else {
+                validate.showErrors();
+                $('.alert-notification').show();
+            }
+        }
+
+        function Confirm(event) {
+            $("#btnSubmit").trigger('click');
+            event.preventDefault();
         }
 
         $("#BENTUK").change(function () {
@@ -161,7 +328,6 @@
         });
 
         function InitSpb(url) {
-            console.log(url);
             var options = {
                 url: url,
                 getValue: "DATA",
@@ -182,37 +348,83 @@
         function GetDataSpb()
         {
             var NoSpb = $('#NO_SPB').val();
-            console.log(NoSpb);
             $.ajax({
                 url: '@Url.Action("GetDataSpb", "TrnDo")',
                 type: "POST",
                 dataType: "JSON",
                 data: { NoSpb: NoSpb },
                 success: function (response) {
-                    $('#NAMA_BARANG').val(response.NAMA_PRODUK);
-                    $('#KOMPOSISI').val(response.KOMPOSISI);
-                    $('#BENTUK').val(response.BENTUK);
-                    if (response.BENTUK == 'Lain-Lain')
-                    {
-                        $('#BENTUK').val(response.BENTUK_DESC);
-                    }
-                    $('#JUMLAH').val(response.KUANTUM);
+                    if (response != null) {
+                        $('#NAMA_BARANG').val(response.NAMA_PRODUK);
+                        $('#KOMPOSISI').val(response.KOMPOSISI);
+                        $('#BENTUK').val(response.BENTUK);
+                        if (response.BENTUK == 'Lain-Lain') {
+                            $('#BENTUK').val(response.BENTUK_DESC);
+                        }
+                        new AutoNumeric('#JUMLAH', response.KUANTUM,{ unformatOnSubmit: true });
+                        //Konsumen ---
+                        $('#NAMA_KONSUMEN').val(response.NAMA_KONSUMEN);
+                        $('#ALAMAT_KONSUMEN').val(response.ALAMAT_KONSUMEN);
+                        $('#NO_TELP').val(response.NO_TELP);
+                        $('#NAMA_CP').val(response.CONTACT_PERSON);
 
-                    //Konsumen ---
-                    $('#NAMA_KONSUMEN').val(response.NAMA_KONSUMEN);
-                    $('#ALAMAT_KONSUMEN').val(response.ALAMAT_KONSUMEN);
-                    $('#NO_TELP').val(response.NO_TELP);
-                    $('#NAMA_CP').val(response.CONTACT_PERSON);
-
-                    $('#KEMASAN').val(response.KEMASAN);
-                    if (response.KEMASAN == "Lain-Lain")
-                    {
-                        $('#KEMASAN').val(response.KEMASAN_DESC);
+                        $('#KEMASAN').val(response.KEMASAN);
+                        if (response.KEMASAN == "Lain-Lain") {
+                            $('#KEMASAN').val(response.KEMASAN_DESC);
+                        }
                     }
                 },
             });
         }
 
+        //Produk List
+        function InitProduk(url) {
+            var options = {
+                url: url,
+                getValue: "DATA",
+                template: {
+                    type: "description",
+                    fields: {
+                        description: "DESKRIPSI"
+                    }
+                },
+                list: {
+                    match: {
+                        enabled: true
+                    },
+                    sort: {
+                        enabled: true
+                    },
+                    onChooseEvent: function () {
+                        GetProduk();
+                    }
+                }
+            };
+            $("#NAMA_BARANG").easyAutocomplete(options);
+        }
+
+        function GetProduk() {
+            var Produk = document.getElementById("NAMA_BARANG").value;
+            $.ajax({
+                url: '@Url.Action("GetProduk", "TrnSpb")',
+                type: "POST",
+                dataType: "JSON",
+                data: { Produk: Produk },
+                success: function (response) {
+                    if (response != null) {
+                        $("#KOMPOSISI").val(response.KOMPOSISI);
+                        $('#BENTUK').val(response.BENTUK);
+                        if (response.BENTUK == 'Lain-Lain') {
+                            $('#BENTUK').val(response.BENTUK_DESC);
+                        }
+                        $('#KEMASAN').val(response.KEMASAN);
+                        if (response.KEMASAN == "Lain-Lain") {
+                            $('#KEMASAN').val(response.KEMASAN_DESC);
+                        }
+                    }
+                },
+            });
+        }
         function initilize()
         {
             $('#BENTUK_DESC').prop('disabled', true);
@@ -243,13 +455,5 @@
                 $('#KEMASAN_DESC').prop('required', true);
             }
         }
-
-        $('.date').datepicker({
-            format: 'dd-M-yyyy'
-        });
     </script>
 }
-
-
-
-

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sistem.manajemen.ppic.core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -37,6 +38,17 @@ namespace sistem.manajemen.ppic.website.Helpers
 
             return Menu == CurrentMenu ?
                 cssClass : String.Empty;
+        }
+        public static string IsShownMenu(this HtmlHelper html, Enums.Role? Role, string CurrentMenu = "Home")
+        {
+            string display = "display:block";
+            
+            if(Role != Enums.Role.Administrator && CurrentMenu == "Master")
+            {
+                display = "display:none";
+            }
+
+            return display;
         }
         public static string PageClass(this HtmlHelper html)
         {

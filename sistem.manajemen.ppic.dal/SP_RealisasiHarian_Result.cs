@@ -11,15 +11,18 @@ namespace sistem.manajemen.ppic.dal
 {
     using System;
     
-    public partial class SP_GetRptOutstanding_Result
+    public partial class SP_RealisasiHarian_Result
     {
-        public System.DateTime TANGGAL { get; set; }
-        public System.DateTime BATAS_KIRIM { get; set; }
-        public string NO_SPB { get; set; }
         public string NO_DO { get; set; }
+        public string NO_SPB { get; set; }
         public string NAMA_KONSUMEN { get; set; }
-        public decimal PARTY { get; set; }
-        public Nullable<decimal> AKUMULASI { get; set; }
-        public Nullable<decimal> SISA { get; set; }
+        public string TUJUAN_KIRIM { get; set; }
+        public string ALAMAT_KONSUMEN { get; set; }
+        public string NAMA_BARANG { get; set; }
+        public string KEMASAN { get; set; }
+        public Nullable<int> ZAK { get; set; }
+        public Nullable<decimal> TOTAL { get; set; }
+        public Nullable<decimal> TOTAL_TIMBANGAN { get; set; }
+        public Nullable<int> TOTAL_TRUK { get; set; }
     }
 }

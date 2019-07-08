@@ -10,6 +10,13 @@ namespace sistem.manajemen.ppic.core
 {
     public class Enums
     {
+        public enum JenisBarang
+        {
+            [Description("Barang Jadi")]
+            BarangJadi=1,
+            [Description("Bahan Baku")]
+            BahanBaku =2
+        }
         public enum Role
         {
             Administrator = 1000,
@@ -35,14 +42,17 @@ namespace sistem.manajemen.ppic.core
             Error =6,
             [Description("Setting")]
             Setting = 7,
+            [Description("Ekspedisi")]
+            Ekspedisi = 8,
+            [Description("Produksi")]
+            Produksi = 9,
 
-            TrnSpb =20,
+            TrnSpb = 20,
             TrnDo=21,
-            TrnPengiriman=22,
-            TrnHasilProduksi = 23,
-
+            
             GdgBarangJadi =30,
-            GdgBarangBB = 30,
+            GdgBarangBB = 31,
+            Mutasi=32,
 
             MasterWilayah = 40,
             MasterSupplier=41,
@@ -53,15 +63,23 @@ namespace sistem.manajemen.ppic.core
 
             LaporanOutstanding=50,
             LaporanRekapBulanan=51,
+            LaporanRealisasiHarian=52,
 
             Timbangan = 60,
+
+            TrnPengiriman = 80,
+            TrnSuratPengantarBongkarMuat = 81,
+            TrnSuratMutasi = 82,
+            
+            TrnHasilProduksi = 90,
+            TrnPermintaanBahanBaku =91,
+            LaporanProduksi=91,
         }
         public enum StatusDocument
         {
             Open=0,
             Closed=1,
             Cancel=2,
-            Delete=3,
         }
         public enum Kemasan
         {

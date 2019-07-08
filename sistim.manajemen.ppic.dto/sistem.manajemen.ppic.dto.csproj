@@ -46,9 +46,11 @@
     <Compile Include="Dto\MstBarangJadiDto.cs" />
     <Compile Include="Dto\MstWilayahDto.cs" />
     <Compile Include="Dto\MstBahanBakuDto.cs" />
+    <Compile Include="Dto\RptEkspedisiHarianDto.cs" />
     <Compile Include="Dto\RptOutstandingDto.cs" />
-    <Compile Include="Dto\TrnPengirimanDetailsDto.cs" />
-    <Compile Include="Dto\TrnPengirimanMasterDto.cs" />
+    <Compile Include="Dto\TrnMutasiBarangDto.cs" />
+    <Compile Include="Dto\TrnPengirimanDto.cs" />
+    <Compile Include="Dto\TrnSuratPengantarBongkarMuatDto.cs" />
     <Compile Include="Dto\UomDto.cs" />
     <Compile Include="Input\RptOutstandingInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

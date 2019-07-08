@@ -43,23 +43,20 @@ namespace sistem.manajemen.ppic.dal
         public DbSet<DOCUMENT_NUMBER> DOCUMENT_NUMBER { get; set; }
         public DbSet<MST_KEMASAN> MST_KEMASAN { get; set; }
         public DbSet<MST_UOM> MST_UOM { get; set; }
-        public DbSet<TRN_PENGIRIMAN_DETAILS> TRN_PENGIRIMAN_DETAILS { get; set; }
-        public DbSet<TRN_PENGIRIMAN_MASTER> TRN_PENGIRIMAN_MASTER { get; set; }
         public DbSet<WORKING_HOURS> WORKING_HOURS { get; set; }
         public DbSet<SO_BARANG_JADI> SO_BARANG_JADI { get; set; }
         public DbSet<SO_BARANG_JADI_DETAILS> SO_BARANG_JADI_DETAILS { get; set; }
+        public DbSet<TRN_PENGIRIMAN> TRN_PENGIRIMAN { get; set; }
+        public DbSet<TRN_SURAT_PENGANTAR_BONGKAR_MUAT> TRN_SURAT_PENGANTAR_BONGKAR_MUAT { get; set; }
+        public DbSet<TRN_MUTASI_BARANG> TRN_MUTASI_BARANG { get; set; }
     
-        public virtual ObjectResult<SP_GetRptOutstanding_Result> SP_GetRptOutstanding(string dateFrom, string dateTo)
+        public virtual ObjectResult<SP_RealisasiHarian_Result> SP_RealisasiHarian(string date)
         {
-            var dateFromParameter = dateFrom != null ?
-                new ObjectParameter("DateFrom", dateFrom) :
-                new ObjectParameter("DateFrom", typeof(string));
+            var dateParameter = date != null ?
+                new ObjectParameter("Date", date) :
+                new ObjectParameter("Date", typeof(string));
     
-            var dateToParameter = dateTo != null ?
-                new ObjectParameter("DateTo", dateTo) :
-                new ObjectParameter("DateTo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetRptOutstanding_Result>("SP_GetRptOutstanding", dateFromParameter, dateToParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_RealisasiHarian_Result>("SP_RealisasiHarian", dateParameter);
         }
     }
 }

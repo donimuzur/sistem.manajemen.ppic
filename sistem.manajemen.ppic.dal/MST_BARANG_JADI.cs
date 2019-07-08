@@ -17,8 +17,8 @@ namespace sistem.manajemen.ppic.dal
         public MST_BARANG_JADI()
         {
             this.TRN_HASIL_PRODUKSI = new HashSet<TRN_HASIL_PRODUKSI>();
-            this.TRN_PENGIRIMAN_DETAILS = new HashSet<TRN_PENGIRIMAN_DETAILS>();
             this.SO_BARANG_JADI_DETAILS = new HashSet<SO_BARANG_JADI_DETAILS>();
+            this.TRN_PENGIRIMAN = new HashSet<TRN_PENGIRIMAN>();
         }
     
         public int ID { get; set; }
@@ -37,7 +37,7 @@ namespace sistem.manajemen.ppic.dal
         public Nullable<decimal> STOCK_AKHIR { get; set; }
     
         public virtual ICollection<TRN_HASIL_PRODUKSI> TRN_HASIL_PRODUKSI { get; set; }
-        public virtual ICollection<TRN_PENGIRIMAN_DETAILS> TRN_PENGIRIMAN_DETAILS { get; set; }
         public virtual ICollection<SO_BARANG_JADI_DETAILS> SO_BARANG_JADI_DETAILS { get; set; }
+        public virtual ICollection<TRN_PENGIRIMAN> TRN_PENGIRIMAN { get; set; }
     }
 }

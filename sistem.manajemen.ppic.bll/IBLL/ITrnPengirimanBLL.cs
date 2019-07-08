@@ -9,13 +9,13 @@ namespace sistem.manajemen.ppic.bll.IBLL
 {
     public interface ITrnPengirimanBLL
     {
-        bool Save(TrnPengirimanMasterDto Dto);
-        bool Save(TrnPengirimanMasterDto Dto, LoginDto Login);
-        List<TrnPengirimanMasterDto> GetAll();
-        List<TrnPengirimanMasterDto> GetAllByDoAndSPB(int Do, string NoSPB);
-        TrnPengirimanMasterDto GetById(object Id);
-        int GenerateNoSJ();
-        decimal GetAkumulasi(int Do, string NoSPB);
-        void SaveChanges();
+        void Save(TrnPengirimanDto Dto);
+        void Save(TrnPengirimanDto Dto, LoginDto Login);
+        List<TrnPengirimanDto> GetAll();
+        List<TrnPengirimanDto> GetActiveAll();
+        List<TrnPengirimanDto> GetAllByDoAndSPB(int Do, string NoSPB);
+        TrnPengirimanDto GetById(object Id);
+        void Delete(int id, string Remarks);
+        decimal? GetAkumulasi(int Do, string NoSPB);
     }
 }

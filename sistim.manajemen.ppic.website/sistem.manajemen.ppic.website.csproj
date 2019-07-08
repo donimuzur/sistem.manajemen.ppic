@@ -52,6 +52,13 @@
       <HintPath>..\packages\AutoMapper.6.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -142,6 +149,7 @@
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -224,6 +232,7 @@
     <Content Include="Contents\plugins\codemirror\codemirror.css" />
     <Content Include="Contents\plugins\colorpicker\bootstrap-colorpicker.min.css" />
     <Content Include="Contents\plugins\cropper\cropper.min.css" />
+    <Content Include="Contents\plugins\dataTables\datatables.fixedColumns.min.css" />
     <Content Include="Contents\plugins\datepicker\datepicker3.css" />
     <Content Include="Contents\plugins\dataTables\datatables.min.css" />
     <Content Include="Contents\plugins\daterangepicker\daterangepicker-bs3.css" />
@@ -1101,6 +1110,7 @@
     <Content Include="Images\new-file.png" />
     <Content Include="Images\no-pict.jpg" />
     <Content Include="Images\profile_small.jpg" />
+    <Content Include="Log Error\Error.txt" />
     <Content Include="Scripts\app\pg.js" />
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1374,6 +1384,7 @@
     <Content Include="Scripts\plugins\cropper\cropper.min.js" />
     <Content Include="Scripts\plugins\d3\d3.min.js" />
     <Content Include="Scripts\plugins\datamaps\datamaps.all.min.js" />
+    <Content Include="Scripts\plugins\dataTables\dataTables.fixedColumns.min.js" />
     <Content Include="Scripts\plugins\datepicker\bootstrap-datepicker.js" />
     <Content Include="Scripts\plugins\dataTables\dataTables.bootstrap4.min.js" />
     <Content Include="Scripts\plugins\dataTables\datatables.min.js" />
@@ -1543,11 +1554,13 @@
     <Compile Include="Controllers\MstBahanBakuController.cs" />
     <Compile Include="Controllers\MstBarangJadiController.cs" />
     <Compile Include="Controllers\MstWilayahController.cs" />
+    <Compile Include="Controllers\RptHarianController.cs" />
     <Compile Include="Controllers\RptOutstandingController.cs" />
     <Compile Include="Controllers\TrnDoController.cs" />
     <Compile Include="Controllers\TrnHasilProduksiController.cs" />
     <Compile Include="Controllers\TrnPengirimanController.cs" />
     <Compile Include="Controllers\TrnSpbController.cs" />
+    <Compile Include="Controllers\TrnSuratPengantarBongkarMuatController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1559,12 +1572,30 @@
     <Compile Include="Models\MstBarangJadiModel.cs" />
     <Compile Include="Models\MstWilayahModel.cs" />
     <Compile Include="Models\RptOutstandingModel.cs" />
+    <Compile Include="Models\RptSuratJalanModel.cs" />
     <Compile Include="Models\SoBarangJadiModel.cs" />
     <Compile Include="Models\TrnDoModel.cs" />
     <Compile Include="Models\TrnHasilProduksiModel.cs" />
+    <Compile Include="Models\TrnMutasiBarangModel.cs" />
     <Compile Include="Models\TrnPengirimanModel.cs" />
     <Compile Include="Models\TrnSpbModel.cs" />
+    <Compile Include="Models\TrnSuratPengantarBongkarMuatModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\ReportRealisasiHarian.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportRealisasiHarian.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportSuratJalan.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportSuratJalan.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Utility\ExcelData.cs" />
+    <Compile Include="Utility\ExcelReader.cs" />
+    <Compile Include="Utility\ExcelWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -1648,6 +1679,7 @@
     <Content Include="Contents\plugins\fine-uploader\jquery.fine-uploader.js.map" />
     <Content Include="Contents\plugins\fine-uploader\jquery.fine-uploader.min.js.map" />
     <Content Include="Contents\plugins\fine-uploader\LICENSE" />
+    <Content Include="Json\provinsi.json" />
     <None Include="Properties\PublishProfiles\file.pubxml" />
     <Content Include="Views\TrnSpb\Create.cshtml" />
     <Content Include="Views\TrnSpb\Edit.cshtml" />
@@ -1685,6 +1717,8 @@
     <Content Include="Scripts\plugins\pdfjs\pdf.js.map" />
     <Content Include="Scripts\plugins\pdfjs\pdf.worker.js.map" />
     <Content Include="Scripts\plugins\topojson\LICENSE" />
+    <Content Include="Views\TrnSuratPengantarBongkarMuat\Index.cshtml" />
+    <Content Include="Views\TrnSuratPengantarBongkarMuat\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1696,7 +1730,9 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\gallery\" />
     <Folder Include="Images\landing\" />
-    <Folder Include="Reports\" />
+    <Folder Include="Rpt\" />
+    <Folder Include="Views\RptHarian\" />
+    <Folder Include="Views\TrnMutasiBarang\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sistem.manajemen.ppic.bll\sistem.manajemen.ppic.bll.csproj">
@@ -1715,6 +1751,19 @@
       <Project>{69b9b0ab-58ac-46d3-842e-bf7e3a85a724}</Project>
       <Name>sistem.manajemen.ppic.dto</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\ReportRealisasiHarian.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportRealisasiHarian.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportSuratJalan.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportSuratJalan.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

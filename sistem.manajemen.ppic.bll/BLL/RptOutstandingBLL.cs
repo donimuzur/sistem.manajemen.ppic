@@ -22,11 +22,12 @@ namespace sistem.manajemen.ppic.bll
         }
         public List<RptOutstandingDto> GetLogProductionIncome_SP(RptOutstandingInput input)
         {
+            var resultDto = new List<RptOutstandingDto>();
             using (var EMSDD_CONTEXT = new PPICEntities())
             {
                 EMSDD_CONTEXT.Database.CommandTimeout = 1000;
-                var result = EMSDD_CONTEXT.SP_GetRptOutstanding(input.FromDate.Value.ToString("yyyy-MM-dd"), input.ToDate.Value.ToString("yyyy-MM-dd"));
-                var resultDto = Mapper.Map<List<RptOutstandingDto>>(result.ToList());
+                //var result = EMSDD_CONTEXT.SP_GetRptOutstanding(input.FromDate.Value.ToString("yyyy-MM-dd"), input.ToDate.Value.ToString("yyyy-MM-dd"));
+                //var resultDto = Mapper.Map<List<RptOutstandingDto>>(result.ToList());
                 return resultDto;
             }
         }

@@ -12,21 +12,24 @@ namespace sistem.manajemen.ppic.dal
     using System;
     using System.Collections.Generic;
     
-    public partial class TRN_PENGIRIMAN_DETAILS
+    public partial class TRN_MUTASI_BARANG
     {
         public int ID { get; set; }
-        public int ID_TRN_PENGIRIMAN_MASTER { get; set; }
-        public int ID_BARANG { get; set; }
-        public string URAIAN_BARANG { get; set; }
+        public System.DateTime TANGGAL { get; set; }
+        public string DEPT_BAGIAN { get; set; }
+        public string NAMA_BARANG { get; set; }
+        public string BENTUK { get; set; }
         public string KEMASAN { get; set; }
-        public int ZAK { get; set; }
-        public Nullable<decimal> STOCK_AWAL { get; set; }
-        public decimal KUANTUM { get; set; }
-        public Nullable<decimal> STOCK_AKHIR { get; set; }
+        public Nullable<int> JENIS_BARANG { get; set; }
+        public string SATUAN { get; set; }
+        public string LOKASI { get; set; }
+        public Nullable<decimal> JUMLAH { get; set; }
         public string KETERANGAN { get; set; }
+        public string REMARKS { get; set; }
         public Nullable<byte> STATUS { get; set; }
-    
-        public virtual MST_BARANG_JADI MST_BARANG_JADI { get; set; }
-        public virtual TRN_PENGIRIMAN_MASTER TRN_PENGIRIMAN_MASTER { get; set; }
+        public Nullable<System.DateTime> CREATED_DATE { get; set; }
+        public string CREATED_BY { get; set; }
+        public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
+        public string MODIFIED_BY { get; set; }
     }
 }

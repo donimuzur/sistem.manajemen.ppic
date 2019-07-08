@@ -151,6 +151,24 @@ namespace sistem.manajemen.ppic.dal
             //_context.Configuration.ValidateOnSaveEnabled = false;
             _dbSet.AddRange(entitiesTobeInserted);
         }
+        public void InsertOrUpdateBulk(IEnumerable<TEntity> entities, Login userLogin, Enums.MenuList menuId)
+        {
+            var entitiesTobeInserted = new List<TEntity>();
+            foreach (var entity in entities)
+            {
+                if (Exists(entity))
+                {
+                    Update(entity);
+                }
+                else
+                {
+                    entitiesTobeInserted.Add(entity);
+                }
+            }
+            //_context.Configuration.AutoDetectChangesEnabled = false;
+            //_context.Configuration.ValidateOnSaveEnabled = false;
+            _dbSet.AddRange(entitiesTobeInserted);
+        }
         public void SaveChangesLog(TEntity entity, Login user, Enums.MenuList menuId)
         {
             if (user != null)

@@ -46,6 +46,7 @@ namespace sistem.manajemen.ppic.website
             container.Register<IRptOutstandingBLL, RptOutstandingBLL>();
             container.Register<IMstKemasanBLL, MstKemasanBLL>();
             container.Register<IMstUomBLL,MstUomBLL >();
+            container.Register<ITrnSuratPengantarBongkarMuatBLL, TrnSuratPengantarBongkarMuatBLL>();
 
             // 3. Optionally verify the container's configuration.
             container.Verify();

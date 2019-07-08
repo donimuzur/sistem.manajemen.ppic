@@ -67,6 +67,17 @@ namespace sistem.manajemen.ppic.website.Controllers
                     model.TANGGAL = DateTime.Now;
                     model.STATUS = Enums.StatusDocument.Open;
 
+                    model.NO_SPB = model.NO_SPB.ToUpper();
+                    model.NO_SPB = model.NO_SPB.TrimEnd('\r', '\n', ' ');
+                    model.NO_SPB = model.NO_SPB.TrimStart('\r', '\n', ' ');
+
+                    var CheckDataExist = _trnSpbBLL.GetBySPB(model.NO_SPB);
+                    if (CheckDataExist == null)
+                    {
+                        AddMessageInfo("No SPB tersebut tidak ada", Enums.MessageInfoType.Error);
+                        return View(Init(model));
+                    }
+
                     _trnDoBLL.Save(Mapper.Map<TrnDoDto>(model), Mapper.Map<LoginDto>(CurrentUser));
 
                     AddMessageInfo("Sukses Create DO",Enums.MessageInfoType.Success);
@@ -75,7 +86,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                 catch (Exception exp)
                 {
                     LogError.LogError.WriteError(exp);
-                    AddMessageInfo("Gagal Create DO", Enums.MessageInfoType.Error);
+                    AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
                     return RedirectToAction("Index", "TrnDo");
                 }
             }
@@ -85,14 +96,28 @@ namespace sistem.manajemen.ppic.website.Controllers
         #endregion
 
         #region --- Edit ---
-        public ActionResult Edit(int Id)
+        public ActionResult Edit(int? id)
         {
-            var model = new TrnDoModel();
+            if (!id.HasValue)
+            {
+                return HttpNotFound();
+            }
 
-            model = Mapper.Map<TrnDoModel>(_trnDoBLL.GetById(Id));
+            try
+            {
+                var model = new TrnDoModel();
 
-            model = Init(model);
-            return View(model);
+                model = Mapper.Map<TrnDoModel>(_trnDoBLL.GetById(id));
+
+                model = Init(model);
+                return View(model);
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
+                AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+                return RedirectToAction("Index", "TrnDo");
+            }
         }
         
         [HttpPost]
@@ -102,6 +127,12 @@ namespace sistem.manajemen.ppic.website.Controllers
             {
                 try
                 {
+                    model.MODIFIED_BY = CurrentUser.USERNAME;
+                    model.MODIFIED_DATE = DateTime.Now;
+
+                    model.NO_SPB = model.NO_SPB.ToUpper();
+                    model.NO_SPB = model.NO_SPB.TrimEnd('\r', '\n', ' ');
+                    model.NO_SPB = model.NO_SPB.TrimStart('\r', '\n', ' ');
                     var CheckDataExist = _trnSpbBLL.GetBySPB(model.NO_SPB);
 
                     if (CheckDataExist == null)
@@ -111,12 +142,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                         return View(model);
                     }
 
-                    model.MODIFIED_BY = CurrentUser.USERNAME;
-                    model.MODIFIED_DATE = DateTime.Now;
-                    model.TANGGAL = DateTime.Now;
-                    
                     _trnDoBLL.Save(Mapper.Map<TrnDoDto>(model), Mapper.Map<LoginDto>(CurrentUser));
-                    _trnSpbBLL.CloseSpb(model.NO_SPB);
 
                     AddMessageInfo("Sukses Update DO", Enums.MessageInfoType.Success);
                     return RedirectToAction("Index", "TrnDo");
@@ -124,24 +150,38 @@ namespace sistem.manajemen.ppic.website.Controllers
                 catch (Exception exp)
                 {
                     LogError.LogError.WriteError(exp);
-                    AddMessageInfo("Telah terjadi kesalahan", Enums.MessageInfoType.Error);
+                    AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
                     return RedirectToAction("Index", "TrnDo");
                 }
             }
-            model = Init(model);
-            return View(model);
+            AddMessageInfo("Gagal Create DO", Enums.MessageInfoType.Error);
+            return View(Init(model));
         }
         #endregion
 
         #region --- Details ---
-        public ActionResult Details(int Id)
+        public ActionResult Details(int? id)
         {
-            var model = new TrnDoModel();
+            if (!id.HasValue)
+            {
+                return HttpNotFound();
+            }
 
-            model = Mapper.Map<TrnDoModel>(_trnDoBLL.GetById(Id));
+            try
+            {
+                var model = new TrnDoModel();
 
-            model = Init(model);
-            return View(model);
+                model = Mapper.Map<TrnDoModel>(_trnDoBLL.GetById(id));
+
+                model = Init(model);
+                return View(model);
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
+                AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+                return RedirectToAction("Index", "TrnDo");
+            }
         }
         #endregion
 

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="798d9d526bb14d6797c7a20386e70ba5" Name="Diagram1" ZoomLevel="46">
+      <Diagram DiagramId="798d9d526bb14d6797c7a20386e70ba5" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="SIM_PPICModel.Login" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIM_PPICModel.PAGE" Width="1.5" PointX="3.375" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIM_PPICModel.MST_BARANG_JADI" Width="1.5" PointX="0.75" PointY="3.75" />
@@ -24,15 +24,15 @@
         <EntityTypeShape EntityType="SIM_PPICModel.DOCUMENT_NUMBER" Width="1.5" PointX="9.375" PointY="11.75" />
         <EntityTypeShape EntityType="SIM_PPICModel.MST_KEMASAN" Width="1.5" PointX="11.375" PointY="11.75" />
         <EntityTypeShape EntityType="SIM_PPICModel.MST_UOM" Width="1.5" PointX="5.375" PointY="12.125" />
-        <EntityTypeShape EntityType="SIM_PPICModel.TRN_PENGIRIMAN_DETAILS" Width="1.5" PointX="0.75" PointY="8.375" />
-        <EntityTypeShape EntityType="SIM_PPICModel.TRN_PENGIRIMAN_MASTER" Width="1.5" PointX="0.75" PointY="12.25" />
         <EntityTypeShape EntityType="SIM_PPICModel.WORKING_HOURS" Width="1.5" PointX="12.375" PointY="9.375" />
-        <AssociationConnector Association="SIM_PPICModel.FK_TRN_PENGIRIMAN_DETAILS_MST_BARANG_JADI" />
-        <AssociationConnector Association="SIM_PPICModel.FK_TRN_PENGIRIMAN_DETAILS_TRN_PENGIRIMAN_MASTER" />
         <EntityTypeShape EntityType="SIM_PPICModel.SO_BARANG_JADI" Width="1.5" PointX="2.875" PointY="13.75" />
         <EntityTypeShape EntityType="SIM_PPICModel.SO_BARANG_JADI_DETAILS" Width="1.5" PointX="3" PointY="10.625" />
         <AssociationConnector Association="SIM_PPICModel.FK_SO_BARANG_JADI_MST_BARANG_JADI" />
         <AssociationConnector Association="SIM_PPICModel.FK_SO_BARANG_JADI_DETAILS_SO_BARANG_JADI" />
+        <EntityTypeShape EntityType="SIM_PPICModel.TRN_PENGIRIMAN" Width="1.5" PointX="13.375" PointY="12.75" />
+        <AssociationConnector Association="SIM_PPICModel.FK_TRN_PENGIRIMAN_MST_BARANG_JADI" />
+        <EntityTypeShape EntityType="SIM_PPICModel.TRN_SURAT_PENGANTAR_BONGKAR_MUAT" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SIM_PPICModel.TRN_MUTASI_BARANG" Width="1.5" PointX="5.375" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
