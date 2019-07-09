@@ -12,5 +12,8 @@ namespace sistem.manajemen.ppic.bll.IBLL
         List<LoginDto> GetAll();
         LoginDto GetById(object Id);
         LoginDto VerificationLogin(LoginDto Login);
+        void ChangePassword(string UserId, string PasswordBaru);
+        void SetLastOnline(string UserId);
+        DateTime? GetLastOnline(string UserId);
     }
 }

@@ -38,7 +38,7 @@
           <Property Name="ROLE_ID" Type="int" />
           <Property Name="POSITION" Type="nvarchar" MaxLength="100" />
           <Property Name="STATUS" Type="bit" Nullable="false" />
-          <Property Name="LAST_ONLINE" Type="nvarchar" MaxLength="100" />
+          <Property Name="LAST_ONLINE" Type="datetime" />
         </EntityType>
         <EntityType Name="MST_BAHAN_BAKU">
           <Key>
@@ -534,7 +534,7 @@
           <Property Name="EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ROLE_ID" Type="SIM_PPICModel.Role" />
           <Property Name="POSITION" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="LAST_ONLINE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LAST_ONLINE" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityContainer Name="PPICEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Logins" EntityType="Self.Login" />

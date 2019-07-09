@@ -10,5 +10,6 @@ namespace sistem.manajemen.ppic.dal.IServices
     {
         List<Login> GetAll();
         Login GetById(object id);
+        void Save(Login Db);
     }
 }

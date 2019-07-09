@@ -17,6 +17,6 @@ namespace sistem.manajemen.ppic.website.Models
         public string EMAIL { get; set; }
         public Nullable<core.Enums.Role> ROLE_ID { get; set; }
         public string POSITION { get; set; }
-        public string LAST_ONLINE { get; set; }
+        public DateTime? LAST_ONLINE { get; set; }
     }
 }

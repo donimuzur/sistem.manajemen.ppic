@@ -85,6 +85,7 @@
     <Compile Include="IServices\IRptEkspedisiHarianServices.cs" />
     <Compile Include="IServices\ITrnDoServices.cs" />
     <Compile Include="IServices\ITrnHasilProduksiServices.cs" />
+    <Compile Include="IServices\ITrnMutasiBarangServices.cs" />
     <Compile Include="IServices\ITrnPengirimanServices.cs" />
     <Compile Include="IServices\ITrnSpbServices.cs" />
     <Compile Include="IServices\ITrnSuratPengantarBongkarMuatServices.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Services\SqlUnitOfWork.cs" />
     <Compile Include="Services\TrnDoServices.cs" />
     <Compile Include="Services\TrnHasilProduksiServices.cs" />
+    <Compile Include="Services\TrnMutasiBarangServices.cs" />
     <Compile Include="Services\TrnPengirimanServices.cs" />
     <Compile Include="Services\TrnSpbServices.cs" />
     <Compile Include="Services\TrnSuratPengantarBongkarMuatServices.cs" />

@@ -140,7 +140,7 @@
         <div class="form">
             <h1>SIM-PPIC Login</h1>
             <form class="login-form" method="POST" action="">
-            @using (Html.BeginForm("Index", "MstPenalty"))
+            @using (Html.BeginForm("Index", "Login"))
             {
                 @Html.TextBoxFor(model => model.USER_ID, new { @placeholder= "user id" })
                 @Html.PasswordFor(model => model.PASSWORD, new { @placeholder = "password" })

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace sistem.manajemen.ppic.website.Models
 {
-    public class TrnMutasiBarangModel
+    public class TrnMutasiBarangModel : BaseModel
     {
         public int ID { get; set; }
         public System.DateTime TANGGAL { get; set; }
@@ -24,5 +25,14 @@ namespace sistem.manajemen.ppic.website.Models
         public string CREATED_BY { get; set; }
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
         public string MODIFIED_BY { get; set; }
+        public SelectList JenisbarangList { set; get; }
+    }
+    public class TrnMutasiBarangViewModel : BaseModel
+    {
+        public TrnMutasiBarangViewModel()
+        {
+            ListData = new List<TrnMutasiBarangModel>();
+        }
+        public List<TrnMutasiBarangModel> ListData { set; get; }
     }
 }

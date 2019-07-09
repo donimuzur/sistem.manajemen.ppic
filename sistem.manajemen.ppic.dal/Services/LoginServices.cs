@@ -1,4 +1,5 @@
-﻿using sistem.manajemen.ppic.dal;
+﻿using sistem.manajemen.ppic.core;
+using sistem.manajemen.ppic.dal;
 using sistem.manajemen.ppic.dal.IServices;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,30 @@ namespace sistem.manajemen.ppic.dal.Services
         {
             var Data = _loginRepo.GetByID(id);
             return Data;
+        }
+        public void Save(Login Db)
+        {
+            try
+            {
+                _loginRepo.InsertOrUpdate(Db);
+                _uow.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void Save(Login Db, Login Login)
+        {
+            try
+            {
+                _loginRepo.InsertOrUpdate(Db, Login, Enums.MenuList.Login);
+                _uow.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

@@ -23,6 +23,6 @@ namespace sistem.manajemen.ppic.dal
         public string EMAIL { get; set; }
         public Nullable<core.Enums.Role> ROLE_ID { get; set; }
         public string POSITION { get; set; }
-        public string LAST_ONLINE { get; set; }
+        public Nullable<System.DateTime> LAST_ONLINE { get; set; }
     }
 }

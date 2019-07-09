@@ -1558,6 +1558,7 @@
     <Compile Include="Controllers\RptOutstandingController.cs" />
     <Compile Include="Controllers\TrnDoController.cs" />
     <Compile Include="Controllers\TrnHasilProduksiController.cs" />
+    <Compile Include="Controllers\TrnMutasiBarangController.cs" />
     <Compile Include="Controllers\TrnPengirimanController.cs" />
     <Compile Include="Controllers\TrnSpbController.cs" />
     <Compile Include="Controllers\TrnSuratPengantarBongkarMuatController.cs" />
@@ -1719,6 +1720,8 @@
     <Content Include="Scripts\plugins\topojson\LICENSE" />
     <Content Include="Views\TrnSuratPengantarBongkarMuat\Index.cshtml" />
     <Content Include="Views\TrnSuratPengantarBongkarMuat\Create.cshtml" />
+    <Content Include="Views\TrnMutasiBarang\Index.cshtml" />
+    <Content Include="Views\Login\ChangePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1732,7 +1735,6 @@
     <Folder Include="Images\landing\" />
     <Folder Include="Rpt\" />
     <Folder Include="Views\RptHarian\" />
-    <Folder Include="Views\TrnMutasiBarang\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sistem.manajemen.ppic.bll\sistem.manajemen.ppic.bll.csproj">

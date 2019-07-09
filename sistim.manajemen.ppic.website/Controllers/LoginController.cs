@@ -27,6 +27,13 @@ namespace sistem.manajemen.ppic.website.Controllers
 
             return View(model);
         }
+        public LoginModel Init(LoginModel model)
+        {
+            model.CurrentUser = CurrentUser;
+            model.Menu = Enums.GetEnumDescription(Enums.MenuList.Login);
+            model.Tittle = "Setting Akun";
+            return model;
+        }
         [HttpPost]
         public ActionResult Index(LoginModel login)
         {
@@ -54,8 +61,32 @@ namespace sistem.manajemen.ppic.website.Controllers
             login.ErrorMessage = "User id or password is not match";
             return View(login);
         }
+        public ActionResult ChangePassword()
+        {
+            var model = Mapper.Map<LoginModel>(_loginBLL.GetById(CurrentUser.USER_ID));
+            
+            return View(Init(model));
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(string USER_ID, string PasswordBaru)
+        {
+            try
+            {
+                _loginBLL.ChangePassword(USER_ID, PasswordBaru);
+                _loginBLL.SetLastOnline(CurrentUser.USER_ID);
+                CurrentUser = null;
+                return RedirectToAction("Index", "Login");
+            }
+            catch (Exception)
+            {
+                var model = Mapper.Map<LoginModel>(_loginBLL.GetById(CurrentUser.USER_ID));
+                AddMessageInfo("Gagal Ubah Password", Enums.MessageInfoType.Error);
+                return View(Init(model));
+            }
+        }
         public ActionResult SignOut()
         {
+            _loginBLL.SetLastOnline(CurrentUser.USER_ID);
             CurrentUser = null;
             return RedirectToAction("Index", "Login");
         }

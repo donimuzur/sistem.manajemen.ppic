@@ -48,5 +48,23 @@ namespace sistem.manajemen.ppic.bll
                 return null;
             }
         }
+        public void ChangePassword(string UserId, string PasswordBaru)
+        {
+            var GetData = _loginServices.GetById(UserId);
+            GetData.PASSWORD = PasswordBaru;
+            _loginServices.Save(GetData);
+        }
+        public void SetLastOnline(string UserId)
+        {
+            var GetData = _loginServices.GetById(UserId);
+            GetData.LAST_ONLINE = DateTime.Now;
+            _loginServices.Save(GetData);
+        }
+        public DateTime? GetLastOnline(string UserId)
+        {
+            var GetData = _loginServices.GetById(UserId);
+
+            return GetData == null ? null : GetData.LAST_ONLINE;
+        }
     }
 }

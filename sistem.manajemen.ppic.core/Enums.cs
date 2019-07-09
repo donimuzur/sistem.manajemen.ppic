@@ -69,7 +69,7 @@ namespace sistem.manajemen.ppic.core
 
             TrnPengiriman = 80,
             TrnSuratPengantarBongkarMuat = 81,
-            TrnSuratMutasi = 82,
+            TrnSuratMutasiBarang = 82,
             
             TrnHasilProduksi = 90,
             TrnPermintaanBahanBaku =91,
