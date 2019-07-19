@@ -9,9 +9,9 @@ namespace sistem.manajemen.ppic.bll.IBLL
 {
     public interface IMstUomBLL
     {
-        List<KemasanDto> GetAll();
-        KemasanDto GetById(object Id);
-        void Save(KemasanDto model);
-        void Save(KemasanDto model, LoginDto LoginDto);
+        List<UomDto> GetAll();
+        UomDto GetById(object Id);
+        void Save(UomDto model);
+        void Save(UomDto model, LoginDto LoginDto);
     }
 }

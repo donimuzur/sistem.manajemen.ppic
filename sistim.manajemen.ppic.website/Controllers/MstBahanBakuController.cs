@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using sistem.manajemen.ppic.bll.IBLL;
 using sistem.manajemen.ppic.core;
 using sistem.manajemen.ppic.website.Models;
+using sistem.manajemen.ppic.bll.IBLL;
+using sistem.manajemen.ppic.dal;
 using AutoMapper;
 using sistem.manajemen.ppic.dto;
 
@@ -14,43 +15,65 @@ namespace sistem.manajemen.ppic.website.Controllers
     public class MstBahanBakuController : BaseController
     {
         private IMstBahanBakuBLL _mstBahanBakuBLL;
-        public MstBahanBakuController(IPageBLL pageBll, IMstBahanBakuBLL MstBahanBakuBLL) : base(pageBll, Enums.MenuList.GdgBarangBB)
+        private IMstUomBLL _mstUomBLL;
+        public MstBahanBakuController(IMstBahanBakuBLL MstBahanBakuBLL, IMstUomBLL MstUomBLL, IPageBLL pageBll) : base(pageBll, Enums.MenuList.MstBahanBaku)
         {
             _mstBahanBakuBLL = MstBahanBakuBLL;
-        }
-
-        // GET: MstBahanBaku
-        public ActionResult Index()
-        {
-            var model = new MstBahanBakuViewModel();
-            model.ListData = Mapper.Map<List<MstBahanBakuModel>>(_mstBahanBakuBLL.GetAll());
-            
-            model.CurrentUser = CurrentUser;
-            model.Menu = "Master Bahan Baku";
-            model.MainMenu = Enums.MenuList.GdgBarangBB;
-
-            return View(model);
+            _mstUomBLL = MstUomBLL;
         }
 
         public MstBahanBakuModel Init(MstBahanBakuModel model)
         {
-            model.MainMenu = Enums.MenuList.GdgBarangBB;
-            model.Menu = "Master Bahan Baku";
+            var ListUom = new List<string>();
+            ListUom = _mstUomBLL.GetAll().Select(x => x.SATUAN).ToList();
+            model.UomList = new SelectList(ListUom);
+
+            model.MainMenu = Enums.MenuList.MstBahanBaku;
+            model.Menu = Enums.GetEnumDescription(Enums.MenuList.Master);
             model.CurrentUser = CurrentUser;
+            model.Tittle = "Master Bahan Baku";
+
+            model.ChangesHistory = GetChangesHistory((int)Enums.MenuList.MstBahanBaku, model.ID);
 
             return model;
+        }
+
+        public ActionResult Index()
+        {
+            try
+            {
+                var model = new MstBahanBakuViewModel();
+                var data = _mstBahanBakuBLL.GetAll();
+
+                model.ListData = Mapper.Map<List<MstBahanBakuModel>>(data);
+
+                model.MainMenu = Enums.MenuList.MstBahanBaku;
+                model.Menu = Enums.GetEnumDescription(Enums.MenuList.Master);
+                model.CurrentUser = CurrentUser;
+                model.Tittle = "Master Bahan Baku";
+
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
         }
 
         #region --- Create ---
         public ActionResult Create()
         {
             var model = new MstBahanBakuModel();
+
             model = Init(model);
+            model.STATUS = true;
 
             return View(model);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(MstBahanBakuModel model)
         {
             if (ModelState.IsValid)
@@ -61,83 +84,133 @@ namespace sistem.manajemen.ppic.website.Controllers
 
                     Dto.CREATED_BY = CurrentUser.USERNAME;
                     Dto.CREATED_DATE = DateTime.Now;
+                    Dto.STOCK = model.STOCK_AWAL == null ? 0 : model.STOCK_AWAL.Value;
+
                     Dto.STATUS = true;
 
+                    var GetDataExist = _mstBahanBakuBLL.GetByNama(model.NAMA_BARANG);
+                    if(GetDataExist != null)
+                    {
+                        AddMessageInfo("Bahan baku dengan Nama Tersebut Sudah ada", Enums.MessageInfoType.Error);
+                        return View(Init(model));
+                    }
+
                     _mstBahanBakuBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
+                    AddMessageInfo("Success Create Master Bahan Baku", Enums.MessageInfoType.Success);
                     return RedirectToAction("Index", "MstBahanBaku");
                 }
-                catch (Exception)
+                catch (Exception exp)
                 {
-                    throw;
+                    LogError.LogError.WriteError(exp);
+                    AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+                    return RedirectToAction("Index", "MstBahanBaku");
                 }
             }
-            else
-            {
-                model = Init(model);
-                return View(model);
-            }
+            AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+            return View(Init(model));
         }
         #endregion
 
         #region --- Edit ---
-        public ActionResult Edit(int Id)
+        public ActionResult Edit(int? id)
         {
-            var model = new MstBahanBakuModel();
+            try
+            {
+                if (!id.HasValue)
+                {
+                    return HttpNotFound();
+                }
 
-            model = Mapper.Map<MstBahanBakuModel>(_mstBahanBakuBLL.GetById(Id));
-            model = Init(model);
+                var model = new MstBahanBakuModel();
 
-            return View(model);
+                var GetData = _mstBahanBakuBLL.GetById(id);
+                if (GetData == null)
+                {
+                    return HttpNotFound();
+                }
+
+                model = Mapper.Map<MstBahanBakuModel>(GetData);
+
+                model = Init(model);
+                return View(model);
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
+                AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+                return RedirectToAction("Index", "MstBahanBaku");
+            }
         }
-
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(MstBahanBakuModel model)
         {
-            return View(model);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    var GetData = _mstBahanBakuBLL.GetById(model.ID);
+
+                    GetData.STATUS = model.STATUS;
+                    GetData.MODIFIED_BY = CurrentUser.USERNAME;
+                    GetData.MODIFIED_DATE = DateTime.Now;
+
+                    _mstBahanBakuBLL.Save(GetData, Mapper.Map<LoginDto>(CurrentUser));
+                    AddMessageInfo("Sukses Update Master Bahan Baku", Enums.MessageInfoType.Success);
+                    return RedirectToAction("Index", "MstBahanBaku");
+                }
+                catch (Exception exp)
+                {
+                    LogError.LogError.WriteError(exp);
+                    AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+                    return RedirectToAction("Index", "MstBahanBaku");
+                }
+            }
+            AddMessageInfo("Gagal Update Master Bahan Baku", Enums.MessageInfoType.Error);
+            return View(Init(model));
         }
         #endregion
 
         #region --- Details ---
-        public ActionResult Details(int Id)
+        public ActionResult Details(int? id)
         {
-            var model = new MstBahanBakuModel();
+            if (!id.HasValue)
+            {
+                return HttpNotFound();
+            }
 
-            model = Mapper.Map<MstBahanBakuModel>(_mstBahanBakuBLL.GetById(Id));
-            model = Init(model);
+            try
+            {
+                var model = new MstBahanBakuModel();
 
-            return View(model);
+                model = Mapper.Map<MstBahanBakuModel>(_mstBahanBakuBLL.GetById(id));
+
+                model = Init(model);
+                return View(model);
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
+                AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+                return RedirectToAction("Index", "MstBahanBaku");
+            }
         }
         #endregion
 
         #region --- Json ---
-        public JsonResult GetBahanBakuList()
+        public JsonResult GetSatuanList()
         {
-            var model = _mstBahanBakuBLL
-               .GetAll()
-               .Select(x
-                   => new
-                   {
-                       DATA = x.NAMA_BARANG
-                   })
-                   .OrderBy(X => X.DATA)
-                   .Distinct()
-               .ToList();
-            return Json(new object());
-        }
-
-        public JsonResult NamaBarangList()
-        {
-            var model = _mstBahanBakuBLL
-               .GetAll()
-               .Select(x
-                   => new
-                   {
-                       DATA = x.NAMA_BARANG
-                   })
-                   .OrderBy(X => X.DATA)
-                   .Distinct()
-               .ToList();
-            return Json(new object());
+            var model = _mstUomBLL
+                .GetAll()
+                .Select(x
+                    => new
+                    {
+                        DATA = x.SATUAN
+                    })
+                    .OrderBy(X => X.DATA)
+                .ToList();
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

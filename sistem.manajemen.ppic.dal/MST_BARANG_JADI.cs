@@ -19,6 +19,7 @@ namespace sistem.manajemen.ppic.dal
             this.TRN_HASIL_PRODUKSI = new HashSet<TRN_HASIL_PRODUKSI>();
             this.SO_BARANG_JADI_DETAILS = new HashSet<SO_BARANG_JADI_DETAILS>();
             this.TRN_PENGIRIMAN = new HashSet<TRN_PENGIRIMAN>();
+            this.TRN_MUTASI_BARANG = new HashSet<TRN_MUTASI_BARANG>();
         }
     
         public int ID { get; set; }
@@ -39,5 +40,6 @@ namespace sistem.manajemen.ppic.dal
         public virtual ICollection<TRN_HASIL_PRODUKSI> TRN_HASIL_PRODUKSI { get; set; }
         public virtual ICollection<SO_BARANG_JADI_DETAILS> SO_BARANG_JADI_DETAILS { get; set; }
         public virtual ICollection<TRN_PENGIRIMAN> TRN_PENGIRIMAN { get; set; }
+        public virtual ICollection<TRN_MUTASI_BARANG> TRN_MUTASI_BARANG { get; set; }
     }
 }

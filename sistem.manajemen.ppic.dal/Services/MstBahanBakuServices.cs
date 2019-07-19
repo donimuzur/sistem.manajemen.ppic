@@ -44,7 +44,7 @@ namespace sistem.manajemen.ppic.dal.Services
         {
             try
             {
-                _repoMstBahanBaku.InsertOrUpdate(Db, Login, Enums.MenuList.GdgBarangJadi);
+                _repoMstBahanBaku.InsertOrUpdate(Db, Login, Enums.MenuList.MstBahanBaku);
                 _uow.SaveChanges();
             }
             catch (Exception)

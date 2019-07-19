@@ -86,6 +86,7 @@
     <Compile Include="IServices\ITrnDoServices.cs" />
     <Compile Include="IServices\ITrnHasilProduksiServices.cs" />
     <Compile Include="IServices\ITrnMutasiBarangServices.cs" />
+    <Compile Include="IServices\ITrnPenerimaanBarangServices.cs" />
     <Compile Include="IServices\ITrnPengirimanServices.cs" />
     <Compile Include="IServices\ITrnSpbServices.cs" />
     <Compile Include="IServices\ITrnSuratPengantarBongkarMuatServices.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Services\TrnDoServices.cs" />
     <Compile Include="Services\TrnHasilProduksiServices.cs" />
     <Compile Include="Services\TrnMutasiBarangServices.cs" />
+    <Compile Include="Services\TrnPenerimaanBarangServices.cs" />
     <Compile Include="Services\TrnPengirimanServices.cs" />
     <Compile Include="Services\TrnSpbServices.cs" />
     <Compile Include="Services\TrnSuratPengantarBongkarMuatServices.cs" />
@@ -150,6 +152,9 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TRN_PEMAKAIAN_HASIL_PRODUKSI_DETAILS.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TRN_PENERIMAAN_BARANG.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TRN_PENERIMAAN_SUPPLIER.cs">

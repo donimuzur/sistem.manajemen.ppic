@@ -11,7 +11,10 @@ namespace sistem.manajemen.ppic.bll.IBLL
     {
         List<MstBahanBakuDto> GetAll();
         MstBahanBakuDto GetById(object Id);
+        MstBahanBakuDto GetByNama(string NamaBarang);
         void Save(MstBahanBakuDto model);
         void Save(MstBahanBakuDto model, LoginDto LoginDto);
+        bool KurangSaldo(int IdBarang, decimal Jumlah);
+        bool TambahSaldo(int IdBarang, decimal Jumlah);
     }
 }

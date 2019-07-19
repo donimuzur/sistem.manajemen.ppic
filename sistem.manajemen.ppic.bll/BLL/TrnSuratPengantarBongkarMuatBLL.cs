@@ -21,6 +21,22 @@ namespace sistem.manajemen.ppic.bll
             _uow = new SqlUnitOfWork();
             _trnSuratPengantarBongkarMuatServices = new TrnSuratPengantarBongkarMuatServices(_uow);
         }
+        public List<TrnSuratPengantarBongkarMuatDto> GetActiveAll()
+        {
+            try
+            {
+                var Data = _trnSuratPengantarBongkarMuatServices.GetActiveAll();
+                var ReData = Mapper.Map<List<TrnSuratPengantarBongkarMuatDto>>(Data);
+
+                return ReData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+        }
         public List<TrnSuratPengantarBongkarMuatDto> GetAll()
         {
             try
@@ -90,6 +106,18 @@ namespace sistem.manajemen.ppic.bll
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+        public void Delete(int id, string Remarks)
+        {
+            try
+            {
+                _trnSuratPengantarBongkarMuatServices.Delete(id, Remarks);
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

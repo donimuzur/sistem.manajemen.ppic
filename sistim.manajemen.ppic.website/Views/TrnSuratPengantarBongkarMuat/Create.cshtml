@@ -133,7 +133,7 @@
                                         <div class="form-group">
                                             <label class="control-label">Jam Brngkt<span class="text-red">*</span></label>
                                             <div class="input-group clockpicker" data-autoclose="true">
-                                                @Html.TextBoxFor(model => model.TRNSPT_JAM_DATANG, new { @class = "form-control", @tabindex = "8",@required = "required" })
+                                                @Html.TextBoxFor(model => model.TRNSPT_JAM_DATANG, "{0:HH:mm}", new { @class = "form-control", @tabindex = "8",@required = "required" })
                                                 <span class="input-group-addon">
                                                     <span class="fa fa-clock-o"></span>
                                                 </span>
@@ -171,36 +171,36 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
-                                            <label class="control-label">Nama Barang<span class="text-red">*</span></label>
-                                            @Html.TextBoxFor(model => model.NAMA_BARANG, new { @class = "form-control", @tabindex = "9", @style = "text-transform: uppercase;", @required = "required" })
+                                            <label class="control-label">Jenis Barang<span class="text-red">*</span></label>
+                                            @Html.DropDownListFor(model => model.JENIS_BARANG, Model.JenisbarangList, "Please Select", new { @class = "form-control", @tabindex = "9", @required = "required" })
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
-                                            <label class="control-label">Jenis Barang<span class="text-red">*</span></label>
-                                            @Html.DropDownListFor(model => model.JENIS_BARANG, Model.JenisbarangList,"Please Select",new { @class = "form-control" ,@tabindex = "10", @required = "required" })
+                                            <label class="control-label">Nama Barang<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.NAMA_BARANG, new { @class = "form-control", @tabindex = "10", @style = "text-transform: uppercase;", @required = "required" })
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 BarangJadiGroup">
                                         <div class="form-group">
                                             <label class="control-label">Bentuk</label>
-                                            @Html.TextBoxFor(model => model.BENTUK, new { @class = "form-control", @tabindex = "11", @style = "text-transform: uppercase;", @required = "required" })
+                                            @Html.TextBoxFor(model => model.BENTUK, new { @class = "form-control", @tabindex = "11", @style = "text-transform: uppercase;", @readonly = "readonly" })
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 BarangJadiGroup">
                                         <div class="form-group">
                                             <label class="control-label">Kemasan</label>
-                                            @Html.TextBoxFor(model => model.KEMASAN, new { @class = "form-control", @tabindex = "12", @style = "text-transform: uppercase;", @required = "required" })
+                                            @Html.TextBoxFor(model => model.KEMASAN, new { @class = "form-control", @tabindex = "12", @style = "text-transform: uppercase;", @readonly = "readonly" })
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Kuantum<span class="text-red">*</span></label>
                                             <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-addon">Kg</span>
+                                                @Html.TextBoxFor(model => model.KUANTUM, new { @class = "form-control numeric-int", @tabindex = "13", @required = "required" })
+                                                <div class="input-group-append">
+                                                    <span class="input-group-addon">.00</span>
                                                 </div>
-                                                @Html.TextBoxFor(model => model.KUANTUM, new { @class = "form-control numeric", @tabindex = "13", @required = "required" })
                                             </div>
                                         </div>
                                     </div>
@@ -213,7 +213,12 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Jam Muat<span class="text-red">*</span></label>
-                                            @Html.TextBoxFor(model => model.JAM_MUAT, new { @class = "form-control", @tabindex = "15", @style = "text-transform: uppercase;", @required = "required" })
+                                            <div class="input-group clockpicker" data-autoclose="true">
+                                                @Html.TextBoxFor(model => model.JAM_MUAT, "{0:HH:mm}", new { @class = "form-control", @tabindex = "15", @style = "text-transform: uppercase;", @required = "required" })
+                                                <span class="input-group-addon">
+                                                    <span class="fa fa-clock-o"></span>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -250,8 +255,24 @@
 
 }
 
-
-
+<div id="modalSubmit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="color:white">Submit Form</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Apakah anda yakin data sudah benar?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="ladda-button ladda-button-submit btn btn-success" data-style="zoom-in" onclick="Confirm()">Ok</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Styles {
     @Styles.Render("~/plugins/laddaStyles")
@@ -271,7 +292,8 @@
     <script type="text/javascript">
         $(document).ready()
         {
-            new AutoNumeric.multiple('.numeric', { unformatOnSubmit: true })
+            new AutoNumeric.multiple('.numeric-int', [{ unformatOnSubmit: true }, 'integerPos']);
+
             $('.clockpicker').clockpicker();
 
             var l = $('.ladda-button-submit').ladda();
@@ -287,9 +309,9 @@
 
             initilize();
 
-            InitSpb('@Url.Action("GetWilayahList", "TrnSpb")');
-            InitSales('@Url.Action("GetSalesRef", "TrnSpb")');
-            InitProduk('@Url.Action("GetProdukList", "TrnSpb")')
+            InitSpb('@Url.Action("GetSpbList", "TrnSuratPengantarBongkarMuat")');
+            InitProduk('@Url.Action("GetProdukList", "TrnSuratPengantarBongkarMuat")');
+            InitProvinsi();
         }
 
         //SubmitButton
@@ -343,10 +365,91 @@
             event.preventDefault();
         }
 
-        //Produk List
-        function InitProduk(url) {
+        //init SPB
+        function InitSpb(url) {
             var options = {
                 url: url,
+                getValue: "DATA",
+                list: {
+                    maxNumberOfElements: 10,
+                    match: {
+                        enabled: true
+                    },
+                    sort: {
+                        enabled: true
+                    },
+                    onChooseEvent: function () {
+                        CheckDoExistBySpb();
+                    }
+                }
+            };
+            $("#NO_SPB").easyAutocomplete(options);
+        }
+        function CheckDoExistBySpb() {
+            var NoSpb = $('#NO_SPB').val();
+            $.ajax({
+                url: '@Url.Action("CheckDoExistBySpb", "TrnSuratPengantarBongkarMuat")',
+                type: "POST",
+                dataType: "JSON",
+                data: { NoSpb: NoSpb },
+                success: function (response) {
+                    if (response.length > 0) {
+                        InitDo('@Url.Action("GetDoList", "TrnSuratPengantarBongkarMuat")')
+                    }
+                },
+            });
+        }
+
+        //Init DO
+        function InitDo(url) {
+            var No_SPB = document.getElementById("NO_SPB").value;
+            var options = {
+                url: url,
+                ajaxSettings: {
+                    dataType: "json",
+                    method: "POST",
+                    data: { No_SPB: No_SPB }
+                },
+                getValue: "DATA",
+                list: {
+                    maxNumberOfElements: 10,
+                    match: {
+                        enabled: true
+                    },
+                    sort: {
+                        enabled: true
+                    }
+                }
+            };
+            $("#NO_DO").easyAutocomplete(options);
+        }
+        //Init Jenis Kendaraan
+        function InitProvinsi() {
+            var options = {
+                url: "/Json/JenisKendaraan.json",
+                getValue: "nama",
+                list: {
+                    maxNumberOfElements: 10,
+                    match: {
+                        enabled: true
+                    },
+                    sort: {
+                        enabled: true
+                    },
+                }
+            };
+            $("#TRNSPT_JENIS_KENDARAAN").easyAutocomplete(options);
+        }
+        //Produk List
+        function InitProduk(url) {
+            var JenisBarang = $('#JENIS_BARANG').val();
+            var options = {
+                url: url,
+                ajaxSettings: {
+                    dataType: "json",
+                    method: "POST",
+                    data: { JenisBarang: JenisBarang }
+                },
                 getValue: "DATA",
                 template: {
                     type: "description",
@@ -368,97 +471,70 @@
             };
             $("#NAMA_BARANG").easyAutocomplete(options);
         }
+         function GetProduk() {
+            var JenisBarang = $('#JENIS_BARANG').val();
+            var Produk = document.getElementById("NAMA_BARANG").value;
 
-        function GetProduk() {
-            var Produk = document.getElementById("NAMA_PRODUK").value;
             $.ajax({
-                url: '@Url.Action("GetProduk", "TrnSpb")',
+                url: '@Url.Action("GetProduk", "TrnSuratPengantarBongkarMuat")',
                 type: "POST",
                 dataType: "JSON",
-                data: { Produk: Produk },
+                data: {JenisBarang:JenisBarang, Produk: Produk },
                 success: function (response) {
+                    if (response == "Error")
+                    {
+
+                    }
                     if (response != null)
                     {
-                        $("#KOMPOSISI").val(response.KOMPOSISI);
-
-                        if (response.BENTUK == "Lain-Lain")
+                        if (JenisBarang == 1)
                         {
-                            $('#BENTUK').val('Lain-Lain');
-                            $('#BENTUK_DESC').val(response.BENTUK);
-                            $('#BENTUK_DESC').prop('disabled', false);
-                            $('#BENTUK_DESC').prop('required', true);
-                        }
-                        else {
-                            $('#BENTUK').val(response.BENTUK);
-                            $('#BENTUK_DESC').val('');
-                            $('#BENTUK_DESC').prop('disabled', true);
-                            $('#BENTUK_DESC').prop('required', false);
-                        }
+                            $("#BENTUK").val(response.BENTUK);
+                            if (response.BENTUK == "Lain-Lain") {
+                                $("#BENTUK").val(response.BENTUK_DESC);
+                            }
 
-                        if (response.KEMASAN == "Lain-Lain") {
-                            $('#KEMASAN').val('Lain-Lain');
-                            $('#KEMASAN_DESC').val(response.KEMASAN);
-                            $('#KEMASAN_DESC').prop('disabled', false);
-                            $('#KEMASAN_DESC').prop('required', true);
+                            $("#KEMASAN").val(response.KEMASAN);
+                            if (response.KEMASAN == "Lain-Lain") {
+                                $("#KEMASAN").val(response.KEMASAN_DESC);
+                            }
                         }
-                        else {
-                            $('#KEMASAN').val(response.KEMASAN);
-                            $('#KEMASAN_DESC').val('');
-                            $('#BENTUK_DESC').prop('disabled', true);
-                            $('#BENTUK_DESC').prop('required', false);
-                        }
-
-                        $("#KOMPOSISI").val(response.KOMPOSISI);
                     }
                 },
             });
         }
 
-        $("#BENTUK").change(function () {
+        $('#JENIS_BARANG').change(function () {
             initilize();
+            InitProduk('@Url.Action("GetProdukList", "TrnSuratPengantarBongkarMuat")')
         });
 
-        function initilize()
-        {
-            $('#BENTUK_DESC').prop('disabled', true);
-            $('#BENTUK_DESC').prop('required', false);
-            $('#BENTUK_DESC').removeClass("error");
+        function initilize() {
+            var JenisBarang = $('#JENIS_BARANG').val();
+            if (JenisBarang == "1") {
+                $(".BarangJadiGroup").show();
+                $(".BahanBakuGroup").hide();
 
-            $('#JENIS_PENJUALAN_DESC').prop('disabled', true);
-            $('#JENIS_PENJUALAN_DESC').prop('required', false);
-            $('#JENIS_PENJUALAN_DESC').removeClass("error");
-
-            $('#KEMASAN_DESC').prop('required', false);
-            $('#KEMASAN_DESC').prop('disabled', true);
-            $('#KEMASAN_DESC').removeClass("error");
-
-            $('#DOKUMEN_PENDUKUNG_DESC').prop('required', false);
-            $('#DOKUMEN_PENDUKUNG_DESC').prop('disabled', true);
-            $('#DOKUMEN_PENDUKUNG_DESC').removeClass("error");
-
-            var Bentuk = $('#BENTUK').val();
-            if(Bentuk == "Lain-Lain")
-            {
-                $('#BENTUK_DESC').prop('disabled', false);
-                $('#BENTUK_DESC').prop('required', true);
+                $('#BENTUK').prop('required', true);
+                $('#KEMASAN').prop('required', true);
             }
+            else if (JenisBarang == "2") {
+                $(".BarangJadiGroup").hide();
 
-            var JenisPenjualan = $('#JENIS_PENJUALAN').val();
-            if (JenisPenjualan == "Lain-Lain") {
-                $('#JENIS_PENJUALAN_DESC').prop('disabled', false);
-                $('#JENIS_PENJUALAN_DESC').prop('required', true);
+                $('#BENTUK').val('');
+                $('#KEMASAN').val('');
+
+                $('#BENTUK').prop('required', false);
+                $('#KEMASAN').prop('required', false);
             }
+            else {
+                $(".BarangJadiGroup").show();
 
-            var Kemasan = $('#KEMASAN').val();
-            if (Kemasan == "Lain-Lain") {
-                $('#KEMASAN_DESC').prop('disabled', false);
-                $('#KEMASAN_DESC').prop('required', true);
-            }
+                $('#BENTUK').prop('required', true);
+                $('#KEMASAN').prop('required', true);
 
-            var Dokumen = $('#DOKUMEN_PENDUKUNG').val();
-            if (Dokumen == "Lain-Lain") {
-                $('#DOKUMEN_PENDUKUNG_DESC').prop('disabled', false);
-                $('#DOKUMEN_PENDUKUNG_DESC').prop('required', true);
+                $('#BENTUK').val('');
+                $('#KEMASAN').val('');
             }
         }
         $('.date').datepicker({

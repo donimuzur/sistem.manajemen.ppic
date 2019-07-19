@@ -1,40 +1,230 @@
-﻿@model sistem.manajemen.ppic.website.Models.MstBahanBakuModel
+﻿@using System.Web.Optimization
+@using sistem.manajemen.ppic.core
+
+@model sistem.manajemen.ppic.website.Models.MstBahanBakuModel
 @{
-    ViewBag.Title = "Gudang Bahan Baku";
+    ViewBag.Title = "Master Bahan Baku";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            @using (Html.BeginForm("Create", "MstBahanBaku", FormMethod.Post, new { @id = "IdForm" }))
-            {
-                @Html.AntiForgeryToken()
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div class="form-group">
-                            <label class="control-label">Nama Barang</label>
-                            @Html.TextBoxFor(model => model.NAMA_BARANG, new { @class = "form-control", @placeholder = "Nama Barang", @required = "required", @style = "text-transform:uppercase;" })
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Stock</label>
-                            @Html.TextBoxFor(model => model.STOCK, new { @class = "form-control", @placeholder = "Stock", @disabled = "disabled" })
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary waves-effect waves-light">Simpan</button>
-                            <a href="@Url.Action("Index","MstBahanBaku")" class="btn btn-default">Batal</a>
-                        </div>
-                    </div>
-                </div>
-            }
+
+@using (Html.BeginForm("Create", "MstBahanBaku", FormMethod.Post, new { @id = "FormCreate" }))
+{
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>@Model.Tittle</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")">Home</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <a href="@Url.Action("Index", "MstBahanBaku")">Master Bahan Baku</a>
+            </li>
+            <li class="breadcrumb-item">
+                <strong>Create</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+            <button class="btn btn-success" id="btnSubmit" style="display:none" type="submit">Simpan</button>
+            <button class="btn btn-success" onclick="PreSubmit()" type="button">Simpan</button>
+            <a href="@Url.Action("Index", "MstBahanBaku")" class="btn btn-danger">Batal</a>
         </div>
     </div>
 </div>
-@section scripts {
-    <script type="text/javascript">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Form Bahan Baku</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    @Html.HiddenFor(model => model.ID)
+                                    @Html.HiddenFor(model => model.CREATED_BY)
+                                    @Html.HiddenFor(model => model.CREATED_DATE)
+                                    <div class="form-group">
+                                        <label class="control-label">Nama Barang</label>
+                                        @Html.TextBoxFor(model => model.NAMA_BARANG, new { @class = "form-control", @style = "text-transform: uppercase;", @required = "required" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Satuan</label>
+                                        @Html.TextBoxFor(model => model.SATUAN, new { @class = "form-control", @style = "text-transform: uppercase;", @required = "required" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Stock Awal</label>
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(model => model.STOCK_AWAL, new { @class = "form-control numeric-int", @required = "required" })
+                                            <div class="input-group-append">
+                                                <span class="input-group-addon">.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Stock</label>
+                                        <div class="input-group">
+                                            @Html.TextBoxFor(model => model.STOCK, new { @class = "form-control numeric-int", @disabled = "disabled" })
+                                            <div class="input-group-append">
+                                                <span class="input-group-addon">.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Status</label>
+                                        @Html.DropDownListFor(model => model.STATUS, Model.StatusList, "-- Please Select --", new { @class = "form-control", @required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
 
+<div id="modalSubmit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="color:white">Submit Form</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Apakah anda yakin data sudah benar?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="ladda-button ladda-button-submit btn btn-success" data-style="zoom-in" onclick="Confirm()">Ok</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Styles {
+    @Styles.Render("~/plugins/laddaStyles")
+    @Styles.Render("~/plugins/easyautocompleteStyle")
+    @Styles.Render("~/plugins/datePickerStyles")
+    @Styles.Render("~/plugins/jquery-confirmStyle")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/ladda")
+    @Scripts.Render("~/plugins/easyautocomplete")
+    @Scripts.Render("~/plugins/datePicker")
+    @Scripts.Render("~/plugins/validate")
+    @Scripts.Render("~/plugins/autonumeric")
+    @Scripts.Render("~/plugins/jquery-confirm")
+
+    <script type="text/javascript">
+        $(document).ready()
+        {
+            new AutoNumeric.multiple('.numeric-int', [{ unformatOnSubmit: true }, 'integerPos']);
+
+            var l = $('.ladda-button-submit').ladda();
+            l.click(function () {
+                // Start loading
+                l.ladda('start');
+                // Do something in backend and then stop ladda
+                // setTimeout() is only for demo purpose
+                setTimeout(function () {
+                    l.ladda('stop');
+                }, 2000)
+            });
+
+            initilize();
+        }
+
+        //SubmitButton
+        function PreSubmit(event) {
+            var validate = $('#FormCreate').validate({
+                errorPlacement: function (error, element) {
+
+                    if (element.parent().attr("class") == "form-group")
+                        error.insertAfter(element);
+                    else if (element.parent().attr("class") == 'input-group')
+                        error.insertAfter(element.parent());
+                    else if (element.parent().attr("class").search('easy-autocomplete') >= 0 || element.parent().attr("class") == "row" || element.parent().attr("class") == 'input-group date')
+                        error.insertAfter(element.parent());
+                    else
+                        error.insertAfter(element.parent().parent());
+                }
+            });
+
+            jQuery.extend(jQuery.validator.messages, {
+                required: "Tidak boleh kosong",
+                remote: "Please fix this field.",
+                email: "Please enter a valid email address.",
+                url: "Please enter a valid URL.",
+                date: "Please enter a valid date.",
+                dateISO: "Please enter a valid date (ISO).",
+                number: "Please enter a valid number.",
+                digits: "Please enter only digits.",
+                creditcard: "Please enter a valid credit card number.",
+                equalTo: "Please enter the same value again.",
+                accept: "Please enter a value with a valid extension.",
+                maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
+                minlength: jQuery.validator.format("Please enter at least {0} characters."),
+                rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
+                range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+                max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+                min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+            });
+            var isValid = validate.checkForm();
+            if (isValid) {
+                $('.alert-notification').hide();
+                $('#modalSubmit').modal('show');
+            }
+            else {
+                validate.showErrors();
+                $('.alert-notification').show();
+            }
+        }
+
+        function Confirm(event) {
+            $("#btnSubmit").trigger('click');
+            event.preventDefault();
+        }
+        function InitSatuan(url) {
+            var options = {
+                url: url,
+                getValue: "DATA",
+                list: {
+                    maxNumberOfElements: 10,
+                    match: {
+                        enabled: true
+                    },
+                    sort: {
+                        enabled: true
+                    },
+                }
+            };
+            $("#SATUAN").easyAutocomplete(options);
+        }
+       function initilize() {
+           InitSatuan('@Url.Action("GetSatuanList", "MstBahanBaku")');
+       }
     </script>
 }

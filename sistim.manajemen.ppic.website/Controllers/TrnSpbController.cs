@@ -30,7 +30,7 @@ namespace sistem.manajemen.ppic.website.Controllers
         public ActionResult Index()
         {
             var model = new TrnSpbViewModel();
-            model.ListData = Mapper.Map<List<TrnSpbModel>>(_trnSpbBLL.GetAll());
+            model.ListData = Mapper.Map<List<TrnSpbModel>>(_trnSpbBLL.GetActiveAll());
 
             model.CurrentUser = CurrentUser;
             model.Menu = Enums.GetEnumDescription(Enums.MenuList.Transaction);

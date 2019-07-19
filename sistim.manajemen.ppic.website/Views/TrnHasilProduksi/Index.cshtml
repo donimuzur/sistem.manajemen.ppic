@@ -1,72 +1,218 @@
-﻿@model sistem.manajemen.ppic.website.Models.TrnHasilProduksiViewModel
+﻿@using System.Web.Optimization
+@model sistem.manajemen.ppic.website.Models.TrnHasilProduksiViewModel
+
 @{
-    ViewBag.Title = "Hasil Produksi";
+    ViewBag.Title = "Form Hasil Produksi";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="data-table-area mg-b-15">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="sparkline13-list">
-                    <div class="sparkline13-hd">
-                        <div class="main-sparkline13-hd">
-                            <h1>&nbsp;</h1>
-                        </div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>@Model.Tittle</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")">Home</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>Hasil Produksi</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+            @*<a href="@Url.Action("Import","TrnSuratPengantarBongkarMuat")" class="ladda-button ladda-button-import btn btn-success" data-style="zoom-in">Import .xls</a>*@
+            <a href="#" class="ladda-button ladda-button-export btn btn-success" data-style="zoom-in">Export .xls</a>
+            <a href="@Url.Action("Create","TrnHasilProduksi")" class="ladda-button ladda-button-tambah btn btn-success" data-style="zoom-in">Tambah</a>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>List Form Hasil Produksi</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
                     </div>
-                    <div class="sparkline13-graph">
-                        <div>
-                            <div class="add-product">
-                                <a href="@Url.Action("Create","TrnHasilProduksi")">Tambah</a>
-                            </div>
-                            <table id="table" class="stripe row-border order-column" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th style="min-width:30px">No</th>
-                                        <th style="min-width:50px">Action</th>
-                                        <th style="min-width:100px">Tanggal</th>
-                                        <th style="min-width:50px">Barang</th>
-                                        <th style="min-width:150px">Jumlah</th>
-                                        <th style="min-width:200px">Keterangan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.ListData.OrderBy(x => x.TANGGAL).ToList())
-                                    {
-                                        <tr>
-                                            <td>@Html.Raw(Model.ListData.IndexOf(item) + 1)</td>
-                                            <td style="text-align:center;">
-                                                @if (Model.CurrentUser.USERNAME == item.CREATED_BY)
-                                                {
-                                                    <a href="@Url.Action("Hapus","TrnHasilProduksi",new {@id=item.ID})" data-toggle="tooltip" title="Edit" class="pd-setting-ed"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                }
-                                                <a href="@Url.Action("Details","TrnHasilProduksi",new {@id=item.ID})" data-toggle="tooltip" title="Details" class="pd-setting-ed"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                            </td>
-                                            <td>@Html.Raw(item.TANGGAL.ToString("dd MMM yyyy"))</td>
-                                            <td>@Html.Raw(item.MST_BARANG_JADI == null ? "" : item.MST_BARANG_JADI.NAMA_BARANG)</td>
-                                            <td>@Html.Raw(string.Format("{0:N}",item.JUMLAH))</td>
-                                            <td>@Html.Raw(item.CATATAN)</td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-striped table-bordered table-hover dataTables-List">
+                        <thead>
+                            <tr>
+                                <th style="min-width:20px">No</th>
+                                <th style="min-width:50px;">Action</th>
+                                <th style="min-width:150px">Tanggal Produksi</th>
+                                <th style="min-width:200px">Deskripsi Barang</th>
+                                <th style="min-width:200px;">Lokasi Produksi</th>
+                                <th style="min-width:100px;">Shift</th>
+                                <th style="min-width:200px;">Kuantum</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ListData.OrderBy(x => x.TANGGAL).ToList())
+                            {
+                                <tr>
+                                    <td style="text-align:center;">@Html.Raw(Model.ListData.IndexOf(item) + 1)</td>
+                                    <td style="text-align:center;">
+                                        @if (Model.CurrentUser.USERNAME == item.CREATED_BY)
+                                        {
+                                            <a href="#" onclick="Hapus(@item.ID)" data-toggle="modal" data-target="modalHapus" title="Hapus"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                        }
+                                        <a href="@Url.Action("Details","TrnHasilProduksi",new {@id=item.ID})" data-toggle="tooltip" data-placement="bottom" title="Details"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    </td>
+                                    <td>@Html.Raw(item.TANGGAL_PRODUKSI.Value.ToString("dd MMM yyyy"))</td>
+                                    <td class="text-uppercase">@Html.Raw(item.NAMA_BARANG + " - " + item.BENTUK + " - " + item.KEMASAN)</td>
+                                    <td class="text-uppercase">@Html.Raw(item.LOKASI_PRODUKSI)</td>
+                                    <td class="text-uppercase">@Html.Raw(item.SHIFT)</td>
+                                    <td>@Html.Raw(string.Format("{0:N}", item.KUANTUM))</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@section scripts {
+
+
+<div id="modalHapus" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    @using (Html.BeginForm("Hapus", "TrnHasilProduksi", FormMethod.Post, new { @id = "FormHapus", enctype = "multipart/form-data" }))
+    {
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="color:white">Hapus Form</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Apakah anda yakin ingin menghapus data berikut ?
+                        @Html.Hidden("id", "", new { @id = "id" })
+                    </p>
+                    <div class="form-group">
+                        @Html.TextArea("Remarks", "", new { @class = "form-control", @id = "Remarks", @style = "height:100px", @required = "required" })
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="ladda-button ladda-button-hapus btn btn-success" data-style="zoom-in" onclick="Confirm()">Ok</button>
+                    <button type="submit" style="display:none" id="btnHapus"></button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Styles {
+    @Styles.Render("~/Contents/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/plugins/laddaStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/ladda")
+    @Scripts.Render("~/plugins/validate")
+
     <script type="text/javascript">
+        var l_ladda_hapus = null;
         $(document).ready(function () {
-            var table = $('#table').DataTable({
-                "dom": 'lf<"table-overflow"t>pi',
-                orderCellsTop: true,
-                scrollY: "300px",
-                scrollX: true,
+            l_ladda_hapus = $('.ladda-button-hapus').ladda();
+            var l_ladda_export = $('.ladda-button-export').ladda();
+            l_ladda_export.click(function () {
+                // Start loading
+                l_ladda_export.ladda('start');
+                // Do something in backend and then stop ladda
+                // setTimeout() is only for demo purpose
+                setTimeout(function () {
+                    l_ladda_export.ladda('stop');
+                }, 20000)
+            });
+
+            var l_ladda_import = $('.ladda-button-import').ladda();
+            l_ladda_import.click(function () {
+                // Start loading
+                l_ladda_import.ladda('start');
+                // Do something in backend and then stop ladda
+                // setTimeout() is only for demo purpose
+                setTimeout(function () {
+                    l_ladda_import.ladda('stop');
+                }, 20000)
+            });
+
+            var l_ladda_tambah = $('.ladda-button-tambah').ladda();
+            l_ladda_tambah.click(function () {
+                // Start loading
+                l_ladda_tambah.ladda('start');
+                // Do something in backend and then stop ladda
+                // setTimeout() is only for demo purpose
+            });
+
+            $('.dataTables-List').DataTable({
+                pageLength: 25,
+                dom: '<"html5buttons"B>lTfgitp',
+                scrollX:        true,
                 scrollCollapse: true,
-                fixedColumns: true
+                buttons: [
+                    { extend: 'copy' },
+                    { extend: 'csv' },
+                    { extend: 'excel', title: 'ExampleFile' },
+                    { extend: 'pdf', title: 'ExampleFile' },
+                    {
+                        extend: 'print',
+                        customize: function (win) {
+                            $(win.document.body).addClass('white-bg');
+                            $(win.document.body).css('font-size', '10px');
+
+                            $(win.document.body).find('table')
+                                    .addClass('compact')
+                                    .css('font-size', 'inherit');
+                        }
+                    }
+                ]
             });
         });
+
+        // Hapus Form
+        function Confirm() {
+            var validate = $('#FormHapus').validate();
+
+            jQuery.extend(jQuery.validator.messages, {
+                required: "Tidak boleh kosong",
+                remote: "Please fix this field.",
+                email: "Please enter a valid email address.",
+                url: "Please enter a valid URL.",
+                date: "Please enter a valid date.",
+                dateISO: "Please enter a valid date (ISO).",
+                number: "Harus diisi dengan angka.",
+                digits: "Harus diisi dengan angka.",
+                creditcard: "Please enter a valid credit card number.",
+                equalTo: "Please enter the same value again.",
+                accept: "Please enter a value with a valid extension.",
+                maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
+                minlength: jQuery.validator.format("Please enter at least {0} characters."),
+                rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
+                range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+                max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+                min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+            });
+
+            var isValid = validate.checkForm();
+            if (isValid) {
+                l_ladda_hapus.ladda('start');
+                $("#btnHapus").trigger('click');
+                event.preventDefault();
+            }
+            else {
+                validate.showErrors();
+            }
+        }
+
+        function Hapus(value) {
+            $('#id').val(value);
+            $('#modalHapus').modal('show');
+        }
     </script>
 }

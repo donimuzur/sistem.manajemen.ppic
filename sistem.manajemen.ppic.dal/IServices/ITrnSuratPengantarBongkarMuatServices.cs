@@ -12,5 +12,7 @@ namespace sistem.manajemen.ppic.dal.IServices
         TRN_SURAT_PENGANTAR_BONGKAR_MUAT GetById(object Id);
         void Save(TRN_SURAT_PENGANTAR_BONGKAR_MUAT Db);
         void Save(TRN_SURAT_PENGANTAR_BONGKAR_MUAT Db, Login Login);
+        void Delete(int id, string Remarks);
+        List<TRN_SURAT_PENGANTAR_BONGKAR_MUAT> GetActiveAll();
     }
 }

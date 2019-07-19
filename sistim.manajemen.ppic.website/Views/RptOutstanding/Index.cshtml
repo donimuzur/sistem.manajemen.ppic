@@ -1,168 +1,170 @@
-﻿@model sistem.manajemen.ppic.website.Models.RptOutstandingListModel
+﻿@using System.Web.Optimization
+@model sistem.manajemen.ppic.website.Models.RptOutstandingListModel
 @{
     ViewBag.Title = "Laporan Outstanding";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="data-table-area mg-b-15">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="sparkline13-list">
-                    <div class="white-wrapper">
-                        @using (Ajax.BeginForm("FilterListRptOutstanding", "RptOutstanding",
-                        new AjaxOptions
-                        {
-                            HttpMethod = "POST",
-                            InsertionMode = InsertionMode.Replace,
-                            UpdateTargetId = "contenttable",
-                            OnComplete = "ReloadDataTables",
-                            OnBegin = "LoadingShow",
-                            OnSuccess = "LoadingHide",
-                            OnFailure = "LoadingHide"
-                        }, new { role = "form", @id = "SubmitForm" }))
-                        {
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Date From<span class="red">*</span></label>
-                                        <div class="input-group date" id="DateFilter">
-                                            @Html.TextBoxFor(model => model.SearchView.FromDate, "{0:dd-MMM-yyyy}", new { @class = "form-control", @placeholder = "Tanggal Mulai", required = "required" })
-                                            <span class="input-group-addon btn btn-primary">
-                                                <i class="fa fa-calendar "></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Date To<span class="red">*</span></label>
-                                        <div class="input-group date" id="DateFilter">
-                                            @Html.TextBoxFor(model => model.SearchView.ToDate, "{0:dd-MMM-yyyy}", new { @class = "form-control", @placeholder = "Tanggal Akhir", required = "required" })
-                                            <span class="input-group-addon btn btn-primary">
-                                                <i class="fa fa-calendar "></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                    &nbsp;
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="text-align:right;">
-                                    <div class="form-group">
-                                        <input id="btn-filter" type="submit" class="btn btn-primary waves-effect waves-light" value="Generate" />
-                                        <button type="button" id="btn-reset-filter" class="btn btn-primary waves-effect waves-light" onclick="ExportXls()">Export</button>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>iv>
 
-<div class="data-table-area mg-b-15">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="sparkline13-list">
-                    <div class="sparkline13-hd">
-                        <div class="main-sparkline13-hd">
-                            <h1>&nbsp;</h1>
-                        </div>
-                    </div>
-                    <div class="sparkline13-graph">
-                        <div id="contenttable">
-                            @Html.Partial("_listRptOutstanding")
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>@Model.Tittle</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")">Home</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>Laporan Outstanding</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
         </div>
     </div>
 </div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Filter</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Date From<span class="text-danger">*</span></label>
+                                <div class="input-group date" id="DateFilter">
+                                    @Html.TextBoxFor(model => model.SearchView.FromDate, "{0:dd-MMM-yyyy}", new { @class = "form-control", @required = "required" })
+                                    <span class="input-group-addon btn btn-primary">
+                                        <i class="fa fa-calendar "></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label">Date To<span class="text-danger">*</span></label>
+                                <div class="input-group date" id="DateFilter">
+                                    @Html.TextBoxFor(model => model.SearchView.ToDate, "{0:dd-MMM-yyyy}", new { @class = "form-control", @required = "required" })
+                                    <span class="input-group-addon btn btn-primary">
+                                        <i class="fa fa-calendar "></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:right">
+                            <div class="form-group" style="">
+                                <button type="button" class="ladda-button ladda-button-hapus btn btn-success" data-style="zoom-in" onclick="Confirm()">Generate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-@section Scripts
-{
-    <script src="~/Content/js/jquery.unobtrusive-ajax.min.js"></script>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>List Data</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" id="contenttable">
+                    @Html.Partial("_listRptOutstanding")
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Styles {
+    @Styles.Render("~/Contents/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/plugins/laddaStyles")
+    @Styles.Render("~/plugins/datePickerStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/ladda")
+    @Scripts.Render("~/plugins/validate")
+    @Scripts.Render("~/plugins/datePicker")
+
     <script type="text/javascript">
+        var l_ladda_filter = null;
+        $(document).ready(function () {
+            l_ladda_filter = $('.ladda-button-hapus').ladda();
+
+            $('.dataTables-List').DataTable({
+                pageLength: 25,
+                dom: '<"html5buttons"B>lTfgitp',
+                scrollX: true,
+                scrollCollapse: true,
+                buttons: [
+                    { extend: 'copy' },
+                    { extend: 'csv' },
+                    { extend: 'excel', title: 'ExampleFile' },
+                    { extend: 'pdf', title: 'ExampleFile' },
+                    {
+                        extend: 'print',
+                        customize: function (win) {
+                            $(win.document.body).addClass('white-bg');
+                            $(win.document.body).css('font-size', '10px');
+
+                            $(win.document.body).find('table')
+                                    .addClass('compact')
+                                    .css('font-size', 'inherit');
+                        }
+                    }
+                ]
+            });
+        });
+
         function LoadingShow()
         {
-            $('.loading').show();
+            l_ladda_filter.ladda('start');
         }
 
         function LoadingHide()
         {
-            $('.loading').hide();
+            l_ladda_filter.ladda('stop');
         }
 
-        function ExportXls() {
-            console.log('Submitting');
-            var url = '@Url.Action("ExportProductionIncomeReport", "ProductionIncome")';
-            var getFileUrl = '@Url.Action("GetExcelFile", "ProductionIncome")';
-            console.log(url);
-            var objToUpload =
-                {
-                    SearchView: {
-                        DateFrom: $('#SearchView_DateFrom').val(),
-                        DateTo: $('#SearchView_DateTo').val(),
-                        Company: $('#SearchView_Company').val()
-                    }
-                };
+        function Confirm() {
+            var url = '@Url.Action("GetRptOutstandingList", "RptOutstanding")';
+            var FromDate =  $('#SearchView_FromDate').val();
+            var ToDate = $('#SearchView_ToDate').val()
+         
             $.ajax({
-                url: url,
-                data: JSON.stringify(objToUpload),
-                contentType: 'application/json; charset=utf-8',
-                beforeSend: function () {
-                    LoadingShow();
-                },
-                success: function (response, status, jqxhr) {
-                    console.log("DONE");
-                    window.location = getFileUrl + "?pathFile=" + response;
-                    $('.loading').hide();
-                },
-                error: function (jqhxr) {
-                    console.log("ERROR");
-                    console.log(jqhxr.responseText);
-                    $('.loading').hide();
-                },
-                type: 'POST'
+        	    url: url,
+        	    data: { FromDate: FromDate, ToDate: ToDate },
+        	    dataType: "JSON",
+        	    beforeSend:function(){
+        	        LoadingShow();
+        	    },
+        	    success: function (response, jqxhr) {
+        	        console.log(response);
+        		    LoadingHide();
+        	    },
+        	    error: function(jqhxr){
+        		    console.log(jqhxr.responseText);
+        		    LoadingHide();
+        	    },
+        	    type:'POST'
             });
-
-        }
-
-        function setupDataTables() {
-            var table = null;
-            if ($.fn.dataTable.isDataTable('#table')) {
-                table = $('#table').DataTable();
-                table.destroy();
-            }
-             table = $('#table').DataTable({
-                "dom": 'lf<"table-overflow"t>pi',
-                orderCellsTop: true,
-                scrollY: "300px",
-                scrollX: true,
-                scrollCollapse: true,
-                fixedColumns: true
-            });
-        }
-
-        $(document).ready(function () {
-            var table = $('#table').DataTable({
-                "dom": 'lf<"table-overflow"t>pi',
-                orderCellsTop: true,
-                scrollY: "300px",
-                scrollX: true,
-                scrollCollapse: true,
-                fixedColumns: true
-            });
-        });
-
-        function ReloadDataTables() {
-            setupDataTables();
         }
 
         $('.date').datepicker({

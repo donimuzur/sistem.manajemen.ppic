@@ -14,5 +14,7 @@ namespace sistem.manajemen.ppic.bll.IBLL
         TrnMutasiBarangDto GetByNama(string NamaBarang);
         void Save(TrnMutasiBarangDto model);
         void Save(TrnMutasiBarangDto model, LoginDto LoginDto);
+        void Delete(int id, string Remarks);
+        List<TrnMutasiBarangDto> GetActiveAll();
     }
 }

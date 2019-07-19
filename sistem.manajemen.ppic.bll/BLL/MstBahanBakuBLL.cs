@@ -35,6 +35,20 @@ namespace sistem.manajemen.ppic.bll
 
             return ReData;
         }
+        public MstBahanBakuDto GetByNama(string NamaBarang)
+        {
+            try
+            {
+                var Data = _mstBahanBakuServices.GetAll().Where(x => x.NAMA_BARANG.ToUpper() == NamaBarang.ToUpper()).FirstOrDefault();
+                var ReData = Mapper.Map<MstBahanBakuDto>(Data);
+
+                return ReData;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public void Save(MstBahanBakuDto model)
         {
             try
@@ -58,6 +72,42 @@ namespace sistem.manajemen.ppic.bll
             catch (Exception)
             {
                 throw;
+            }
+        }
+        public bool TambahSaldo(int IdBarang, decimal Jumlah)
+        {
+            try
+            {
+                var Db = _mstBahanBakuServices.GetById(IdBarang);
+                Db.STOCK = Db.STOCK + Jumlah;
+
+                _mstBahanBakuServices.Save(Db, new Login { FIRST_NAME = "SYSTEM", USERNAME = "SYSTEM" });
+
+                return true;
+            }
+            catch (Exception exp)
+            {
+
+                LogError.LogError.WriteError(exp);
+                return false;
+            }
+        }
+
+        public bool KurangSaldo(int IdBarang, decimal Jumlah)
+        {
+            try
+            {
+                var Db = _mstBahanBakuServices.GetById(IdBarang);
+                Db.STOCK = Db.STOCK - Jumlah;
+
+                _mstBahanBakuServices.Save(Db, new Login { FIRST_NAME = "SYSTEM", USERNAME = "SYSTEM" });
+
+                return true;
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
+                return false;
             }
         }
     }

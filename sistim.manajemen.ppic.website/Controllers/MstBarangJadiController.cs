@@ -16,7 +16,7 @@ namespace sistem.manajemen.ppic.website.Controllers
     {
         private IMstBarangJadiBLL _mstBarangJadiBLL;
         private IMstKemasanBLL _mstKemasanBLL;
-        public MstBarangJadiController(IMstBarangJadiBLL MstBarangJadiBLL, IMstKemasanBLL MstKemasanBLL, IPageBLL pageBll) : base(pageBll, Enums.MenuList.GdgBarangJadi)
+        public MstBarangJadiController(IMstBarangJadiBLL MstBarangJadiBLL, IMstKemasanBLL MstKemasanBLL, IPageBLL pageBll) : base(pageBll, Enums.MenuList.MstBarangJadi)
         {
             _mstBarangJadiBLL = MstBarangJadiBLL;
             _mstKemasanBLL = MstKemasanBLL;
@@ -28,9 +28,12 @@ namespace sistem.manajemen.ppic.website.Controllers
             ListKemasan = _mstKemasanBLL.GetAll().Select(x => x.KEMASAN).ToList();
             model.KemasanList = new SelectList(ListKemasan);
 
+            model.MainMenu = Enums.MenuList.MstBarangJadi;
+            model.Menu = Enums.GetEnumDescription(Enums.MenuList.Master);
             model.CurrentUser = CurrentUser;
-            model.Menu = "Barang Jadi";
-            model.ChangesHistory = GetChangesHistory((int)Enums.MenuList.GdgBarangJadi, model.ID);
+            model.Tittle = "Master Barang Jadi";
+
+            model.ChangesHistory = GetChangesHistory((int)Enums.MenuList.MstBarangJadi, model.ID);
 
             return model;
         }
@@ -44,8 +47,10 @@ namespace sistem.manajemen.ppic.website.Controllers
 
                 model.ListData = Mapper.Map<List<MstBarangJadiModel>>(data);
 
+                model.MainMenu = Enums.MenuList.MstBarangJadi;
+                model.Menu = Enums.GetEnumDescription(Enums.MenuList.Master);
                 model.CurrentUser = CurrentUser;
-                model.Menu = "Barang Jadi";
+                model.Tittle = "Master Barang Jadi";
 
                 return View(model);
             }
@@ -82,8 +87,15 @@ namespace sistem.manajemen.ppic.website.Controllers
                     Dto.STOCK = model.STOCK_AWAL == null ? 0 : model.STOCK_AWAL.Value;
                     
                     Dto.STATUS = true;
-                    
+
+                    var GetDataExist = _mstBarangJadiBLL.GetByNama(model.NAMA_BARANG);
+                    if (GetDataExist != null)
+                    {
+                        AddMessageInfo("Barang dengan Nama Tersebut Sudah ada", Enums.MessageInfoType.Error);
+                        return View(Init(model));
+                    }
                     _mstBarangJadiBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
+                    AddMessageInfo("Sukses create Master Barang Jadi", Enums.MessageInfoType.Error);
                     return RedirectToAction("Index", "MstBarangJadi");
                 }
                 catch (Exception)
@@ -102,23 +114,32 @@ namespace sistem.manajemen.ppic.website.Controllers
         #region --- Edit ---
         public ActionResult Edit(int? id)
         {
-            if(!id.HasValue)
+            try
             {
-                return HttpNotFound();
+                if (!id.HasValue)
+                {
+                    return HttpNotFound();
+                }
+
+                var model = new MstBarangJadiModel();
+
+                var GetData = _mstBarangJadiBLL.GetById(id);
+                if (GetData == null)
+                {
+                    return HttpNotFound();
+                }
+
+                model = Mapper.Map<MstBarangJadiModel>(GetData);
+
+                model = Init(model);
+                return View(model);
             }
-
-            var model = new MstBarangJadiModel();
-
-            var GetData = _mstBarangJadiBLL.GetById(id);
-            if (GetData == null)
+            catch (Exception exp)
             {
-                return HttpNotFound();
+                LogError.LogError.WriteError(exp);
+                AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+                return RedirectToAction("Index", "MstBarangJadi");
             }
-
-            model = Mapper.Map<MstBarangJadiModel>(GetData);
-
-            model = Init(model);
-            return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -134,20 +155,45 @@ namespace sistem.manajemen.ppic.website.Controllers
                     GetData.STATUS = model.STATUS;
                     GetData.MODIFIED_BY = CurrentUser.USERNAME;
                     GetData.MODIFIED_DATE = DateTime.Now;
-
+                  
                     _mstBarangJadiBLL.Save(GetData,Mapper.Map<LoginDto>(CurrentUser));
-
+                    AddMessageInfo("Success Update Master Barang Jadi", Enums.MessageInfoType.Success);
                     return RedirectToAction("Index", "MstBarangJadi");
                 }
-                catch (Exception)
+                catch (Exception exp)
                 {
-                    throw;
+                    LogError.LogError.WriteError(exp);
+                    AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+                    return RedirectToAction("Index", "MstBarangJadi");
                 }
             }
-            else
+            AddMessageInfo("Gagal Update Master Barang Jadi", Enums.MessageInfoType.Error);
+            return View(Init(model));
+        }
+        #endregion
+        
+        #region --- Details ---
+        public ActionResult Details(int? id)
+        {
+            if (!id.HasValue)
             {
+                return HttpNotFound();
+            }
+
+            try
+            {
+                var model = new MstBarangJadiModel();
+
+                model = Mapper.Map<MstBarangJadiModel>(_mstBarangJadiBLL.GetById(id));
+
                 model = Init(model);
                 return View(model);
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
+                AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+                return RedirectToAction("Index", "MstBarangJadi");
             }
         }
         #endregion

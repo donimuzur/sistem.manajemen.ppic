@@ -12,9 +12,11 @@ namespace sistem.manajemen.ppic.bll.IBLL
     public interface ITrnHasilProduksiBLL
     {
         List<TrnHasilProduksiDto> GetAll();
+        List<TrnHasilProduksiDto> GetActiveAll();
         TrnHasilProduksiDto GetById(object Id);
         TrnHasilProduksiDto GetByBarang(int IdBarang);
         void Save(TrnHasilProduksiDto model);
         void Save(TrnHasilProduksiDto model, LoginDto LoginDto);
+        void Delete(int id, string Remarks);
     }
 }

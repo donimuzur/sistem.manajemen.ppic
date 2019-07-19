@@ -12,5 +12,7 @@ namespace sistem.manajemen.ppic.dal.IServices
         TRN_MUTASI_BARANG GetById(object Id);
         void Save(TRN_MUTASI_BARANG Db);
         void Save(TRN_MUTASI_BARANG Db, Login Login);
+        void Delete(int id, string Remarks);
+        List<TRN_MUTASI_BARANG> GetActiveAll();
     }
 }

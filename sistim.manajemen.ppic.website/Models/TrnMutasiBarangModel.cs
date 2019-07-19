@@ -25,6 +25,13 @@ namespace sistem.manajemen.ppic.website.Models
         public string CREATED_BY { get; set; }
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
         public string MODIFIED_BY { get; set; }
+        public Nullable<int> ID_BARANG_JADI { get; set; }
+        public Nullable<int> ID_BAHAN_BAKU { get; set; }
+        public Nullable<decimal> STOCK_AWAL { get; set; }
+        public Nullable<decimal> STOCK_AKHIR { get; set; }
+        public string NO_SURAT { get; set; }
+
+        public MstBarangJadiModel MST_BARANG_JADI { get; set; }
         public SelectList JenisbarangList { set; get; }
     }
     public class TrnMutasiBarangViewModel : BaseModel

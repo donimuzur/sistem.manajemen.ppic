@@ -22,6 +22,21 @@ namespace sistem.manajemen.ppic.bll
             _uow = new SqlUnitOfWork();
             _trnMutasiBarangServcies = new TrnMutasiBarangServices(_uow);
         }
+        public List<TrnMutasiBarangDto> GetActiveAll()
+        {
+            try
+            {
+                var Data = _trnMutasiBarangServcies.GetActiveAll();
+                var ReData = Mapper.Map<List<TrnMutasiBarangDto>>(Data);
+
+                return ReData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<TrnMutasiBarangDto> GetAll()
         {
             try
@@ -91,6 +106,18 @@ namespace sistem.manajemen.ppic.bll
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+        public void Delete(int id, string Remarks)
+        {
+            try
+            {
+                _trnMutasiBarangServcies.Delete(id, Remarks);
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

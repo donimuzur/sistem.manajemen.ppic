@@ -39,13 +39,13 @@
                 <a href="#"><i class="fa fa-cubes"></i> <span class="nav-label">Gudang</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Gudang", CurrentMenu : Model.Menu, cssClass: "in")">
                     <li class="@Html.IsSelected(controller:"GdgBarangJadi",action: "Index")"><a href="@Url.Action("Index","GdgBarangJadi")">Barang Jadi</a></li>
-                    <li class="#"><a href="#">Bahan Baku</a></li>
+                    <li class="@Html.IsSelected(controller:"GdgBahanBaku",action: "Index")"><a href="@Url.Action("Index","GdgBahanBaku")">Bahan Baku</a></li>
                 </ul>
             </li>
             <li class="@Html.IsSelectedMenu(Menu: "Produksi", CurrentMenu : Model.Menu)" style="@Html.IsShownMenu(Model.CurrentUser.ROLE_ID, "Produksi" )">
                 <a href="#"><i class="fa fa-industry"></i> <span class="nav-label">Produksi</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Produksi", CurrentMenu : Model.Menu, cssClass: "in")">
-                    <li class="@Html.IsSelected(controller:"TrnProduksi",action: "Index")"><a href="@Url.Action("Index", "TrnProduksi")">Hasil Produksi</a></li>
+                    <li class="@Html.IsSelected(controller:"TrnHasilProduksi",action: "Index")"><a href="@Url.Action("Index", "TrnHasilProduksi")">Hasil Produksi</a></li>
                     <li class="@Html.IsSelected(controller:"TrnProduksi",action: "Index")"><a href="@Url.Action("Index", "TrnProduksi")">Permintaan Bahan Baku</a></li>
                 </ul>
             </li>
@@ -55,6 +55,7 @@
                     <li class="@Html.IsSelected(controller:"TrnPengiriman",action: "Index")"><a href="@Url.Action("Index", "TrnPengiriman")">Pengiriman</a></li>
                     <li class="@Html.IsSelected(controller: "TrnSuratPengantarBongkarMuat", action: "Index")"><a href="@Url.Action("Index", "TrnSuratPengantarBongkarMuat")">Surat Pengantar Bongkar Muat</a></li>
                     <li class="@Html.IsSelected(controller: "TrnMutasiBarang", action: "Index")"><a href="@Url.Action("Index", "TrnMutasiBarang")">Mutasi Barang</a></li>
+                    <li class="@Html.IsSelected(controller: "TrnPenerimaanBarang", action: "Index")"><a href="@Url.Action("Index", "TrnPenerimaanBarang")">Penerimaan Barang</a></li>
                 </ul>
             </li>
 
@@ -62,7 +63,7 @@
                 <a href="#"><i class="fa fa-database"></i> <span class="nav-label">Master</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Master", CurrentMenu : Model.Menu, cssClass: "in")">
                     <li class="@Html.IsSelected(controller:"MstBarangJadi",action: "Index")"><a href="@Url.Action("Index","MstBarangJadi")">Master Barang Jadi</a></li>
-                    <li class="#"><a href="#">Master Bahan Baku</a></li>
+                    <li class="@Html.IsSelected(controller:"MstBahanBaku",action: "Index")"><a href="@Url.Action("Index","MstBahanBaku")">Master Bahan Baku</a></li>
                     <li class="#"><a href="#">Master Wilayah</a></li>
                     <li class="#"><a href="#">Master Konsumen</a></li>
                     <li class="#"><a href="#">Master Kemasan</a></li>

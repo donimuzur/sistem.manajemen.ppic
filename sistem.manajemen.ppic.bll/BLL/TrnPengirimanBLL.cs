@@ -24,31 +24,64 @@ namespace sistem.manajemen.ppic.BLL
         }
         public List<TrnPengirimanDto> GetAll()
         {
-            var Data = _trnPengirimanServices.GetAll();
-            var ReData = Mapper.Map<List<TrnPengirimanDto>>(Data);
+            try
+            {
+                var Data = _trnPengirimanServices.GetAll();
+                var ReData = Mapper.Map<List<TrnPengirimanDto>>(Data);
 
-            return ReData;
+                return ReData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         public List<TrnPengirimanDto> GetActiveAll()
         {
-            var Data = _trnPengirimanServices.GetActiveAll();
-            var ReData = Mapper.Map<List<TrnPengirimanDto>>(Data);
+            try
+            {
+                var Data = _trnPengirimanServices.GetActiveAll();
+                var ReData = Mapper.Map<List<TrnPengirimanDto>>(Data);
 
-            return ReData;
+                return ReData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         public List<TrnPengirimanDto> GetAllByDoAndSPB(int Do, string NoSPB)
         {
-            var Data = _trnPengirimanServices.GetAll().Where(x => x.NO_DO == Do && x.NO_SPB.ToUpper() == NoSPB.ToUpper()).ToList();
-            var ReData = Mapper.Map<List<TrnPengirimanDto>>(Data);
+            try
+            {
 
-            return ReData;
+                var Data = _trnPengirimanServices.GetAll().Where(x => x.NO_DO == Do && x.NO_SPB.ToUpper() == NoSPB.ToUpper()).ToList();
+                var ReData = Mapper.Map<List<TrnPengirimanDto>>(Data);
+
+                return ReData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         public TrnPengirimanDto GetById(object Id)
         {
-            var Data = _trnPengirimanServices.GetTrnPengirimanMasterById(Id);
-            var ReData = Mapper.Map<TrnPengirimanDto>(Data);
+            try
+            {
+                var Data = _trnPengirimanServices.GetTrnPengirimanMasterById(Id);
+                var ReData = Mapper.Map<TrnPengirimanDto>(Data);
 
-            return ReData;
+                return ReData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         public void Save(TrnPengirimanDto Dto)
         {

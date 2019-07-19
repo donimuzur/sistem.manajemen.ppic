@@ -17,32 +17,68 @@ namespace sistem.manajemen.ppic.bll
         private ITrnHasilProduksiServices _trnHasilProduksiServices;
         private IMstBarangJadiServices _mstBarangJadiServices;
         private IUnitOfWork _uow;
+
         public TrnHasilProduksiBLL(IUnitOfWork Uow)
         {
             _uow = Uow;
             _trnHasilProduksiServices = new TrnHasilProduksiServices(_uow);
             _mstBarangJadiServices = new MstBarangJadiServices(_uow);
         }
+        public List<TrnHasilProduksiDto> GetActiveAll()
+        {
+            try
+            {
+                var Data = _trnHasilProduksiServices.GetActiveAll();
+                var ReData = Mapper.Map<List<TrnHasilProduksiDto>>(Data);
+
+                return ReData;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public List<TrnHasilProduksiDto> GetAll()
         {
-            var Data = _trnHasilProduksiServices.GetAll();
-            var ReData = Mapper.Map<List<TrnHasilProduksiDto>>(Data);
+            try
+            {
+                var Data = _trnHasilProduksiServices.GetAll();
+                var ReData = Mapper.Map<List<TrnHasilProduksiDto>>(Data);
 
-            return ReData;
+                return ReData;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public TrnHasilProduksiDto GetById(object Id)
         {
-            var Data = _trnHasilProduksiServices.GetById(Id);
-            var ReData = Mapper.Map<TrnHasilProduksiDto>(Data);
+            try
+            {
+                var Data = _trnHasilProduksiServices.GetById(Id);
+                var ReData = Mapper.Map<TrnHasilProduksiDto>(Data);
 
-            return ReData;
+                return ReData;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public TrnHasilProduksiDto GetByBarang(int IdBarang)
         {
-            var Data = _trnHasilProduksiServices.GetAll().Where(x => x.ID_BARANG== IdBarang).FirstOrDefault();
-            var ReData = Mapper.Map<TrnHasilProduksiDto>(Data);
+            try
+            {
+                var Data = _trnHasilProduksiServices.GetAll().Where(x => x.ID_BARANG == IdBarang).FirstOrDefault();
+                var ReData = Mapper.Map<TrnHasilProduksiDto>(Data);
 
-            return ReData;
+                return ReData;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public void Save(TrnHasilProduksiDto model)
         {
@@ -68,6 +104,18 @@ namespace sistem.manajemen.ppic.bll
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+        public void Delete(int id, string Remarks)
+        {
+            try
+            {
+                _trnHasilProduksiServices.Delete(id, Remarks);
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

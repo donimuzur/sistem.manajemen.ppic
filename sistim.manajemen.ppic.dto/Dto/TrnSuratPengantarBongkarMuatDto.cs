@@ -11,7 +11,7 @@ namespace sistem.manajemen.ppic.dto
         public int ID { get; set; }
         public System.DateTime TANGGAL { get; set; }
         public string NO_SPB { get; set; }
-        public int NO_DO { get; set; }
+        public int? NO_DO { get; set; }
         public string TRNSPT_NAMA_PT { get; set; }
         public string TRNSPT_JENIS_KENDARAAN { get; set; }
         public string TRNSPT_NO_POLISI { get; set; }

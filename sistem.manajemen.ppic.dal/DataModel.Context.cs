@@ -49,6 +49,7 @@ namespace sistem.manajemen.ppic.dal
         public DbSet<TRN_PENGIRIMAN> TRN_PENGIRIMAN { get; set; }
         public DbSet<TRN_SURAT_PENGANTAR_BONGKAR_MUAT> TRN_SURAT_PENGANTAR_BONGKAR_MUAT { get; set; }
         public DbSet<TRN_MUTASI_BARANG> TRN_MUTASI_BARANG { get; set; }
+        public DbSet<TRN_PENERIMAAN_BARANG> TRN_PENERIMAAN_BARANG { get; set; }
     
         public virtual ObjectResult<SP_RealisasiHarian_Result> SP_RealisasiHarian(string date)
         {

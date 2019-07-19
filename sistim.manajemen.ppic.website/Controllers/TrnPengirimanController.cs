@@ -187,7 +187,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                 _trnPengirimanBLL.Delete(id.Value, Remarks);
                 _mstBarangJadiBLL.TambahSaldo(model.ID_BARANG, model.KUANTUM.Value);
 
-                AddMessageInfo("Data sukses dihapus", Enums.MessageInfoType.Error);
+                AddMessageInfo("Data sukses dihapus", Enums.MessageInfoType.Success);
                 return RedirectToAction("Index", "TrnPengiriman");
             }
             catch (Exception exp)

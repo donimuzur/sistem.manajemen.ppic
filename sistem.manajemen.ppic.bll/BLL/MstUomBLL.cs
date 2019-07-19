@@ -21,21 +21,21 @@ namespace sistem.manajemen.ppic.bll
             _uow = Uow;
             _mstUomServices = new MstUomServices(_uow);
         }
-        public List<KemasanDto> GetAll()
+        public List<UomDto> GetAll()
         {
             var Data = _mstUomServices.GetAll();
-            var ReData = Mapper.Map<List<KemasanDto>>(Data);
+            var ReData = Mapper.Map<List<UomDto>>(Data);
 
             return ReData;
         }
-        public KemasanDto GetById(object Id)
+        public UomDto GetById(object Id)
         {
             var Data = _mstUomServices.GetById(Id);
-            var ReData = Mapper.Map<KemasanDto>(Data);
+            var ReData = Mapper.Map<UomDto>(Data);
 
             return ReData;
         }
-        public void Save(KemasanDto model)
+        public void Save(UomDto model)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace sistem.manajemen.ppic.bll
                 throw;
             }
         }
-        public void Save(KemasanDto model, LoginDto LoginDto)
+        public void Save(UomDto model, LoginDto LoginDto)
         {
             try
             {

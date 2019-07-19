@@ -45,6 +45,9 @@ namespace sistem.manajemen.ppic.website.Code
                 cfg.CreateMap<TrnSuratPengantarBongkarMuatModel, TrnSuratPengantarBongkarMuatDto>().ReverseMap();
                 cfg.CreateMap<TrnSuratPengantarBongkarMuatDto, TRN_SURAT_PENGANTAR_BONGKAR_MUAT>().ReverseMap();
 
+                cfg.CreateMap<TrnMutasiBarangModel, TrnMutasiBarangDto>().ReverseMap();
+                cfg.CreateMap<TrnMutasiBarangDto, TRN_MUTASI_BARANG>().ReverseMap();
+
                 cfg.CreateMap<RptOutstandingModelSearchView, RptOutstandingInput>().ReverseMap();
 
                 cfg.CreateMap<RptOutstandingModel, RptOutstandingDto>().ReverseMap();

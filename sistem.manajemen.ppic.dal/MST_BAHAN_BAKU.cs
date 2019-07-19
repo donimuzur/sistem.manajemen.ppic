@@ -14,6 +14,11 @@ namespace sistem.manajemen.ppic.dal
     
     public partial class MST_BAHAN_BAKU
     {
+        public MST_BAHAN_BAKU()
+        {
+            this.TRN_PENERIMAAN_BARANG = new HashSet<TRN_PENERIMAAN_BARANG>();
+        }
+    
         public int ID { get; set; }
         public string NAMA_BARANG { get; set; }
         public decimal STOCK { get; set; }
@@ -25,5 +30,8 @@ namespace sistem.manajemen.ppic.dal
         public Nullable<decimal> STOCK_AWAL { get; set; }
         public Nullable<decimal> STOCK_AKHIR { get; set; }
         public string SATUAN { get; set; }
+        public Nullable<byte> ISBAHAN_PEMBANTU { get; set; }
+    
+        public virtual ICollection<TRN_PENERIMAAN_BARANG> TRN_PENERIMAAN_BARANG { get; set; }
     }
 }

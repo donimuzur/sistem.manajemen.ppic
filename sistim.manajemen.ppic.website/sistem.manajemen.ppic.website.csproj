@@ -18,8 +18,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -1118,6 +1118,8 @@
     <Content Include="Scripts\form.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\plugins\autonumeric\AutoNumeric.js" />
     <Content Include="Scripts\plugins\autonumeric\maths\ASTNode.js" />
     <Content Include="Scripts\plugins\autonumeric\maths\Evaluator.js" />
@@ -1549,6 +1551,8 @@
     <Compile Include="Code\WebsiteMapper.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ErrrorController.cs" />
+    <Compile Include="Controllers\GdgBahanBakuController.cs" />
+    <Compile Include="Controllers\GdgBarangJadiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MstBahanBakuController.cs" />
@@ -1559,6 +1563,7 @@
     <Compile Include="Controllers\TrnDoController.cs" />
     <Compile Include="Controllers\TrnHasilProduksiController.cs" />
     <Compile Include="Controllers\TrnMutasiBarangController.cs" />
+    <Compile Include="Controllers\TrnPenerimaanBarangController.cs" />
     <Compile Include="Controllers\TrnPengirimanController.cs" />
     <Compile Include="Controllers\TrnSpbController.cs" />
     <Compile Include="Controllers\TrnSuratPengantarBongkarMuatController.cs" />
@@ -1571,6 +1576,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MstBahanBakuModel.cs" />
     <Compile Include="Models\MstBarangJadiModel.cs" />
+    <Compile Include="Models\MstUomModel.cs" />
     <Compile Include="Models\MstWilayahModel.cs" />
     <Compile Include="Models\RptOutstandingModel.cs" />
     <Compile Include="Models\RptSuratJalanModel.cs" />
@@ -1578,6 +1584,7 @@
     <Compile Include="Models\TrnDoModel.cs" />
     <Compile Include="Models\TrnHasilProduksiModel.cs" />
     <Compile Include="Models\TrnMutasiBarangModel.cs" />
+    <Compile Include="Models\TrnPenerimaanBarangModel.cs" />
     <Compile Include="Models\TrnPengirimanModel.cs" />
     <Compile Include="Models\TrnSpbModel.cs" />
     <Compile Include="Models\TrnSuratPengantarBongkarMuatModel.cs" />
@@ -1681,6 +1688,7 @@
     <Content Include="Contents\plugins\fine-uploader\jquery.fine-uploader.min.js.map" />
     <Content Include="Contents\plugins\fine-uploader\LICENSE" />
     <Content Include="Json\provinsi.json" />
+    <Content Include="Json\JenisKendaraan.json" />
     <None Include="Properties\PublishProfiles\file.pubxml" />
     <Content Include="Views\TrnSpb\Create.cshtml" />
     <Content Include="Views\TrnSpb\Edit.cshtml" />
@@ -1722,6 +1730,16 @@
     <Content Include="Views\TrnSuratPengantarBongkarMuat\Create.cshtml" />
     <Content Include="Views\TrnMutasiBarang\Index.cshtml" />
     <Content Include="Views\Login\ChangePassword.cshtml" />
+    <Content Include="Views\TrnMutasiBarang\Create.cshtml" />
+    <Content Include="Views\TrnMutasiBarang\Details.cshtml" />
+    <Content Include="Views\TrnSuratPengantarBongkarMuat\Details.cshtml" />
+    <Content Include="Views\TrnSuratPengantarBongkarMuat\Edit.cshtml" />
+    <Content Include="Views\TrnPenerimaanBarang\Index.cshtml" />
+    <Content Include="Views\TrnPenerimaanBarang\Create.cshtml" />
+    <Content Include="Views\TrnPenerimaanBarang\Details.cshtml" />
+    <Content Include="Views\MstBarangJadi\Details.cshtml" />
+    <Content Include="Views\GdgBarangJadi\Index.cshtml" />
+    <Content Include="Views\GdgBahanBaku\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1733,7 +1751,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\gallery\" />
     <Folder Include="Images\landing\" />
-    <Folder Include="Rpt\" />
     <Folder Include="Views\RptHarian\" />
   </ItemGroup>
   <ItemGroup>

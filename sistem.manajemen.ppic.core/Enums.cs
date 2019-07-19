@@ -60,6 +60,8 @@ namespace sistem.manajemen.ppic.core
             MasterTransportir = 43,
             MasterUom =44,
             MasterKemasan=45,
+            MstBarangJadi=46,
+            MstBahanBaku=47,
 
             LaporanOutstanding=50,
             LaporanRekapBulanan=51,
@@ -70,6 +72,7 @@ namespace sistem.manajemen.ppic.core
             TrnPengiriman = 80,
             TrnSuratPengantarBongkarMuat = 81,
             TrnSuratMutasiBarang = 82,
+            TrnPenerimaanBarang = 83,
             
             TrnHasilProduksi = 90,
             TrnPermintaanBahanBaku =91,

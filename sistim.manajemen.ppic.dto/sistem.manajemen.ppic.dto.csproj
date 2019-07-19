@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\TrnPenerimaanBarangDto.cs" />
     <Compile Include="Dto\ChangesHistoryDto.cs" />
     <Compile Include="Dto\KemasanDto.cs" />
     <Compile Include="Dto\LoginDto.cs" />

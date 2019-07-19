@@ -512,6 +512,11 @@ namespace sistem.manajemen.ppic.website.App_Start
             bundles.Add(new ScriptBundle("~/plugins/jquery-confirm").Include(
                         "~/Scripts/plugins/jquery-confirm/jquery-confirm.min.js"));
 
+            // jquery-unobtrusive-ajax
+            bundles.Add(new ScriptBundle("~/plugins/jquery-Unobtrusive-ajax").Include(
+                        "~/Scripts/jquery.unobtrusive-ajax.min.js",
+                        "~/Scripts/jquery.validate.unobtrusive.min.js"));
+
         }
     }
 }

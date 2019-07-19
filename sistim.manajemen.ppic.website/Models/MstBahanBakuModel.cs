@@ -23,8 +23,13 @@ namespace sistem.manajemen.ppic.website.Models
         public string CREATED_BY { get; set; }
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
         public string MODIFIED_BY { get; set; }
+        public Nullable<decimal> STOCK_AWAL { get; set; }
+        public Nullable<decimal> STOCK_AKHIR { get; set; }
+        public string SATUAN { get; set; }
+        public Nullable<byte> ISBAHAN_PEMBANTU { get; set; }
 
         public SelectList StatusList { get; set; }
+        public SelectList UomList { set; get; }
     }
     public class MstBahanBakuViewModel : BaseModel
     {

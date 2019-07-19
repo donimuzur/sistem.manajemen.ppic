@@ -10,6 +10,7 @@ namespace sistem.manajemen.ppic.bll.IBLL
     public interface ITrnSpbBLL
     {
         List<TrnSpbDto> GetAll();
+        List<TrnSpbDto> GetActiveAll();
         TrnSpbDto GetById(object Id);
         TrnSpbDto GetBySPB(string SPB);
         void CloseSpb(string NoSpb);

@@ -33,6 +33,9 @@
         <AssociationConnector Association="SIM_PPICModel.FK_TRN_PENGIRIMAN_MST_BARANG_JADI" />
         <EntityTypeShape EntityType="SIM_PPICModel.TRN_SURAT_PENGANTAR_BONGKAR_MUAT" Width="1.5" PointX="14.375" PointY="0.75" />
         <EntityTypeShape EntityType="SIM_PPICModel.TRN_MUTASI_BARANG" Width="1.5" PointX="5.375" PointY="15.75" />
+        <AssociationConnector Association="SIM_PPICModel.FK_TRN_MUTASI_BARANG_MST_BARANG_JADI" />
+        <EntityTypeShape EntityType="SIM_PPICModel.TRN_PENERIMAAN_BARANG" Width="1.5" PointX="15.375" PointY="7.75" />
+        <AssociationConnector Association="SIM_PPICModel.FK_TRN_PENERIMAAN_BARANG_MST_BAHAN_BAKU" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

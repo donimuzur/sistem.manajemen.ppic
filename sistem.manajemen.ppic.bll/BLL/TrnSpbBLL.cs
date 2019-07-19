@@ -29,6 +29,13 @@ namespace sistem.manajemen.ppic.bll
 
             return ReData;
         }
+        public List<TrnSpbDto> GetActiveAll()
+        {
+            var Data = _trnSpbServices.GetAll().Where(x => x.STATUS != Enums.StatusDocument.Cancel).ToList();
+            var ReData = Mapper.Map<List<TrnSpbDto>>(Data);
+
+            return ReData;
+        }
         public TrnSpbDto GetById(object Id)
         {
             var Data = _trnSpbServices.GetById(Id);

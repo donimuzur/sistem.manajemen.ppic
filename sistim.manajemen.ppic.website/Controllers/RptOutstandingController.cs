@@ -30,15 +30,8 @@ namespace sistem.manajemen.ppic.website.Controllers
 
             return View(model);
         }
-        [HttpPost]
-        public PartialViewResult FilterListRptOutstanding(RptOutstandingListModel model)
-        {
-            model.ListRptOutstanding = new List<RptOutstandingModel>();
-            model.ListRptOutstanding = GetRawMaterialIncome(model.SearchView);
-
-            return PartialView("_listRptOutstanding", model);
-        }
-        private List<RptOutstandingModel> GetRawMaterialIncome(RptOutstandingModelSearchView filter = null)
+      
+        private List<RptOutstandingModel> GetRptOutstanding(RptOutstandingModelSearchView filter = null)
         {
             if (filter == null)
             {
@@ -53,5 +46,40 @@ namespace sistem.manajemen.ppic.website.Controllers
             var dbData = _rptOutstandingBLL.GetLogProductionIncome_SP(input);
             return Mapper.Map<List<RptOutstandingModel>>(dbData);
         }
+
+        #region --- Json ---
+        [HttpPost]
+        public JsonResult GetRptOutstandingList(string FromDate, string ToDate)
+        {
+            try
+            {
+                var input = new RptOutstandingModelSearchView();
+                if (string.IsNullOrEmpty(FromDate))
+                {
+                    input.FromDate = null;
+                }
+                else
+                {
+                    input.FromDate = Convert.ToDateTime(FromDate);
+                }
+
+                if(string.IsNullOrEmpty(ToDate))
+                {
+                    input.ToDate = null;
+                }
+                else
+                {
+                    input.ToDate = Convert.ToDateTime(ToDate);
+                }
+
+                var data = GetRptOutstanding(input);
+                return Json(data);
+            }
+            catch (Exception)
+            {
+                return Json("Error");
+            }
+        }
+        #endregion
     }
 }

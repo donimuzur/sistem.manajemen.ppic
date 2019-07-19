@@ -17,6 +17,20 @@ namespace sistem.manajemen.ppic.dal.Services
             _uow = Uow;
             _trnSpbRepo = _uow.GetGenericRepository<TRN_SPB>();
         }
+        public List<TRN_SPB> GetActiveAll()
+        {
+            try
+            {
+                var data = new List<TRN_SPB>();
+                data = _trnSpbRepo.Get().Where(x => x.STATUS != Enums.StatusDocument.Cancel).ToList();
+                return data;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<TRN_SPB> GetAll()
         {
             var data = _trnSpbRepo.Get().ToList();

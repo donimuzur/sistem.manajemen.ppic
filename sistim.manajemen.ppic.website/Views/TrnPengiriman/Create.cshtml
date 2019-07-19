@@ -472,7 +472,7 @@
                 data: { NoSpb: NoSpb },
                 success: function (response) {
                     if (response.length > 0) {
-                        InitDo('@Url.Action("GetDoList", "TrnPengiriman")')
+                        InitDo('@Url.Action("GetDoList", "TrnPengiriman")');
                     }
                     else {
                         $.confirm({

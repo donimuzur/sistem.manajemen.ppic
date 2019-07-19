@@ -14,5 +14,7 @@ namespace sistem.manajemen.ppic.bll.IBLL
         TrnSuratPengantarBongkarMuatDto GetByNama(string NamaBarang);
         void Save(TrnSuratPengantarBongkarMuatDto model);
         void Save(TrnSuratPengantarBongkarMuatDto model, LoginDto LoginDto);
+        void Delete(int id, string Remarks);
+        List<TrnSuratPengantarBongkarMuatDto> GetActiveAll();
     }
 }

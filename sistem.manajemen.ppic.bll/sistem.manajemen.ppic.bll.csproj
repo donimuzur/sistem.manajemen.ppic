@@ -49,6 +49,7 @@
     <Compile Include="BLL\MstWilayahBLL.cs" />
     <Compile Include="BLL\RptEkspedisiHarianBLL.cs" />
     <Compile Include="BLL\TrnMutasiBarangBLL.cs" />
+    <Compile Include="BLL\TrnPenerimaanBarangBLL.cs" />
     <Compile Include="BLL\TrnPengirimanBLL.cs" />
     <Compile Include="BLL\TrnSuratPengantarBongkarMuatBLL.cs" />
     <Compile Include="IBLL\IMstBahanBakuBLL.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="IBLL\ITrnDoBLL.cs" />
     <Compile Include="IBLL\ITrnHasilProduksiBLL.cs" />
     <Compile Include="IBLL\ITrnMutasiBarangBLL.cs" />
+    <Compile Include="IBLL\ITrnPenerimaanBarangBLL.cs" />
     <Compile Include="IBLL\ITrnPengirimanBLL.cs" />
     <Compile Include="IBLL\ITrnSpbBLL.cs" />
     <Compile Include="BLL\MstBahanBakuBLL.cs" />

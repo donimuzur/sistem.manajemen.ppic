@@ -20,7 +20,6 @@
     </div>
     <div class="col-sm-8">
         <div class="title-action">
-            <a href="@Url.Action("Import","TrnMutasiBarang")" class="ladda-button ladda-button-import btn btn-success" data-style="zoom-in">Import .xls</a>
             <a href="#" class="ladda-button ladda-button-export btn btn-success" data-style="zoom-in">Export .xls</a>
             <a href="@Url.Action("Create","TrnMutasiBarang")" class="ladda-button ladda-button-tambah btn btn-success" data-style="zoom-in">Tambah</a>
         </div>
@@ -47,7 +46,6 @@
                                 <th style="min-width:80px">Tanggal</th>
                                 <th style="min-width:100px">Dept/Bagian</th>
                                 <th style="min-width:200px">Deskripsi Barang</th>
-                                <th style="min-width:150px">Satuan</th>
                                 <th style="min-width:200px;">Lokasi</th>
                                 <th style="min-width:100px;">Jumlah</th>
                                 <th style="min-width:300px;">Keterangan</th>
@@ -61,14 +59,13 @@
                                     <td style="text-align:center;">
                                         @if (Model.CurrentUser.USERNAME == item.CREATED_BY)
                                         {
-                                            <a href="@Url.Action("Edit","TrnMutasiBarang",new {@id=item.ID})" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                            <a href="#" onclick="Hapus(@item.ID)" data-toggle="modal" data-target="modalHapus" title="Hapus"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         }
                                         <a href="@Url.Action("Details","TrnMutasiBarang",new {@id=item.ID})" data-toggle="tooltip" data-placement="bottom" title="Details"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     </td>
                                     <td>@Html.Raw(item.TANGGAL.ToString("dd MMM yyyy"))</td>
                                     <td class="text-uppercase">@Html.Raw(item.DEPT_BAGIAN)</td>
                                     <td class="text-uppercase">@Html.Raw(item.NAMA_BARANG + (item.BENTUK == null ? "":" - " + item.BENTUK ) + (item.KEMASAN == null ? "" : " - " + item.KEMASAN))</td>
-                                    <td class="text-uppercase">@Html.Raw(item.SATUAN)</td>
                                     <td class="text-uppercase">@Html.Raw(item.LOKASI)</td>
                                     <td>@Html.Raw(string.Format("{0:N}", item.JUMLAH))</td>
                                     <td class="text-uppercase">@Html.Raw(item.KETERANGAN)</td>
@@ -82,6 +79,34 @@
     </div>
 </div>
 
+
+<div id="modalHapus" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    @using (Html.BeginForm("Hapus", "TrnMutasiBarang", FormMethod.Post, new { @id = "FormHapus", enctype = "multipart/form-data" }))
+    {
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="color:white">Hapus Form</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Apakah anda yakin ingin menghapus data berikut ?
+                        @Html.Hidden("id", "", new { @id = "id" })
+                    </p>
+                    <div class="form-group">
+                        @Html.TextArea("Remarks", "", new { @class = "form-control", @id = "Remarks", @style = "height:100px", @required = "required" })
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="ladda-button ladda-button-hapus btn btn-success" data-style="zoom-in" onclick="Confirm()">Ok</button>
+                    <button type="submit" style="display:none" id="btnHapus"></button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
 @section Styles {
     @Styles.Render("~/Contents/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/plugins/laddaStyles")
@@ -90,9 +115,12 @@
 @section Scripts {
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/plugins/ladda")
+    @Scripts.Render("~/plugins/validate")
 
     <script type="text/javascript">
+        var l_ladda_hapus = null;
         $(document).ready(function () {
+            l_ladda_hapus = $('.ladda-button-hapus').ladda();
 
             var l_ladda_export = $('.ladda-button-export').ladda();
             l_ladda_export.click(function () {
@@ -148,5 +176,46 @@
                 ]
             });
         });
+
+        // Hapus Form
+        function Confirm() {
+            var validate = $('#FormHapus').validate();
+
+            jQuery.extend(jQuery.validator.messages, {
+                required: "Tidak boleh kosong",
+                remote: "Please fix this field.",
+                email: "Please enter a valid email address.",
+                url: "Please enter a valid URL.",
+                date: "Please enter a valid date.",
+                dateISO: "Please enter a valid date (ISO).",
+                number: "Harus diisi dengan angka.",
+                digits: "Harus diisi dengan angka.",
+                creditcard: "Please enter a valid credit card number.",
+                equalTo: "Please enter the same value again.",
+                accept: "Please enter a value with a valid extension.",
+                maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
+                minlength: jQuery.validator.format("Please enter at least {0} characters."),
+                rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
+                range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+                max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+                min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+            });
+
+            var isValid = validate.checkForm();
+            if (isValid) {
+                l_ladda_hapus.ladda('start');
+                $("#btnHapus").trigger('click');
+                event.preventDefault();
+            }
+            else {
+                l_ladda_hapus.ladda('stop');
+                validate.showErrors();
+            }
+        }
+
+        function Hapus(value) {
+            $('#id').val(value);
+            $('#modalHapus').modal('show');
+        }
     </script>
 }

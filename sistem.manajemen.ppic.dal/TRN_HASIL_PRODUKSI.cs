@@ -25,6 +25,17 @@ namespace sistem.manajemen.ppic.dal
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
         public Nullable<decimal> STOCK_AWAL { get; set; }
         public Nullable<decimal> STOCK_AKHIR { get; set; }
+        public Nullable<System.DateTime> TANGGAL_PRODUKSI { get; set; }
+        public string REMARKS { get; set; }
+        public Nullable<byte> STATUS { get; set; }
+        public string NAMA_BARANG { get; set; }
+        public string KEMASAN { get; set; }
+        public string BENTUK { get; set; }
+        public Nullable<decimal> ZAK { get; set; }
+        public Nullable<decimal> KUANTUM { get; set; }
+        public string LOKASI_PRODUKSI { get; set; }
+        public Nullable<int> SHIFT { get; set; }
+        public string NO_SURAT { get; set; }
     
         public virtual MST_BARANG_JADI MST_BARANG_JADI { get; set; }
     }
