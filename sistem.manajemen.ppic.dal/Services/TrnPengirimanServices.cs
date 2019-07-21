@@ -67,7 +67,7 @@ namespace sistem.manajemen.ppic.dal.Services
                 throw;
             }
         }
-        public void Save(TRN_PENGIRIMAN Db, Login Login)
+        public TRN_PENGIRIMAN Save(TRN_PENGIRIMAN Db, Login Login)
         {
             try
             {
@@ -103,6 +103,8 @@ namespace sistem.manajemen.ppic.dal.Services
                 {
                     _trnPengirimanRepo.InsertOrUpdate(Db, Login, Enums.MenuList.TrnPengiriman);
                 }
+                _uow.SaveChanges();
+                return Db;
             }
             catch (Exception )
             {

@@ -15,6 +15,6 @@ namespace sistem.manajemen.ppic.bll.IBLL
         TrnDoDto GetByDo(string Do);
         TrnDoDto GetBySpbAndDo(string SPB, string DO);
         void Save(TrnDoDto model);
-        void Save(TrnDoDto model, LoginDto LoginDto);
+        TrnDoDto Save(TrnDoDto model, LoginDto LoginDto);
     }
 }

@@ -42,7 +42,7 @@ namespace sistem.manajemen.ppic.dal.Services
                 throw;
             }
         }
-        public void Save(TRN_DO Db, Login Login)
+        public TRN_DO Save(TRN_DO Db, Login Login)
         {
             try
             {
@@ -60,15 +60,17 @@ namespace sistem.manajemen.ppic.dal.Services
                     DbDocNumber.NO = Id + 1;
                     DbDocNumber.FORM_ID = (int)Enums.MenuList.TrnDo;
                     DbDocNumber.TANGGAL = DateTime.Now;
-                    
-                    _docNumberRepo.InsertOrUpdate(DbDocNumber, Login, Enums.MenuList.TrnDo);
+
                     _trnDoRepo.InsertOrUpdate(Db, Login, Enums.MenuList.TrnDo);
+                    _docNumberRepo.InsertOrUpdate(DbDocNumber, Login, Enums.MenuList.TrnDo);
+                    
                 }
                 else
                 {
                     _trnDoRepo.InsertOrUpdate(Db, Login, Enums.MenuList.TrnDo);
                 }
                 _uow.SaveChanges();
+                return Db;
             }
             catch (Exception)
             {

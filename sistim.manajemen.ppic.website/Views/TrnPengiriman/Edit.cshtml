@@ -155,6 +155,17 @@
                                             @Html.TextBoxFor(model => model.TRNSPT_NAMA_SOPIR, new { @class = "form-control", @tabindex = "11", @style = "text-transform: uppercase;", @required = "required" })
                                         </div>
                                     </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Berangkat<span class="text-red">*</span></label>
+                                            <div class="input-group clockpicker" data-autoclose="true">
+                                                @Html.TextBoxFor(model => model.TRNSPT_BERANGKAT, "{0:HH:mm}", new { @class = "form-control", @type = "text", @tabindex = "12", @required = "required" })
+                                                <span class="input-group-addon">
+                                                    <span class="fa fa-clock-o"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -187,25 +198,25 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Nama Konsumen<span class="text-red">*</span></label>
-                                            @Html.TextAreaFor(model => model.NAMA_KONSUMEN, new { @class = "form-control", @tabindex = "12", @style = "text-transform: uppercase;", @required = "required" })
+                                            @Html.TextAreaFor(model => model.NAMA_KONSUMEN, new { @class = "form-control", @tabindex = "13", @style = "text-transform: uppercase;", @required = "required" })
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Alamat Pengiriman<span class="text-red">*</span></label>
-                                            @Html.TextAreaFor(model => model.ALAMAT_KONSUMEN, new { @class = "form-control", @tabindex = "13", @style = "text-transform: uppercase;height:150px;", @required = "required" })
+                                            @Html.TextAreaFor(model => model.ALAMAT_KONSUMEN, new { @class = "form-control", @tabindex = "14", @style = "text-transform: uppercase;height:150px;", @required = "required" })
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Provinsi<span class="text-red">*</span></label>
-                                            @Html.TextBoxFor(model => model.PROVINSI, new { @class = "form-control", @tabindex = "14", @style = "text-transform: uppercase;", @required = "required" })
+                                            @Html.TextBoxFor(model => model.PROVINSI, new { @class = "form-control", @tabindex = "15", @style = "text-transform: uppercase;", @required = "required" })
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Kabupaten/Kota<span class="text-red">*</span></label>
-                                            @Html.TextBoxFor(model => model.KABUPATEN, new { @class = "form-control", @tabindex = "15", @style = "text-transform: uppercase;", @required = "required" })
+                                            @Html.TextBoxFor(model => model.KABUPATEN, new { @class = "form-control", @tabindex = "16", @style = "text-transform: uppercase;", @required = "required" })
                                         </div>
                                     </div>
                                 </div>
@@ -240,20 +251,20 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Nama Barang<span class="text-red">*</span></label>
-                                            @Html.TextBoxFor(model => model.NAMA_BARANG, new { @class = "form-control", @tabindex = "16", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly", })
+                                            @Html.TextBoxFor(model => model.NAMA_BARANG, new { @class = "form-control", @tabindex = "17", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly", })
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Kemasan<span class="text-red">*</span></label>
-                                            @Html.TextBoxFor(model => model.KEMASAN, new { @class = "form-control", @tabindex = "17", @style = "text-transform: uppercase;", @readonly = "readonly", @required = "required" })
+                                            @Html.TextBoxFor(model => model.KEMASAN, new { @class = "form-control", @tabindex = "18", @style = "text-transform: uppercase;", @readonly = "readonly", @required = "required" })
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Zak<span class="text-red">*</span></label>
                                             <div class="input-group">
-                                                @Html.TextBoxFor(model => model.ZAK, new { @class = "form-control numeric-int", @tabindex = "18", @required = "required" })
+                                                @Html.TextBoxFor(model => model.ZAK, new { @class = "form-control numeric-int", @tabindex = "19", @required = "required" })
                                             </div>
                                         </div>
                                     </div>
@@ -266,7 +277,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-addon">Kg</span>
                                                         </div>
-                                                        @Html.TextBoxFor(model => model.KUANTUM, new { @class = "form-control numeric", @tabindex = "19", @required = "required", @readonly = "readonly" })
+                                                        @Html.TextBoxFor(model => model.KUANTUM, new { @class = "form-control numeric", @tabindex = "20", @required = "required", @readonly = "readonly" })
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -274,7 +285,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-addon">Kg</span>
                                                         </div>
-                                                        @Html.TextBoxFor(model => model.TIMBANGAN, new { @class = "form-control numeric", @tabindex = "20", @required = "required", @readonly = "readonly" })
+                                                        @Html.TextBoxFor(model => model.TIMBANGAN, new { @class = "form-control numeric", @tabindex = "21", @required = "required", @readonly = "readonly" })
                                                     </div>
                                                 </div>
                                             </div>
@@ -340,6 +351,7 @@
     @Styles.Render("~/plugins/laddaStyles")
     @Styles.Render("~/plugins/easyautocompleteStyle")
     @Styles.Render("~/plugins/jquery-confirmStyle")
+    @Styles.Render("~/plugins/clockpickerStyles")
 }
 
 @section Scripts {
@@ -348,13 +360,16 @@
     @Scripts.Render("~/plugins/validate")
     @Scripts.Render("~/plugins/autonumeric")
     @Scripts.Render("~/plugins/jquery-confirm")
+    @Scripts.Render("~/plugins/clockpicker")
 
     <script type="text/javascript">
+        var ladda_print = null;
         $(document).ready()
         {
             new AutoNumeric.multiple('.numeric', { unformatOnSubmit: true })
             new AutoNumeric.multiple('.numeric-int', [{ unformatOnSubmit: true }, 'integerPos']);
 
+            $('.clockpicker').clockpicker();
 
             var l = $('.ladda-button-submit').ladda();
             l.click(function () {
@@ -366,6 +381,8 @@
                     l.ladda('stop');
                 }, 2000)
             });
+
+            ladda_print = $('.ladda-button-print').ladda();
 
             InitSpb('@Url.Action("GetSpbList", "TrnDo")');
             InitProvinsi();
@@ -570,6 +587,74 @@
                 },
             });
         }
+
+        //Print to PDF
+        function PrintPDF() {
+            ladda_print.ladda('start');
+            var id = document.getElementById("ID").value;
+            $.ajax({
+                url: '@Url.Action("PrintPDF", "TrnPengiriman")',
+                type: "POST",
+                dataType: "JSON",
+                data: { id: id },
+                timeout: 20000,
+                success: function (response) {
+                    if (response != "Error") {
+                        ladda_print.ladda('stop');
+                        window.location = response;
+                    } else {
+                        ladda_print.ladda('stop');
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'Terjadi Kesalahan <br><br> Hubungi Administrator!',
+                            type: 'red',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    }
+                },
+                error: function (xmlhttprequest, textstatus, message) {
+                    if (textstatus === "timeout") {
+                        ladda_print.ladda('stop');
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'Timeout Server',
+                            type: 'red',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        ladda_print.ladda('stop');
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'Terjadi Kesalahan <br><br> Hubungi Administrator!',
+                            type: 'red',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
         function initilize()
         {
 

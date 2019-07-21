@@ -16,14 +16,14 @@ namespace sistem.manajemen.ppic.website.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ReportDo : ReportClass {
+    public class ReportSPB : ReportClass {
         
-        public ReportDo() {
+        public ReportSPB() {
         }
         
         public override string ResourceName {
             get {
-                return "ReportDo.rpt";
+                return "ReportSPB.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace sistem.manajemen.ppic.website.Reports {
         
         public override string FullResourceName {
             get {
-                return "sistem.manajemen.ppic.website.Reports.ReportDo.rpt";
+                return "sistem.manajemen.ppic.website.Reports.ReportSPB.rpt";
             }
             set {
                 // Do nothing
@@ -87,20 +87,12 @@ namespace sistem.manajemen.ppic.website.Reports {
                 return this.ReportDefinition.Sections[4];
             }
         }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_id {
-            get {
-                return this.DataDefinition.ParameterFields[0];
-            }
-        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedReportDo : Component, ICachedReport {
+    public class CachedReportSPB : Component, ICachedReport {
         
-        public CachedReportDo() {
+        public CachedReportSPB() {
         }
         
         [Browsable(false)]
@@ -137,7 +129,7 @@ namespace sistem.manajemen.ppic.website.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ReportDo rpt = new ReportDo();
+            ReportSPB rpt = new ReportSPB();
             rpt.Site = this.Site;
             return rpt;
         }

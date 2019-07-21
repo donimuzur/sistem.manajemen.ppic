@@ -52,7 +52,9 @@
       <HintPath>..\packages\AutoMapper.6.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -1578,6 +1580,7 @@
     <Compile Include="Models\MstBarangJadiModel.cs" />
     <Compile Include="Models\MstUomModel.cs" />
     <Compile Include="Models\MstWilayahModel.cs" />
+    <Compile Include="Models\RptDoModel.cs" />
     <Compile Include="Models\RptOutstandingModel.cs" />
     <Compile Include="Models\RptSuratJalanModel.cs" />
     <Compile Include="Models\SoBarangJadiModel.cs" />
@@ -1589,6 +1592,18 @@
     <Compile Include="Models\TrnSpbModel.cs" />
     <Compile Include="Models\TrnSuratPengantarBongkarMuatModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\ReportSPB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportSPB.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportDo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportDo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ReportRealisasiHarian.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1599,6 +1614,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportSuratJalan.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportSuratJalan2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportSuratJalan2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Utility\ExcelData.cs" />
@@ -1749,6 +1770,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="files_upload\Reports\Do\" />
+    <Folder Include="files_upload\Reports\Laporan\" />
+    <Folder Include="files_upload\Reports\SPB\" />
+    <Folder Include="files_upload\Reports\Surat Jalan\" />
     <Folder Include="Images\gallery\" />
     <Folder Include="Images\landing\" />
     <Folder Include="Views\RptHarian\" />
@@ -1772,6 +1797,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\ReportSPB.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportSPB.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportDo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportDo.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportRealisasiHarian.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportRealisasiHarian.cs</LastGenOutput>
@@ -1779,6 +1812,10 @@
     <EmbeddedResource Include="Reports\ReportSuratJalan.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportSuratJalan.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportSuratJalan2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportSuratJalan2.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

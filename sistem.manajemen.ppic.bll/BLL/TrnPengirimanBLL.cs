@@ -94,12 +94,13 @@ namespace sistem.manajemen.ppic.BLL
                 throw;
             }
         }
-        public void Save(TrnPengirimanDto Dto, LoginDto Login)
+        public TrnPengirimanDto Save(TrnPengirimanDto Dto, LoginDto Login)
         {
             try
             {
-                _trnPengirimanServices.Save(Mapper.Map<TRN_PENGIRIMAN>(Dto)
+                var Db = _trnPengirimanServices.Save(Mapper.Map<TRN_PENGIRIMAN>(Dto)
                     , Mapper.Map<Login>(Login));
+                return Mapper.Map<TrnPengirimanDto>(Db);
             }
             catch (Exception)
             {

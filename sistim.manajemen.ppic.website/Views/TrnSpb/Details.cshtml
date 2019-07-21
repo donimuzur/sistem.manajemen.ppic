@@ -22,6 +22,7 @@
     </div>
     <div class="col-sm-8">
         <div class="title-action">
+            <button class="ladda-button ladda-button-print btn btn-success" data-style="zoom-in" onclick="PrintPDF()" type="button">Print PDF</button>
             <a href="@Url.Action("Index", "TrnSpb")" class="btn btn-danger">Kembali</a>
         </div>
     </div>
@@ -408,6 +409,7 @@
 
 @section Styles {
     @Styles.Render("~/plugins/bootstrap-fileinputStyle")
+    @Styles.Render("~/plugins/jquery-confirmStyle")
 }
 
 @section Scripts {
@@ -415,8 +417,10 @@
     @Scripts.Render("~/plugins/bootstrap-fileinput")
     @Scripts.Render("~/plugins/validate")
     @Scripts.Render("~/plugins/autonumeric")
+    @Scripts.Render("~/plugins/jquery-confirm")
 
     <script type="text/javascript">
+        var ladda_print = null;
         $(document).ready()
         {
             new AutoNumeric.multiple('.numeric', { unformatOnSubmit: true })
@@ -449,6 +453,7 @@
             }
             $("#input-file").fileinput(fileInputOptions);
 
+            ladda_print = $('.ladda-button-print').ladda();
 
             initilize();
         }
@@ -456,6 +461,73 @@
         $("#BENTUK").change(function () {
             initilize();
         });
+
+        //Print to PDF
+        function PrintPDF() {
+            ladda_print.ladda('start');
+            var id = document.getElementById("ID").value;
+            $.ajax({
+                url: '@Url.Action("PrintPDF", "TrnDo")',
+                type: "POST",
+                dataType: "JSON",
+                data: { id: id },
+                timeout: 20000,
+                success: function (response) {
+                    if (response != "Error") {
+                        ladda_print.ladda('stop');
+                        window.location = response;
+                    } else {
+                        ladda_print.ladda('stop');
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'Terjadi Kesalahan <br><br> Hubungi Administrator!',
+                            type: 'red',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    }
+                },
+                error: function (xmlhttprequest, textstatus, message) {
+                    if (textstatus === "timeout") {
+                        ladda_print.ladda('stop');
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'Timeout Server',
+                            type: 'red',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        ladda_print.ladda('stop');
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'Terjadi Kesalahan <br><br> Hubungi Administrator!',
+                            type: 'red',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
 
         function initilize()
         {

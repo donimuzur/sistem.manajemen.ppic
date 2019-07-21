@@ -74,13 +74,14 @@ namespace sistem.manajemen.ppic.bll
                 throw;
             }
         }
-        public void Save(TrnSpbDto model, LoginDto LoginDto)
+        public TrnSpbDto Save(TrnSpbDto model, LoginDto LoginDto)
         {
             try
             {
                 var db = Mapper.Map<TRN_SPB>(model);
                 var Login = Mapper.Map<Login>(LoginDto);
-                _trnSpbServices.Save(db, Login);
+                db =_trnSpbServices.Save(db, Login);
+                return Mapper.Map<TrnSpbDto>(db);
             }
             catch (Exception)
             {

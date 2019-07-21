@@ -11,6 +11,6 @@ namespace sistem.manajemen.ppic.dal.IServices
         List<TRN_DO> GetAll();
         TRN_DO GetById(object Id);
         void Save(TRN_DO Db);
-        void Save(TRN_DO Db, Login Login);
+        TRN_DO Save(TRN_DO Db, Login Login);
     }
 }

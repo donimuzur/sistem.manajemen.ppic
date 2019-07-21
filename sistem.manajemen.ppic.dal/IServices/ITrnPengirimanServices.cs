@@ -11,7 +11,7 @@ namespace sistem.manajemen.ppic.dal.IServices
         List<TRN_PENGIRIMAN> GetAll();
         List<TRN_PENGIRIMAN> GetActiveAll();
         TRN_PENGIRIMAN GetTrnPengirimanMasterById(Object Id);
-        void Save(TRN_PENGIRIMAN Db, Login Login);
+        TRN_PENGIRIMAN Save(TRN_PENGIRIMAN Db, Login Login);
         void Save(TRN_PENGIRIMAN Db);
         void Delete(int id, string Remarks);
     }

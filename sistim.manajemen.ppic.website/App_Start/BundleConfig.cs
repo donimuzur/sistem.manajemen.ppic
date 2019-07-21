@@ -256,6 +256,8 @@ namespace sistem.manajemen.ppic.website.App_Start
             // color picker styles
             bundles.Add(new StyleBundle("~/Contents/plugins/colorpicker/colorpickerStyles").Include(
                       "~/Contents/plugins/colorpicker/bootstrap-colorpicker.min.css"));
+            bundles.Add(new StyleBundle("~/plugins/colorpicker/colorpickerStyles").Include(
+                    "~/Contents/plugins/colorpicker/bootstrap-colorpicker.min.css"));
 
             // image cropper
             bundles.Add(new ScriptBundle("~/plugins/imagecropper").Include(

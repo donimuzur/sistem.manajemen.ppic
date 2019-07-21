@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CrystalDecisions.CrystalReports.Engine;
 using sistem.manajemen.ppic.bll.IBLL;
 using sistem.manajemen.ppic.core;
 using sistem.manajemen.ppic.dto;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 
 namespace sistem.manajemen.ppic.website.Controllers
@@ -115,12 +117,11 @@ namespace sistem.manajemen.ppic.website.Controllers
                         return View(Init(model));
                     }
 
-                    var Dto = Mapper.Map<TrnPengirimanDto>(model);
-                    _trnPengirimanBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
+                    var Dto = _trnPengirimanBLL.Save(Mapper.Map<TrnPengirimanDto>(model), Mapper.Map<LoginDto>(CurrentUser));
                     _mstBarangJadiBLL.KurangSaldo(model.ID_BARANG, model.KUANTUM.Value);
 
                     AddMessageInfo("Sukses Create Form Pengiriman", Enums.MessageInfoType.Success);
-                    return RedirectToAction("Index", "TrnPengiriman");
+                    return RedirectToAction("Details", "TrnPengiriman", new { id = Dto.ID});
                 }
                 catch (Exception exp)
                 {
@@ -272,6 +273,34 @@ namespace sistem.manajemen.ppic.website.Controllers
             }
 
             return Json(data);
+        }
+        [HttpPost]
+        public JsonResult PrintPDF(int id)
+        {
+            try
+            {
+                ReportDocument cryRpt = new ReportDocument();
+                var WebrootUrl = ConfigurationManager.AppSettings["Webrooturl"];
+                var FilesUploadPath = ConfigurationManager.AppSettings["FilesReport"];
+                var fileName = System.IO.Path.GetFileName("RptSuratJalan_" + id.ToString().PadLeft(4, '0') + ".pdf");
+                var fullPath = System.IO.Path.Combine(@FilesUploadPath+ "\\Surat Jalan\\", fileName);
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+                var SystemPath = HostingEnvironment.ApplicationPhysicalPath;
+
+                cryRpt.Load(SystemPath + "\\Reports\\ReportSuratJalan2.rpt");
+                cryRpt.SetParameterValue("id", id);
+                cryRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, fullPath);
+
+                return Json(WebrootUrl + "\\files_upload\\Reports\\Surat Jalan\\" + fileName);
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
+                return Json("Error");
+            }
         }
         #endregion
 

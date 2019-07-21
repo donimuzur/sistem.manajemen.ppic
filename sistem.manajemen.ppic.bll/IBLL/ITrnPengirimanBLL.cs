@@ -10,7 +10,7 @@ namespace sistem.manajemen.ppic.bll.IBLL
     public interface ITrnPengirimanBLL
     {
         void Save(TrnPengirimanDto Dto);
-        void Save(TrnPengirimanDto Dto, LoginDto Login);
+        TrnPengirimanDto Save(TrnPengirimanDto Dto, LoginDto Login);
         List<TrnPengirimanDto> GetAll();
         List<TrnPengirimanDto> GetActiveAll();
         List<TrnPengirimanDto> GetAllByDoAndSPB(int Do, string NoSPB);

@@ -10,6 +10,8 @@ using AutoMapper;
 using sistem.manajemen.ppic.dto;
 using System.Configuration;
 using sistem.manajemen.ppic.website.Controllers.Utility;
+using System.Web.Hosting;
+using CrystalDecisions.CrystalReports.Engine;
 
 namespace sistem.manajemen.ppic.website.Controllers
 {
@@ -144,12 +146,11 @@ namespace sistem.manajemen.ppic.website.Controllers
                         AddMessageInfo("No. SPB sudah ada", Enums.MessageInfoType.Error);
                         return View(Init(model));
                     }
-
-                    var Dto = Mapper.Map<TrnSpbDto>(model);
-                    _trnSpbBLL.Save(Dto,Mapper.Map<LoginDto>(CurrentUser));
+                    
+                    var Dto = _trnSpbBLL.Save(Mapper.Map<TrnSpbDto>(model), Mapper.Map<LoginDto>(CurrentUser));
 
                     AddMessageInfo("Sukses Create SPB", Enums.MessageInfoType.Success);
-                    return RedirectToAction("Index", "TrnSpb");
+                    return RedirectToAction("Details", "TrnSpb", new { id = Dto.ID });
                 }
                 catch (Exception exp)
                 {
@@ -1177,6 +1178,34 @@ namespace sistem.manajemen.ppic.website.Controllers
                 }
             }
             return Json(model);
+        }
+        [HttpPost]
+        public JsonResult PrintPDF(int id)
+        {
+            try
+            {
+                ReportDocument cryRpt = new ReportDocument();
+                var WebrootUrl = ConfigurationManager.AppSettings["Webrooturl"];
+                var FilesUploadPath = ConfigurationManager.AppSettings["FilesReport"];
+                var fileName = System.IO.Path.GetFileName("RptSPB_" + id.ToString().PadLeft(4, '0') + ".pdf");
+                var fullPath = System.IO.Path.Combine(@FilesUploadPath+ "\\SPB\\", fileName);
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+                var SystemPath = HostingEnvironment.ApplicationPhysicalPath;
+
+                cryRpt.Load(SystemPath + "\\Reports\\ReportSPB.rpt");
+                cryRpt.SetParameterValue("id", id);
+                cryRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, fullPath);
+
+                return Json(WebrootUrl + "\\files_upload\\Reports\\SPB\\" + fileName);
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
+                return Json("Error");
+            }
         }
         #endregion
     }

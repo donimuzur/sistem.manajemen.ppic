@@ -8,6 +8,9 @@ using sistem.manajemen.ppic.core;
 using sistem.manajemen.ppic.website.Models;
 using AutoMapper;
 using sistem.manajemen.ppic.dto;
+using CrystalDecisions.CrystalReports.Engine;
+using System.Configuration;
+using System.Web.Hosting;
 
 namespace sistem.manajemen.ppic.website.Controllers
 {
@@ -78,10 +81,10 @@ namespace sistem.manajemen.ppic.website.Controllers
                         return View(Init(model));
                     }
 
-                    _trnDoBLL.Save(Mapper.Map<TrnDoDto>(model), Mapper.Map<LoginDto>(CurrentUser));
+                    var Dto = _trnDoBLL.Save(Mapper.Map<TrnDoDto>(model), Mapper.Map<LoginDto>(CurrentUser));
 
                     AddMessageInfo("Sukses Create DO",Enums.MessageInfoType.Success);
-                    return RedirectToAction("Index", "TrnDo");
+                    return RedirectToAction("Details", "TrnDo",new {id= Dto.ID });
                 }
                 catch (Exception exp)
                 {
@@ -236,6 +239,35 @@ namespace sistem.manajemen.ppic.website.Controllers
             var data = _mstBarangJadiBLL.GetByNama(Produk);
 
             return Json(data);
+        }
+
+        [HttpPost]
+        public JsonResult PrintPDF(int id)
+        {
+            try
+            {
+                ReportDocument cryRpt = new ReportDocument();
+                var WebrootUrl = ConfigurationManager.AppSettings["Webrooturl"];
+                var FilesUploadPath = ConfigurationManager.AppSettings["FilesReport"];
+                var fileName = System.IO.Path.GetFileName("RptDO_" + id.ToString().PadLeft(4, '0') + ".pdf");
+                var fullPath = System.IO.Path.Combine(@FilesUploadPath + "\\Do\\", fileName);
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+                var SystemPath = HostingEnvironment.ApplicationPhysicalPath;
+
+                cryRpt.Load(SystemPath + "\\Reports\\ReportDo.rpt");
+                cryRpt.SetParameterValue("id", id);
+                cryRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, fullPath);
+                
+                return Json(WebrootUrl+"\\files_upload\\Reports\\Do\\" +fileName);
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
+                return Json("Error");
+            }
         }
         #endregion
     }

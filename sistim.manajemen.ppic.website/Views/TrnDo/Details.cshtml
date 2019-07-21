@@ -22,6 +22,7 @@
     </div>
     <div class="col-sm-8">
         <div class="title-action">
+            <button class="ladda-button ladda-button-print btn btn-success" data-style="zoom-in" onclick="PrintPDF()" type="button">Print PDF</button>
             <a href="@Url.Action("Index", "TrnDo")" class="btn btn-danger">Kembali</a>
         </div>
     </div>
@@ -49,6 +50,10 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
+                                            @Html.HiddenFor(model => model.ID)
+                                            @Html.HiddenFor(model => model.TANGGAL)
+                                            @Html.HiddenFor(model => model.CREATED_BY)
+                                            @Html.HiddenFor(model => model.CREATED_DATE)
                                             <label class="control-label">No SPB<span class="text-red">*</span></label>
                                             @Html.TextBoxFor(model => model.NO_SPB, new { @class = "form-control", @tabindex = "1", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly" })
                                         </div>
@@ -245,6 +250,7 @@
 @section Styles {
     @Styles.Render("~/plugins/laddaStyles")
     @Styles.Render("~/plugins/easyautocompleteStyle")
+    @Styles.Render("~/plugins/jquery-confirmStyle")
 }
 
 @section Scripts {
@@ -252,8 +258,10 @@
     @Scripts.Render("~/plugins/easyautocomplete")
     @Scripts.Render("~/plugins/validate")
     @Scripts.Render("~/plugins/autonumeric")
+    @Scripts.Render("~/plugins/jquery-confirm")
 
     <script type="text/javascript">
+        var ladda_print = null;
         $(document).ready()
         {
             new AutoNumeric('.numeric', { unformatOnSubmit: true })
@@ -268,7 +276,9 @@
                     l.ladda('stop');
                 }, 2000)
             });
-
+            ladda_print = $('.ladda-button-print').ladda();
+            InitSpb('@Url.Action("GetSpbList", "TrnDo")');
+            InitProduk('@Url.Action("GetProdukList", "TrnDo")')
             initilize();
         }
 
@@ -425,6 +435,74 @@
                 },
             });
         }
+
+        //Print to PDF
+        function PrintPDF() {
+            ladda_print.ladda('start');
+            var id = document.getElementById("ID").value;
+            $.ajax({
+                url: '@Url.Action("PrintPDF", "TrnDo")',
+                type: "POST",
+                dataType: "JSON",
+                data: { id: id },
+                timeout: 20000,
+                success: function (response) {
+                    if (response != "Error") {
+                        ladda_print.ladda('stop');
+                        window.location = response;
+                    } else {
+                        ladda_print.ladda('stop');
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'Terjadi Kesalahan <br><br> Hubungi Administrator!',
+                            type: 'red',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    }
+                },
+                error: function (xmlhttprequest, textstatus, message) {
+                    if (textstatus === "timeout") {
+                        ladda_print.ladda('stop');
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'Timeout Server',
+                            type: 'red',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        ladda_print.ladda('stop');
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'Terjadi Kesalahan <br><br> Hubungi Administrator!',
+                            type: 'red',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
         function initilize()
         {
             $('#BENTUK_DESC').prop('disabled', true);

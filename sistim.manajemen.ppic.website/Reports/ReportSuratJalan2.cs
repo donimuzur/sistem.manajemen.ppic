@@ -16,14 +16,14 @@ namespace sistem.manajemen.ppic.website.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ReportDo : ReportClass {
+    public class ReportSuratJalan2 : ReportClass {
         
-        public ReportDo() {
+        public ReportSuratJalan2() {
         }
         
         public override string ResourceName {
             get {
-                return "ReportDo.rpt";
+                return "ReportSuratJalan2.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace sistem.manajemen.ppic.website.Reports {
         
         public override string FullResourceName {
             get {
-                return "sistem.manajemen.ppic.website.Reports.ReportDo.rpt";
+                return "sistem.manajemen.ppic.website.Reports.ReportSuratJalan2.rpt";
             }
             set {
                 // Do nothing
@@ -98,9 +98,9 @@ namespace sistem.manajemen.ppic.website.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedReportDo : Component, ICachedReport {
+    public class CachedReportSuratJalan2 : Component, ICachedReport {
         
-        public CachedReportDo() {
+        public CachedReportSuratJalan2() {
         }
         
         [Browsable(false)]
@@ -137,7 +137,7 @@ namespace sistem.manajemen.ppic.website.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ReportDo rpt = new ReportDo();
+            ReportSuratJalan2 rpt = new ReportSuratJalan2();
             rpt.Site = this.Site;
             return rpt;
         }

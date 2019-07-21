@@ -775,3 +775,311 @@ StackTrace :    at System.Data.Entity.Core.Common.EntitySql.SemanticAnalyzer.Con
    at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
    at System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
    at System.Data.Entity.Internal.Linq.InternalSet`1.FindInStore(WrappedEntityKey key, String keyValuesParamName)
+-----------------------------------------------------------------------------
+Date : 2019-44-21 14:07:20
+
+System.ArgumentNullException
+Message : Value cannot be null.
+Parameter name: path1
+StackTrace :    at System.IO.Path.Combine(String path1, String path2)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 252
+-----------------------------------------------------------------------------
+Date : 2019-44-21 14:07:34
+
+System.ArgumentNullException
+Message : Value cannot be null.
+Parameter name: path1
+StackTrace :    at System.IO.Path.Combine(String path1, String path2)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 252
+-----------------------------------------------------------------------------
+Date : 2019-49-21 14:07:09
+
+System.ArgumentNullException
+Message : Value cannot be null.
+Parameter name: path1
+StackTrace :    at System.IO.Path.Combine(String path1, String path2)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 252
+-----------------------------------------------------------------------------
+Date : 2019-04-21 15:07:35
+
+System.IO.DirectoryNotFoundException
+Message : Could not find a part of the path 'D:\Project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Reports\RptDO_1003.pdf'.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.WriteStreamToFile(Stream stream, String filename)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportStreamToFile(Stream stream, DiskFileDestinationOptions options)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 254
+-----------------------------------------------------------------------------
+Date : 2019-07-21 15:07:07
+
+System.IO.DirectoryNotFoundException
+Message : Could not find a part of the path 'D:\Project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Reports\RptDO_1003.pdf'.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.WriteStreamToFile(Stream stream, String filename)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportStreamToFile(Stream stream, DiskFileDestinationOptions options)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 254
+-----------------------------------------------------------------------------
+Date : 2019-07-21 15:07:48
+
+System.IO.DirectoryNotFoundException
+Message : Could not find a part of the path 'D:\Project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Reports\RptDO_1003.pdf'.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.WriteStreamToFile(Stream stream, String filename)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportStreamToFile(Stream stream, DiskFileDestinationOptions options)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 254
+-----------------------------------------------------------------------------
+Date : 2019-27-21 15:07:06
+
+System.IO.DirectoryNotFoundException
+Message : Could not find a part of the path 'D:\Project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Reports\RptDO_1003.pdf'.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.WriteStreamToFile(Stream stream, String filename)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportStreamToFile(Stream stream, DiskFileDestinationOptions options)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 256
+-----------------------------------------------------------------------------
+Date : 2019-27-21 15:07:41
+
+System.IO.DirectoryNotFoundException
+Message : Could not find a part of the path 'D:\Projects\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Reports\RptDO_1003.pdf'.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.WriteStreamToFile(Stream stream, String filename)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportStreamToFile(Stream stream, DiskFileDestinationOptions options)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 256
+-----------------------------------------------------------------------------
+Date : 2019-29-21 15:07:48
+
+System.IO.DirectoryNotFoundException
+Message : Could not find a part of the path 'D:\Projects\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Reports\RptDO_1003.pdf'.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.WriteStreamToFile(Stream stream, String filename)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportStreamToFile(Stream stream, DiskFileDestinationOptions options)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 256
+-----------------------------------------------------------------------------
+Date : 2019-33-21 15:07:41
+
+System.IO.IOException
+Message : The requested operation cannot be performed on a file with a user-mapped section open.
+
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.WriteStreamToFile(Stream stream, String filename)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportStreamToFile(Stream stream, DiskFileDestinationOptions options)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 256
+-----------------------------------------------------------------------------
+Date : 2019-33-21 15:07:44
+
+System.IO.IOException
+Message : The requested operation cannot be performed on a file with a user-mapped section open.
+
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.WriteStreamToFile(Stream stream, String filename)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportStreamToFile(Stream stream, DiskFileDestinationOptions options)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 256
+-----------------------------------------------------------------------------
+Date : 2019-34-21 15:07:28
+
+System.IO.IOException
+Message : The requested operation cannot be performed on a file with a user-mapped section open.
+
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.WriteStreamToFile(Stream stream, String filename)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportStreamToFile(Stream stream, DiskFileDestinationOptions options)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 256
+-----------------------------------------------------------------------------
+Date : 2019-09-21 21:07:56
+
+CrystalDecisions.CrystalReports.Engine.LogOnException
+Message : Error in File ReportDo 20500_18068_{0E9F312C-BCE9-488C-816F-422327D04280}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 262
+System.Runtime.InteropServices.COMException
+Message : Error in File ReportDo 20500_18068_{0E9F312C-BCE9-488C-816F-422327D04280}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+-----------------------------------------------------------------------------
+Date : 2019-11-21 21:07:56
+
+CrystalDecisions.CrystalReports.Engine.LogOnException
+Message : Error in File ReportDo 20500_5916_{16F25550-05A9-44CB-93A9-88173EADABDB}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 262
+System.Runtime.InteropServices.COMException
+Message : Error in File ReportDo 20500_5916_{16F25550-05A9-44CB-93A9-88173EADABDB}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+-----------------------------------------------------------------------------
+Date : 2019-14-21 21:07:05
+
+CrystalDecisions.CrystalReports.Engine.LogOnException
+Message : Error in File ReportSuratJalan2 20500_21400_{B44FA132-3ADA-4255-8B31-2311089EE672}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnPengirimanController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnPengirimanController.cs:line 295
+System.Runtime.InteropServices.COMException
+Message : Error in File ReportSuratJalan2 20500_21400_{B44FA132-3ADA-4255-8B31-2311089EE672}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+-----------------------------------------------------------------------------
+Date : 2019-16-21 21:07:05
+
+CrystalDecisions.CrystalReports.Engine.LogOnException
+Message : Database logon failed.
+StackTrace :    at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnPengirimanController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnPengirimanController.cs:line 295
+System.Runtime.InteropServices.COMException
+Message : Database logon failed.
+StackTrace :    at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+-----------------------------------------------------------------------------
+Date : 2019-18-21 21:07:06
+
+CrystalDecisions.CrystalReports.Engine.LogOnException
+Message : Database logon failed.
+StackTrace :    at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnPengirimanController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnPengirimanController.cs:line 295
+System.Runtime.InteropServices.COMException
+Message : Database logon failed.
+StackTrace :    at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+-----------------------------------------------------------------------------
+Date : 2019-19-21 21:07:46
+
+CrystalDecisions.CrystalReports.Engine.LogOnException
+Message : Database logon failed.
+StackTrace :    at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnPengirimanController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnPengirimanController.cs:line 295
+System.Runtime.InteropServices.COMException
+Message : Database logon failed.
+StackTrace :    at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+-----------------------------------------------------------------------------
+Date : 2019-30-21 21:07:34
+
+CrystalDecisions.CrystalReports.Engine.LogOnException
+Message : Database logon failed.
+StackTrace :    at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnPengirimanController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnPengirimanController.cs:line 295
+System.Runtime.InteropServices.COMException
+Message : Database logon failed.
+StackTrace :    at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+-----------------------------------------------------------------------------
+Date : 2019-36-21 21:07:06
+
+CrystalDecisions.CrystalReports.Engine.LogOnException
+Message : Error in File ReportSuratJalan2 20500_18052_{2DCDCB38-2FDE-406D-B27E-9381D0A5B970}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnPengirimanController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnPengirimanController.cs:line 295
+System.Runtime.InteropServices.COMException
+Message : Error in File ReportSuratJalan2 20500_18052_{2DCDCB38-2FDE-406D-B27E-9381D0A5B970}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+-----------------------------------------------------------------------------
+Date : 2019-36-21 21:07:52
+
+CrystalDecisions.CrystalReports.Engine.LogOnException
+Message : Error in File ReportSuratJalan2 20500_19148_{6185FED8-58F8-4037-B1A4-4F371C2E9E80}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnPengirimanController.PrintPDF(Int32 id) in D:\Projects\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnPengirimanController.cs:line 295
+System.Runtime.InteropServices.COMException
+Message : Error in File ReportSuratJalan2 20500_19148_{6185FED8-58F8-4037-B1A4-4F371C2E9E80}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
