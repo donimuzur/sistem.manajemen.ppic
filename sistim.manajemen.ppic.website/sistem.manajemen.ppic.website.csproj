@@ -1581,6 +1581,7 @@
     <Compile Include="Models\MstUomModel.cs" />
     <Compile Include="Models\MstWilayahModel.cs" />
     <Compile Include="Models\RptDoModel.cs" />
+    <Compile Include="Models\RptEkspedisiHarianModel.cs" />
     <Compile Include="Models\RptOutstandingModel.cs" />
     <Compile Include="Models\RptSuratJalanModel.cs" />
     <Compile Include="Models\SoBarangJadiModel.cs" />
@@ -1761,6 +1762,8 @@
     <Content Include="Views\MstBarangJadi\Details.cshtml" />
     <Content Include="Views\GdgBarangJadi\Index.cshtml" />
     <Content Include="Views\GdgBahanBaku\Index.cshtml" />
+    <Content Include="Views\RptHarian\Index.cshtml" />
+    <Content Include="Views\RptHarian\_listRptEkspedisiHarian.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1776,7 +1779,7 @@
     <Folder Include="files_upload\Reports\Surat Jalan\" />
     <Folder Include="Images\gallery\" />
     <Folder Include="Images\landing\" />
-    <Folder Include="Views\RptHarian\" />
+    <Folder Include="Views\TrnPermintaanBahanBaku\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sistem.manajemen.ppic.bll\sistem.manajemen.ppic.bll.csproj">

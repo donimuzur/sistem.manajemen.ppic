@@ -532,6 +532,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_GetRptOutstanding" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DateFrom" Type="varchar" Mode="In" />
+          <Parameter Name="DateTo" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SP_RealisasiHarian" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Date" Type="varchar" Mode="In" />
         </Function>
@@ -657,9 +661,6 @@
             <End Role="TRN_PENGIRIMAN" EntitySet="TRN_PENGIRIMAN" />
           </AssociationSet>
           <EntitySet Name="TRN_SURAT_PENGANTAR_BONGKAR_MUAT" EntityType="SIM_PPICModel.TRN_SURAT_PENGANTAR_BONGKAR_MUAT" />
-          <FunctionImport Name="SP_RealisasiHarian" ReturnType="Collection(SIM_PPICModel.SP_RealisasiHarian_Result)">
-          <Parameter Name="Date" Mode="In" Type="String" />
-          </FunctionImport>
           <EntitySet Name="TRN_MUTASI_BARANG" EntityType="SIM_PPICModel.TRN_MUTASI_BARANG" />
           <AssociationSet Name="FK_TRN_MUTASI_BARANG_MST_BARANG_JADI" Association="SIM_PPICModel.FK_TRN_MUTASI_BARANG_MST_BARANG_JADI">
             <End Role="MST_BARANG_JADI" EntitySet="MST_BARANG_JADI" />
@@ -670,6 +671,13 @@
             <End Role="MST_BAHAN_BAKU" EntitySet="MST_BAHAN_BAKU" />
             <End Role="TRN_PENERIMAAN_BARANG" EntitySet="TRN_PENERIMAAN_BARANG" />
           </AssociationSet>
+          <FunctionImport Name="SP_GetRptOutstanding">
+            <Parameter Name="DateFrom" Mode="In" Type="String" />
+            <Parameter Name="DateTo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_RealisasiHarian" ReturnType="Collection(SIM_PPICModel.SP_RealisasiHarian_Result)">
+            <Parameter Name="Date" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="PAGE">
           <Key>
@@ -1123,19 +1131,6 @@
           <Property Name="NO_SURAT" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CATATAN" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <ComplexType Name="SP_RealisasiHarian_Result">
-          <Property Type="String" Name="NO_DO" Nullable="true" MaxLength="4" />
-          <Property Type="String" Name="NO_SPB" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="NAMA_KONSUMEN" Nullable="false" MaxLength="255" />
-          <Property Type="String" Name="TUJUAN_KIRIM" Nullable="true" MaxLength="Max" />
-          <Property Type="String" Name="ALAMAT_KONSUMEN" Nullable="true" MaxLength="Max" />
-          <Property Type="String" Name="NAMA_BARANG" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="KEMASAN" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="ZAK" Nullable="true" />
-          <Property Type="Decimal" Name="TOTAL" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Decimal" Name="TOTAL_TIMBANGAN" Nullable="true" Precision="38" Scale="2" />
-          <Property Type="Int32" Name="TOTAL_TRUK" Nullable="true" />
-        </ComplexType>
         <EntityType Name="TRN_MUTASI_BARANG">
           <Key>
             <PropertyRef Name="ID" />
@@ -1214,6 +1209,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SP_RealisasiHarian_Result">
+          <Property Type="String" Name="NO_DO" Nullable="true" MaxLength="4" />
+          <Property Type="String" Name="NO_SPB" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="NAMA_KONSUMEN" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="TUJUAN_KIRIM" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="ALAMAT_KONSUMEN" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="NAMA_BARANG" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="KEMASAN" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="JUMLAH" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="ZAK" Nullable="true" />
+          <Property Type="Decimal" Name="TOTAL" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="TOTAL_TIMBANGAN" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="TOTAL_TRUK" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1620,23 +1629,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SP_RealisasiHarian" FunctionName="SIM_PPICModel.Store.SP_RealisasiHarian">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIM_PPICModel.SP_RealisasiHarian_Result">
-                <ScalarProperty Name="NO_DO" ColumnName="NO_DO" />
-                <ScalarProperty Name="NO_SPB" ColumnName="NO_SPB" />
-                <ScalarProperty Name="NAMA_KONSUMEN" ColumnName="NAMA_KONSUMEN" />
-                <ScalarProperty Name="TUJUAN_KIRIM" ColumnName="TUJUAN_KIRIM" />
-                <ScalarProperty Name="ALAMAT_KONSUMEN" ColumnName="ALAMAT_KONSUMEN" />
-                <ScalarProperty Name="NAMA_BARANG" ColumnName="NAMA_BARANG" />
-                <ScalarProperty Name="KEMASAN" ColumnName="KEMASAN" />
-                <ScalarProperty Name="ZAK" ColumnName="ZAK" />
-                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
-                <ScalarProperty Name="TOTAL_TIMBANGAN" ColumnName="TOTAL TIMBANGAN" />
-                <ScalarProperty Name="TOTAL_TRUK" ColumnName="TOTAL TRUK" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="TRN_MUTASI_BARANG">
             <EntityTypeMapping TypeName="SIM_PPICModel.TRN_MUTASI_BARANG">
               <MappingFragment StoreEntitySet="TRN_MUTASI_BARANG">
@@ -1691,6 +1683,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetRptOutstanding" FunctionName="SIM_PPICModel.Store.SP_GetRptOutstanding" />
+          <FunctionImportMapping FunctionImportName="SP_RealisasiHarian" FunctionName="SIM_PPICModel.Store.SP_RealisasiHarian">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIM_PPICModel.SP_RealisasiHarian_Result">
+                <ScalarProperty Name="NO_DO" ColumnName="NO_DO" />
+                <ScalarProperty Name="NO_SPB" ColumnName="NO_SPB" />
+                <ScalarProperty Name="NAMA_KONSUMEN" ColumnName="NAMA_KONSUMEN" />
+                <ScalarProperty Name="TUJUAN_KIRIM" ColumnName="TUJUAN_KIRIM" />
+                <ScalarProperty Name="ALAMAT_KONSUMEN" ColumnName="ALAMAT_KONSUMEN" />
+                <ScalarProperty Name="NAMA_BARANG" ColumnName="NAMA_BARANG" />
+                <ScalarProperty Name="KEMASAN" ColumnName="KEMASAN" />
+                <ScalarProperty Name="JUMLAH" ColumnName="JUMLAH" />
+                <ScalarProperty Name="ZAK" ColumnName="ZAK" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="TOTAL_TIMBANGAN" ColumnName="TOTAL TIMBANGAN" />
+                <ScalarProperty Name="TOTAL_TRUK" ColumnName="TOTAL TRUK" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

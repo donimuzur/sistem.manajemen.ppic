@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sistem.manajemen.ppic.bll.BLL
+namespace sistem.manajemen.ppic.bll
 {
     public class RptEkspedisiHarianBLL : IRptHarianEkspedisiBLL
     {

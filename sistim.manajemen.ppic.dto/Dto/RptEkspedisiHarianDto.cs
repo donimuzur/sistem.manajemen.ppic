@@ -15,6 +15,7 @@ namespace sistem.manajemen.ppic.dto
         public string ALAMAT_KONSUMEN { get; set; }
         public string NAMA_BARANG { get; set; }
         public string KEMASAN { get; set; }
+        public decimal JUMLAH { get; set; }
         public Nullable<int> ZAK { get; set; }
         public Nullable<decimal> TOTAL { get; set; }
         public Nullable<decimal> TOTAL_TIMBANGAN { get; set; }

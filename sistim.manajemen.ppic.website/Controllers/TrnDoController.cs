@@ -11,6 +11,8 @@ using sistem.manajemen.ppic.dto;
 using CrystalDecisions.CrystalReports.Engine;
 using System.Configuration;
 using System.Web.Hosting;
+using System.Data.SqlClient;
+using System.Data.Entity.Core.EntityClient;
 
 namespace sistem.manajemen.ppic.website.Controllers
 {
@@ -246,6 +248,11 @@ namespace sistem.manajemen.ppic.website.Controllers
         {
             try
             {
+                var connection = System.Configuration.ConfigurationManager.ConnectionStrings["PPICEntities"].ConnectionString;
+                var connectString = ConfigurationManager.ConnectionStrings["PPICEntities"].ConnectionString;
+                var entityStringBuilder = new EntityConnectionStringBuilder(connectString);
+                SqlConnectionStringBuilder SqlConnection = new SqlConnectionStringBuilder(entityStringBuilder.ProviderConnectionString);
+
                 ReportDocument cryRpt = new ReportDocument();
                 var WebrootUrl = ConfigurationManager.AppSettings["Webrooturl"];
                 var FilesUploadPath = ConfigurationManager.AppSettings["FilesReport"];
@@ -258,6 +265,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                 var SystemPath = HostingEnvironment.ApplicationPhysicalPath;
 
                 cryRpt.Load(SystemPath + "\\Reports\\ReportDo.rpt");
+                cryRpt.SetDatabaseLogon(SqlConnection.UserID, SqlConnection.Password, SqlConnection.DataSource, SqlConnection.InitialCatalog);
                 cryRpt.SetParameterValue("id", id);
                 cryRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, fullPath);
                 

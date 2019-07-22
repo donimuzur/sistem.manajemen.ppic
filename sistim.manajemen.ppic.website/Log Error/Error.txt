@@ -1083,3 +1083,210 @@ Unable to connect: incorrect log on parameters.
 Details:  [Database Vendor Code: 18456 ]
 StackTrace :    at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
    at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+-----------------------------------------------------------------------------
+Date : 2019-09-22 09:07:47
+
+CrystalDecisions.CrystalReports.Engine.LogOnException
+Message : Error in File ReportDo 10368_29504_{C006DA41-8954-4E99-B5F6-B2B0E65FF903}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 262
+System.Runtime.InteropServices.COMException
+Message : Error in File ReportDo 10368_29504_{C006DA41-8954-4E99-B5F6-B2B0E65FF903}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+-----------------------------------------------------------------------------
+Date : 2019-14-22 09:07:42
+
+CrystalDecisions.CrystalReports.Engine.LogOnException
+Message : Error in File ReportDo 10368_25484_{07F6BFF0-ED6A-47AC-9855-2FECFFC3A409}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 262
+System.Runtime.InteropServices.COMException
+Message : Error in File ReportDo 10368_25484_{07F6BFF0-ED6A-47AC-9855-2FECFFC3A409}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+-----------------------------------------------------------------------------
+Date : 2019-15-22 09:07:36
+
+CrystalDecisions.CrystalReports.Engine.LogOnException
+Message : Error in File ReportDo 10368_188_{20F83F21-9BFE-43ED-B5D9-4BB8C11A1428}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 262
+System.Runtime.InteropServices.COMException
+Message : Error in File ReportDo 10368_188_{20F83F21-9BFE-43ED-B5D9-4BB8C11A1428}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+-----------------------------------------------------------------------------
+Date : 2019-16-22 09:07:30
+
+CrystalDecisions.CrystalReports.Engine.LogOnException
+Message : Error in File ReportDo 10368_29008_{14F60DAE-B009-493E-B31E-E666964357BE}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 262
+System.Runtime.InteropServices.COMException
+Message : Error in File ReportDo 10368_29008_{14F60DAE-B009-493E-B31E-E666964357BE}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+-----------------------------------------------------------------------------
+Date : 2019-17-22 09:07:52
+
+CrystalDecisions.CrystalReports.Engine.LogOnException
+Message : Error in File ReportDo 10368_25968_{5677E854-21BC-4F7D-A761-891A2966D378}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.ConvertDotNetToErom.ThrowDotNetException(Exception e)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.ExportToStream(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.FormatEngine.Export(ExportRequestContext reqContext)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.ExportToDisk(ExportFormatType formatType, String fileName)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 262
+System.Runtime.InteropServices.COMException
+Message : Error in File ReportDo 10368_25968_{5677E854-21BC-4F7D-A761-891A2966D378}.rpt:
+Unable to connect: incorrect log on parameters.
+Details:  [Database Vendor Code: 18456 ]
+StackTrace :    at CrystalDecisions.ReportAppServer.Controllers.ReportSourceClass.Export(ExportOptions pExportOptions, RequestContext pRequestContext)
+   at CrystalDecisions.ReportSource.EromReportSourceBase.ExportToStream(ExportRequestContext reqContext)
+-----------------------------------------------------------------------------
+Date : 2019-06-22 10:07:39
+
+System.ArgumentException
+Message : Keyword not supported: 'metadata'.
+StackTrace :    at System.Data.SqlClient.SqlConnectionStringBuilder.GetIndex(String keyword)
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_Item(String keyword, Object value)
+   at System.Data.Common.DbConnectionStringBuilder.set_ConnectionString(String value)
+   at System.Data.SqlClient.SqlConnectionStringBuilder..ctor(String connectionString)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 254
+-----------------------------------------------------------------------------
+Date : 2019-07-22 10:07:12
+
+System.ArgumentException
+Message : Keyword not supported: 'metadata'.
+StackTrace :    at System.Data.SqlClient.SqlConnectionStringBuilder.GetIndex(String keyword)
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_Item(String keyword, Object value)
+   at System.Data.Common.DbConnectionStringBuilder.set_ConnectionString(String value)
+   at System.Data.SqlClient.SqlConnectionStringBuilder..ctor(String connectionString)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 254
+-----------------------------------------------------------------------------
+Date : 2019-07-22 10:07:58
+
+System.ArgumentException
+Message : Keyword not supported: 'metadata'.
+StackTrace :    at System.Data.SqlClient.SqlConnectionStringBuilder.GetIndex(String keyword)
+   at System.Data.SqlClient.SqlConnectionStringBuilder.set_Item(String keyword, Object value)
+   at System.Data.Common.DbConnectionStringBuilder.set_ConnectionString(String value)
+   at System.Data.SqlClient.SqlConnectionStringBuilder..ctor(String connectionString)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 254
+-----------------------------------------------------------------------------
+Date : 2019-11-22 10:07:25
+
+CrystalDecisions.CrystalReports.Engine.LoadSaveReportException
+Message : Invalid report file path.
+StackTrace :    at CrystalDecisions.CrystalReports.Engine.EngineExceptionUtils.DoThrowException(String message, EngineExceptionErrorID id)
+   at CrystalDecisions.CrystalReports.Engine.ExceptionThrower.ThrowEngineException(String messageID, EngineExceptionErrorID id)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.Load(String filename, OpenReportMethod openMethod, Int16 parentJob)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.EnsureLoadReport()
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDatabaseLogon(String user, String password, String server, String database, Boolean ignoreCase)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDatabaseLogon(String user, String password, String server, String database)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 267
+-----------------------------------------------------------------------------
+Date : 2019-11-22 10:07:44
+
+CrystalDecisions.CrystalReports.Engine.LoadSaveReportException
+Message : Invalid report file path.
+StackTrace :    at CrystalDecisions.CrystalReports.Engine.EngineExceptionUtils.DoThrowException(String message, EngineExceptionErrorID id)
+   at CrystalDecisions.CrystalReports.Engine.ExceptionThrower.ThrowEngineException(String messageID, EngineExceptionErrorID id)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.Load(String filename, OpenReportMethod openMethod, Int16 parentJob)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.EnsureLoadReport()
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDatabaseLogon(String user, String password, String server, String database, Boolean ignoreCase)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetDatabaseLogon(String user, String password, String server, String database)
+   at sistem.manajemen.ppic.website.Controllers.TrnDoController.PrintPDF(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnDoController.cs:line 267
+-----------------------------------------------------------------------------
+Date : 2019-27-22 10:07:58
+
+System.Runtime.InteropServices.COMException
+Message : Invalid index. (Exception from HRESULT: 0x8002000B (DISP_E_BADINDEX))
+StackTrace :    at CrystalDecisions.ReportAppServer.DataDefModel.FieldsClass.get_Item(Int32 Index)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinitions.get_Item(Int32 index)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinitions.get_Item(String fieldName)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   at sistem.manajemen.ppic.website.Controllers.RptHarianController.PrintPDF(String Tanggal) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\RptHarianController.cs:line 65
+-----------------------------------------------------------------------------
+Date : 2019-28-22 10:07:24
+
+System.Runtime.InteropServices.COMException
+Message : Invalid index. (Exception from HRESULT: 0x8002000B (DISP_E_BADINDEX))
+StackTrace :    at CrystalDecisions.ReportAppServer.DataDefModel.FieldsClass.get_Item(Int32 Index)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinitions.get_Item(Int32 index)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinitions.get_Item(String fieldName)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   at sistem.manajemen.ppic.website.Controllers.RptHarianController.PrintPDF(String Tanggal) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\RptHarianController.cs:line 65
+-----------------------------------------------------------------------------
+Date : 2019-38-22 10:07:09
+
+System.FormatException
+Message : String was not recognized as a valid DateTime.
+StackTrace :    at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at sistem.manajemen.ppic.website.Controllers.RptHarianController.PrintPDF(String Tanggal) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\RptHarianController.cs:line 47
+-----------------------------------------------------------------------------
+Date : 2019-40-22 10:07:33
+
+System.Runtime.InteropServices.COMException
+Message : Invalid index. (Exception from HRESULT: 0x8002000B (DISP_E_BADINDEX))
+StackTrace :    at CrystalDecisions.ReportAppServer.DataDefModel.FieldsClass.get_Item(Int32 Index)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinitions.get_Item(Int32 index)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinitions.get_Item(String fieldName)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   at sistem.manajemen.ppic.website.Controllers.RptHarianController.PrintPDF(String Tanggal) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\RptHarianController.cs:line 66
+-----------------------------------------------------------------------------
+Date : 2019-41-22 10:07:35
+
+System.Runtime.InteropServices.COMException
+Message : Invalid index. (Exception from HRESULT: 0x8002000B (DISP_E_BADINDEX))
+StackTrace :    at CrystalDecisions.ReportAppServer.DataDefModel.FieldsClass.get_Item(Int32 Index)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinitions.get_Item(Int32 index)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinitions.get_Item(String fieldName)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   at sistem.manajemen.ppic.website.Controllers.RptHarianController.PrintPDF(String Tanggal) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\RptHarianController.cs:line 66
+-----------------------------------------------------------------------------
+Date : 2019-42-22 10:07:49
+
+System.Runtime.InteropServices.COMException
+Message : Invalid index. (Exception from HRESULT: 0x8002000B (DISP_E_BADINDEX))
+StackTrace :    at CrystalDecisions.ReportAppServer.DataDefModel.FieldsClass.get_Item(Int32 Index)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinitions.get_Item(Int32 index)
+   at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinitions.get_Item(String fieldName)
+   at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
+   at sistem.manajemen.ppic.website.Controllers.RptHarianController.PrintPDF(String Tanggal) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\RptHarianController.cs:line 66

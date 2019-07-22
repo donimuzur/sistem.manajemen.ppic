@@ -7,6 +7,8 @@ using sistem.manajemen.ppic.website.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity.Core.EntityClient;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Hosting;
@@ -279,6 +281,11 @@ namespace sistem.manajemen.ppic.website.Controllers
         {
             try
             {
+                var connection = System.Configuration.ConfigurationManager.ConnectionStrings["PPICEntities"].ConnectionString;
+                var connectString = ConfigurationManager.ConnectionStrings["PPICEntities"].ConnectionString;
+                var entityStringBuilder = new EntityConnectionStringBuilder(connectString);
+                SqlConnectionStringBuilder SqlConnection = new SqlConnectionStringBuilder(entityStringBuilder.ProviderConnectionString);
+
                 ReportDocument cryRpt = new ReportDocument();
                 var WebrootUrl = ConfigurationManager.AppSettings["Webrooturl"];
                 var FilesUploadPath = ConfigurationManager.AppSettings["FilesReport"];
@@ -291,6 +298,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                 var SystemPath = HostingEnvironment.ApplicationPhysicalPath;
 
                 cryRpt.Load(SystemPath + "\\Reports\\ReportSuratJalan2.rpt");
+                cryRpt.SetDatabaseLogon(SqlConnection.UserID, SqlConnection.Password, SqlConnection.DataSource, SqlConnection.InitialCatalog);
                 cryRpt.SetParameterValue("id", id);
                 cryRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, fullPath);
 

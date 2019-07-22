@@ -1,0 +1,373 @@
+﻿@using System.Web.Optimization
+@model sistem.manajemen.ppic.website.Models.RptEkspedisiHarianViewModel
+@{
+    ViewBag.Title = "Laporan Harian";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>@Model.Tittle</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")">Home</a>
+            </li>
+            <li class="active breadcrumb-item">
+                <strong>Laporan Harian Ekspedisi</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+            <button class="ladda-button ladda-button-print btn btn-success" data-style="zoom-in" onclick="PrintPDF()" type="button">Print PDF</button>
+            <button class="ladda-button ladda-button-export btn btn-success" data-style="zoom-in" onclick="ExportExcel()" type="button">Export to Excel (.xls)</button>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Filter</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        @using (Html.BeginForm("PrintPDF", "RptHarian", FormMethod.Post, new { @id = "FormCreate", enctype = "multipart/form-data" }))
+                        {
+                            <div class="form-group">
+                                <label class="control-label">Tanggal<span class="text-danger">*</span></label>
+                                <div class="input-group date" id="DateFilter">
+                                    @Html.TextBoxFor(model => model.TANGGAL, "{0:dd-MMM-yyyy}", new { @class = "form-control", @required = "required" })
+                                    <span class="input-group-addon btn btn-primary">
+                                        <i class="fa fa-calendar "></i>
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:right">
+                            <div class="form-group" style="">
+                                <button type="button" class="ladda-button ladda-button-filter btn btn-success" data-style="zoom-in" onclick="Confirm()">Generate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>List Data</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" id="contenttable">
+                    @Html.Partial("_listRptEkspedisiHarian")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/Contents/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/plugins/laddaStyles")
+    @Styles.Render("~/plugins/datePickerStyles")
+    @Styles.Render("~/plugins/jquery-confirmStyle")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/ladda")
+    @Scripts.Render("~/plugins/validate")
+    @Scripts.Render("~/plugins/datePicker")
+    @Scripts.Render("~/plugins/jquery-confirm")
+
+    <script type="text/javascript">
+        var l_ladda_filter = null;
+
+        var ladda_print = null;
+        var ladda_export = null;
+
+        var dataTable = null;
+        $(document).ready(function () {
+            l_ladda_filter = $('.ladda-button-filter').ladda();
+            ladda_print = $('.ladda-button-print').ladda();
+            ladda_export = $('.ladda-button-export').ladda();
+
+            dataTable = $('.dataTables-List').DataTable({
+                pageLength: 25,
+                dom: '<"html5buttons"B>lTfgitp',
+                scrollX: true,
+                scrollCollapse: true,
+                buttons: [
+                    { extend: 'copy' },
+                    { extend: 'csv' },
+                    { extend: 'excel', title: 'ExampleFile' },
+                    { extend: 'pdf', title: 'ExampleFile' },
+                    {
+                        extend: 'print',
+                        customize: function (win) {
+                            $(win.document.body).addClass('white-bg');
+                            $(win.document.body).css('font-size', '10px');
+
+                            $(win.document.body).find('table')
+                                    .addClass('compact')
+                                    .css('font-size', 'inherit');
+                        }
+                    }
+                ]
+            });
+        });
+
+        function LoadingShow()
+        {
+            l_ladda_filter.ladda('start');
+        }
+
+        function LoadingHide()
+        {
+            l_ladda_filter.ladda('stop');
+        }
+
+        function Confirm() {
+            if (!PreSubmit()) return false;
+            l_ladda_filter.ladda('start');
+            var url = '@Url.Action("GetRptEkspedisiList", "RptHarian")';
+            var Tanggal = $('#TANGGAL').val();
+
+            $.ajax({
+        	    url: url,
+        	    data: { Tanggal: Tanggal },
+        	    type: "POST",
+        	    dataType: "JSON",
+        	    timeout: 20000,
+        	    success: function (response) {
+        	        console.log(response);
+        	        if (response != "Error") {
+        	            try {
+        	                dataTable.clear();
+        	                for (var i = 0; i < response.length ; i++)
+        	                {
+        	                    dataTable.row.add([
+                                    i+1,
+                                    response[i].NO_DO,
+                                    response[i].NO_SPB,
+                                    response[i].NAMA_KONSUMEN,
+                                    response[i].TUJUAN_KIRIM,
+                                    response[i].ALAMAT_KONSUMEN,
+                                    response[i].NAMA_BARANG,
+                                    response[i].KEMASAN,
+                                    response[i].ZAK,
+                                    response[i].JUMLAH,
+                                    response[i].TOTAL,
+                                    response[i].TOTAL_TIMBANGAN,
+                                    response[i].TOTAL_TRUK
+        	                    ]).draw(false);
+        	                }
+        	                l_ladda_filter.ladda('stop');
+        	            } catch (e) {
+
+        	                l_ladda_filter.ladda('stop');
+        	                $.confirm({
+        	                    title: 'Informasi !',
+        	                    content: 'Terjadi Kesalahan <br><br> Hubungi Administrator!',
+        	                    type: 'red',
+        	                    buttons: {
+        	                        Ok: {
+        	                            btnClass: 'btn-primary text-white',
+        	                            keys: ['enter'],
+        	                            action: function () {
+        	                            }
+        	                        }
+        	                    }
+        	                });
+        	            }
+        	        } else {
+        	            l_ladda_filter.ladda('stop');
+        	            $.confirm({
+        	                title: 'Informasi !',
+        	                content: 'Terjadi Kesalahan <br><br> Hubungi Administrator!',
+        	                type: 'red',
+        	                buttons: {
+        	                    Ok: {
+        	                        btnClass: 'btn-primary text-white',
+        	                        keys: ['enter'],
+        	                        action: function () {
+        	                        }
+        	                    }
+        	                }
+        	            });
+        	        }
+        	    },
+        	    error: function (xmlhttprequest, textstatus, message) {
+        	        if (textstatus === "timeout") {
+        	            l_ladda_filter.ladda('stop');
+        	            $.confirm({
+        	                title: 'Informasi !',
+        	                content: 'Timeout Server',
+        	                type: 'red',
+        	                buttons: {
+        	                    Ok: {
+        	                        btnClass: 'btn-primary text-white',
+        	                        keys: ['enter'],
+        	                        action: function () {
+        	                        }
+        	                    }
+        	                }
+        	            });
+        	        } else {
+        	            l_ladda_filter.ladda('stop');
+        	            $.confirm({
+        	                title: 'Informasi !',
+        	                content: 'Terjadi Kesalahan <br><br> Hubungi Administrator!',
+        	                type: 'red',
+        	                buttons: {
+        	                    Ok: {
+        	                        btnClass: 'btn-primary text-white',
+        	                        keys: ['enter'],
+        	                        action: function () {
+        	                        }
+        	                    }
+        	                }
+        	            });
+        	        }
+        	    }
+            });
+        }
+
+        //pre-submit
+        function PreSubmit() {
+            var validate = $('#FormCreate').validate({
+                errorPlacement: function (error, element) {
+
+                    if (element.parent().attr("class") == "form-group")
+                        error.insertAfter(element);
+                    else if (element.parent().attr("class") == 'input-group')
+                        error.insertAfter(element.parent());
+                    else if (element.parent().attr("class").search('easy-autocomplete') >= 0 || element.parent().attr("class") == "row" || element.parent().attr("class") == 'input-group date')
+                        error.insertAfter(element.parent());
+                    else
+                        error.insertAfter(element.parent().parent());
+                }
+            });
+
+            jQuery.extend(jQuery.validator.messages, {
+                required: "Tidak boleh kosong",
+                remote: "Please fix this field.",
+                email: "Please enter a valid email address.",
+                url: "Please enter a valid URL.",
+                date: "Please enter a valid date.",
+                dateISO: "Please enter a valid date (ISO).",
+                number: "Please enter a valid number.",
+                digits: "Please enter only digits.",
+                creditcard: "Please enter a valid credit card number.",
+                equalTo: "Please enter the same value again.",
+                accept: "Please enter a value with a valid extension.",
+                maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
+                minlength: jQuery.validator.format("Please enter at least {0} characters."),
+                rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
+                range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+                max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+                min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+            });
+
+            var isValid = validate.checkForm();
+            if (isValid) {
+                return true;
+            }
+            else {
+                validate.showErrors();
+                return false;
+            }
+        }
+
+
+        //Print to PDF
+        function PrintPDF() {
+            if (!PreSubmit()) return false;
+            ladda_print.ladda('start');
+            var Tanggal = document.getElementById("TANGGAL").value;
+            $.ajax({
+                url: '@Url.Action("PrintPDF", "RptHarian")',
+                type: "POST",
+                dataType: "JSON",
+                data: { Tanggal: Tanggal },
+                timeout: 20000,
+                success: function (response) {
+                    if (response != "Error") {
+                        ladda_print.ladda('stop');
+                        window.location = response;
+                    } else {
+                        ladda_print.ladda('stop');
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'Terjadi Kesalahan <br><br> Hubungi Administrator!',
+                            type: 'red',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    }
+                },
+                error: function (xmlhttprequest, textstatus, message) {
+                    if (textstatus === "timeout") {
+                        ladda_print.ladda('stop');
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'Timeout Server',
+                            type: 'red',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        ladda_print.ladda('stop');
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'Terjadi Kesalahan <br><br> Hubungi Administrator!',
+                            type: 'red',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+        $('.date').datepicker({
+            format: 'dd-M-yyyy'
+        });
+    </script>
+}

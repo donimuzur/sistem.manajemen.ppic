@@ -75,6 +75,7 @@
                 <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Laporan</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Laporan", CurrentMenu : Model.Menu, cssClass: "in")">
                     <li class="#"><a href="#">Laporan Rekap Bulanan</a></li>
+                    <li class="@Html.IsSelected(controller:"RptHarian",action: "Index")"><a href="@Url.Action("Index","RptHarian")">Laporan Realisasi</a></li>
                     <li class="@Html.IsSelected(controller:"RptOutstanding",action: "Index")"><a href="@Url.Action("Index","RptOutstanding")">Laporan Outstanding</a></li>
                     <li class="#"><a href="#">Laporan Stock</a></li>
                 </ul>

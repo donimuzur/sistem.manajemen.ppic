@@ -89,7 +89,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                         {
                             model.ID_BARANG_JADI = GetBarang.ID;
                             model.STOCK_AWAL = GetBarang.STOCK;
-                            model.STOCK_AKHIR = model.STOCK_AWAL - model.JUMLAH;
+                            model.STOCK_AKHIR = model.STOCK_AWAL + model.JUMLAH;
                             if (model.STOCK_AKHIR < 0)
                             {
                                 AddMessageInfo("Stock barang tidak mencukupi", Enums.MessageInfoType.Error);
@@ -104,7 +104,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                         {
                             model.ID_BAHAN_BAKU = GetBarang.ID;
                             model.STOCK_AWAL = GetBarang.STOCK;
-                            model.STOCK_AKHIR = model.STOCK_AWAL - model.JUMLAH;
+                            model.STOCK_AKHIR = model.STOCK_AWAL + model.JUMLAH;
                             if (model.STOCK_AKHIR < 0)
                             {
                                 AddMessageInfo("Stock barang tidak mencukupi", Enums.MessageInfoType.Error);
@@ -117,11 +117,11 @@ namespace sistem.manajemen.ppic.website.Controllers
                     _trnMutasiBarangBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
                     if(model.JENIS_BARANG == (int)Enums.JenisBarang.BarangJadi)
                     {
-                        _mstBarangJadiBLL.KurangSaldo(model.ID_BARANG_JADI.Value, model.JUMLAH.Value);
+                        _mstBarangJadiBLL.TambahSaldo(model.ID_BARANG_JADI.Value, model.JUMLAH.Value);
                     }
                     else if(model.JENIS_BARANG == (int)Enums.JenisBarang.BahanBaku)
                     {
-                        _mstBahanBakuBLL.KurangSaldo(model.ID_BAHAN_BAKU.Value, model.JUMLAH.Value);
+                        _mstBahanBakuBLL.TambahSaldo(model.ID_BAHAN_BAKU.Value, model.JUMLAH.Value);
                     }
 
                     AddMessageInfo("Sukses Create Form Mutasi Barang", Enums.MessageInfoType.Success);
