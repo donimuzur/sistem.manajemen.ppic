@@ -5,18 +5,13 @@ using System.Web;
 
 namespace sistem.manajemen.ppic.website.Models
 {
-    public class RptOutstandingListModel : BaseModel
+    public class RptOutstandingViewModel : BaseModel
     {
-        public RptOutstandingListModel()
+        public List<RptOutstandingModel> ListData { set; get; }
+        public RptOutstandingViewModel()
         {
-            SearchViewExport = new CfmIdleSearchViewExport();
-            SearchView = new RptOutstandingModelSearchView();
-            ListRptOutstanding = new List<RptOutstandingModel>();
+            ListData = new List<RptOutstandingModel>();
         }
-
-        public List<RptOutstandingModel> ListRptOutstanding { get; set; }
-        public RptOutstandingModelSearchView SearchView { get; set; }
-        public CfmIdleSearchViewExport SearchViewExport { get; set; }
     }
     public class RptOutstandingModel
     {
@@ -28,25 +23,5 @@ namespace sistem.manajemen.ppic.website.Models
         public decimal PARTY { get; set; }
         public Nullable<decimal> AKUMULASI { get; set; }
         public Nullable<decimal> SISA { get; set; }
-    }
-    public class RptOutstandingModelSearchView
-    {
-        public DateTime? FromDate { get; set; }
-        public DateTime? ToDate { get; set; }
-       
-        public int MonthFrom { get; set; }
-        public int MonthTo { get; set; }
-        public int YearFrom { get; set; }
-        public int YearTo { get; set; }
-    }
-    public class CfmIdleSearchViewExport
-    {
-        public DateTime? FromDate { get; set; }
-        public DateTime? ToDate { get; set; }
-        
-        public int MonthFrom { get; set; }
-        public int MonthTo { get; set; }
-        public int YearFrom { get; set; }
-        public int YearTo { get; set; }
     }
 }

@@ -8,6 +8,11 @@ using sistem.manajemen.ppic.core;
 using sistem.manajemen.ppic.website.Models;
 using sistem.manajemen.ppic.dto.Input;
 using AutoMapper;
+using System.Configuration;
+using System.Data.SqlClient;
+using CrystalDecisions.CrystalReports.Engine;
+using System.Data.Entity.Core.EntityClient;
+using System.Web.Hosting;
 
 namespace sistem.manajemen.ppic.website.Controllers
 {
@@ -22,61 +27,64 @@ namespace sistem.manajemen.ppic.website.Controllers
         // GET: RptOutstanding
         public ActionResult Index()
         {
-            var model = new RptOutstandingListModel();
+            var model = new RptOutstandingViewModel();
 
-            model.CurrentUser = CurrentUser;
+            model.ListData = new List<RptOutstandingModel>();
+
             model.MainMenu = Enums.MenuList.LaporanOutstanding;
-            model.Menu = "Laporan Outstanding";
+            model.Menu = Enums.GetEnumDescription(Enums.MenuList.Report);
+            model.CurrentUser = CurrentUser;
+            model.Tittle = "Laporan Outstanding";
 
             return View(model);
-        }
-      
-        private List<RptOutstandingModel> GetRptOutstanding(RptOutstandingModelSearchView filter = null)
-        {
-            if (filter == null)
-            {
-                //Get All
-                var data = _rptOutstandingBLL.GetLogProductionIncome_SP(new RptOutstandingInput());
-                return Mapper.Map<List<RptOutstandingModel>>(data);
-            }
-
-            //getbyparams
-            var input = Mapper.Map<RptOutstandingInput>(filter);
-
-            var dbData = _rptOutstandingBLL.GetLogProductionIncome_SP(input);
-            return Mapper.Map<List<RptOutstandingModel>>(dbData);
         }
 
         #region --- Json ---
         [HttpPost]
-        public JsonResult GetRptOutstandingList(string FromDate, string ToDate)
+        public JsonResult GetDataList(string Tanggal)
         {
             try
             {
-                var input = new RptOutstandingModelSearchView();
-                if (string.IsNullOrEmpty(FromDate))
-                {
-                    input.FromDate = null;
-                }
-                else
-                {
-                    input.FromDate = Convert.ToDateTime(FromDate);
-                }
-
-                if(string.IsNullOrEmpty(ToDate))
-                {
-                    input.ToDate = null;
-                }
-                else
-                {
-                    input.ToDate = Convert.ToDateTime(ToDate);
-                }
-
-                var data = GetRptOutstanding(input);
+                var data = _rptOutstandingBLL.GetRpt();
                 return Json(data);
             }
-            catch (Exception)
+            catch (Exception exp)
             {
+                LogError.LogError.WriteError(exp);
+                return Json("Error");
+            }
+        }
+        [HttpPost]
+        public JsonResult PrintPDF(string Tanggal)
+        {
+            try
+            {
+                var Date = Convert.ToDateTime(Tanggal);
+                var connection = System.Configuration.ConfigurationManager.ConnectionStrings["PPICEntities"].ConnectionString;
+                var connectString = ConfigurationManager.ConnectionStrings["PPICEntities"].ConnectionString;
+                var entityStringBuilder = new EntityConnectionStringBuilder(connectString);
+                SqlConnectionStringBuilder SqlConnection = new SqlConnectionStringBuilder(entityStringBuilder.ProviderConnectionString);
+
+                ReportDocument cryRpt = new ReportDocument();
+                var WebrootUrl = ConfigurationManager.AppSettings["Webrooturl"];
+                var FilesUploadPath = ConfigurationManager.AppSettings["FilesReport"];
+                var fileName = System.IO.Path.GetFileName("RptOutstanding_" + DateTime.Now.ToString("yyyyMMdd") + ".pdf");
+                var fullPath = System.IO.Path.Combine(@FilesUploadPath + "\\Laporan\\", fileName);
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+                var SystemPath = HostingEnvironment.ApplicationPhysicalPath;
+
+                cryRpt.Load(SystemPath + "\\Reports\\ReportOutstanding.rpt");
+                cryRpt.SetDatabaseLogon(SqlConnection.UserID, SqlConnection.Password, SqlConnection.DataSource, SqlConnection.InitialCatalog);
+                cryRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, fullPath);
+
+                return Json(WebrootUrl + "\\files_upload\\Reports\\Laporan\\" + fileName);
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
                 return Json("Error");
             }
         }

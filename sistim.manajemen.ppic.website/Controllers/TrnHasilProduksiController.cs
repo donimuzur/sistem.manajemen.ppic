@@ -219,6 +219,15 @@ namespace sistem.manajemen.ppic.website.Controllers
 
 
         #region --- Json ---
+        public JsonResult GetSPPList()
+        {
+            var model = new List<string>();
+            model = _trnSpbBLL.GetAll()
+                    .Select(x => x.NO_SPB)
+                    .ToList();
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult GetSpbList()
         {
             var model = new List<string>();

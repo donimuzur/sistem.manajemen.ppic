@@ -39,12 +39,13 @@ namespace sistem.manajemen.ppic.dal.Services
                 throw;
             }
         }
-        public void Save(MST_WILAYAH Db,Login Login)
+        public MST_WILAYAH Save(MST_WILAYAH Db,Login Login)
         {
             try
             {
                 _repoMstWilayah.InsertOrUpdate(Db,Login,Enums.MenuList.MasterWilayah);
                 _uow.SaveChanges();
+                return Db;
             }
             catch (Exception)
             {

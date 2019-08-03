@@ -11,6 +11,6 @@ namespace sistem.manajemen.ppic.dal.IServices
         List<MST_KEMASAN> GetAll();
         MST_KEMASAN GetById(object id);
         void Save(MST_KEMASAN Db);
-        void Save(MST_KEMASAN Db, Login Login);
+        MST_KEMASAN Save(MST_KEMASAN Db, Login Login);
     }
 }

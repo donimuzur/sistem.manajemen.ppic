@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using sistem.manajemen.ppic.bll.IBLL;
+using sistem.manajemen.ppic.core;
 using sistem.manajemen.ppic.dal;
 using sistem.manajemen.ppic.dal.IServices;
 using sistem.manajemen.ppic.dal.Services;
@@ -21,21 +22,35 @@ namespace sistem.manajemen.ppic.bll
             _uow = Uow;
             _mstKemasanServices = new MstKemasanServices(_uow);
         }
-        public List<KemasanDto> GetAll()
+        public List<MstKemasanDto> GetAll()
         {
             var Data = _mstKemasanServices.GetAll();
-            var ReData = Mapper.Map<List<KemasanDto>>(Data);
+            var ReData = Mapper.Map<List<MstKemasanDto>>(Data);
 
             return ReData;
         }
-        public KemasanDto GetById(object Id)
+        public List<MstKemasanDto> GetActiveAll()
+        {
+            var Data = _mstKemasanServices.GetAll().Where(x => x.STATUS != (int) Enums.StatusDocument.Cancel).ToList();
+            var ReData = Mapper.Map<List<MstKemasanDto>>(Data);
+
+            return ReData;
+        }
+        public MstKemasanDto GetById(object Id)
         {
             var Data = _mstKemasanServices.GetById(Id);
-            var ReData = Mapper.Map<KemasanDto>(Data);
+            var ReData = Mapper.Map<MstKemasanDto>(Data);
 
             return ReData;
         }
-        public void Save(KemasanDto model)
+        public MstKemasanDto GetByNama(string Nama)
+        {
+            var Data = _mstKemasanServices.GetAll().Where(x=> x.KEMASAN.ToUpper() == Nama.ToUpper()).FirstOrDefault();
+            var ReData = Mapper.Map<MstKemasanDto>(Data);
+
+            return ReData;
+        }
+        public void Save(MstKemasanDto model)
         {
             try
             {
@@ -47,13 +62,14 @@ namespace sistem.manajemen.ppic.bll
                 throw;
             }
         }
-        public void Save(KemasanDto model, LoginDto LoginDto)
+        public MstKemasanDto Save(MstKemasanDto model, LoginDto LoginDto)
         {
             try
             {
                 var db = Mapper.Map<MST_KEMASAN>(model);
                 var Login = Mapper.Map<Login>(LoginDto);
-                _mstKemasanServices.Save(db, Login);
+                db = _mstKemasanServices.Save(db, Login);
+                return Mapper.Map<MstKemasanDto>(db);
             }
             catch (Exception)
             {

@@ -76,7 +76,9 @@ namespace sistem.manajemen.ppic.core
             
             TrnHasilProduksi = 90,
             TrnPermintaanBahanBaku =91,
-            LaporanProduksi=91,
+            TrnSuratPerintahProduksi = 92,
+            LaporanProduksi=95,
+
         }
         public enum StatusDocument
         {

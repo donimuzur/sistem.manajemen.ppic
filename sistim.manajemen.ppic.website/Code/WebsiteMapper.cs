@@ -47,11 +47,18 @@ namespace sistem.manajemen.ppic.website.Code
 
                 cfg.CreateMap<TrnMutasiBarangModel, TrnMutasiBarangDto>().ReverseMap();
                 cfg.CreateMap<TrnMutasiBarangDto, TRN_MUTASI_BARANG>().ReverseMap();
-
-                cfg.CreateMap<RptOutstandingModelSearchView, RptOutstandingInput>().ReverseMap();
-
+                
                 cfg.CreateMap<RptOutstandingModel, RptOutstandingDto>().ReverseMap();
-                //cfg.CreateMap<RptOutstandingDto, SP_GetRptOutstanding_Result>().ReverseMap();
+                cfg.CreateMap<RptOutstandingDto, SP_GetRptOutstanding_Result>().ReverseMap();
+
+                cfg.CreateMap<RptEkspedisiHarianModel, RptEkspedisiHarianDto>().ReverseMap();
+                cfg.CreateMap<RptEkspedisiHarianDto, SP_RealisasiHarian_Result>().ReverseMap();
+
+                cfg.CreateMap<TrnSuratPerintahProduksiModel, TrnSuratPerintahProduksiDto>().ReverseMap();
+                cfg.CreateMap<TrnSuratPerintahProduksiDto, TRN_SURAT_PERINTAH_PRODUKSI>().ReverseMap();
+
+                cfg.CreateMap<MstKemasanModel, MstKemasanDto>().ReverseMap();
+                cfg.CreateMap<MstKemasanDto, MST_KEMASAN>().ReverseMap();
 
             });
         }

@@ -52,5 +52,7 @@ namespace sistem.manajemen.ppic.dal
         public Nullable<core.Enums.StatusDocument> STATUS { get; set; }
         public Nullable<int> DOKUMEN_PENDUKUNG_TYPE { get; set; }
         public string REMARK { get; set; }
+        public Nullable<decimal> ONGKOS_INCLARING { get; set; }
+        public Nullable<decimal> ONGKOS_GUDANG { get; set; }
     }
 }

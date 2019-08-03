@@ -50,19 +50,7 @@ namespace sistem.manajemen.ppic.dal
         public DbSet<TRN_SURAT_PENGANTAR_BONGKAR_MUAT> TRN_SURAT_PENGANTAR_BONGKAR_MUAT { get; set; }
         public DbSet<TRN_MUTASI_BARANG> TRN_MUTASI_BARANG { get; set; }
         public DbSet<TRN_PENERIMAAN_BARANG> TRN_PENERIMAAN_BARANG { get; set; }
-    
-        public virtual int SP_GetRptOutstanding(string dateFrom, string dateTo)
-        {
-            var dateFromParameter = dateFrom != null ?
-                new ObjectParameter("DateFrom", dateFrom) :
-                new ObjectParameter("DateFrom", typeof(string));
-    
-            var dateToParameter = dateTo != null ?
-                new ObjectParameter("DateTo", dateTo) :
-                new ObjectParameter("DateTo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GetRptOutstanding", dateFromParameter, dateToParameter);
-        }
+        public DbSet<TRN_SURAT_PERINTAH_PRODUKSI> TRN_SURAT_PERINTAH_PRODUKSI { get; set; }
     
         public virtual ObjectResult<SP_RealisasiHarian_Result> SP_RealisasiHarian(string date)
         {
@@ -71,6 +59,11 @@ namespace sistem.manajemen.ppic.dal
                 new ObjectParameter("Date", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_RealisasiHarian_Result>("SP_RealisasiHarian", dateParameter);
+        }
+    
+        public virtual ObjectResult<SP_GetRptOutstanding_Result> SP_GetRptOutstanding()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetRptOutstanding_Result>("SP_GetRptOutstanding");
         }
     }
 }

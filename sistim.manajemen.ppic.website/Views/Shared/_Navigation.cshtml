@@ -45,6 +45,7 @@
             <li class="@Html.IsSelectedMenu(Menu: "Produksi", CurrentMenu : Model.Menu)" style="@Html.IsShownMenu(Model.CurrentUser.ROLE_ID, "Produksi" )">
                 <a href="#"><i class="fa fa-industry"></i> <span class="nav-label">Produksi</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Produksi", CurrentMenu : Model.Menu, cssClass: "in")">
+                    <li class="@Html.IsSelected(controller:"TrnSuratPerintahProduksi",action: "Index")"><a href="@Url.Action("Index", "TrnSuratPerintahProduksi")">Surat Perintah Produksi</a></li>
                     <li class="@Html.IsSelected(controller:"TrnHasilProduksi",action: "Index")"><a href="@Url.Action("Index", "TrnHasilProduksi")">Hasil Produksi</a></li>
                     <li class="@Html.IsSelected(controller:"TrnProduksi",action: "Index")"><a href="@Url.Action("Index", "TrnProduksi")">Permintaan Bahan Baku</a></li>
                 </ul>
@@ -64,9 +65,9 @@
                 <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Master", CurrentMenu : Model.Menu, cssClass: "in")">
                     <li class="@Html.IsSelected(controller:"MstBarangJadi",action: "Index")"><a href="@Url.Action("Index","MstBarangJadi")">Master Barang Jadi</a></li>
                     <li class="@Html.IsSelected(controller:"MstBahanBaku",action: "Index")"><a href="@Url.Action("Index","MstBahanBaku")">Master Bahan Baku</a></li>
-                    <li class="#"><a href="#">Master Wilayah</a></li>
+                    <li class="@Html.IsSelected(controller:"MstWilayah",action: "Index")"><a href="@Url.Action("Index","MstWilayah")">Master Wilayah</a></li>
                     <li class="#"><a href="#">Master Konsumen</a></li>
-                    <li class="#"><a href="#">Master Kemasan</a></li>
+                    <li class="@Html.IsSelected(controller:"MstKemasan",action: "Index")"><a href="@Url.Action("Index","MstKemasan")">Master Kemasan</a></li>
                     <li class="#"><a href="#">Master Bentuk</a></li>
                     <li class="#"><a href="#">Master UOM</a></li>
                 </ul>

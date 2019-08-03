@@ -35,6 +35,13 @@ namespace sistem.manajemen.ppic.bll
 
             return ReData;
         }
+        public MstWilayahDto GetByWilayah(string Wilayah)
+        {
+            var Data = _mstWilayahServices.GetAll().Where(x=> x.WILAYAH.ToUpper() == Wilayah.ToUpper()).FirstOrDefault();
+            var ReData = Mapper.Map<MstWilayahDto>(Data);
+
+            return ReData;
+        }
         public void Save(MstWilayahDto model)
         {
             try
@@ -47,13 +54,15 @@ namespace sistem.manajemen.ppic.bll
                 throw;
             }
         }
-        public void Save(MstWilayahDto model,LoginDto LoginDto)
+        public MstWilayahDto Save(MstWilayahDto model,LoginDto LoginDto)
         {
             try
             {
                 var db = Mapper.Map<MST_WILAYAH>(model);
                 var Login = Mapper.Map<Login>(LoginDto);
-                _mstWilayahServices.Save(db,Login);
+                db = _mstWilayahServices.Save(db,Login);
+                model = Mapper.Map<MstWilayahDto>(db);
+                return model;
             }
             catch (Exception)
             {

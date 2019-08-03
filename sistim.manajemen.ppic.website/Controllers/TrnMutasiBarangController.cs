@@ -8,6 +8,11 @@ using sistem.manajemen.ppic.core;
 using sistem.manajemen.ppic.website.Models;
 using AutoMapper;
 using sistem.manajemen.ppic.dto;
+using System.Configuration;
+using System.Data.Entity.Core.EntityClient;
+using System.Data.SqlClient;
+using CrystalDecisions.CrystalReports.Engine;
+using System.Web.Hosting;
 
 namespace sistem.manajemen.ppic.website.Controllers
 {
@@ -188,11 +193,11 @@ namespace sistem.manajemen.ppic.website.Controllers
                 _trnMutasiBarangBLL.Delete(id.Value, Remarks);
                 if(model.JENIS_BARANG == (int)Enums.JenisBarang.BarangJadi)
                 {
-                    _mstBarangJadiBLL.TambahSaldo(model.ID_BARANG_JADI.Value, model.JUMLAH.Value);
+                    _mstBarangJadiBLL.KurangSaldo(model.ID_BARANG_JADI.Value, model.JUMLAH.Value);
                 }
                 else if(model.JENIS_BARANG == (int)Enums.JenisBarang.BahanBaku)
                 {
-                    _mstBahanBakuBLL.TambahSaldo(model.ID_BAHAN_BAKU.Value, model.JUMLAH.Value);
+                    _mstBahanBakuBLL.KurangSaldo(model.ID_BAHAN_BAKU.Value, model.JUMLAH.Value);
                 }
 
                 AddMessageInfo("Data sukses dihapus", Enums.MessageInfoType.Success);
@@ -256,6 +261,40 @@ namespace sistem.manajemen.ppic.website.Controllers
                 return Json(data);
             }
             return Json("Error");
+        }
+        [HttpPost]
+        public JsonResult PrintPDF(int id)
+        {
+            try
+            {
+                var connection = System.Configuration.ConfigurationManager.ConnectionStrings["PPICEntities"].ConnectionString;
+                var connectString = ConfigurationManager.ConnectionStrings["PPICEntities"].ConnectionString;
+                var entityStringBuilder = new EntityConnectionStringBuilder(connectString);
+                SqlConnectionStringBuilder SqlConnection = new SqlConnectionStringBuilder(entityStringBuilder.ProviderConnectionString);
+
+                ReportDocument cryRpt = new ReportDocument();
+                var WebrootUrl = ConfigurationManager.AppSettings["Webrooturl"];
+                var FilesUploadPath = ConfigurationManager.AppSettings["FilesReport"];
+                var fileName = System.IO.Path.GetFileName("RptMutasiBarang_" + id.ToString().PadLeft(4, '0') + ".pdf");
+                var fullPath = System.IO.Path.Combine(@FilesUploadPath + "\\Mutasi Barang\\", fileName);
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+                var SystemPath = HostingEnvironment.ApplicationPhysicalPath;
+
+                cryRpt.Load(SystemPath + "\\Reports\\ReportMutasiBarang.rpt");
+                cryRpt.SetDatabaseLogon(SqlConnection.UserID, SqlConnection.Password, SqlConnection.DataSource, SqlConnection.InitialCatalog);
+                cryRpt.SetParameterValue("id", id);
+                cryRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, fullPath);
+
+                return Json(WebrootUrl + "\\files_upload\\Reports\\Mutasi Barang\\" + fileName);
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
+                return Json("Error");
+            }
         }
         #endregion
     }

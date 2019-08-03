@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sistem.manajemen.ppic.dto
 {
-    public class KemasanDto
+    public class MstKemasanDto
     {
         public int ID { get; set; }
         public string KEMASAN { get; set; }
@@ -15,5 +15,6 @@ namespace sistem.manajemen.ppic.dto
         public Nullable<System.DateTime> CREATED_DATE { get; set; }
         public string MODIFIED_BY { get; set; }
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
+        public Nullable<decimal> CONVERTION { get; set; }
     }
 }

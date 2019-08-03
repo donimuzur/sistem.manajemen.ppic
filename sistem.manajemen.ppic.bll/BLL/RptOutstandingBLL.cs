@@ -15,21 +15,20 @@ namespace sistem.manajemen.ppic.bll
 {
     public class RptOutstandingBLL: IRptOutstandingBLL
     {
+        private IRptOutstandingServices _rptOutstandingServices;
         private IUnitOfWork _uow;
-        public RptOutstandingBLL(IUnitOfWork Uow)
+
+        public RptOutstandingBLL()
         {
-            _uow = Uow;
+            _uow = new SqlUnitOfWork();
+            _rptOutstandingServices = new RptOutstandingServices(_uow);
         }
-        public List<RptOutstandingDto> GetLogProductionIncome_SP(RptOutstandingInput input)
+        public List<RptOutstandingDto> GetRpt()
         {
-            var resultDto = new List<RptOutstandingDto>();
-            using (var EMSDD_CONTEXT = new PPICEntities())
-            {
-                EMSDD_CONTEXT.Database.CommandTimeout = 1000;
-                //var result = EMSDD_CONTEXT.SP_GetRptOutstanding(input.FromDate.Value.ToString("yyyy-MM-dd"), input.ToDate.Value.ToString("yyyy-MM-dd"));
-                //var resultDto = Mapper.Map<List<RptOutstandingDto>>(result.ToList());
-                return resultDto;
-            }
+            var Data = _rptOutstandingServices.GetRpt();
+            var ReData = Mapper.Map<List<RptOutstandingDto>>(Data);
+
+            return ReData;
         }
     }
 }

@@ -20,8 +20,11 @@ namespace sistem.manajemen.ppic.website.Controllers
         }
         public MstWilayahModel Init(MstWilayahModel model)
         {
+            model.MainMenu = Enums.MenuList.MasterWilayah;
+            model.Menu = Enums.GetEnumDescription(Enums.MenuList.Master);
             model.CurrentUser = CurrentUser;
-            model.Menu = "Wilayah";
+            model.Tittle = "Master Wilayah";
+
             model.ChangesHistory = GetChangesHistory((int)Enums.MenuList.MasterWilayah, model.ID);
 
             return model;
@@ -33,8 +36,11 @@ namespace sistem.manajemen.ppic.website.Controllers
 
             model.ListData = Mapper.Map<List<MstWilayahModel>>(data);
 
+            model.MainMenu = Enums.MenuList.MasterWilayah;
+            model.Menu = Enums.GetEnumDescription(Enums.MenuList.Master);
             model.CurrentUser = CurrentUser;
-            model.Menu = "Wilayah";
+            model.Tittle = "Master Wilayah";
+
 
             return View(model);
         }
@@ -62,16 +68,27 @@ namespace sistem.manajemen.ppic.website.Controllers
                     Dto.CREATED_DATE = DateTime.Now;
                     Dto.STATUS = true;
 
-                    _mstWilayahBLL.Save(Dto,Mapper.Map<LoginDto>(CurrentUser));
-                    return RedirectToAction("Index", "MstWilayah");
+                    var GetDataExist = _mstWilayahBLL.GetByWilayah(model.WILAYAH);
+                    if (GetDataExist != null)
+                    {
+                        AddMessageInfo("Data dengan wilayah Tersebut Sudah ada", Enums.MessageInfoType.Error);
+                        return View(Init(model));
+                    }
+
+                    Dto = _mstWilayahBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
+                    AddMessageInfo("Sukses tambah data", Enums.MessageInfoType.Success);
+                    return RedirectToAction("Details", "MstWilayah", new { id = Dto.ID });
                 }
-                catch (Exception)
+                catch (Exception exp)
                 {
-                    throw;
+                    LogError.LogError.WriteError(exp);
+                    AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+                    return RedirectToAction("Index", "MstWilayah");
                 }
             }
             else
             {
+                AddMessageInfo("Gagal update data", Enums.MessageInfoType.Error);
                 model = Init(model);
                 return View(model);
             }
@@ -114,11 +131,14 @@ namespace sistem.manajemen.ppic.website.Controllers
                     Dto.MODIFIED_DATE = DateTime.Now;
                     
                     _mstWilayahBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
-                    return RedirectToAction("Index", "MstWilayah");
+                    AddMessageInfo("Sukses update data", Enums.MessageInfoType.Success);
+                    return RedirectToAction("Details", "MstWilayah", new {id=model.ID });
                 }
-                catch (Exception)
+                catch (Exception exp)
                 {
-                    throw;
+                    LogError.LogError.WriteError(exp);
+                    AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+                    return RedirectToAction("Index", "MstWilayah");
                 }
             }
             else
@@ -128,6 +148,32 @@ namespace sistem.manajemen.ppic.website.Controllers
             }
         }
         #endregion
+
+        #region --- Details ---
+        public ActionResult Details(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return HttpNotFound();
+            }
+            try
+            {
+                var model = new MstWilayahModel();
+
+                model = Mapper.Map<MstWilayahModel>(_mstWilayahBLL.GetById(id));
+
+                model = Init(model);
+                return View(model);
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
+                AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+                return RedirectToAction("Index", "MstWilayah");
+            }
+        }
+        #endregion
+
 
         #region --- Json ---
 

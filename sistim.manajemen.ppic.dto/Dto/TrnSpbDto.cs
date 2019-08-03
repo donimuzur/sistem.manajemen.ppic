@@ -46,5 +46,9 @@ namespace sistem.manajemen.ppic.dto
         public Nullable<core.Enums.StatusDocument> STATUS { get; set; }
         public Nullable<int> DOKUMEN_PENDUKUNG_TYPE { get; set; }
         public string REMARK { get; set; }
+        public Nullable<decimal> ONGKOS_INCLARING { get; set; }
+        public Nullable<decimal> ONGKOS_GUDANG { get; set; }
+
+        public string REMARKS { get; set; }
     }
 }

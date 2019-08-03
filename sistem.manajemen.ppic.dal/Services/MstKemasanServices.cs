@@ -39,12 +39,13 @@ namespace sistem.manajemen.ppic.dal.Services
                 throw;
             }
         }
-        public void Save(MST_KEMASAN Db, Login Login)
+        public MST_KEMASAN Save(MST_KEMASAN Db, Login Login)
         {
             try
             {
                 _mstKemasanRepo.InsertOrUpdate(Db, Login, Enums.MenuList.MasterKemasan);
                 _uow.SaveChanges();
+                return Db;
             }
             catch (Exception)
             {

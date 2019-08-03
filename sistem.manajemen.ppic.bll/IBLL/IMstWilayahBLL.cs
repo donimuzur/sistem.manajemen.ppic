@@ -11,7 +11,8 @@ namespace sistem.manajemen.ppic.bll.IBLL
     {
         List<MstWilayahDto> GetAll();
         MstWilayahDto GetById(object Id);
+        MstWilayahDto GetByWilayah(string Wilayah);
         void Save(MstWilayahDto model);
-        void Save(MstWilayahDto model, LoginDto LoginDto);
+        MstWilayahDto Save(MstWilayahDto model, LoginDto LoginDto);
     }
 }

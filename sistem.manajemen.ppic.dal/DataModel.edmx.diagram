@@ -36,6 +36,7 @@
         <AssociationConnector Association="SIM_PPICModel.FK_TRN_MUTASI_BARANG_MST_BARANG_JADI" />
         <EntityTypeShape EntityType="SIM_PPICModel.TRN_PENERIMAAN_BARANG" Width="1.5" PointX="15.375" PointY="7.75" />
         <AssociationConnector Association="SIM_PPICModel.FK_TRN_PENERIMAAN_BARANG_MST_BAHAN_BAKU" />
+        <EntityTypeShape EntityType="SIM_PPICModel.TRN_SURAT_PERINTAH_PRODUKSI" Width="1.5" PointX="9.375" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

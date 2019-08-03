@@ -55,6 +55,8 @@ namespace sistem.manajemen.ppic.website.Models
         public SelectList CaraPembayaranList { get; set; }
         public SelectList KemasanList {get;set;}
         public SelectList DokumenList { get; set; }
+        public Nullable<decimal> ONGKOS_INCLARING { get; set; }
+        public Nullable<decimal> ONGKOS_GUDANG { get; set; }
     }
     public class TrnSpbViewModel:BaseModel
     {
@@ -101,5 +103,7 @@ namespace sistem.manajemen.ppic.website.Models
         public string KEMASAN_DESC { get; set; }
         public Nullable<int> DOKUMEN_PENDUKUNG_TYPE { get; set; }
         public string MessageError { set; get; }
+        public Nullable<decimal> ONGKOS_INCLARING { get; set; }
+        public Nullable<decimal> ONGKOS_GUDANG { get; set; }
     }
 }

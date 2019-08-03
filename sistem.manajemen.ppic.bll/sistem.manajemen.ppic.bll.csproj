@@ -52,6 +52,7 @@
     <Compile Include="BLL\TrnPenerimaanBarangBLL.cs" />
     <Compile Include="BLL\TrnPengirimanBLL.cs" />
     <Compile Include="BLL\TrnSuratPengantarBongkarMuatBLL.cs" />
+    <Compile Include="BLL\TrnSuratPerintahProduksiBLL.cs" />
     <Compile Include="IBLL\IMstBahanBakuBLL.cs" />
     <Compile Include="IBLL\IMstBarangJadiBLL.cs" />
     <Compile Include="IBLL\ILoginBLL.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="BLL\MstUomBLL.cs" />
     <Compile Include="BLL\MstKemasanBLL.cs" />
     <Compile Include="IBLL\ITrnSuratPengantarBongkarMuatBLL.cs" />
+    <Compile Include="IBLL\ITrnSuratPerintahProduksiBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BLL\TrnSpbBLL.cs" />
     <Compile Include="BLL\TrnDoBLL.cs" />

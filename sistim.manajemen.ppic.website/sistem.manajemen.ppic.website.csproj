@@ -318,6 +318,11 @@
     <Content Include="Contents\plugins\touchspin\jquery.bootstrap-touchspin.min.css" />
     <Content Include="Contents\style.css" />
     <Content Include="files_upload\Dokumen\aa.png" />
+    <Content Include="files_upload\Reports\Do\ini.txt" />
+    <Content Include="files_upload\Reports\Laporan\ini.txt" />
+    <Content Include="files_upload\Reports\Mutasi Barang\ini.txt" />
+    <Content Include="files_upload\Reports\SPB\ini.txt" />
+    <Content Include="files_upload\Reports\Surat Jalan\ini.txt" />
     <Content Include="Fonts\font-awesome\css\font-awesome.css" />
     <Content Include="Fonts\font-awesome\css\font-awesome.min.css" />
     <Content Include="Fonts\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -1559,6 +1564,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MstBahanBakuController.cs" />
     <Compile Include="Controllers\MstBarangJadiController.cs" />
+    <Compile Include="Controllers\MstKemasanController.cs" />
     <Compile Include="Controllers\MstWilayahController.cs" />
     <Compile Include="Controllers\RptHarianController.cs" />
     <Compile Include="Controllers\RptOutstandingController.cs" />
@@ -1569,6 +1575,7 @@
     <Compile Include="Controllers\TrnPengirimanController.cs" />
     <Compile Include="Controllers\TrnSpbController.cs" />
     <Compile Include="Controllers\TrnSuratPengantarBongkarMuatController.cs" />
+    <Compile Include="Controllers\TrnSuratPerintahProduksiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1578,6 +1585,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MstBahanBakuModel.cs" />
     <Compile Include="Models\MstBarangJadiModel.cs" />
+    <Compile Include="Models\MstKemasanModel.cs" />
     <Compile Include="Models\MstUomModel.cs" />
     <Compile Include="Models\MstWilayahModel.cs" />
     <Compile Include="Models\RptDoModel.cs" />
@@ -1592,7 +1600,20 @@
     <Compile Include="Models\TrnPengirimanModel.cs" />
     <Compile Include="Models\TrnSpbModel.cs" />
     <Compile Include="Models\TrnSuratPengantarBongkarMuatModel.cs" />
+    <Compile Include="Models\TrnSuratPerintahProduksiModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\ReportMutasiBarang.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportMutasiBarang.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportOutstanding.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportOutstanding.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ReportSPB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1764,6 +1785,15 @@
     <Content Include="Views\GdgBahanBaku\Index.cshtml" />
     <Content Include="Views\RptHarian\Index.cshtml" />
     <Content Include="Views\RptHarian\_listRptEkspedisiHarian.cshtml" />
+    <Content Include="Views\TrnSuratPerintahProduksi\Index.cshtml" />
+    <Content Include="Views\TrnSuratPerintahProduksi\Create.cshtml" />
+    <Content Include="Views\TrnSuratPerintahProduksi\Details.cshtml" />
+    <Content Include="Views\TrnSuratPerintahProduksi\Edit.cshtml" />
+    <Content Include="Views\MstKemasan\Index.cshtml" />
+    <Content Include="Views\MstKemasan\Create.cshtml" />
+    <Content Include="Views\MstKemasan\Details.cshtml" />
+    <Content Include="Views\MstKemasan\Edit.cshtml" />
+    <Content Include="Views\MstWilayah\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1773,10 +1803,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="files_upload\Reports\Do\" />
-    <Folder Include="files_upload\Reports\Laporan\" />
-    <Folder Include="files_upload\Reports\SPB\" />
-    <Folder Include="files_upload\Reports\Surat Jalan\" />
     <Folder Include="Images\gallery\" />
     <Folder Include="Images\landing\" />
     <Folder Include="Views\TrnPermintaanBahanBaku\" />
@@ -1800,29 +1826,39 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\ReportSPB.rpt">
+    <Content Include="Reports\ReportSPB.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportSPB.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportDo.rpt">
+    </Content>
+    <Content Include="Reports\ReportDo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportDo.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportRealisasiHarian.rpt">
+    </Content>
+    <Content Include="Reports\ReportRealisasiHarian.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportRealisasiHarian.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportSuratJalan.rpt">
+    </Content>
+    <Content Include="Reports\ReportSuratJalan.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportSuratJalan.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportSuratJalan2.rpt">
+    </Content>
+    <Content Include="Reports\ReportSuratJalan2.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportSuratJalan2.cs</LastGenOutput>
-    </EmbeddedResource>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\ReportMutasiBarang.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportMutasiBarang.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportOutstanding.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportOutstanding.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

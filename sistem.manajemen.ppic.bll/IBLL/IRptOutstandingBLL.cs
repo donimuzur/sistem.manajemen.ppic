@@ -10,6 +10,6 @@ namespace sistem.manajemen.ppic.bll.IBLL
 {
     public interface IRptOutstandingBLL
     {
-        List<RptOutstandingDto> GetLogProductionIncome_SP(RptOutstandingInput input);
+        List<RptOutstandingDto> GetRpt();
     }
 }

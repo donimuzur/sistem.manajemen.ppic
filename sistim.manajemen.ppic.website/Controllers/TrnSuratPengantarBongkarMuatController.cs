@@ -19,13 +19,14 @@ namespace sistem.manajemen.ppic.website.Controllers
         private IMstKemasanBLL _mstKemasanBLL;
         private ITrnSpbBLL _trnSpbBLL;
         private ITrnDoBLL _trnDoBLL;
-        public TrnSuratPengantarBongkarMuatController(IPageBLL pageBll, ITrnSpbBLL TrnSpbBLL, ITrnDoBLL TrnDoBLL, IMstBarangJadiBLL MstBarangJadiBLL, IMstKemasanBLL MstKemasanBLL, ITrnSuratPengantarBongkarMuatBLL TrnSuratPengantarBongkarMuatBLL) : base(pageBll, Enums.MenuList.TrnSuratPengantarBongkarMuat)
+        public TrnSuratPengantarBongkarMuatController(IPageBLL pageBll, ITrnSpbBLL TrnSpbBLL, ITrnDoBLL TrnDoBLL, IMstBarangJadiBLL MstBarangJadiBLL, IMstKemasanBLL MstKemasanBLL, IMstBahanBakuBLL MstBahanBakuBLL, ITrnSuratPengantarBongkarMuatBLL TrnSuratPengantarBongkarMuatBLL) : base(pageBll, Enums.MenuList.TrnSuratPengantarBongkarMuat)
         {
             _trnSuratPengantarBongkarMuatBLL = TrnSuratPengantarBongkarMuatBLL;
             _mstBarangJadiBLL = MstBarangJadiBLL;
             _mstKemasanBLL = MstKemasanBLL;
             _trnSpbBLL = TrnSpbBLL;
             _trnDoBLL = TrnDoBLL;
+            _mstBahanBakuBLL = MstBahanBakuBLL;
         }
         // GET: TrnSuratPengantarBongkarMuat
         public ActionResult Index()

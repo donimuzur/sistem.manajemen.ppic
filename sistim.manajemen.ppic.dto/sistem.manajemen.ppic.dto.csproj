@@ -40,9 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\MstKemasanDto.cs" />
     <Compile Include="Dto\TrnPenerimaanBarangDto.cs" />
     <Compile Include="Dto\ChangesHistoryDto.cs" />
-    <Compile Include="Dto\KemasanDto.cs" />
     <Compile Include="Dto\LoginDto.cs" />
     <Compile Include="Dto\MstBarangJadiDto.cs" />
     <Compile Include="Dto\MstWilayahDto.cs" />
@@ -52,6 +52,7 @@
     <Compile Include="Dto\TrnMutasiBarangDto.cs" />
     <Compile Include="Dto\TrnPengirimanDto.cs" />
     <Compile Include="Dto\TrnSuratPengantarBongkarMuatDto.cs" />
+    <Compile Include="Dto\TrnSuratPerintahProduksiDto.cs" />
     <Compile Include="Dto\UomDto.cs" />
     <Compile Include="Input\RptOutstandingInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

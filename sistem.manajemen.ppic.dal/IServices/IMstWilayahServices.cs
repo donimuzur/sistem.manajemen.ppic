@@ -11,6 +11,6 @@ namespace sistem.manajemen.ppic.dal.IServices
         List<MST_WILAYAH> GetAll();
         MST_WILAYAH GetById(object Id);
         void Save(MST_WILAYAH Db);
-        void Save(MST_WILAYAH Db, Login Login);
+        MST_WILAYAH Save(MST_WILAYAH Db, Login Login);
     }
 }
