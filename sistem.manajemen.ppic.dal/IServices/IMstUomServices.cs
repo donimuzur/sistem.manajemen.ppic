@@ -11,6 +11,6 @@ namespace sistem.manajemen.ppic.dal.IServices
         List<MST_UOM> GetAll();
         MST_UOM GetById(object id);
         void Save(MST_UOM Db);
-        void Save(MST_UOM Db, Login Login);
+        MST_UOM Save(MST_UOM Db, Login Login);
     }
 }

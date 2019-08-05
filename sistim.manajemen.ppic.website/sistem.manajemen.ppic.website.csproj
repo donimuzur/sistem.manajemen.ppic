@@ -1565,6 +1565,7 @@
     <Compile Include="Controllers\MstBahanBakuController.cs" />
     <Compile Include="Controllers\MstBarangJadiController.cs" />
     <Compile Include="Controllers\MstKemasanController.cs" />
+    <Compile Include="Controllers\MstUomController.cs" />
     <Compile Include="Controllers\MstWilayahController.cs" />
     <Compile Include="Controllers\RptHarianController.cs" />
     <Compile Include="Controllers\RptOutstandingController.cs" />
@@ -1794,6 +1795,8 @@
     <Content Include="Views\MstKemasan\Details.cshtml" />
     <Content Include="Views\MstKemasan\Edit.cshtml" />
     <Content Include="Views\MstWilayah\Details.cshtml" />
+    <Content Include="Views\MstUom\Index.cshtml" />
+    <Content Include="Views\MstUom\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

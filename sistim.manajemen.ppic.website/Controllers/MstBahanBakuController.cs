@@ -96,7 +96,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                     }
 
                     _mstBahanBakuBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
-                    AddMessageInfo("Success Create Master Bahan Baku", Enums.MessageInfoType.Success);
+                    AddMessageInfo("Success tambah data", Enums.MessageInfoType.Success);
                     return RedirectToAction("Index", "MstBahanBaku");
                 }
                 catch (Exception exp)
@@ -106,7 +106,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                     return RedirectToAction("Index", "MstBahanBaku");
                 }
             }
-            AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+            AddMessageInfo("Gagal tambah data", Enums.MessageInfoType.Error);
             return View(Init(model));
         }
         #endregion
@@ -157,7 +157,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                     GetData.MODIFIED_DATE = DateTime.Now;
 
                     _mstBahanBakuBLL.Save(GetData, Mapper.Map<LoginDto>(CurrentUser));
-                    AddMessageInfo("Sukses Update Master Bahan Baku", Enums.MessageInfoType.Success);
+                    AddMessageInfo("Sukses update data", Enums.MessageInfoType.Success);
                     return RedirectToAction("Index", "MstBahanBaku");
                 }
                 catch (Exception exp)
@@ -167,7 +167,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                     return RedirectToAction("Index", "MstBahanBaku");
                 }
             }
-            AddMessageInfo("Gagal Update Master Bahan Baku", Enums.MessageInfoType.Error);
+            AddMessageInfo("Gagal Update data", Enums.MessageInfoType.Error);
             return View(Init(model));
         }
         #endregion

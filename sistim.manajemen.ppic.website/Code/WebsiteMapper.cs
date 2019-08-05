@@ -60,6 +60,9 @@ namespace sistem.manajemen.ppic.website.Code
                 cfg.CreateMap<MstKemasanModel, MstKemasanDto>().ReverseMap();
                 cfg.CreateMap<MstKemasanDto, MST_KEMASAN>().ReverseMap();
 
+                cfg.CreateMap<MstUomModel, MstUomDto>().ReverseMap();
+                cfg.CreateMap<MstUomDto, MST_UOM>().ReverseMap();
+
             });
         }
     }

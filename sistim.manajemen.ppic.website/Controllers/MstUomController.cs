@@ -11,35 +11,35 @@ using sistem.manajemen.ppic.dto;
 
 namespace sistem.manajemen.ppic.website.Controllers
 {
-    public class MstWilayahController : BaseController
+    public class MstUomController : BaseController
     {
-        private IMstWilayahBLL _mstWilayahBLL;
-        public MstWilayahController(IMstWilayahBLL MstWilayahBLL, IPageBLL pageBll) : base(pageBll, Enums.MenuList.MasterWilayah)
+        private IMstUomBLL _mstUomBLL;
+        public MstUomController(IMstUomBLL MstUomBLL, IPageBLL pageBll) : base(pageBll, Enums.MenuList.MasterUom)
         {
-            _mstWilayahBLL = MstWilayahBLL; 
+            _mstUomBLL = MstUomBLL;
         }
-        public MstWilayahModel Init(MstWilayahModel model)
+        public MstUomModel Init(MstUomModel model)
         {
-            model.MainMenu = Enums.MenuList.MasterWilayah;
+            model.MainMenu = Enums.MenuList.MasterUom;
             model.Menu = Enums.GetEnumDescription(Enums.MenuList.Master);
             model.CurrentUser = CurrentUser;
-            model.Tittle = "Master Wilayah";
+            model.Tittle = "Master Uom";
 
-            model.ChangesHistory = GetChangesHistory((int)Enums.MenuList.MasterWilayah, model.ID);
+            model.ChangesHistory = GetChangesHistory((int)Enums.MenuList.MasterUom, model.ID);
 
             return model;
         }
         public ActionResult Index()
         {
-            var model = new MstWilayahViewModel();
-            var data = _mstWilayahBLL.GetAll();
+            var model = new MstUomViewModel();
+            var data = _mstUomBLL.GetAll();
 
-            model.ListData = Mapper.Map<List<MstWilayahModel>>(data);
+            model.ListData = Mapper.Map<List<MstUomModel>>(data);
 
-            model.MainMenu = Enums.MenuList.MasterWilayah;
+            model.MainMenu = Enums.MenuList.MasterUom;
             model.Menu = Enums.GetEnumDescription(Enums.MenuList.Master);
             model.CurrentUser = CurrentUser;
-            model.Tittle = "Master Wilayah";
+            model.Tittle = "Master Uom";
 
 
             return View(model);
@@ -47,43 +47,41 @@ namespace sistem.manajemen.ppic.website.Controllers
         #region --- Create ---
         public ActionResult Create()
         {
-            var model = new MstWilayahModel();
+            var model = new MstUomModel();
 
             model = Init(model);
-            model.STATUS = true;
 
             return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(MstWilayahModel model)
+        public ActionResult Create(MstUomModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var Dto = Mapper.Map<MstWilayahDto>(model);
+                    var Dto = Mapper.Map<MstUomDto>(model);
 
                     Dto.CREATED_BY = CurrentUser.USERNAME;
                     Dto.CREATED_DATE = DateTime.Now;
-                    Dto.STATUS = true;
 
-                    var GetDataExist = _mstWilayahBLL.GetByWilayah(model.WILAYAH);
+                    var GetDataExist = _mstUomBLL.GetByUom(model.SATUAN);
                     if (GetDataExist != null)
                     {
-                        AddMessageInfo("Data dengan wilayah Tersebut Sudah ada", Enums.MessageInfoType.Error);
+                        AddMessageInfo("Data dengan satuan tersebut sudah ada", Enums.MessageInfoType.Error);
                         return View(Init(model));
                     }
 
-                    Dto = _mstWilayahBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
+                    Dto = _mstUomBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
                     AddMessageInfo("Sukses tambah data", Enums.MessageInfoType.Success);
-                    return RedirectToAction("Details", "MstWilayah", new { id = Dto.ID });
+                    return RedirectToAction("Details", "MstUom", new { id = Dto.ID });
                 }
                 catch (Exception exp)
                 {
                     LogError.LogError.WriteError(exp);
                     AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
-                    return RedirectToAction("Index", "MstWilayah");
+                    return RedirectToAction("Index", "MstUom");
                 }
             }
             else
@@ -103,15 +101,15 @@ namespace sistem.manajemen.ppic.website.Controllers
                 return HttpNotFound();
             }
 
-            var model = new MstWilayahModel();
+            var model = new MstUomModel();
 
-            var GetData = _mstWilayahBLL.GetById(id);
+            var GetData = _mstUomBLL.GetById(id);
             if (GetData == null)
             {
                 return HttpNotFound();
             }
 
-            model = Mapper.Map<MstWilayahModel>(GetData);
+            model = Mapper.Map<MstUomModel>(GetData);
             model = Init(model);
 
             return View(model);
@@ -119,26 +117,26 @@ namespace sistem.manajemen.ppic.website.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(MstWilayahModel model)
+        public ActionResult Edit(MstUomModel model)
         {
             if (ModelState.IsValid)
             {
                 try
-                {                                                      
-                    var Dto = Mapper.Map<MstWilayahDto>(model);
+                {
+                    var Dto = Mapper.Map<MstUomDto>(model);
 
                     Dto.MODIFIED_BY = CurrentUser.USERNAME;
                     Dto.MODIFIED_DATE = DateTime.Now;
-                    
-                    _mstWilayahBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
+
+                    _mstUomBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
                     AddMessageInfo("Sukses update data", Enums.MessageInfoType.Success);
-                    return RedirectToAction("Details", "MstWilayah", new {id=model.ID });
+                    return RedirectToAction("Details", "MstUom", new { id = model.ID });
                 }
                 catch (Exception exp)
                 {
                     LogError.LogError.WriteError(exp);
                     AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
-                    return RedirectToAction("Index", "MstWilayah");
+                    return RedirectToAction("Index", "MstUom");
                 }
             }
             else
@@ -159,9 +157,9 @@ namespace sistem.manajemen.ppic.website.Controllers
             }
             try
             {
-                var model = new MstWilayahModel();
+                var model = new MstUomModel();
 
-                model = Mapper.Map<MstWilayahModel>(_mstWilayahBLL.GetById(id));
+                model = Mapper.Map<MstUomModel>(_mstUomBLL.GetById(id));
 
                 model = Init(model);
                 return View(model);
@@ -170,7 +168,7 @@ namespace sistem.manajemen.ppic.website.Controllers
             {
                 LogError.LogError.WriteError(exp);
                 AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
-                return RedirectToAction("Index", "MstWilayah");
+                return RedirectToAction("Index", "MstUom");
             }
         }
         #endregion

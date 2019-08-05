@@ -21,21 +21,28 @@ namespace sistem.manajemen.ppic.bll
             _uow = Uow;
             _mstUomServices = new MstUomServices(_uow);
         }
-        public List<UomDto> GetAll()
+        public List<MstUomDto> GetAll()
         {
             var Data = _mstUomServices.GetAll();
-            var ReData = Mapper.Map<List<UomDto>>(Data);
+            var ReData = Mapper.Map<List<MstUomDto>>(Data);
 
             return ReData;
         }
-        public UomDto GetById(object Id)
+        public MstUomDto GetById(object Id)
         {
             var Data = _mstUomServices.GetById(Id);
-            var ReData = Mapper.Map<UomDto>(Data);
+            var ReData = Mapper.Map<MstUomDto>(Data);
 
             return ReData;
         }
-        public void Save(UomDto model)
+        public MstUomDto GetByUom(string Uom)
+        {
+            var Data = _mstUomServices.GetAll().Where(x=> x.SATUAN.ToUpper() == Uom.ToUpper()).FirstOrDefault();
+            var ReData = Mapper.Map<MstUomDto>(Data);
+
+            return ReData;
+        }
+        public void Save(MstUomDto model)
         {
             try
             {
@@ -47,13 +54,14 @@ namespace sistem.manajemen.ppic.bll
                 throw;
             }
         }
-        public void Save(UomDto model, LoginDto LoginDto)
+        public MstUomDto Save(MstUomDto model, LoginDto LoginDto)
         {
             try
             {
                 var db = Mapper.Map<MST_UOM>(model);
                 var Login = Mapper.Map<Login>(LoginDto);
-                _mstUomServices.Save(db, Login);
+                db =_mstUomServices.Save(db, Login);
+                return Mapper.Map<MstUomDto>(db);
             }
             catch (Exception)
             {

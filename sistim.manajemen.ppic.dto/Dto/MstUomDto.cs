@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sistem.manajemen.ppic.dto
 {
-    public class UomDto
+    public class MstUomDto
     {
         public int ID { get; set; }
         public string SATUAN { get; set; }

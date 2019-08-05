@@ -39,12 +39,13 @@ namespace sistem.manajemen.ppic.dal.Services
                 throw;
             }
         }
-        public void Save(MST_UOM Db, Login Login)
+        public MST_UOM Save(MST_UOM Db, Login Login)
         {
             try
             {
                 _mstUomRepo.InsertOrUpdate(Db, Login, Enums.MenuList.MasterUom);
                 _uow.SaveChanges();
+                return Db;
             }
             catch (Exception)
             {

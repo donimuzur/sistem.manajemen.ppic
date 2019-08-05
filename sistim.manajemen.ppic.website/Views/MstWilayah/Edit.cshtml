@@ -73,6 +73,9 @@
                 </div>
             </div>
         </div>
+        <div id="changes">
+            @Html.Partial("_ChangesLog")
+        </div>
     </div>
 }
 
@@ -113,7 +116,12 @@
     <script type="text/javascript">
        $(document).ready()
        {
-           new AutoNumeric('.init', { vMin: '0', vMax: '999999999' });
+           new AutoNumeric('.init', {
+               minimumValue: '0',
+               maximumValue: '999999999',
+               decimalPlaces: 0,
+               digitGroupSeparator: '',
+           });
 
            var l = $('.ladda-button-submit').ladda();
            l.click(function () {
