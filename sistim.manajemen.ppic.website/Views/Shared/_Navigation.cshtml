@@ -47,7 +47,7 @@
                 <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Produksi", CurrentMenu : Model.Menu, cssClass: "in")">
                     <li class="@Html.IsSelected(controller:"TrnSuratPerintahProduksi",action: "Index")"><a href="@Url.Action("Index", "TrnSuratPerintahProduksi")">Surat Perintah Produksi</a></li>
                     <li class="@Html.IsSelected(controller:"TrnHasilProduksi",action: "Index")"><a href="@Url.Action("Index", "TrnHasilProduksi")">Hasil Produksi</a></li>
-                    <li class="@Html.IsSelected(controller:"TrnProduksi",action: "Index")"><a href="@Url.Action("Index", "TrnProduksi")">Permintaan Bahan Baku</a></li>
+                    <li class="@Html.IsSelected(controller:"TrnSuratPermintaanBahanBaku",action: "Index")"><a href="@Url.Action("Index", "TrnSuratPermintaanBahanBaku")">Surat Permintaan Bahan Baku</a></li>
                 </ul>
             </li>
             <li class="@Html.IsSelectedMenu(Menu: "Ekspedisi", CurrentMenu : Model.Menu)" style="@Html.IsShownMenu(Model.CurrentUser.ROLE_ID, "Ekspedisi" )">

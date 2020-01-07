@@ -32,5 +32,6 @@ namespace sistem.manajemen.ppic.dto
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
         public string NO_SURAT { get; set; }
         public string CATATAN { get; set; }
+        public Nullable<int> ZAK { get; set; }
     }
 }

@@ -20,7 +20,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TANGGAL" Type="datetime" Nullable="false" />
           <Property Name="NO" Type="int" />
           <Property Name="FORM_ID" Type="int" />
@@ -418,6 +418,7 @@
           <Property Name="JENIS_BARANG" Type="int" />
           <Property Name="NAMA_BARANG" Type="nvarchar" MaxLength="100" />
           <Property Name="KUANTUM" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ZAK" Type="int" />
           <Property Name="BENTUK" Type="nchar" MaxLength="100" />
           <Property Name="KEMASAN" Type="nvarchar" MaxLength="100" />
           <Property Name="JAM_MUAT" Type="datetime" />
@@ -457,6 +458,37 @@
           <Property Name="MODIFIED_DATE" Type="datetime" />
           <Property Name="STATUS" Type="tinyint" Nullable="false" />
           <Property Name="REMARKS" Type="text" />
+        </EntityType>
+        <EntityType Name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TANGGAL" Type="datetime" Nullable="false" />
+          <Property Name="NO_SPP" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NO_SURAT" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NAMA_PRODUK" Type="nvarchar" MaxLength="100" />
+          <Property Name="KOMPOSISI" Type="nvarchar" MaxLength="255" />
+          <Property Name="BENTUK" Type="nvarchar" MaxLength="100" />
+          <Property Name="KEMASAN" Type="nvarchar" MaxLength="100" />
+          <Property Name="KUANTUM_PRODUKSI" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SHIFT" Type="int" />
+          <Property Name="CREATED_DATE" Type="datetime" Nullable="false" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MODIFIED_DATE" Type="datetime" />
+          <Property Name="MODIFIED_BY" Type="nvarchar" MaxLength="100" />
+          <Property Name="STATUS" Type="tinyint" />
+          <Property Name="CATATAN" Type="text" />
+          <Property Name="REMARKS" Type="text" />
+        </EntityType>
+        <EntityType Name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_TRN_SURAT_PERMINTAAN_BAHAN_BAKU" Type="int" Nullable="false" />
+          <Property Name="ID_MST_BAHAN_BAKU" Type="int" Nullable="false" />
+          <Property Name="KUANTUM" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="WORKING_HOURS">
           <Key>
@@ -564,6 +596,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_MST_BAHAN_BAKU">
+          <End Role="MST_BAHAN_BAKU" Type="Self.MST_BAHAN_BAKU" Multiplicity="1" />
+          <End Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" Type="Self.TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MST_BAHAN_BAKU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS">
+              <PropertyRef Name="ID_MST_BAHAN_BAKU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_TRN_SURAT_PERMINTAAN_BAHAN_BAKU">
+          <End Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU" Type="Self.TRN_SURAT_PERMINTAAN_BAHAN_BAKU" Multiplicity="1" />
+          <End Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" Type="Self.TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS">
+              <PropertyRef Name="ID_TRN_SURAT_PERMINTAAN_BAHAN_BAKU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="SP_GetRptOutstanding" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_RealisasiHarian" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Date" Type="varchar" Mode="In" />
@@ -592,6 +648,8 @@
           <EntitySet Name="TRN_SPB" EntityType="Self.TRN_SPB" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRN_SURAT_PENGANTAR_BONGKAR_MUAT" EntityType="Self.TRN_SURAT_PENGANTAR_BONGKAR_MUAT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRN_SURAT_PERINTAH_PRODUKSI" EntityType="Self.TRN_SURAT_PERINTAH_PRODUKSI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU" EntityType="Self.TRN_SURAT_PERMINTAAN_BAHAN_BAKU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" EntityType="Self.TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WORKING_HOURS" EntityType="Self.WORKING_HOURS" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_HASIL_PRODUKSI_MST_BARANG_JADI" Association="Self.FK_HASIL_PRODUKSI_MST_BARANG_JADI">
             <End Role="MST_BARANG_JADI" EntitySet="MST_BARANG_JADI" />
@@ -624,6 +682,14 @@
           <AssociationSet Name="FK_TRN_PENGIRIMAN_MST_BARANG_JADI" Association="Self.FK_TRN_PENGIRIMAN_MST_BARANG_JADI">
             <End Role="MST_BARANG_JADI" EntitySet="MST_BARANG_JADI" />
             <End Role="TRN_PENGIRIMAN" EntitySet="TRN_PENGIRIMAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_MST_BAHAN_BAKU" Association="Self.FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_MST_BAHAN_BAKU">
+            <End Role="MST_BAHAN_BAKU" EntitySet="MST_BAHAN_BAKU" />
+            <End Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" EntitySet="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_TRN_SURAT_PERMINTAAN_BAHAN_BAKU" Association="Self.FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_TRN_SURAT_PERMINTAAN_BAHAN_BAKU">
+            <End Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU" EntitySet="TRN_SURAT_PERMINTAAN_BAHAN_BAKU" />
+            <End Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" EntitySet="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -706,6 +772,16 @@
           </FunctionImport>
           <FunctionImport Name="SP_GetRptOutstanding" ReturnType="Collection(SIM_PPICModel.SP_GetRptOutstanding_Result)" />
           <EntitySet Name="TRN_SURAT_PERINTAH_PRODUKSI" EntityType="SIM_PPICModel.TRN_SURAT_PERINTAH_PRODUKSI" />
+          <EntitySet Name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU" EntityType="SIM_PPICModel.TRN_SURAT_PERMINTAAN_BAHAN_BAKU" />
+          <EntitySet Name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" EntityType="SIM_PPICModel.TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" />
+          <AssociationSet Name="FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_MST_BAHAN_BAKU" Association="SIM_PPICModel.FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_MST_BAHAN_BAKU">
+            <End Role="MST_BAHAN_BAKU" EntitySet="MST_BAHAN_BAKU" />
+            <End Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" EntitySet="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_TRN_SURAT_PERMINTAAN_BAHAN_BAKU" Association="SIM_PPICModel.FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_TRN_SURAT_PERMINTAAN_BAHAN_BAKU">
+            <End Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU" EntitySet="TRN_SURAT_PERMINTAAN_BAHAN_BAKU" />
+            <End Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" EntitySet="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="PAGE">
           <Key>
@@ -855,6 +931,7 @@
           <Property Name="SATUAN" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ISBAHAN_PEMBANTU" Type="Byte" />
           <NavigationProperty Name="TRN_PENERIMAAN_BARANG" Relationship="SIM_PPICModel.FK_TRN_PENERIMAAN_BARANG_MST_BAHAN_BAKU" FromRole="MST_BAHAN_BAKU" ToRole="TRN_PENERIMAAN_BARANG" />
+          <NavigationProperty Name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" Relationship="SIM_PPICModel.FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_MST_BAHAN_BAKU" FromRole="MST_BAHAN_BAKU" ToRole="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" />
         </EntityType>
         <EntityType Name="TRN_PEMAKAIAN_HASIL_PRODUKSI">
           <Key>
@@ -1161,6 +1238,7 @@
           <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
           <Property Name="NO_SURAT" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CATATAN" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ZAK" Type="Int32" />
         </EntityType>
         <EntityType Name="TRN_MUTASI_BARANG">
           <Key>
@@ -1293,6 +1371,64 @@
           <Property Name="REMARKS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="NO_DOKUMEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TANGGAL" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NO_SPP" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NO_SURAT" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NAMA_PRODUK" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KOMPOSISI" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BENTUK" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KEMASAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SHIFT" Type="Int32" />
+          <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CREATED_BY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_BY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="Byte" />
+          <Property Name="CATATAN" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="KUANTUM_PRODUKSI" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="REMARKS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" Relationship="SIM_PPICModel.FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_TRN_SURAT_PERMINTAAN_BAHAN_BAKU" FromRole="TRN_SURAT_PERMINTAAN_BAHAN_BAKU" ToRole="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" />
+        </EntityType>
+        <EntityType Name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_TRN_SURAT_PERMINTAAN_BAHAN_BAKU" Type="Int32" Nullable="false" />
+          <Property Name="ID_MST_BAHAN_BAKU" Type="Int32" Nullable="false" />
+          <Property Name="KUANTUM" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="MST_BAHAN_BAKU" Relationship="SIM_PPICModel.FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_MST_BAHAN_BAKU" FromRole="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" ToRole="MST_BAHAN_BAKU" />
+          <NavigationProperty Name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU" Relationship="SIM_PPICModel.FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_TRN_SURAT_PERMINTAAN_BAHAN_BAKU" FromRole="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" ToRole="TRN_SURAT_PERMINTAAN_BAHAN_BAKU" />
+        </EntityType>
+        <Association Name="FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_MST_BAHAN_BAKU">
+          <End Type="SIM_PPICModel.MST_BAHAN_BAKU" Role="MST_BAHAN_BAKU" Multiplicity="1" />
+          <End Type="SIM_PPICModel.TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MST_BAHAN_BAKU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS">
+              <PropertyRef Name="ID_MST_BAHAN_BAKU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_TRN_SURAT_PERMINTAAN_BAHAN_BAKU">
+          <End Type="SIM_PPICModel.TRN_SURAT_PERMINTAAN_BAHAN_BAKU" Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU" Multiplicity="1" />
+          <End Type="SIM_PPICModel.TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS">
+              <PropertyRef Name="ID_TRN_SURAT_PERMINTAAN_BAHAN_BAKU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1675,6 +1811,7 @@
           <EntitySetMapping Name="TRN_SURAT_PENGANTAR_BONGKAR_MUAT">
             <EntityTypeMapping TypeName="SIM_PPICModel.TRN_SURAT_PENGANTAR_BONGKAR_MUAT">
               <MappingFragment StoreEntitySet="TRN_SURAT_PENGANTAR_BONGKAR_MUAT">
+                <ScalarProperty Name="ZAK" ColumnName="ZAK" />
                 <ScalarProperty Name="CATATAN" ColumnName="CATATAN" />
                 <ScalarProperty Name="NO_SURAT" ColumnName="NO_SURAT" />
                 <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
@@ -1814,6 +1951,39 @@
                 <ScalarProperty Name="TUJUAN_PRODUKSI" ColumnName="TUJUAN_PRODUKSI" />
                 <ScalarProperty Name="TANGGAL" ColumnName="TANGGAL" />
                 <ScalarProperty Name="NO_SURAT" ColumnName="NO_SURAT" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU">
+            <EntityTypeMapping TypeName="SIM_PPICModel.TRN_SURAT_PERMINTAAN_BAHAN_BAKU">
+              <MappingFragment StoreEntitySet="TRN_SURAT_PERMINTAAN_BAHAN_BAKU">
+                <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+                <ScalarProperty Name="KUANTUM_PRODUKSI" ColumnName="KUANTUM_PRODUKSI" />
+                <ScalarProperty Name="CATATAN" ColumnName="CATATAN" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="MODIFIED_BY" ColumnName="MODIFIED_BY" />
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="SHIFT" ColumnName="SHIFT" />
+                <ScalarProperty Name="KEMASAN" ColumnName="KEMASAN" />
+                <ScalarProperty Name="BENTUK" ColumnName="BENTUK" />
+                <ScalarProperty Name="KOMPOSISI" ColumnName="KOMPOSISI" />
+                <ScalarProperty Name="NAMA_PRODUK" ColumnName="NAMA_PRODUK" />
+                <ScalarProperty Name="NO_SURAT" ColumnName="NO_SURAT" />
+                <ScalarProperty Name="NO_SPP" ColumnName="NO_SPP" />
+                <ScalarProperty Name="TANGGAL" ColumnName="TANGGAL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS">
+            <EntityTypeMapping TypeName="SIM_PPICModel.TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS">
+              <MappingFragment StoreEntitySet="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS">
+                <ScalarProperty Name="KUANTUM" ColumnName="KUANTUM" />
+                <ScalarProperty Name="ID_MST_BAHAN_BAKU" ColumnName="ID_MST_BAHAN_BAKU" />
+                <ScalarProperty Name="ID_TRN_SURAT_PERMINTAAN_BAHAN_BAKU" ColumnName="ID_TRN_SURAT_PERMINTAAN_BAHAN_BAKU" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

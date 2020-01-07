@@ -196,8 +196,8 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label class="control-label">Telephone<span class="text-red">*</span></label>
-                                    @Html.TextBoxFor(model => model.NO_TELP, new { @class = "form-control", @tabindex = "14", @required = "required" })
+                                    <label class="control-label">Telephone</label>
+                                    @Html.TextBoxFor(model => model.NO_TELP, new { @class = "form-control", @tabindex = "14"})
                                 </div>
                             </div>
                         </div>
@@ -316,23 +316,45 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
-                                    <label class="control-label">Harga Loko<span class="text-red">*</span></label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-addon">Rp</span>
-                                        </div>
-                                        @Html.TextBoxFor(model => model.HARGA_LOKO, new { @class = "form-control numeric", @tabindex = "22", @required = "required" })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                <div class="form-group">
                                     <label class="control-label">Ongkos Kirim</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-addon">Rp</span>
                                         </div>
-                                        @Html.TextBoxFor(model => model.ONGKOS_KIRIM, new { @class = "form-control numeric", @tabindex = "23" })
+                                        @Html.TextBoxFor(model => model.ONGKOS_KIRIM, new { @class = "form-control numeric", @tabindex = "22" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label">Ongkos Inclaring</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-addon">Rp</span>
+                                        </div>
+                                        @Html.TextBoxFor(model => model.ONGKOS_INCLARING, new { @class = "form-control numeric", @tabindex = "23" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label">Ongkos Gudang</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-addon">Rp</span>
+                                        </div>
+                                        @Html.TextBoxFor(model => model.ONGKOS_GUDANG, new { @class = "form-control numeric", @tabindex = "24" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label">Harga Loko<span class="text-red">*</span></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-addon">Rp</span>
+                                        </div>
+                                        @Html.TextBoxFor(model => model.HARGA_LOKO, new { @class = "form-control numeric", @tabindex = "25", @required = "required", @readonly = "readonly" })
                                     </div>
                                 </div>
                             </div>
@@ -366,10 +388,10 @@
                                     <label class="control-label">Jenis Dokumen</label>
                                     <div class="row">
                                         <div class="col-lg-4 col-md-4 col-sm-4">
-                                            @Html.DropDownListFor(model => model.DOKUMEN_PENDUKUNG, Model.DokumenList, "Please Select", new { @class = "form-control", @tabindex = "24", @onchange = "initilize()" })
+                                            @Html.DropDownListFor(model => model.DOKUMEN_PENDUKUNG, Model.DokumenList, "Please Select", new { @class = "form-control", @tabindex = "26", @onchange = "initilize()" })
                                         </div>
                                         <div class="col-lg-8 col-md-8 col-sm-8">
-                                            @Html.TextBoxFor(model => model.DOKUMEN_PENDUKUNG_DESC, new { @class = "form-control", @tabindex = "25", @style = "text-transform: uppercase;", @disabled = "disabled" })
+                                            @Html.TextBoxFor(model => model.DOKUMEN_PENDUKUNG_DESC, new { @class = "form-control", @tabindex = "27", @style = "text-transform: uppercase;", @disabled = "disabled" })
                                         </div>
                                     </div>
                                 </div>
@@ -377,7 +399,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label">Nomer Dokumen</label>
-                                    @Html.TextBoxFor(model => model.DOKUMEN_NOMOR, new { @class = "form-control", @tabindex = "26", @style = "text-transform: uppercase;" })
+                                    @Html.TextBoxFor(model => model.DOKUMEN_NOMOR, new { @class = "form-control", @tabindex = "28", @style = "text-transform: uppercase;" })
                                 </div>
                             </div>
                         </div>
@@ -817,6 +839,38 @@
                 $('#DOKUMEN_PENDUKUNG_DESC').prop('required', true);
             }
         }
+        //Harga Loko
+        $("#HARGA_JUAL").change(function () {
+            CalcHargaLoko()
+        });
+        $("#ONGKOS_KIRIM").change(function () {
+            CalcHargaLoko()
+        });
+        $("#ONGKOS_GUDANG").change(function () {
+            CalcHargaLoko()
+        });
+        function CalcHargaLoko() {
+            var HargaJual = 0;
+            var OngkosKirim = 0;
+            var OngkosGudang = 0;
+
+            var AutoNumericElement = AutoNumeric.getAutoNumericElement('#HARGA_JUAL');
+            HargaJual = AutoNumericElement.getNumericString();
+
+            AutoNumericElement = AutoNumeric.getAutoNumericElement('#ONGKOS_KIRIM');
+            OngkosKirim = AutoNumericElement.getNumericString();
+
+            AutoNumericElement = AutoNumeric.getAutoNumericElement('#ONGKOS_GUDANG');
+            OngkosGudang = AutoNumericElement.getNumericString();
+
+            var HargaLoko = HargaJual - OngkosGudang - OngkosKirim;
+            AutoNumericElement = AutoNumeric.getAutoNumericElement('#HARGA_LOKO');
+            if (HargaLoko == null || HargaLoko < 0) {
+                HargaLoko = 0;
+            }
+            AutoNumericElement.set(HargaLoko);
+        }
+        ////////////////////
         $('.date').datepicker({
             format: 'dd-M-yyyy'
         });

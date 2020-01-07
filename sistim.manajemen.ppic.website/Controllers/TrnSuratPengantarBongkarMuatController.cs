@@ -266,7 +266,7 @@ namespace sistem.manajemen.ppic.website.Controllers
              .Select(x
                  => new
                  {
-                     DATA = x.NO_DO.ToUpper()
+                     DATA = x.NO_DO.PadLeft(4,'0').ToUpper()
                  })
              .Distinct()
              .OrderBy(X => X.DATA)

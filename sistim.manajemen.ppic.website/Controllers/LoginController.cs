@@ -55,6 +55,8 @@ namespace sistem.manajemen.ppic.website.Controllers
                     CurrentUser.POSITION = GetData.POSITION;
                     CurrentUser.ROLE_ID = GetData.ROLE_ID;
 
+                    _loginBLL.SetLastOnline(CurrentUser.USER_ID);
+
                     return RedirectToAction("Index","Home");
                 }
             }

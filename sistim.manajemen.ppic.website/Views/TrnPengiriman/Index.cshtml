@@ -64,9 +64,15 @@
                                         }
                                         <a href="@Url.Action("Details","TrnPengiriman",new {@id=item.ID})" data-toggle="tooltip" data-placement="bottom" title="Details"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     </td>
-                                    <td>@Html.Raw(item.TANGGAL.ToString("dd MMM yyyy"))</td>
+                                    <td>@Html.Raw(item.TANGGAL.HasValue ? item.TANGGAL.Value.ToString("dd MMM yyyy"):"")</td>
                                     <td>@Html.Raw(item.NO_SPB)</td>
-                                    <td>@Html.Raw(item.NO_DO + "/"+item.NO_RIT)</td>
+                                    <td>
+                                        @{
+                                            var myString = item.NO_DO.ToString();
+                                            myString = myString.PadLeft(4, '0');
+                                        }
+                                        @Html.Raw(myString + "/"+item.NO_RIT)
+                                    </td>
                                     <td>@Html.Raw(item.NO_SURAT_JALAN)</td>
                                     <td class="text-uppercase">@Html.Raw(item.NAMA_KONSUMEN)</td>
                                     <td class="text-uppercase">@Html.Raw(item.NAMA_BARANG)</td>

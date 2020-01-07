@@ -67,7 +67,12 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">No DO<span class="text-red">*</span></label>
-                                            @Html.TextBoxFor(model => model.NO_DO, new { @class = "form-control", @tabindex = "2", @style = "text-transform: uppercase;", @readonly = "readonly" })
+                                            @Html.HiddenFor(model => model.NO_DO)
+                                            @{
+                                                var myString = Model.NO_DO;
+                                                myString = myString.PadLeft(4, '0');
+                                            }
+                                            @Html.TextBox("NO_DO_STRING", myString, new { @class = "form-control", @tabindex = "2", @style = "text-transform: uppercase;", @readonly = "readonly" })
                                         </div>
                                     </div>
                                 </div>

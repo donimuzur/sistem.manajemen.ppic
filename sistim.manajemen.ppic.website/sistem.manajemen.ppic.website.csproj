@@ -1534,6 +1534,7 @@
     <Content Include="Scripts\plugins\summernote\summernote-bs4.js" />
     <Content Include="Scripts\plugins\sweetalert\sweetalert.min.js" />
     <Content Include="Scripts\plugins\switchery\switchery.js" />
+    <Content Include="Scripts\plugins\thousandseparator\thousand-separator.js" />
     <Content Include="Scripts\plugins\tinycon\tinycon.min.js" />
     <Content Include="Scripts\plugins\toastr\toastr.min.js" />
     <Content Include="Scripts\plugins\topojson\topojson.js" />
@@ -1577,6 +1578,7 @@
     <Compile Include="Controllers\TrnSpbController.cs" />
     <Compile Include="Controllers\TrnSuratPengantarBongkarMuatController.cs" />
     <Compile Include="Controllers\TrnSuratPerintahProduksiController.cs" />
+    <Compile Include="Controllers\TrnSuratPermintaanBahanBakuController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1602,7 +1604,14 @@
     <Compile Include="Models\TrnSpbModel.cs" />
     <Compile Include="Models\TrnSuratPengantarBongkarMuatModel.cs" />
     <Compile Include="Models\TrnSuratPerintahProduksiModel.cs" />
+    <Compile Include="Models\TrnSuratPermintaanBahanBakuModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\ReportBongkarMuat.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportBongkarMuat.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ReportMutasiBarang.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1613,6 +1622,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportOutstanding.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportSlipTimbangan.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportSlipTimbangan.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\ReportSPB.cs">
@@ -1639,10 +1654,28 @@
       <DependentUpon>ReportSuratJalan.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ReportSuratJalan3-Layout.cs">
+      <DependentUpon>ReportSuratJalan3-Layout.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\ReportSuratJalan3.cs">
+      <DependentUpon>ReportSuratJalan3.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\ReportSuratJalan2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportSuratJalan2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\TrnSuratPerintahProduksi.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrnSuratPerintahProduksi.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Utility\ExcelData.cs" />
@@ -1797,6 +1830,12 @@
     <Content Include="Views\MstWilayah\Details.cshtml" />
     <Content Include="Views\MstUom\Index.cshtml" />
     <Content Include="Views\MstUom\Create.cshtml" />
+    <Content Include="Views\MstUom\Edit.cshtml" />
+    <Content Include="Views\MstUom\Details.cshtml" />
+    <Content Include="Views\TrnSuratPermintaanBahanBaku\Index.cshtml" />
+    <Content Include="Views\TrnSuratPermintaanBahanBaku\Create.cshtml" />
+    <Content Include="Views\TrnSuratPermintaanBahanBaku\Details.cshtml" />
+    <Content Include="Views\TrnSuratPermintaanBahanBaku\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1808,7 +1847,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\gallery\" />
     <Folder Include="Images\landing\" />
-    <Folder Include="Views\TrnPermintaanBahanBaku\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\sistem.manajemen.ppic.bll\sistem.manajemen.ppic.bll.csproj">
@@ -1854,6 +1892,10 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\ReportBongkarMuat.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportBongkarMuat.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportMutasiBarang.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportMutasiBarang.cs</LastGenOutput>
@@ -1861,6 +1903,22 @@
     <EmbeddedResource Include="Reports\ReportOutstanding.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportOutstanding.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Content Include="Reports\ReportSuratJalan3.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportSuratJalan3.cs</LastGenOutput>
+    </Content>
+    <Content Include="Reports\ReportSuratJalan3-Layout.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportSuratJalan3-Layout.cs</LastGenOutput>
+    </Content>
+    <EmbeddedResource Include="Reports\ReportSlipTimbangan.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportSlipTimbangan.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\TrnSuratPerintahProduksi.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TrnSuratPerintahProduksi.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

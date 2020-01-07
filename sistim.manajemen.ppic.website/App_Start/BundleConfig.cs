@@ -467,7 +467,6 @@ namespace sistem.manajemen.ppic.website.App_Start
                         "~/Scripts/plugins/pwstrength/pwstrength-bootstrap.min.js",
                         "~/Scripts/plugins/pwstrength/zxcvbn.js"));
 
-
             // Easy Autocomplete Style
             bundles.Add(new StyleBundle("~/plugins/easyautocompleteStyle").Include(
                        "~/Contents/plugins/easyautocomplete/easy-autocomplete.min.css"));
@@ -518,6 +517,10 @@ namespace sistem.manajemen.ppic.website.App_Start
             bundles.Add(new ScriptBundle("~/plugins/jquery-Unobtrusive-ajax").Include(
                         "~/Scripts/jquery.unobtrusive-ajax.min.js",
                         "~/Scripts/jquery.validate.unobtrusive.min.js"));
+
+            // Thousand-separator
+            bundles.Add(new ScriptBundle("~/plugins/Thousand-Separator").Include(
+                        "~/Scripts/plugins/thousandseparator/thousand-separator.js"));
 
         }
     }

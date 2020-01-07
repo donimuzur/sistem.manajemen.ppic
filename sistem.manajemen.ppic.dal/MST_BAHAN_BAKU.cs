@@ -17,6 +17,7 @@ namespace sistem.manajemen.ppic.dal
         public MST_BAHAN_BAKU()
         {
             this.TRN_PENERIMAAN_BARANG = new HashSet<TRN_PENERIMAAN_BARANG>();
+            this.TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS = new HashSet<TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS>();
         }
     
         public int ID { get; set; }
@@ -33,5 +34,6 @@ namespace sistem.manajemen.ppic.dal
         public Nullable<byte> ISBAHAN_PEMBANTU { get; set; }
     
         public virtual ICollection<TRN_PENERIMAAN_BARANG> TRN_PENERIMAAN_BARANG { get; set; }
+        public virtual ICollection<TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS> TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS { get; set; }
     }
 }

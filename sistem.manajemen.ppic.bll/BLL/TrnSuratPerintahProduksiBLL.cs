@@ -84,6 +84,22 @@ namespace sistem.manajemen.ppic.bll
             }
 
         }
+        public TrnSuratPerintahProduksiDto GetByNoSurat(string NoSurat)
+        {
+            try
+            {
+                var Data = _trnSuratPerintahProduksiServices.GetAll().Where(x => x.NO_SURAT.ToUpper() == NoSurat.ToUpper()).FirstOrDefault();
+                var ReData = Mapper.Map<TrnSuratPerintahProduksiDto>(Data);
+
+                return ReData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         public void Save(TrnSuratPerintahProduksiDto model)
         {
             try

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="798d9d526bb14d6797c7a20386e70ba5" Name="Diagram1" ZoomLevel="86">
+      <Diagram DiagramId="798d9d526bb14d6797c7a20386e70ba5" Name="Diagram1" ZoomLevel="48">
         <EntityTypeShape EntityType="SIM_PPICModel.Login" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIM_PPICModel.PAGE" Width="1.5" PointX="3.375" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIM_PPICModel.MST_BARANG_JADI" Width="1.5" PointX="0.75" PointY="3.75" />
@@ -37,7 +37,11 @@
         <EntityTypeShape EntityType="SIM_PPICModel.TRN_PENERIMAAN_BARANG" Width="1.5" PointX="15.375" PointY="7.75" />
         <AssociationConnector Association="SIM_PPICModel.FK_TRN_PENERIMAAN_BARANG_MST_BAHAN_BAKU" />
         <EntityTypeShape EntityType="SIM_PPICModel.TRN_SURAT_PERINTAH_PRODUKSI" Width="1.5" PointX="9.375" PointY="15.75" />
-      </Diagram>
+        <EntityTypeShape EntityType="SIM_PPICModel.TRN_SURAT_PERMINTAAN_BAHAN_BAKU" Width="1.5" PointX="13.375" PointY="22.5" />
+        <EntityTypeShape EntityType="SIM_PPICModel.TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" Width="1.5" PointX="15.625" PointY="18.25" />
+        <AssociationConnector Association="SIM_PPICModel.FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_MST_BAHAN_BAKU" />
+        <AssociationConnector Association="SIM_PPICModel.FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_TRN_SURAT_PERMINTAAN_BAHAN_BAKU" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

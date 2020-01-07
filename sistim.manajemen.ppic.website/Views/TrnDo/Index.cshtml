@@ -66,7 +66,13 @@
                                     </td>
                                     <td>@Html.Raw(item.TANGGAL.ToString("dd MMM yyyy"))</td>
                                     <td>@Html.Raw(item.NO_SPB)</td>
-                                    <td>@Html.Raw(item.NO_DO)</td>
+                                    <td>
+                                        @{
+                                            var myString = item.NO_DO;
+                                            myString = myString.PadLeft(4, '0');
+                                        }
+                                        @Html.Raw(myString)
+                                    </td>
                                     <td class="text-uppercase">@Html.Raw(item.NAMA_BARANG)</td>
                                     <td class="text-uppercase">@Html.Raw(item.NAMA_KONSUMEN)</td>
                                     <td>@Html.Raw(string.Format("{0:N}", item.JUMLAH))</td>

@@ -54,6 +54,7 @@
     <Compile Include="Dto\TrnPengirimanDto.cs" />
     <Compile Include="Dto\TrnSuratPengantarBongkarMuatDto.cs" />
     <Compile Include="Dto\TrnSuratPerintahProduksiDto.cs" />
+    <Compile Include="Dto\TrnSuratPermintaanBahanBakuDto.cs" />
     <Compile Include="Input\RptOutstandingInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Dto\TrnSpbDto.cs" />

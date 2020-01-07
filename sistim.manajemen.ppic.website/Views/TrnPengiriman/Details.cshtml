@@ -23,7 +23,8 @@
     </div>
     <div class="col-sm-8">
         <div class="title-action">
-            <button class="ladda-button ladda-button-print btn btn-success" data-style="zoom-in" onclick="PrintPDF()" type="button">Print PDF</button>
+            <button class="ladda-button ladda-button-print btn btn-success" data-style="zoom-in" onclick="PrintToPrinter()" type="button"><span class="fa fa-print">&nbsp;</span> Print To Printer</button>
+            <button class="ladda-button ladda-button-pdf btn btn-success" data-style="zoom-in" onclick="PrintPDF()" type="button">Export to PDF</button>
             <a href="@Url.Action("Index", "TrnPengiriman")" class="btn btn-danger">Kembali</a>
         </div>
     </div>
@@ -72,7 +73,12 @@
                                             <label class="control-label">No DO / RIT<span class="text-red">*</span></label>
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                                    @Html.TextBoxFor(model => model.NO_DO, new { @class = "form-control digit-only", @tabindex = "3", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly" })
+                                                    @Html.HiddenFor(model => model.NO_DO)
+                                                    @{
+                                                        var myString = Model.NO_DO.ToString();
+                                                        myString = myString.PadLeft(4, '0');
+                                                    }
+                                                    @Html.TextBox("String_DO",myString, new { @class = "form-control digit-only", @tabindex = "3", @style = "text-transform: uppercase;", @required = "required", @readonly = "readonly" })
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                                     @Html.TextBoxFor(model => model.NO_RIT, new { @class = "form-control", @tabindex = "4", @style = "text-transform: uppercase;", @readonly = "readonly" })
@@ -359,6 +365,7 @@
             });
 
             ladda_print = $('.ladda-button-print').ladda();
+            ladda_pdf = $('.ladda-button-pdf').ladda();
 
             InitSpb('@Url.Action("GetSpbList", "TrnDo")');
             InitProvinsi();
@@ -563,12 +570,12 @@
             });
         }
 
-        //Print to PDF
-        function PrintPDF() {
+        //Print to Printer
+        function PrintToPrinter() {
             ladda_print.ladda('start');
             var id = document.getElementById("ID").value;
             $.ajax({
-                url: '@Url.Action("PrintPDF", "TrnPengiriman")',
+                url: '@Url.Action("PrintToPrinter", "TrnPengiriman")',
                 type: "POST",
                 dataType: "JSON",
                 data: { id: id },
@@ -576,7 +583,19 @@
                 success: function (response) {
                     if (response != "Error") {
                         ladda_print.ladda('stop');
-                        window.location = response;
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'File Printing',
+                            type: 'success',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
                     } else {
                         ladda_print.ladda('stop');
                         $.confirm({
@@ -612,6 +631,72 @@
                         });
                     } else {
                         ladda_print.ladda('stop');
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'Terjadi Kesalahan <br><br> Hubungi Administrator!',
+                            type: 'red',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        //Print to PDF
+        function PrintPDF() {
+            ladda_pdf.ladda('start');
+            var id = document.getElementById("ID").value;
+            $.ajax({
+                url: '@Url.Action("PrintPDF", "TrnPengiriman")',
+                type: "POST",
+                dataType: "JSON",
+                data: { id: id },
+                timeout: 20000,
+                success: function (response) {
+                    if (response != "Error") {
+                        ladda_print.ladda('stop');
+                        window.location = response;
+                    } else {
+                        ladda_pdf.ladda('stop');
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'Terjadi Kesalahan <br><br> Hubungi Administrator!',
+                            type: 'red',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    }
+                },
+                error: function (xmlhttprequest, textstatus, message) {
+                    if (textstatus === "timeout") {
+                        ladda_pdf.ladda('stop');
+                        $.confirm({
+                            title: 'Informasi !',
+                            content: 'Timeout Server',
+                            type: 'red',
+                            buttons: {
+                                Ok: {
+                                    btnClass: 'btn-primary text-white',
+                                    keys: ['enter'],
+                                    action: function () {
+                                    }
+                                }
+                            }
+                        });
+                    } else {
+                        ladda_pdf.ladda('stop');
                         $.confirm({
                             title: 'Informasi !',
                             content: 'Terjadi Kesalahan <br><br> Hubungi Administrator!',

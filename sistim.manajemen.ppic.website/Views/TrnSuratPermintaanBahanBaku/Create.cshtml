@@ -1,0 +1,655 @@
+﻿@using System.Web.Optimization
+@using sistem.manajemen.ppic.core
+
+@model sistem.manajemen.ppic.website.Models.TrnSuratPermintaanBahanBakuModel
+@{
+    ViewBag.Title = "Surat Permintaan Bahan Baku";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "TrnSuratPermintaanBahanBaku", FormMethod.Post, new { @id = "FormCreate", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-6">
+            <h2>@Model.Tittle</h2>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="@Url.Action("Index", "Home")">Home</a>
+                </li>
+                <li class="active breadcrumb-item">
+                    <a href="@Url.Action("Index", "TrnSuratPermintaanBahanBaku")">Surat Permintaan Bahan Baku</a>
+                </li>
+                <li class="active breadcrumb-item">
+                    <strong>Create</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-sm-6">
+            <div class="title-action">
+                <button class="btn btn-success" id="btnSubmit" style="display:none" type="submit">Simpan</button>
+                <button class="btn btn-success" onclick="PreSubmit()" type="button">Simpan</button>
+                <a href="@Url.Action("Index", "TrnSuratPermintaanBahanBaku")" class="btn btn-danger">Batal</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Informasi</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.HiddenFor(x => x.ID)
+                                            @Html.HiddenFor(x => x.STATUS)
+                                            @Html.HiddenFor(x => x.CREATED_BY)
+                                            @Html.HiddenFor(x => x.CREATED_DATE)
+                                            <label class="control-label">Tanggal<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.TANGGAL, "{0:dd MMM yyyy}", new { @class = "form-control", @style = "text-transform: uppercase;", @tabindex = "1", @required = "required", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">No Surat<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.NO_SURAT, new { @class = "form-control", @style = "text-transform: uppercase;", @tabindex = "2", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">No SPP<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.NO_SPP, new { @class = "form-control", @style = "text-transform: uppercase;", @tabindex = "3", @required = "required"})
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Shift<span class="text-red">*</span></label>
+                                            @Html.DropDownListFor(model => model.SHIFT,Model.ShiftList,"Please Select", new { @class = "form-control", @tabindex = "4", @required = "required" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Data Produk</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Nama Produk<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.NAMA_PRODUK, new { @class = "form-control", @style = "text-transform: uppercase;", @tabindex = "5", @required = "required", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Komposisi<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.KOMPOSISI, new { @class = "form-control", @style = "text-transform: uppercase;", @tabindex = "6", @required = "required", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Bentuk<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.BENTUK, new { @class = "form-control", @style = "text-transform: uppercase;", @tabindex = "7", @required = "required", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Kemasan<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.KEMASAN, new { @class = "form-control", @style = "text-transform: uppercase;", @tabindex = "8", @required = "required", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Kuantum Produksi<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.KUANTUM_PRODUKSI, new { @class = "form-control numeric", @style = "text-transform: uppercase;", @tabindex = "9", @required = "required", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Permintaan Bahan Baku</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            @Html.Hidden("ID_BAHAN_BAKU")
+                                            <label class="control-label">Bahan Baku</label>
+                                            @Html.TextBoxFor(model => model.BahanBaku, new { @class = "form-control", @style = "text-transform: uppercase;", @tabindex = "10", })
+                                            <label id="BahanBaku-error" class="input-bahanbaku error" for="BahanBaku" style="display:none">Tidak boleh kosong</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Stock</label>
+                                            @Html.TextBox("Stock", "", new { @id = "Stock", @class = "form-control numeric", @style = "text-transform: uppercase;", @tabindex = "11", @readonly = "readonly" })
+                                            <label id="Stock-error" class="input-bahanbaku error" for="Stock" style="display:none">Tidak boleh kosong</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Satuan</label>
+                                            @Html.TextBox("Satuan", "", new { @id = "Satuan", @class = "form-control", @style = "text-transform: uppercase;", @tabindex = "12", @readonly = "readonly" })
+                                            <label id="Satuan-error" class="input-bahanbaku error" for="Satuan" style="display:none">Tidak boleh kosong</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Jumlah</label>
+                                            @Html.TextBoxFor(model => model.JumlahPermintaan, new { @class = "form-control numeric", @style = "text-transform: uppercase;", @tabindex = "13" })
+                                            <label id="JumlahPermintaan-error" class="input-bahanbaku error" for="JumlahPermintaan" style="display:none">Tidak boleh kosong</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <button type="button" class="ladda-button ladda-button-tambah btn btn-success" data-style="zoom-in" onclick="Tambah()">Tambah</button>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <table class="table table-striped table-bordered table-hover dataTables-List">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align:center;vertical-align:central">Action</th>
+                                                    <th style="min-width:400px;text-align:center;vertical-align:central">Bahan Baku</th>
+                                                    <th style="min-width:200px;text-align:center;vertical-align:central">Jumlah</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div id="BahanBakuDetails">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Catatan</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label">Catatan</label>
+                                    @Html.TextAreaFor(model => model.CATATAN, new { @class = "form-control", style = "height:200px" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div id="modalSubmit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="color:white">Submit Form</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Apakah anda yakin data sudah benar?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="ladda-button ladda-button-submit btn btn-success" data-style="zoom-in" onclick="Confirm()">Ok</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/plugins/laddaStyles")
+    @Styles.Render("~/plugins/easyautocompleteStyle")
+    @Styles.Render("~/plugins/datePickerStyles")
+    @Styles.Render("~/plugins/jquery-confirmStyle")
+    @Styles.Render("~/Contents/plugins/dataTables/dataTablesStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/dataTables")
+    @Scripts.Render("~/plugins/ladda")
+    @Scripts.Render("~/plugins/easyautocomplete")
+    @Scripts.Render("~/plugins/datePicker")
+    @Scripts.Render("~/plugins/validate")
+    @Scripts.Render("~/plugins/autonumeric")
+    @Scripts.Render("~/plugins/jquery-confirm")
+
+    <script type="text/javascript">
+        var validate = null;
+        var dataTable = null;
+        var arrTempBahanBaku = [];
+        $(document).ready()
+        {
+            arrTempBahanBaku = [];
+            new AutoNumeric.multiple('.numeric', [{ unformatOnSubmit: true }, 'integerPos']);
+
+            var l = $('.ladda-button-submit').ladda();
+            l.click(function () {
+                // Start loading
+                l.ladda('start');
+                // Do something in backend and then stop ladda
+                // setTimeout() is only for demo purpose
+                setTimeout(function () {
+                    l.ladda('stop');
+                }, 2000)
+            });
+
+            dataTable = $('.dataTables-List').DataTable({
+                pageLength: 25,
+                scrollX: true,
+                scrollCollapse: true,
+            });
+
+            InitSPPList('@Url.Action("GetSppList", "TrnSuratPermintaanBahanBaku")');
+            InitMstBahanBakuList('@Url.Action("MstBahanBakuList", "TrnSuratPermintaanBahanBaku")');
+        }
+
+        //SubmitButton
+        function PreSubmit(event) {
+            validate = $('#FormCreate').validate({
+                errorPlacement: function (error, element) {
+
+                    if (element.parent().attr("class") == "form-group")
+                        error.insertAfter(element);
+                    else if (element.parent().attr("class") == 'input-group')
+                        error.insertAfter(element.parent());
+                    else if (element.parent().attr("class").search('easy-autocomplete') >= 0 || element.parent().attr("class") == "row" || element.parent().attr("class") == 'input-group date')
+                        error.insertAfter(element.parent());
+                    else
+                        error.insertAfter(element.parent().parent());
+                }
+            });
+
+            jQuery.extend(jQuery.validator.messages, {
+                required: "Tidak boleh kosong",
+                remote: "Please fix this field.",
+                email: "Please enter a valid email address.",
+                url: "Please enter a valid URL.",
+                date: "Please enter a valid date.",
+                dateISO: "Please enter a valid date (ISO).",
+                number: "Please enter a valid number.",
+                digits: "Please enter only digits.",
+                creditcard: "Please enter a valid credit card number.",
+                equalTo: "Please enter the same value again.",
+                accept: "Please enter a value with a valid extension.",
+                maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
+                minlength: jQuery.validator.format("Please enter at least {0} characters."),
+                rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
+                range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+                max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+                min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+            });
+
+            var isValid = validate.checkForm();
+            if (isValid){
+                $('.alert-notification').hide();
+                $('#modalSubmit').modal('show');
+            }
+            else {
+                validate.showErrors();
+                $('.alert-notification').show();
+            }
+        }
+
+        function Confirm(event) {
+            $("#btnSubmit").trigger('click');
+            event.preventDefault();
+        }
+
+        //Get SuratPerintahProduksi List
+        function InitSPPList(url) {
+            var options = {
+                url: url,
+                getValue: "DATA",
+                template: {
+                    type: "description",
+                    fields: {
+                        description: "DESKRIPSI"
+                    }
+                },
+                list: {
+                    maxNumberOfElements: 10,
+                    match: {
+                        enabled: true
+                    },
+                    sort: {
+                        enabled: true
+                    },
+                    onChooseEvent: function () {
+                        GetSPP();
+                    }
+                }
+            };
+            $("#NO_SPP").easyAutocomplete(options);
+        }
+
+        function GetSPP() {
+            var NoSPP = document.getElementById("NO_SPP").value;
+
+            $.ajax({
+                url: '@Url.Action("GetSPP", "TrnSuratPermintaanBahanBaku")',
+                type: "POST",
+                dataType: "JSON",
+                data: { NoSPP: NoSPP },
+                success: function (response) {
+                    if (response == "Error") {
+
+                    }
+                    if (response != null) {
+                        $("#NAMA_PRODUK").val(response.NAMA_PRODUK);
+                        $("#KOMPOSISI").val(response.KOMPOSISI);
+                        $('#BENTUK').val(response.BENTUK);
+                        if (response.BENTUK == "Lain-Lain") {
+                            $('#BENTUK').val(response.BENTUK_DESC);
+                        }
+                        $('#KEMASAN').val(response.KEMASAN);
+                        var AutoNumericElement  = AutoNumeric.getAutoNumericElement('#KUANTUM_PRODUKSI');
+                        AutoNumericElement.set(response.KUANTUM);
+                    }
+                    else {
+                        $("#NAMA_PRODUK").val('');
+                        $("#KOMPOSISI").val('');
+                        $('#BENTUK').val('');
+                        $('#KEMASAN').val('');
+                        var AutoNumericElement = AutoNumeric.getAutoNumericElement('#KUANTUM_PRODUKSI');
+                        AutoNumericElement.set('');
+                    }
+                },
+            });
+        }
+        //GetMstBahanBakuList
+        function InitMstBahanBakuList(url) {
+            var options = {
+                url: url,
+                getValue: "DATA",
+                list: {
+                    maxNumberOfElements: 10,
+                    match: {
+                        enabled: true
+                    },
+                    sort: {
+                        enabled: true
+                    },
+                    onChooseEvent: function () {
+                        GetMstBahanBaku();
+                    }
+                }
+            };
+            $("#BahanBaku").easyAutocomplete(options);
+        }
+
+        function GetMstBahanBaku() {
+            var BahanBaku = document.getElementById("BahanBaku").value;
+
+            $.ajax({
+                url: '@Url.Action("GetMstBahanBaku", "TrnSuratPermintaanBahanBaku")',
+                type: "POST",
+                dataType: "JSON",
+                data: { BahanBaku: BahanBaku },
+                success: function (response) {
+                    if (response == "Error") {
+
+                    }
+                    if (response != null) {
+                        $("#ID_BAHAN_BAKU").val(response.ID);
+                        $("#Satuan").val(response.SATUAN);
+                        AutoNumericElement = AutoNumeric.getAutoNumericElement('#Stock');
+                        AutoNumericElement.set(response.STOCK);
+                    }
+                    else {
+                        $("#Satuan").val('');
+                        $('#ID_BAHAN_BAKU').val('');
+
+                        var AutoNumericElement = AutoNumeric.getAutoNumericElement('#JumlahPermintaan');
+                        AutoNumericElement.set('');
+
+                        AutoNumericElement = AutoNumeric.getAutoNumericElement('#Stock');
+                        AutoNumericElement.set('');
+                    }
+                },
+            });
+        }
+
+        //Tambah
+        function Tambah() {
+            var isValid = true;
+            var BahanBaku = $('#BahanBaku').val();
+            var Stock = $('#Stock').val();
+            var Satuan = $('#Satuan').val();
+            var JumlahPermintaan = $('#JumlahPermintaan').val();
+            var IdBahanBaku = $('#ID_BAHAN_BAKU').val();
+            var IdTrnSuratPermintaanBahanBaku = $('#ID').val();
+
+
+            var hasMatch = false;
+            for (var index = 0; index < arrTempBahanBaku.length; ++index) {
+
+                var GetBahanBaku = arrTempBahanBaku[index];
+                console.log(BahanBaku);
+
+                if (GetBahanBaku.ID_MST_BAHAN_BAKU == IdBahanBaku) {
+                    console.log('match');
+                    hasMatch = true;
+                    break;
+                }
+            }
+            if (hasMatch) {
+                $.confirm({
+                    title: 'Warning !',
+                    content: 'Bahan baku tersebut sudah ada <br><br> ',
+                    type: 'red',
+                    buttons: {
+                        Ok: {
+                            btnClass: 'btn-primary text-white',
+                            keys: ['enter'],
+                            action: function () {
+
+                            }
+                        }
+                    }
+                });
+
+                $('#BahanBaku').val('');
+                $('#Satuan').val('');
+
+                var AutoNumericElement = AutoNumeric.getAutoNumericElement('#JumlahPermintaan');
+                AutoNumericElement.set('');
+
+                AutoNumericElement = AutoNumeric.getAutoNumericElement('#Stock');
+                AutoNumericElement.set('');
+
+                $('#ID_BAHAN_BAKU').val('');
+                return false;
+            }
+
+            if (BahanBaku === '' || BahanBaku === null)
+            {
+                isValid = false;
+                $('#BahanBaku').addClass('error');
+                $('#BahanBaku-error').show();
+                $('#BahanBaku').focus();
+            }
+            else {
+                isValid = true;
+                $('#BahanBaku').removeClass('error');
+                $('#BahanBaku-error').hide();
+            }
+
+            if (Stock === '' || Stock === null)
+            {
+                isValid = false;
+                $('#Stock').addClass('error');
+                $('#Stock-error').show();
+                $('#Stock').focus();
+            }
+            else {
+                isValid = true;
+                $('#Stock').removeClass('error');
+                $('#Stock-error').hide();
+            }
+
+            if (Satuan === '' || Satuan === null)
+            {
+                isValid = false;
+                $('#Satuan').addClass('error');
+                $('#Satuan-error').show();
+                $('#Satuan').focus();
+            }
+            else {
+                isValid = true;
+                $('#Satuan').removeClass('error');
+                $('#Satuan-error').hide();
+            }
+
+            if (Satuan === '' || Satuan === null) {
+                isValid = false;
+                $('#Satuan').addClass('error');
+                $('#Satuan-error').show();
+                $('#Satuan').focus();
+            }
+            else {
+                isValid = true;
+                $('#Satuan').removeClass('error');
+                $('#Satuan-error').hide();
+            }
+
+            if (JumlahPermintaan === '' || JumlahPermintaan === null) {
+                isValid = false;
+                $('#JumlahPermintaan').addClass('error');
+                $('#JumlahPermintaan-error').show();
+                $('#JumlahPermintaan').focus();
+            }
+            else {
+                isValid = true;
+                $('#JumlahPermintaan').removeClass('error');
+                $('#JumlahPermintaan-error').hide();
+            }
+            var AutoNumericElement = AutoNumeric.getAutoNumericElement('#JumlahPermintaan');
+            JumlahPermintaanRaw = AutoNumericElement.getNumericString();
+
+            AutoNumericElement = AutoNumeric.getAutoNumericElement('#Stock');
+            StockRaw = AutoNumericElement.getNumericString();
+
+            if (parseInt(JumlahPermintaanRaw) > parseInt(StockRaw))
+            {
+                $.confirm({
+                    title: 'Warning !',
+                    content: 'Jumlah permintaan tidak boleh melebihi stock <br><br> ',
+                    type: 'red',
+                    buttons: {
+                        Ok: {
+                            btnClass: 'btn-primary text-white',
+                            keys: ['enter'],
+                            action: function () {
+
+                            }
+                        }
+                    }
+                });
+                return false;
+            }
+
+            if (isValid) {
+                var item = {
+                    "ID_TRN_SURAT_PERMINTAAN_BAHAN_BAKU": IdTrnSuratPermintaanBahanBaku,
+                    "ID_MST_BAHAN_BAKU" : IdBahanBaku,
+                    "KUANTUM": JumlahPermintaanRaw
+                };
+                arrTempBahanBaku.push(item);
+                console.log(arrTempBahanBaku);
+
+                dataTable.row.add([
+                    '<button type="button" class="btn btn-danger" data-style="zoom-in" onclick="Hapus('+BahanBaku+')">Hapus</button>',
+                    BahanBaku,
+                    JumlahPermintaan,
+                ]).draw(false);
+
+                //remove Child BahanBakuList
+                $("#BahanBakuDetails").empty();
+                
+                for (var index = 0; index < arrTempBahanBaku.length; ++index) {
+                    
+                    var str = '<input id="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS[' + index + '].ID_TRN_SURAT_PERMINTAAN_BAHAN_BAKU" name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS[' + index + '].ID_TRN_SURAT_PERMINTAAN_BAHAN_BAKU" value="' + arrTempBahanBaku[index].ID_TRN_SURAT_PERMINTAAN_BAHAN_BAKU + '" type="hidden" >' +
+                    '<input id="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS[' + index + '].ID_MST_BAHAN_BAKU" name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS[' + index + '].ID_MST_BAHAN_BAKU" value="' + arrTempBahanBaku[index].ID_MST_BAHAN_BAKU + '" type="hidden" >' +
+                    '<input id="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS[' + index + '].KUANTUM" name="TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS[' + index + '].KUANTUM" value="' + arrTempBahanBaku[index].KUANTUM + '" type="hidden" >'
+
+                    $("#BahanBakuDetails").append(str);
+                }
+
+                $('#BahanBaku').val('');
+                $('#Satuan').val('');
+
+                var AutoNumericElement = AutoNumeric.getAutoNumericElement('#JumlahPermintaan');
+                AutoNumericElement.set('');
+
+                AutoNumericElement = AutoNumeric.getAutoNumericElement('#Stock');
+                AutoNumericElement.set('');
+
+                $('#ID_BAHAN_BAKU').val('');
+            }
+        }
+    </script>
+}

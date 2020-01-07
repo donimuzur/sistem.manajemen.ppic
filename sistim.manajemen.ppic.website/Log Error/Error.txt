@@ -1350,3 +1350,239 @@ StackTrace :    at CrystalDecisions.ReportAppServer.DataDefModel.FieldsClass.get
    at CrystalDecisions.CrystalReports.Engine.ParameterFieldDefinitions.get_Item(String fieldName)
    at CrystalDecisions.CrystalReports.Engine.ReportDocument.SetParameterValue(String name, Object val)
    at sistem.manajemen.ppic.website.Controllers.RptOutstandingController.PrintPDF(String Tanggal) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\RptOutstandingController.cs:line 81
+-----------------------------------------------------------------------------
+Date : 2019-56-22 09:08:44
+
+System.NotSupportedException
+Message : LINQ to Entities does not recognize the method 'Int32 ToInt32(System.Object)' method, and this method cannot be translated into a store expression.
+StackTrace :    at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.DefaultTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.TypedTranslate(ExpressionConverter parent, MethodCallExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.EqualsTranslator.TypedTranslate(ExpressionConverter parent, BinaryExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input, DbExpressionBinding& binding)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.OneLambdaTranslator.Translate(ExpressionConverter parent, MethodCallExpression call, DbExpression& source, DbExpressionBinding& sourceBinding, DbExpression& lambda)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.OneLambdaTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.SequenceMethodTranslator.Translate(ExpressionConverter parent, MethodCallExpression call, SequenceMethod sequenceMethod)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.TypedTranslate(ExpressionConverter parent, MethodCallExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.UnaryTranslator.TypedTranslate(ExpressionConverter parent, UnaryExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.ObjectQueryIncludeTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.TypedTranslate(ExpressionConverter parent, MethodCallExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.Convert()
+   at System.Data.Entity.Core.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__6()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__5()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at sistem.manajemen.ppic.dal.SqlGenericRepository`1.Get(Expression`1 filter, Func`2 orderBy, String includeProperties) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistem.manajemen.ppic.dal\Services\SqlGenericRepository.cs:line 50
+   at sistem.manajemen.ppic.dal.Services.TrnSuratPermintaanBahanBakuServices.GetById(Object Id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistem.manajemen.ppic.dal\Services\TrnSuratPermintaanBahanBakuServices.cs:line 53
+   at sistem.manajemen.ppic.bll.TrnSuratPermintaanBahanBakuBLL.GetById(Int32 Id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistem.manajemen.ppic.bll\BLL\TrnSuratPermintaanBahanBakuBLL.cs:line 63
+   at sistem.manajemen.ppic.website.Controllers.TrnSuratPermintaanBahanBakuController.Details(Nullable`1 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnSuratPermintaanBahanBakuController.cs:line 118
+-----------------------------------------------------------------------------
+Date : 2019-01-22 10:08:33
+
+System.NotSupportedException
+Message : LINQ to Entities does not recognize the method 'Int32 ToInt32(System.Object)' method, and this method cannot be translated into a store expression.
+StackTrace :    at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.DefaultTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.TypedTranslate(ExpressionConverter parent, MethodCallExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.EqualsTranslator.TypedTranslate(ExpressionConverter parent, BinaryExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateLambda(LambdaExpression lambda, DbExpression input, DbExpressionBinding& binding)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.OneLambdaTranslator.Translate(ExpressionConverter parent, MethodCallExpression call, DbExpression& source, DbExpressionBinding& sourceBinding, DbExpression& lambda)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.OneLambdaTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.SequenceMethodTranslator.Translate(ExpressionConverter parent, MethodCallExpression call, SequenceMethod sequenceMethod)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.TypedTranslate(ExpressionConverter parent, MethodCallExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.UnaryTranslator.TypedTranslate(ExpressionConverter parent, UnaryExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.ObjectQueryIncludeTranslator.Translate(ExpressionConverter parent, MethodCallExpression call)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.MethodCallTranslator.TypedTranslate(ExpressionConverter parent, MethodCallExpression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TypedTranslator`1.Translate(ExpressionConverter parent, Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.TranslateExpression(Expression linq)
+   at System.Data.Entity.Core.Objects.ELinq.ExpressionConverter.Convert()
+   at System.Data.Entity.Core.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__6()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__5()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at sistem.manajemen.ppic.dal.SqlGenericRepository`1.Get(Expression`1 filter, Func`2 orderBy, String includeProperties) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistem.manajemen.ppic.dal\Services\SqlGenericRepository.cs:line 50
+   at sistem.manajemen.ppic.dal.Services.TrnSuratPermintaanBahanBakuServices.GetById(Object Id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistem.manajemen.ppic.dal\Services\TrnSuratPermintaanBahanBakuServices.cs:line 53
+   at sistem.manajemen.ppic.bll.TrnSuratPermintaanBahanBakuBLL.GetById(Int32 Id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistem.manajemen.ppic.bll\BLL\TrnSuratPermintaanBahanBakuBLL.cs:line 63
+   at sistem.manajemen.ppic.website.Controllers.TrnSuratPermintaanBahanBakuController.Details(Nullable`1 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnSuratPermintaanBahanBakuController.cs:line 118
+-----------------------------------------------------------------------------
+Date : 2019-22-22 11:08:20
+
+System.Data.Entity.Infrastructure.DbUpdateException
+Message : An error occurred while updating the entries. See the inner exception for details.
+StackTrace :    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at sistem.manajemen.ppic.dal.SqlUnitOfWork.SaveChanges() in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistem.manajemen.ppic.dal\Services\SqlUnitOfWork.cs:line 36
+   at sistem.manajemen.ppic.dal.Services.TrnSuratPermintaanBahanBakuServices.Save(TRN_SURAT_PERMINTAAN_BAHAN_BAKU Db, Login Login) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistem.manajemen.ppic.dal\Services\TrnSuratPermintaanBahanBakuServices.cs:line 124
+   at sistem.manajemen.ppic.bll.TrnSuratPermintaanBahanBakuBLL.Save(TrnSuratPermintaanBahanBakuDto Dto, LoginDto Login) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistem.manajemen.ppic.bll\BLL\TrnSuratPermintaanBahanBakuBLL.cs:line 89
+   at sistem.manajemen.ppic.website.Controllers.TrnSuratPermintaanBahanBakuController.Create(TrnSuratPermintaanBahanBakuModel model) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnSuratPermintaanBahanBakuController.cs:line 89
+System.Data.Entity.Core.UpdateException
+Message : An error occurred while updating the entries. See the inner exception for details.
+StackTrace :    at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.<Update>b__2(UpdateTranslator ut)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update[T](T noChangesResult, Func`2 updateFunction)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update()
+   at System.Data.Entity.Core.Objects.ObjectContext.<SaveChangesToStore>b__35()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass2a.<SaveChangesInternal>b__27()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+System.Data.SqlClient.SqlException
+Message : The INSERT statement conflicted with the FOREIGN KEY constraint "FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_TRN_SURAT_PERMINTAAN_BAHAN_BAKU". The conflict occurred in database "SIM_PPIC", table "dbo.TRN_SURAT_PERMINTAAN_BAHAN_BAKU", column 'ID'.
+The statement has been terminated.
+StackTrace :    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.<Reader>b__c(DbCommand t, DbCommandInterceptionContext`1 c)
+   at System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.Reader(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   at System.Data.Entity.Internal.InterceptableDbCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.Execute(Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+-----------------------------------------------------------------------------
+Date : 2019-39-22 11:08:09
+
+System.Data.Entity.Infrastructure.DbUpdateException
+Message : An error occurred while updating the entries. See the inner exception for details.
+StackTrace :    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at sistem.manajemen.ppic.dal.SqlUnitOfWork.SaveChanges() in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistem.manajemen.ppic.dal\Services\SqlUnitOfWork.cs:line 36
+   at sistem.manajemen.ppic.dal.Services.TrnSuratPermintaanBahanBakuServices.Save(TRN_SURAT_PERMINTAAN_BAHAN_BAKU Db, Login Login) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistem.manajemen.ppic.dal\Services\TrnSuratPermintaanBahanBakuServices.cs:line 124
+   at sistem.manajemen.ppic.bll.TrnSuratPermintaanBahanBakuBLL.Save(TrnSuratPermintaanBahanBakuDto Dto, LoginDto Login) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistem.manajemen.ppic.bll\BLL\TrnSuratPermintaanBahanBakuBLL.cs:line 89
+   at sistem.manajemen.ppic.website.Controllers.TrnSuratPermintaanBahanBakuController.Create(TrnSuratPermintaanBahanBakuModel model) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnSuratPermintaanBahanBakuController.cs:line 89
+System.Data.Entity.Core.UpdateException
+Message : An error occurred while updating the entries. See the inner exception for details.
+StackTrace :    at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.<Update>b__2(UpdateTranslator ut)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update[T](T noChangesResult, Func`2 updateFunction)
+   at System.Data.Entity.Core.EntityClient.Internal.EntityAdapter.Update()
+   at System.Data.Entity.Core.Objects.ObjectContext.<SaveChangesToStore>b__35()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesToStore(SaveOptions options, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass2a.<SaveChangesInternal>b__27()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+System.Data.SqlClient.SqlException
+Message : The INSERT statement conflicted with the FOREIGN KEY constraint "FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_TRN_SURAT_PERMINTAAN_BAHAN_BAKU". The conflict occurred in database "SIM_PPIC", table "dbo.TRN_SURAT_PERMINTAAN_BAHAN_BAKU", column 'ID'.
+The statement has been terminated.
+StackTrace :    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.<Reader>b__c(DbCommand t, DbCommandInterceptionContext`1 c)
+   at System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   at System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.Reader(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   at System.Data.Entity.Internal.InterceptableDbCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Entity.Core.Mapping.Update.Internal.DynamicUpdateCommand.Execute(Dictionary`2 identifierValues, List`1 generatedValues)
+   at System.Data.Entity.Core.Mapping.Update.Internal.UpdateTranslator.Update()
+-----------------------------------------------------------------------------
+Date : 2019-54-31 13:12:00
+
+System.IO.IOException
+Message : The process cannot access the file 'D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Reports\Surat Jalan\RptSuratJalan_1009.doc' because it is being used by another process.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.File.InternalDelete(String path, Boolean checkHost)
+   at System.IO.File.Delete(String path)
+   at sistem.manajemen.ppic.website.Controllers.TrnPengirimanController.PrintToPrinter(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnPengirimanController.cs:line 410
+-----------------------------------------------------------------------------
+Date : 2019-54-31 13:12:11
+
+System.IO.IOException
+Message : The process cannot access the file 'D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Reports\Surat Jalan\RptSuratJalan_1009.doc' because it is being used by another process.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.File.InternalDelete(String path, Boolean checkHost)
+   at System.IO.File.Delete(String path)
+   at sistem.manajemen.ppic.website.Controllers.TrnPengirimanController.PrintToPrinter(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnPengirimanController.cs:line 410
+-----------------------------------------------------------------------------
+Date : 2019-54-31 13:12:14
+
+System.IO.IOException
+Message : The process cannot access the file 'D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Reports\Surat Jalan\RptSuratJalan_1009.doc' because it is being used by another process.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.File.InternalDelete(String path, Boolean checkHost)
+   at System.IO.File.Delete(String path)
+   at sistem.manajemen.ppic.website.Controllers.TrnPengirimanController.PrintToPrinter(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnPengirimanController.cs:line 410
+-----------------------------------------------------------------------------
+Date : 2019-57-31 13:12:24
+
+System.IO.IOException
+Message : The process cannot access the file 'D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Reports\Surat Jalan\RptSuratJalan_1009.doc' because it is being used by another process.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.File.InternalDelete(String path, Boolean checkHost)
+   at System.IO.File.Delete(String path)
+   at sistem.manajemen.ppic.website.Controllers.TrnPengirimanController.PrintToPrinter(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnPengirimanController.cs:line 410
+-----------------------------------------------------------------------------
+Date : 2019-57-31 13:12:27
+
+System.IO.IOException
+Message : The process cannot access the file 'D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Reports\Surat Jalan\RptSuratJalan_1009.doc' because it is being used by another process.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.File.InternalDelete(String path, Boolean checkHost)
+   at System.IO.File.Delete(String path)
+   at sistem.manajemen.ppic.website.Controllers.TrnPengirimanController.PrintToPrinter(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnPengirimanController.cs:line 410
+-----------------------------------------------------------------------------
+Date : 2019-00-31 14:12:20
+
+System.IO.IOException
+Message : The process cannot access the file 'D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\files_upload\Reports\Surat Jalan\RptSuratJalan_1009.doc' because it is being used by another process.
+StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.File.InternalDelete(String path, Boolean checkHost)
+   at System.IO.File.Delete(String path)
+   at sistem.manajemen.ppic.website.Controllers.TrnPengirimanController.PrintToPrinter(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnPengirimanController.cs:line 410

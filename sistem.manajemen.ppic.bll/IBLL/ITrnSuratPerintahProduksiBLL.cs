@@ -12,6 +12,7 @@ namespace sistem.manajemen.ppic.bll.IBLL
         List<TrnSuratPerintahProduksiDto> GetAll();
         TrnSuratPerintahProduksiDto GetById(object Id);
         TrnSuratPerintahProduksiDto GetByNama(string NamaBarang);
+        TrnSuratPerintahProduksiDto GetByNoSurat(string NoSurat);
         void Save(TrnSuratPerintahProduksiDto model);
         void Save(TrnSuratPerintahProduksiDto model, LoginDto LoginDto);
         void Delete(int id, string Remarks);

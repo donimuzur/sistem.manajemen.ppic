@@ -1,13 +1,13 @@
 ﻿@using System.Web.Optimization
 @using sistem.manajemen.ppic.core
 
-@model sistem.manajemen.ppic.website.Models.MstWilayahModel
+@model sistem.manajemen.ppic.website.Models.MstUomModel
 @{
-    ViewBag.Title = "Master Wilayah";
+    ViewBag.Title = "Master Uom";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Create", "MstWilayah", FormMethod.Post, new { @id = "FormCreate", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "MstUom", FormMethod.Post, new { @id = "FormCreate", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div class="row wrapper border-bottom white-bg page-heading">
@@ -18,7 +18,7 @@
                     <a href="@Url.Action("Index", "Home")">Home</a>
                 </li>
                 <li class="active breadcrumb-item">
-                    <a href="@Url.Action("Index", "MstWilayah")">Master Wilayah</a>
+                    <a href="@Url.Action("Index", "MstUom")">Master Uom</a>
                 </li>
                 <li class="active breadcrumb-item">
                     <strong>Create</strong>
@@ -29,7 +29,7 @@
             <div class="title-action">
                 <button class="btn btn-success" id="btnSubmit" style="display:none" type="submit">Simpan</button>
                 <button class="btn btn-success" onclick="PreSubmit()" type="button">Simpan</button>
-                <a href="@Url.Action("Index", "MstWilayah")" class="btn btn-danger">Batal</a>
+                <a href="@Url.Action("Index", "MstUom")" class="btn btn-danger">Batal</a>
             </div>
         </div>
     </div>
@@ -56,14 +56,14 @@
                                             @Html.HiddenFor(x => x.STATUS)
                                             @Html.HiddenFor(x => x.CREATED_BY)
                                             @Html.HiddenFor(x => x.CREATED_DATE)
-                                            <label class="control-label">Wilayah<span class="text-red">*</span></label>
-                                            @Html.TextBoxFor(model => model.WILAYAH, new { @class = "form-control", @style = "text-transform: uppercase;", @tabindex = "1", @required = "required" })
+                                            <label class="control-label">Satuan<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.SATUAN, new { @class = "form-control", @style = "text-transform: uppercase;", @tabindex = "1", @required = "required" })
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
-                                            <label class="control-label">Kode<span class="text-red">*</span></label>
-                                            @Html.TextBoxFor(model => model.KODE, new { @class = "form-control init", @style = "text-transform: uppercase;", @tabindex = "2", @required = "required" })
+                                            <label class="control-label">Deskripsi<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.DESKRIPSI, new { @class = "form-control", @style = "text-transform: uppercase;", @tabindex = "2", @required = "required" })
                                         </div>
                                     </div>
                                 </div>
@@ -113,13 +113,6 @@
     <script type="text/javascript">
        $(document).ready()
        {
-           new AutoNumeric('.init', {
-               minimumValue: '0',
-               maximumValue: '999999999',
-               decimalPlaces: 0,
-               digitGroupSeparator: '',
-           });
-
            var l = $('.ladda-button-submit').ladda();
            l.click(function () {
                // Start loading

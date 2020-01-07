@@ -367,7 +367,10 @@
                         if (response.BENTUK == 'Lain-Lain') {
                             $('#BENTUK').val(response.BENTUK_DESC);
                         }
-                        new AutoNumeric('#JUMLAH', response.KUANTUM,{ unformatOnSubmit: true });
+
+                        var AutoNumericElement = AutoNumeric.getAutoNumericElement('#JUMLAH');
+                        AutoNumericElement.set(response.KUANTUM);
+
                         //Konsumen ---
                         $('#NAMA_KONSUMEN').val(response.NAMA_KONSUMEN);
                         $('#ALAMAT_KONSUMEN').val(response.ALAMAT_KONSUMEN);
@@ -378,6 +381,10 @@
                         if (response.KEMASAN == "Lain-Lain") {
                             $('#KEMASAN').val(response.KEMASAN_DESC);
                         }
+                        
+                        $('#TUJUAN_KIRIM').val(response.LOKASI_KIRIM);
+                        $('#NAMA_CP').val(response.CONTACT_PERSON);
+                        $('#NO_TELP').val(response.NO_TELP);
                     }
                 },
             });

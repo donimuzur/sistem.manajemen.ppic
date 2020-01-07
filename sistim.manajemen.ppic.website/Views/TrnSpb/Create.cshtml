@@ -474,7 +474,7 @@
                     showCancel: false,
                     purifyHtml: true,
                 });
-            
+
             var l = $('.ladda-button-submit').ladda();
             l.click(function () {
                 // Start loading
@@ -493,11 +493,11 @@
             InitProduk('@Url.Action("GetProdukList", "TrnSpb")')
         }
 
-        //SubmitButton 
+        //SubmitButton
         function PreSubmit(event) {
             var validate = $('#FormCreate').validate({
                 errorPlacement: function (error, element) {
-                 
+
                     if (element.parent().attr("class") == "form-group")
                         error.insertAfter(element);
                     else if (element.parent().attr("class") == 'input-group')
@@ -672,6 +672,48 @@
             });
         }
 
+         //Konsumen List
+        function InitProduk(url) {
+            var options = {
+                url: url,
+                getValue: "DATA",
+                template: {
+                    type: "description",
+                    fields: {
+                        description: "DESKRIPSI"
+                    }
+                },
+                list: {
+                    match: {
+                        enabled: true
+                    },
+                    sort: {
+                        enabled: true
+                    },
+                    onChooseEvent: function () {
+                        GetKonsumen();
+                    }
+                }
+            };
+            $("#NAMA_KONSUMEN").easyAutocomplete(options);
+        }
+
+        function GetKonsumen() {
+            var Produk = document.getElementById("NAMA_KONSUMEN").value;
+            $.ajax({
+                url: '@Url.Action("GetKonsumen", "TrnSpb")',
+                type: "POST",
+                dataType: "JSON",
+                data: { Konsumen: Konsumen },
+                success: function (response) {
+                    if (response != null)
+                    {
+                        $("#ALAMAT_KONSUMEN").val(response.ALAMAT_KONSUMEN);
+                    }
+                },
+            });
+        }
+
         $("#BENTUK").change(function () {
             initilize();
         });
@@ -719,6 +761,42 @@
                 $('#DOKUMEN_PENDUKUNG_DESC').prop('required', true);
             }
         }
+
+        //Harga Loko
+        $("#HARGA_JUAL").change(function () {
+            CalcHargaLoko()
+        });
+        $("#ONGKOS_KIRIM").change(function () {
+            CalcHargaLoko()
+        });
+        $("#ONGKOS_GUDANG").change(function () {
+            CalcHargaLoko()
+        });
+        function CalcHargaLoko()
+        {
+            var HargaJual = 0;
+            var OngkosKirim = 0;
+            var OngkosGudang= 0;
+
+            var AutoNumericElement = AutoNumeric.getAutoNumericElement('#HARGA_JUAL');
+            HargaJual = AutoNumericElement.getNumericString();
+
+            AutoNumericElement = AutoNumeric.getAutoNumericElement('#ONGKOS_KIRIM');
+            OngkosKirim = AutoNumericElement.getNumericString();
+
+            AutoNumericElement = AutoNumeric.getAutoNumericElement('#ONGKOS_GUDANG');
+            OngkosGudang = AutoNumericElement.getNumericString();
+
+            var HargaLoko = HargaJual - OngkosGudang - OngkosKirim;
+            AutoNumericElement = AutoNumeric.getAutoNumericElement('#HARGA_LOKO');
+            if (HargaLoko == null || HargaLoko < 0)
+            {
+                HargaLoko = 0;
+            }
+            AutoNumericElement.set(HargaLoko);
+        }
+        ////////////////////
+
         $('.date').datepicker({
             format: 'dd-M-yyyy'
         });

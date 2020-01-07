@@ -53,13 +53,24 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="row">
+                                    @Html.HiddenFor(x => x.ID)
+                                    @Html.HiddenFor(x => x.ID_BARANG)
+                                    @Html.HiddenFor(x => x.CREATED_BY)
+                                    @Html.HiddenFor(x => x.CREATED_DATE)
+                                    @Html.HiddenFor(x => x.STOCK_AWAL)
+                                    @Html.HiddenFor(x => x.STOCK_AKHIR)
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        @Html.HiddenFor(x => x.ID)
-                                        @Html.HiddenFor(x => x.ID_BARANG)
-                                        @Html.HiddenFor(x => x.CREATED_BY)
-                                        @Html.HiddenFor(x => x.CREATED_DATE)
-                                        @Html.HiddenFor(x => x.STOCK_AWAL)
-                                        @Html.HiddenFor(x => x.STOCK_AKHIR)
+                                        <div class="form-group">
+                                            <label class="control-label">Tanggal<span class="text-red">*</span></label>
+                                            <div class="input-group date" id="BatasKirim">
+                                                @Html.TextBoxFor(model => model.TANGGAL, "{0:dd-MMM-yyyy}", new { @class = "form-control", @tabindex = "1", required = "required" })
+                                                <span class="input-group-addon btn btn-success">
+                                                    <i class="fa fa-calendar "></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">No Surat Jalan<span class="text-red">*</span></label>
                                             @Html.TextBoxFor(model => model.NO_SURAT_JALAN, new { @class = "form-control", @tabindex = "1", @style = "text-transform: uppercase;", @readonly = "readonly" })
@@ -264,7 +275,7 @@
                                         <div class="form-group">
                                             <label class="control-label">Zak<span class="text-red">*</span></label>
                                             <div class="input-group">
-                                                @Html.TextBoxFor(model => model.ZAK, new { @class = "form-control numeric-int", @tabindex = "19", @required = "required" })
+                                                @Html.TextBoxFor(model => model.ZAK, new { @class = "form-control numeric-int", onchange = "HitungKuantum()", @tabindex = "19", @required = "required" })
                                             </div>
                                         </div>
                                     </div>
@@ -348,6 +359,7 @@
     @Styles.Render("~/plugins/easyautocompleteStyle")
     @Styles.Render("~/plugins/jquery-confirmStyle")
     @Styles.Render("~/plugins/clockpickerStyles")
+    @Styles.Render("~/plugins/datePickerStyles")
 }
 
 @section Scripts {
@@ -357,15 +369,21 @@
     @Scripts.Render("~/plugins/autonumeric")
     @Scripts.Render("~/plugins/jquery-confirm")
     @Scripts.Render("~/plugins/clockpicker")
+    @Scripts.Render("~/plugins/datePicker")
 
     <script type="text/javascript">
         $(document).ready()
         {
             new AutoNumeric.multiple('.numeric', { unformatOnSubmit: true })
             new AutoNumeric.multiple('.numeric-int', [{ unformatOnSubmit: true }, 'integerPos']);
+            new AutoNumeric('#PARTAI', [{ unformatOnSubmit: true }, 'numeric']);
+            new AutoNumeric('#SISA_KIRIM', [{ unformatOnSubmit: true }, 'numeric']);
+            new AutoNumeric('#TOTAL_KIRIM', [{ unformatOnSubmit: true }, 'numeric']);
 
             $('.clockpicker').clockpicker();
-
+            $('.date').datepicker({
+                format: 'dd-M-yyyy'
+            });
             var l = $('.ladda-button-submit').ladda();
             l.click(function () {
                 // Start loading
@@ -377,7 +395,8 @@
                 }, 2000)
             });
 
-            InitSpb('@Url.Action("GetSpbList", "TrnDo")');
+            InitSpb('@Url.Action("GetSpbList", "TrnPengiriman")');
+            InitNoPolisi('@Url.Action("GetNopolList", "TrnPengiriman")');
             InitProvinsi();
             initilize();
         }
@@ -455,7 +474,7 @@
             };
             $("#PROVINSI").easyAutocomplete(options);
         }
-       
+
         //init SPB
         function InitSpb(url) {
             var options = {
@@ -506,7 +525,7 @@
                 },
             });
         }
-        
+
         //Init DO
         function InitDo(url) {
             var No_SPB = document.getElementById("NO_SPB").value;
@@ -550,14 +569,19 @@
                             $('#KEMASAN').val(response.KEMASAN_DESC);
                         }
 
-                        new AutoNumeric('#PARTAI', response.PARTAI, [{ unformatOnSubmit: true }, 'numeric']);
-                        new AutoNumeric('#SISA_KIRIM', response.SISA_KIRIM, [{ unformatOnSubmit: true }, 'numeric']);
-                        new AutoNumeric('#TOTAL_KIRIM', response.TOTAL_KIRIM, [{ unformatOnSubmit: true }, 'numeric']);
+                        var AutoNumericElement = AutoNumeric.getAutoNumericElement('#PARTAI');
+                        AutoNumericElement.set(response.PARTAI);
+
+                        AutoNumericElement = AutoNumeric.getAutoNumericElement('#SISA_KIRIM');
+                        AutoNumericElement.set(response.SISA_KIRIM);
+
+                        AutoNumericElement = AutoNumeric.getAutoNumericElement('#TOTAL_KIRIM');
+                        AutoNumericElement.set(response.TOTAL_KIRIM);
 
                         //Konsumen ---
                         $('#NAMA_KONSUMEN').val(response.NAMA_KONSUMEN);
                         $('#ALAMAT_KONSUMEN').val(response.ALAMAT_KONSUMEN);
-                        
+
                     }
                 },
                 error: function (response) {
@@ -568,14 +592,100 @@
                             $('#KEMASAN').val(response.KEMASAN_DESC);
                         }
 
-                        new AutoNumeric('#PARTAI', response.PARTAI, [{ unformatOnSubmit: true }, 'integerPos']);
-                        new AutoNumeric('#SISA_KIRIM', response.SISA_KIRIM, [{ unformatOnSubmit: true }, 'integerPos']);
-                        new AutoNumeric('#TOTAL_KIRIM', response.TOTAL_KIRIM, [{ unformatOnSubmit: true }, 'integerPos']);
+                        var AutoNumericElement = AutoNumeric.getAutoNumericElement('#PARTAI');
+                        AutoNumericElement.set(response.PARTAI);
+
+                        AutoNumericElement = AutoNumeric.getAutoNumericElement('#SISA_KIRIM');
+                        AutoNumericElement.set(response.SISA_KIRIM);
+
+                        AutoNumericElement = AutoNumeric.getAutoNumericElement('#TOTAL_KIRIM');
+                        AutoNumericElement.set(response.TOTAL_KIRIM);
 
                         //Konsumen ---
                         $('#NAMA_KONSUMEN').val(response.NAMA_KONSUMEN);
                         $('#ALAMAT_KONSUMEN').val(response.ALAMAT_KONSUMEN);
 
+                    }
+                },
+            });
+        }
+        // when the field is changed perform the following
+        $('#ZAK').on('change', function () {
+            console.log('bisa');
+            // force the value to 100
+            HitungKuantum();
+
+        });
+        function HitungKuantum ()
+        {
+            console.log('bisa 2');
+            var Kemasan = document.getElementById("KEMASAN").value;
+
+            var AutoNumericElement = AutoNumeric.getAutoNumericElement('#ZAK');
+            var Zak = AutoNumericElement.getNumericString();
+            console.log('Zak :'+ Zak);
+            $.ajax({
+                url: '@Url.Action("HitungKuantum", "TrnPengiriman")',
+                type: "POST",
+                dataType: "JSON",
+                data: { Kemasan: Kemasan , Zak:Zak},
+                success: function (response) {
+                    if (response != null) {
+                        AutoNumericElement = AutoNumeric.getAutoNumericElement('#KUANTUM');
+                        AutoNumericElement.set(response);
+                    }
+                },
+                error: function (response) {
+                    if (response != null) {
+                        var AutoNumericElement = AutoNumeric.getAutoNumericElement('#KUANTUM');
+                        AutoNumericElement.set('');
+                    }
+                },
+            });
+        }
+        //init Nopol From BongkarMuat
+        function InitNoPolisi(url) {
+            var options = {
+                url: url,
+                getValue: "DATA",
+                list: {
+                    maxNumberOfElements: 10,
+                    match: {
+                        enabled: true
+                    },
+                    sort: {
+                        enabled: true
+                    },
+                    onChooseEvent: function () {
+                        GetDataTransportir();
+                    }
+                }
+            };
+            $("#TRNSPT_NO_POLISI").easyAutocomplete(options);
+        }
+        function GetDataTransportir()
+        {
+            var SPB = document.getElementById("NO_SPB").value;
+            var DO = document.getElementById("NO_DO").value;
+            var No_Polisi = document.getElementById("TRNSPT_NO_POLISI").value;
+            
+            $.ajax({
+                url: '@Url.Action("GetDataTransportir", "TrnPengiriman")',
+                type: "POST",
+                dataType: "JSON",
+                data: { No_Polisi: No_Polisi, SPB:SPB, DO:DO },
+                success: function (response) {
+                    if (response != null) {
+                        $('#TRNSPT_NAMA_PT').val(response.TRNSPT_NAMA_PT);
+                        $('#TRNSPT_JENIS_KENDARAAN').val(response.TRNSPT_JENIS_KENDARAAN);
+                    }
+                },
+                error: function (response) {
+                    $('#TRNSPT_NAMA_PT').val('');
+                    $('#TRNSPT_JENIS_KENDARAAN').val('');
+                    if (response != null) {
+                        $('#TRNSPT_NAMA_PT').val(response.TRNSPT_NAMA_PT);
+                        $('#TRNSPT_JENIS_KENDARAAN').val(response.TRNSPT_JENIS_KENDARAAN);
                     }
                 },
             });

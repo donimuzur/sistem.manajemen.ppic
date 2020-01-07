@@ -84,6 +84,42 @@ namespace sistem.manajemen.ppic.bll
             }
 
         }
+        public TrnSuratPengantarBongkarMuatDto GetBy_Nopol(string NoPol)
+        {
+            try
+            {
+                var Data = _trnSuratPengantarBongkarMuatServices.GetAll().Where(x => !string.IsNullOrEmpty(x.TRNSPT_NO_POLISI)
+                                                                                && x.TRNSPT_NO_POLISI.ToUpper() == NoPol.ToUpper()).LastOrDefault();
+                var ReData = Mapper.Map<TrnSuratPengantarBongkarMuatDto>(Data);
+
+                return ReData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public TrnSuratPengantarBongkarMuatDto GetBy_SPB_DO_Nopol(string SPB,int DO, string NoPol)
+        {
+            try
+            {
+                var Data = _trnSuratPengantarBongkarMuatServices.GetAll().Where(x => x.NO_SPB != null && x.NO_DO.HasValue && !string.IsNullOrEmpty(x.TRNSPT_NO_POLISI)
+                                                                                && x.NO_SPB == SPB
+                                                                                && x.NO_DO == DO
+                                                                                && x.TRNSPT_NO_POLISI.ToUpper() == NoPol.ToUpper()).LastOrDefault();
+                var ReData = Mapper.Map<TrnSuratPengantarBongkarMuatDto>(Data);
+
+                return ReData;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         public void Save(TrnSuratPengantarBongkarMuatDto model)
         {
             try

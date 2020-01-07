@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 using sistem.manajemen.ppic.bll.IBLL;
 using sistem.manajemen.ppic.core;
 using sistem.manajemen.ppic.dto;
@@ -22,13 +23,18 @@ namespace sistem.manajemen.ppic.website.Controllers
         private ITrnSpbBLL _trnSpbBLL;
         private ITrnPengirimanBLL _trnPengirimanBLL;
         private IMstBarangJadiBLL _mstBarangJadiBLL;
-        public TrnPengirimanController(IPageBLL pageBll, ITrnDoBLL TrnDoBLL, ITrnSpbBLL TrnSpbBLL, 
-            ITrnPengirimanBLL TrnPengirimanBLL,IMstBarangJadiBLL MstBarangJadiBLL) : base(pageBll, Enums.MenuList.TrnPengiriman)
+        private ITrnSuratPengantarBongkarMuatBLL _suratPengantarBongkarMuatBLL;
+        private IMstKemasanBLL _mstKemasanBLL;
+
+        public TrnPengirimanController(IPageBLL pageBll, ITrnDoBLL TrnDoBLL, ITrnSpbBLL TrnSpbBLL, IMstKemasanBLL MstKemasanBLL,
+            ITrnPengirimanBLL TrnPengirimanBLL,IMstBarangJadiBLL MstBarangJadiBLL, ITrnSuratPengantarBongkarMuatBLL SuratPengantarBongkarMuatBLL) : base(pageBll, Enums.MenuList.TrnPengiriman)
         {
             _trnDoBLL = TrnDoBLL;
             _trnSpbBLL = TrnSpbBLL;
             _mstBarangJadiBLL = MstBarangJadiBLL;
             _trnPengirimanBLL = TrnPengirimanBLL;
+            _suratPengantarBongkarMuatBLL = SuratPengantarBongkarMuatBLL;
+            _mstKemasanBLL = MstKemasanBLL;
         }
         public TrnPengirimanModel Init(TrnPengirimanModel model)
         {
@@ -71,7 +77,6 @@ namespace sistem.manajemen.ppic.website.Controllers
             {
                 try
                 {
-                    model.TANGGAL = DateTime.Now;
                     model.CREATED_BY = CurrentUser.USERNAME;
                     model.CREATED_DATE = DateTime.Now;
                     model.STATUS = (int)Enums.StatusDocument.Open;
@@ -84,13 +89,13 @@ namespace sistem.manajemen.ppic.website.Controllers
                     if (GetBarang != null)
                     {
                         model.ID_BARANG = GetBarang.ID;
-                        model.STOCK_AWAL = GetBarang.STOCK;
-                        model.STOCK_AKHIR = model.STOCK_AWAL - model.KUANTUM;
-                        if(model.STOCK_AKHIR < 0)
-                        {
-                            AddMessageInfo("Stock barang tidak mencukupi", Enums.MessageInfoType.Error);
-                            return View(Init(model));
-                        }
+                        //model.STOCK_AWAL = GetBarang.STOCK;
+                        //model.STOCK_AKHIR = model.STOCK_AWAL - model.KUANTUM;
+                        //if(model.STOCK_AKHIR < 0)
+                        //{
+                        //    AddMessageInfo("Stock barang tidak mencukupi", Enums.MessageInfoType.Error);
+                        //    return View(Init(model));
+                        //}
                     }
 
                     if (model.KUANTUM > model.SISA_KIRIM )
@@ -120,7 +125,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                     }
 
                     var Dto = _trnPengirimanBLL.Save(Mapper.Map<TrnPengirimanDto>(model), Mapper.Map<LoginDto>(CurrentUser));
-                    _mstBarangJadiBLL.KurangSaldo(model.ID_BARANG, model.KUANTUM.Value);
+                    //_mstBarangJadiBLL.KurangSaldo(model.ID_BARANG, model.KUANTUM.Value);
 
                     AddMessageInfo("Sukses Create Form Pengiriman", Enums.MessageInfoType.Success);
                     return RedirectToAction("Details", "TrnPengiriman", new { id = Dto.ID});
@@ -152,7 +157,6 @@ namespace sistem.manajemen.ppic.website.Controllers
             try
             {
                 var model = new TrnPengirimanModel();
-               
                 model =Mapper.Map<TrnPengirimanModel>(_trnPengirimanBLL.GetById(id));
                 if (model == null)
                 {
@@ -160,6 +164,12 @@ namespace sistem.manajemen.ppic.website.Controllers
                 }
 
                 model = Init(model);
+
+                var GetAkumulasi = _trnPengirimanBLL.GetAkumulasi(model.NO_DO.Value, model.NO_SPB);
+
+                model.TOTAL_KIRIM = GetAkumulasi;
+                model.SISA_KIRIM = model.PARTAI - model.TOTAL_KIRIM;
+
                 return View(model);
             }
             catch (Exception exp)
@@ -188,7 +198,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                 }
 
                 _trnPengirimanBLL.Delete(id.Value, Remarks);
-                _mstBarangJadiBLL.TambahSaldo(model.ID_BARANG, model.KUANTUM.Value);
+                //_mstBarangJadiBLL.TambahSaldo(model.ID_BARANG, model.KUANTUM.Value);
 
                 AddMessageInfo("Data sukses dihapus", Enums.MessageInfoType.Success);
                 return RedirectToAction("Index", "TrnPengiriman");
@@ -245,7 +255,7 @@ namespace sistem.manajemen.ppic.website.Controllers
              .Select(x
                  => new
                  {
-                     DATA = x.NO_DO.ToUpper()
+                     DATA = x.NO_DO.PadLeft(4,'0').ToUpper()
                  })
              .Distinct()
              .OrderBy(X => X.DATA)
@@ -260,21 +270,88 @@ namespace sistem.manajemen.ppic.website.Controllers
             if(!string.IsNullOrEmpty(No_Spb) && !string.IsNullOrEmpty(No_Do))
             {
                 var GetSpb = _trnSpbBLL.GetBySPB(No_Spb);
-                var GetDo = _trnDoBLL.GetBySpbAndDo(No_Spb, No_Do);
+                var GetDo = _trnDoBLL.GetBySpbAndDo(No_Spb, int.Parse(No_Do).ToString());
                 
                 var GetAkumulasi = _trnPengirimanBLL.GetAkumulasi(int.Parse(No_Do), No_Spb);
 
-                data.ALAMAT_KONSUMEN = GetDo.ALAMAT_KONSUMEN;
-                data.NAMA_KONSUMEN = GetDo.NAMA_KONSUMEN;
-                data.NAMA_BARANG = GetDo.NAMA_BARANG;
-                data.KEMASAN = GetDo.KEMASAN;
-                data.PARTAI = GetDo.JUMLAH;
-                data.TOTAL_KIRIM = GetAkumulasi;
-                data.SISA_KIRIM = data.PARTAI - data.TOTAL_KIRIM;
-                
+                if(GetDo != null)
+                {
+                    data.ALAMAT_KONSUMEN = GetDo.ALAMAT_KONSUMEN;
+                    data.NAMA_KONSUMEN = GetDo.NAMA_KONSUMEN;
+                    data.NAMA_BARANG = GetDo.NAMA_BARANG;
+                    data.KEMASAN = GetDo.KEMASAN;
+                    data.PARTAI = GetDo.JUMLAH;
+                    data.TOTAL_KIRIM = GetAkumulasi;
+                    data.SISA_KIRIM = data.PARTAI - data.TOTAL_KIRIM;
+                }
             }
-
             return Json(data);
+        }
+        [HttpPost]
+        public JsonResult HitungKuantum(string Kemasan, string Zak)
+        {
+            try
+            {
+                decimal HitungKuantum = 0;
+                var data = new MstKemasanDto();
+                if (!string.IsNullOrEmpty(Kemasan) && !string.IsNullOrEmpty(Zak))
+                {
+
+                    data = _mstKemasanBLL.GetByNama(Kemasan);
+                    HitungKuantum = data.CONVERTION.Value * Convert.ToInt32(Zak);
+                    
+                    return Json(HitungKuantum);
+                }
+
+                    return Json("Error");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        //Get Data Transportir
+        public JsonResult GetNopolList()
+        {
+            var model = _suratPengantarBongkarMuatBLL
+             .GetAll()
+             .Select(x
+                 => new
+                 {
+                     DATA = x.TRNSPT_NO_POLISI
+                 })
+             .Distinct()
+             .OrderBy(X => X.DATA)
+             .ToList();
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult GetDataTransportir(string No_Polisi)
+        {
+            try
+            {
+                var data = new TrnSuratPengantarBongkarMuatDto();
+                if (!string.IsNullOrEmpty(No_Polisi))
+                {
+
+                    data = _suratPengantarBongkarMuatBLL.GetBy_Nopol(No_Polisi);
+                    return Json(data);
+                }
+                //if (!string.IsNullOrEmpty(No_Polisi) && !string.IsNullOrEmpty(SPB) && !string.IsNullOrEmpty(DO))
+                //{
+
+                //    data =_suratPengantarBongkarMuatBLL.GetBy_SPB_DO_Nopol(SPB,Convert.ToInt32(DO),No_Polisi);
+                //    return Json(data);
+                //}
+                return Json("Error");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         [HttpPost]
         public JsonResult PrintPDF(int id)
@@ -297,12 +374,54 @@ namespace sistem.manajemen.ppic.website.Controllers
                 }
                 var SystemPath = HostingEnvironment.ApplicationPhysicalPath;
 
-                cryRpt.Load(SystemPath + "\\Reports\\ReportSuratJalan2.rpt");
+                cryRpt.Load(SystemPath + "\\Reports\\ReportSuratJalan3-Layout.rpt");
                 cryRpt.SetDatabaseLogon(SqlConnection.UserID, SqlConnection.Password, SqlConnection.DataSource, SqlConnection.InitialCatalog);
                 cryRpt.SetParameterValue("id", id);
+                
                 cryRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, fullPath);
-
+                
                 return Json(WebrootUrl + "\\files_upload\\Reports\\Surat Jalan\\" + fileName);
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
+                return Json("Error");
+            }
+        }
+        [HttpPost]
+        public JsonResult PrintToPrinter(int id)
+        {
+            try
+            {
+                var connection = System.Configuration.ConfigurationManager.ConnectionStrings["PPICEntities"].ConnectionString;
+                var connectString = ConfigurationManager.ConnectionStrings["PPICEntities"].ConnectionString;
+                var entityStringBuilder = new EntityConnectionStringBuilder(connectString);
+                SqlConnectionStringBuilder SqlConnection = new SqlConnectionStringBuilder(entityStringBuilder.ProviderConnectionString);
+
+                ReportDocument cryRpt = new ReportDocument();
+                var SystemPath = HostingEnvironment.ApplicationPhysicalPath;
+
+                cryRpt.Load(SystemPath + "\\Reports\\ReportSuratJalan3.rpt");
+                cryRpt.SetDatabaseLogon(SqlConnection.UserID, SqlConnection.Password, SqlConnection.DataSource, SqlConnection.InitialCatalog);
+                cryRpt.SetParameterValue("id", id);
+
+                //cryRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.WordForWindows, fullPath);
+                
+                System.Drawing.Printing.PrinterSettings printersettings = new System.Drawing.Printing.PrinterSettings();
+                System.Drawing.Printing.PageSettings pageSettings = new System.Drawing.Printing.PageSettings();
+                var paper = new System.Drawing.Printing.PaperSize("Custom", 850,650);
+                
+                printersettings.DefaultPageSettings.Landscape = true;
+                printersettings.DefaultPageSettings.PaperSize = paper;
+
+                pageSettings.PaperSize = paper;
+                pageSettings.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0);
+                pageSettings.Landscape = true;
+
+                printersettings.PrinterName = "EPSON LX-310";
+
+                cryRpt.PrintToPrinter(printersettings, pageSettings, false);
+                return Json(true);
             }
             catch (Exception exp)
             {
