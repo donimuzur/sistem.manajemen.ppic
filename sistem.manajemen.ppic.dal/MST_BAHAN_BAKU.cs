@@ -32,6 +32,7 @@ namespace sistem.manajemen.ppic.dal
         public Nullable<decimal> STOCK_AKHIR { get; set; }
         public string SATUAN { get; set; }
         public Nullable<byte> ISBAHAN_PEMBANTU { get; set; }
+        public string ITEMNO { get; set; }
     
         public virtual ICollection<TRN_PENERIMAAN_BARANG> TRN_PENERIMAAN_BARANG { get; set; }
         public virtual ICollection<TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS> TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS { get; set; }

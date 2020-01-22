@@ -28,6 +28,7 @@
             <div class="title-action">
                 <button class="btn btn-success" id="btnSubmit" style="display:none" type="submit">Simpan</button>
                 <button class="btn btn-success" onclick="PreSubmit()" type="button">Update</button>
+                <button class="btn btn-warning" onclick="PreClosed()" type="button">Close SPB</button>
                 <a href="@Url.Action("Index", "TrnSpb")" class="btn btn-danger">Batal</a>
             </div>
         </div>
@@ -432,6 +433,26 @@
 
 }
 
+<div id="modalClosed" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="color:white">Closed Document</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Apakah anda yakin merubah status Document menjadi closed ?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a href="@Url.Action("ClosedSPB", "TrnSpb",new { id = @Model.ID})" class="ladda-button ladda-button-closed btn btn-danger">OK</a>
+                @*<button type="button" class="ladda-button ladda-button-closed btn btn-danger" data-style="zoom-in" onclick="">Ok</button>*@
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="modalSubmit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -537,6 +558,17 @@
                 }, 2000)
             });
 
+            var ladda_closed = $('.ladda-button-closed').ladda();
+            ladda_closed.click(function () {
+                // Start loading
+                ladda_closed.ladda('start');
+                // Do something in backend and then stop ladda
+                // setTimeout() is only for demo purpose
+                setTimeout(function () {
+                    ladda_closed.ladda('stop');
+                }, 2000)
+            });
+
             ladda_print = $('.ladda-button-print').ladda();
 
             initilize();
@@ -544,6 +576,51 @@
             InitSpb('@Url.Action("GetWilayahList", "TrnSpb")');
             InitSales('@Url.Action("GetSalesRef", "TrnSpb")');
             InitProduk('@Url.Action("GetProdukList", "TrnSpb")')
+        }
+        //SubmitButton
+        function PreClosed(event) {
+            var validate = $('#FormEdit').validate({
+                errorPlacement: function (error, element) {
+
+                    if (element.parent().attr("class") == "form-group")
+                        error.insertAfter(element);
+                    else if (element.parent().attr("class") == 'input-group')
+                        error.insertAfter(element.parent());
+                    else if (element.parent().attr("class").search('easy-autocomplete') >= 0 || element.parent().attr("class") == "row" || element.parent().attr("class") == 'input-group date')
+                        error.insertAfter(element.parent());
+                    else
+                        error.insertAfter(element.parent().parent());
+                }
+            });
+
+            jQuery.extend(jQuery.validator.messages, {
+                required: "Tidak boleh kosong",
+                remote: "Please fix this field.",
+                email: "Please enter a valid email address.",
+                url: "Please enter a valid URL.",
+                date: "Please enter a valid date.",
+                dateISO: "Please enter a valid date (ISO).",
+                number: "Please enter a valid number.",
+                digits: "Please enter only digits.",
+                creditcard: "Please enter a valid credit card number.",
+                equalTo: "Please enter the same value again.",
+                accept: "Please enter a value with a valid extension.",
+                maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
+                minlength: jQuery.validator.format("Please enter at least {0} characters."),
+                rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
+                range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+                max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+                min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+            });
+            var isValid = validate.checkForm();
+            if (isValid) {
+                $('.alert-notification').hide();
+                $('#modalClosed').modal('show');
+            }
+            else {
+                validate.showErrors();
+                $('.alert-notification').show();
+            }
         }
 
         //SubmitButton

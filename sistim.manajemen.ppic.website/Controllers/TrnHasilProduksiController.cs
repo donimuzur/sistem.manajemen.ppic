@@ -90,7 +90,7 @@ namespace sistem.manajemen.ppic.website.Controllers
 
                     var Dto = Mapper.Map<TrnHasilProduksiDto>(model);
                     _trnHasilProduksiBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
-                    _mstBarangJadiBLL.TambahSaldo(model.ID_BARANG, model.KUANTUM.Value);
+                    //_mstBarangJadiBLL.TambahSaldo(model.ID_BARANG, model.KUANTUM.Value);
                 
                     AddMessageInfo("Sukses Create Form Hasil Produksi", Enums.MessageInfoType.Success);
                     return RedirectToAction("Index", "TrnHasilProduksi");
@@ -203,7 +203,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                 }
 
                 _trnHasilProduksiBLL.Delete(id.Value, Remarks);
-                _mstBarangJadiBLL.KurangSaldo(model.ID_BARANG, model.KUANTUM.Value);
+                //_mstBarangJadiBLL.KurangSaldo(model.ID_BARANG, model.KUANTUM.Value);
 
                 AddMessageInfo("Data sukses dihapus", Enums.MessageInfoType.Success);
                 return RedirectToAction("Index", "TrnHasilProduksi");

@@ -80,6 +80,7 @@
     <Compile Include="IServices\IMstBahanBakuServices.cs" />
     <Compile Include="IServices\IMstBarangJadiServices.cs" />
     <Compile Include="IServices\IMstKemasanServices.cs" />
+    <Compile Include="IServices\IMstKonsumenServices.cs" />
     <Compile Include="IServices\IMstUomServices.cs" />
     <Compile Include="IServices\IMstWilayahServices.cs" />
     <Compile Include="IServices\IRptEkspedisiHarianServices.cs" />
@@ -106,6 +107,9 @@
     <Compile Include="MST_KEMASAN.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MST_KONSUMEN.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MST_UOM.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -121,6 +125,7 @@
     <Compile Include="Services\MstBahanBakuServices.cs" />
     <Compile Include="Services\MstBarangJadiServices.cs" />
     <Compile Include="Services\MstKemasanServices.cs" />
+    <Compile Include="Services\MstKonsumenServices.cs" />
     <Compile Include="Services\MstUomServices.cs" />
     <Compile Include="Services\MstWilayahServices.cs" />
     <Compile Include="Services\RptEkspedisiHarianServices.cs" />
@@ -136,6 +141,9 @@
     <Compile Include="Services\TrnSuratPengantarBongkarMuatServices.cs" />
     <Compile Include="Services\TrnSuratPerintahProduksiServices.cs" />
     <Compile Include="Services\TrnSuratPermintaanBahanBakuServices.cs" />
+    <Compile Include="SLIP_TIMBANGAN.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SO_BARANG_JADI.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>

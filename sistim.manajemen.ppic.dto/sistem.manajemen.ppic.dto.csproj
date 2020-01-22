@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\MstKemasanDto.cs" />
+    <Compile Include="Dto\MstKonsumenDto.cs" />
     <Compile Include="Dto\MstUomDto.cs" />
     <Compile Include="Dto\TrnPenerimaanBarangDto.cs" />
     <Compile Include="Dto\ChangesHistoryDto.cs" />

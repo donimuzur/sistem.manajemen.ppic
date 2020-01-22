@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="798d9d526bb14d6797c7a20386e70ba5" Name="Diagram1" ZoomLevel="48">
+      <Diagram DiagramId="798d9d526bb14d6797c7a20386e70ba5" Name="Diagram1" ZoomLevel="63">
         <EntityTypeShape EntityType="SIM_PPICModel.Login" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIM_PPICModel.PAGE" Width="1.5" PointX="3.375" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIM_PPICModel.MST_BARANG_JADI" Width="1.5" PointX="0.75" PointY="3.75" />
@@ -41,6 +41,8 @@
         <EntityTypeShape EntityType="SIM_PPICModel.TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS" Width="1.5" PointX="15.625" PointY="18.25" />
         <AssociationConnector Association="SIM_PPICModel.FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_MST_BAHAN_BAKU" />
         <AssociationConnector Association="SIM_PPICModel.FK_TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS_TRN_SURAT_PERMINTAAN_BAHAN_BAKU" />
+        <EntityTypeShape EntityType="SIM_PPICModel.MST_KONSUMEN" Width="1.5" PointX="15.375" PointY="13.75" />
+        <EntityTypeShape EntityType="SIM_PPICModel.SLIP_TIMBANGAN" Width="1.5" PointX="16.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

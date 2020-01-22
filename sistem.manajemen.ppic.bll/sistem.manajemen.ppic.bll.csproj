@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\MstKonsumenBLL.cs" />
     <Compile Include="BLL\MstWilayahBLL.cs" />
     <Compile Include="BLL\RptEkspedisiHarianBLL.cs" />
     <Compile Include="BLL\TrnMutasiBarangBLL.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="IBLL\IMstBarangJadiBLL.cs" />
     <Compile Include="IBLL\ILoginBLL.cs" />
     <Compile Include="IBLL\IMstKemasanBLL.cs" />
+    <Compile Include="IBLL\IMstKonsumenBLL.cs" />
     <Compile Include="IBLL\IMstUomBLL.cs" />
     <Compile Include="IBLL\IMstWilayahBLL.cs" />
     <Compile Include="IBLL\IPageBLL.cs" />

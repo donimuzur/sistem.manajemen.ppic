@@ -12,6 +12,8 @@ using System.Configuration;
 using sistem.manajemen.ppic.website.Controllers.Utility;
 using System.Web.Hosting;
 using CrystalDecisions.CrystalReports.Engine;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace sistem.manajemen.ppic.website.Controllers
 {
@@ -21,13 +23,16 @@ namespace sistem.manajemen.ppic.website.Controllers
         private IMstBarangJadiBLL _mstBarangJadiBLL;
         private IMstWilayahBLL _mstWilayahBLL;
         private IMstKemasanBLL _mstKemasanBLL;
+        private IMstKonsumenBLL _mstKonsumenBLL;
+
         public TrnSpbController(ITrnSpbBLL TrnSpbBLL,IPageBLL pageBll, IMstBarangJadiBLL MstBarangJadiBLL, IMstWilayahBLL MstWilayahBLL,
-            IMstKemasanBLL MstKemasanBLL) : base(pageBll, Enums.MenuList.TrnSpb)
+            IMstKemasanBLL MstKemasanBLL, IMstKonsumenBLL MstKonsumenBLL) : base(pageBll, Enums.MenuList.TrnSpb)
         {
             _trnSpbBLL = TrnSpbBLL;
             _mstBarangJadiBLL = MstBarangJadiBLL;
             _mstWilayahBLL = MstWilayahBLL;
             _mstKemasanBLL = MstKemasanBLL;
+            _mstKonsumenBLL = MstKonsumenBLL;
         }
         public ActionResult Index()
         {
@@ -48,43 +53,66 @@ namespace sistem.manajemen.ppic.website.Controllers
             model.ChangesHistory = GetChangesHistory((int)Enums.MenuList.TrnSpb, model.ID);
 
             var ListBentuk = new List<string>();
-            ListBentuk.Add("Powder");
-            ListBentuk.Add("Granule");
-            ListBentuk.Add("Tablet");
-            ListBentuk.Add("Bricket");
-            ListBentuk.Add("Lain-Lain");
-            model.BentukList= new SelectList(ListBentuk);
 
+            var SystemPath = HostingEnvironment.ApplicationPhysicalPath;
+            using (StreamReader r = new StreamReader(SystemPath+"\\Json\\Bentuk.json"))
+            {
+                string json = r.ReadToEnd();
+                dynamic array = JsonConvert.DeserializeObject(json);
+                foreach (var item in array)
+                {
+                    ListBentuk.Add(item.DATA.Value);
+                }
+                model.BentukList = new SelectList(ListBentuk);
+            }
+           
             var ListJenisPenjualan = new List<string>();
-            ListJenisPenjualan.Add("Loko");
-            ListJenisPenjualan.Add("Site");
-            ListJenisPenjualan.Add("FOB");
-            ListJenisPenjualan.Add("FAS");
-            ListJenisPenjualan.Add("CNF");
-            ListJenisPenjualan.Add("CIF");
-            ListJenisPenjualan.Add("Lain-Lain");
-            model.JenisPenjualanList = new SelectList(ListJenisPenjualan);
+            using (StreamReader r = new StreamReader(SystemPath + "\\Json\\Jenis Penjualan.json"))
+            {
+                string json = r.ReadToEnd();
+                dynamic array = JsonConvert.DeserializeObject(json);
+                foreach (var item in array)
+                {
+                    ListJenisPenjualan.Add(item.DATA.Value);
+                }
+                model.JenisPenjualanList = new SelectList(ListJenisPenjualan);
+            }
 
             var ListSegmenPasar = new List<string>();
-            ListSegmenPasar.Add("PTPN");
-            ListSegmenPasar.Add("PBSN");
-            ListSegmenPasar.Add("Plasma");
-            ListSegmenPasar.Add("Tambak");
-            ListSegmenPasar.Add("Tanpang");
-            ListSegmenPasar.Add("Industri");
-            ListSegmenPasar.Add("Proyek");
-            model.SegmenPasarList = new SelectList(ListSegmenPasar);
+            using (StreamReader r = new StreamReader(SystemPath + "\\Json\\Segmen Pasar.json"))
+            {
+                string json = r.ReadToEnd();
+                dynamic array = JsonConvert.DeserializeObject(json);
+                foreach (var item in array)
+                {
+                    ListSegmenPasar.Add(item.DATA.Value);
+                }
+                model.SegmenPasarList = new SelectList(ListSegmenPasar);
+            }
 
             var ListPPN = new List<string>();
-            ListPPN.Add("Incl PPN");
-            ListPPN.Add("Excl PPN");
-            ListPPN.Add("Non PPN");
-            model.PPNList = new SelectList(ListPPN);
+            using (StreamReader r = new StreamReader(SystemPath + "\\Json\\PPN.json"))
+            {
+                string json = r.ReadToEnd();
+                dynamic array = JsonConvert.DeserializeObject(json);
+                foreach (var item in array)
+                {
+                    ListPPN.Add(item.DATA.Value);
+                }
+                model.PPNList = new SelectList(ListPPN);
+            }           
 
             var ListCaraPembayaran = new List<string>();
-            ListCaraPembayaran.Add("Tunai");
-            ListCaraPembayaran.Add("Kredit");
-            model.CaraPembayaranList = new SelectList(ListCaraPembayaran);
+            using (StreamReader r = new StreamReader(SystemPath + "\\Json\\Cara Pembayaran.json"))
+            {
+                string json = r.ReadToEnd();
+                dynamic array = JsonConvert.DeserializeObject(json);
+                foreach (var item in array)
+                {
+                    ListCaraPembayaran.Add(item.DATA.Value);
+                }
+                model.CaraPembayaranList = new SelectList(ListCaraPembayaran);
+            }            
 
             var ListKemasan = new List<string>();
             ListKemasan = _mstKemasanBLL.GetAll().Select(x => x.KEMASAN).ToList();
@@ -92,12 +120,16 @@ namespace sistem.manajemen.ppic.website.Controllers
             model.KemasanList = new SelectList(ListKemasan);
 
             var DokumenList = new List<string>();
-            DokumenList.Add("MOU");
-            DokumenList.Add("SPK");
-            DokumenList.Add("Kontrak");
-            DokumenList.Add("PO");
-            DokumenList.Add("Lain-Lain");
-            model.DokumenList = new SelectList(DokumenList);
+            using (StreamReader r = new StreamReader(SystemPath + "\\Json\\Dokumen List.json"))
+            {
+                string json = r.ReadToEnd();
+                dynamic array = JsonConvert.DeserializeObject(json);
+                foreach (var item in array)
+                {
+                    DokumenList.Add(item.DATA.Value);
+                }
+                model.DokumenList = new SelectList(DokumenList);
+            }
 
             return model;
         }
@@ -117,7 +149,6 @@ namespace sistem.manajemen.ppic.website.Controllers
             {
                 try
                 {
-                    model.TANGGAL = DateTime.Now;
                     model.CREATED_BY = CurrentUser.USERNAME;
                     model.CREATED_DATE = DateTime.Now;
                     model.STATUS = Enums.StatusDocument.Open;
@@ -148,6 +179,8 @@ namespace sistem.manajemen.ppic.website.Controllers
                     }
                     
                     var Dto = _trnSpbBLL.Save(Mapper.Map<TrnSpbDto>(model), Mapper.Map<LoginDto>(CurrentUser));
+                    MstKonsumenDto KonsumenDto = new MstKonsumenDto { ALAMAT_KONSUMEN = model.ALAMAT_KONSUMEN, CONTACT_PERSON = model.CONTACT_PERSON, NAMA_KONSUMEN = model.NAMA_KONSUMEN, NO_TELP = model.NO_TELP };
+                    _mstKonsumenBLL.InsertUpdateMstKonsumen(KonsumenDto, Mapper.Map<LoginDto>(CurrentUser));
 
                     AddMessageInfo("Sukses Create SPB", Enums.MessageInfoType.Success);
                     return RedirectToAction("Details", "TrnSpb", new { id = Dto.ID });
@@ -256,8 +289,34 @@ namespace sistem.manajemen.ppic.website.Controllers
         }
         #endregion
 
+        #region --- Closed ---
+        public ActionResult ClosedSPB(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return HttpNotFound();
+            }
+
+            try
+            {
+                var model = new TrnSpbModel();
+                model = Mapper.Map<TrnSpbModel>(_trnSpbBLL.GetById(id));
+                model.STATUS = Enums.StatusDocument.Closed;
+                _trnSpbBLL.Save(Mapper.Map<TrnSpbDto>(model), Mapper.Map<LoginDto>(CurrentUser));
+                AddMessageInfo("Success Update SPB", Enums.MessageInfoType.Success);
+                return RedirectToAction("Index", "TrnSpb");
+            }
+            catch (Exception exp)
+            {
+                LogError.LogError.WriteError(exp);
+                AddMessageInfo("Telah Terjadi Kesalahan", Enums.MessageInfoType.Error);
+                return RedirectToAction("Index", "TrnSpb");
+            }
+        }
+        #endregion
+
         #region --- Import ---
-        
+
         public ActionResult Import()
         {
             var model = new TrnSpbModel();
@@ -705,9 +764,9 @@ namespace sistem.manajemen.ppic.website.Controllers
             
             return Json(data);
         }
-        public JsonResult GetCustomerList()
+        public JsonResult GetKonsumenList()
         {
-            var model = _trnSpbBLL
+            var model = _mstKonsumenBLL
              .GetAll()
              .Select(x
                 => new 
@@ -719,6 +778,12 @@ namespace sistem.manajemen.ppic.website.Controllers
              .ToList();
 
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult GetKonsumen(string Konsumen)
+        {
+            var data = _mstKonsumenBLL.GetByNama(Konsumen);
+            return Json(data);
         }
         public JsonResult GetWilayahList()
         {
@@ -753,8 +818,6 @@ namespace sistem.manajemen.ppic.website.Controllers
         {
             return Json("");
         }
-
-
         [HttpPost]
         public JsonResult UploadFile(HttpPostedFileBase FileUpload)
         {

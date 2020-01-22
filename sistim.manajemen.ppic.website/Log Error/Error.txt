@@ -1586,3 +1586,10 @@ StackTrace :    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFul
    at System.IO.File.InternalDelete(String path, Boolean checkHost)
    at System.IO.File.Delete(String path)
    at sistem.manajemen.ppic.website.Controllers.TrnPengirimanController.PrintToPrinter(Int32 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnPengirimanController.cs:line 410
+-----------------------------------------------------------------------------
+Date : 2020-53-09 10:01:13
+
+System.NullReferenceException
+Message : Object reference not set to an instance of an object.
+StackTrace :    at sistem.manajemen.ppic.website.Controllers.TrnSpbController.Init(TrnSpbModel model) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnSpbController.cs:line 50
+   at sistem.manajemen.ppic.website.Controllers.TrnSpbController.Edit(Nullable`1 id) in D:\project\Polowijo Gosari\sistem.manajemen.ppic\sistim.manajemen.ppic.website\Controllers\TrnSpbController.cs:line 215

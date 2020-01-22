@@ -87,47 +87,47 @@ namespace sistem.manajemen.ppic.website.Controllers
                     model.CREATED_DATE = DateTime.Now;
                     model.STATUS = (int)Enums.StatusDocument.Open;
                     
-                    if(model.JENIS_BARANG == (int)Enums.JenisBarang.BarangJadi)
-                    {
-                        var GetBarang = _mstBarangJadiBLL.GetByNama(model.NAMA_BARANG);
-                        if (GetBarang != null)
-                        {
-                            model.ID_BARANG_JADI = GetBarang.ID;
-                            model.STOCK_AWAL = GetBarang.STOCK;
-                            model.STOCK_AKHIR = model.STOCK_AWAL + model.JUMLAH;
-                            if (model.STOCK_AKHIR < 0)
-                            {
-                                AddMessageInfo("Stock barang tidak mencukupi", Enums.MessageInfoType.Error);
-                                return View(Init(model));
-                            }
-                        }
-                    }
-                    else if(model.JENIS_BARANG == (int)Enums.JenisBarang.BahanBaku)
-                    {
-                        var GetBarang = _mstBahanBakuBLL.GetById(model.NAMA_BARANG);
-                        if (GetBarang != null)
-                        {
-                            model.ID_BAHAN_BAKU = GetBarang.ID;
-                            model.STOCK_AWAL = GetBarang.STOCK;
-                            model.STOCK_AKHIR = model.STOCK_AWAL + model.JUMLAH;
-                            if (model.STOCK_AKHIR < 0)
-                            {
-                                AddMessageInfo("Stock barang tidak mencukupi", Enums.MessageInfoType.Error);
-                                return View(Init(model));
-                            }
-                        }
-                    }
+                    //if(model.JENIS_BARANG == (int)Enums.JenisBarang.BarangJadi)
+                    //{
+                    //    var GetBarang = _mstBarangJadiBLL.GetByNama(model.NAMA_BARANG);
+                    //    if (GetBarang != null)
+                    //    {
+                    //        model.ID_BARANG_JADI = GetBarang.ID;
+                    //        model.STOCK_AWAL = GetBarang.STOCK;
+                    //        model.STOCK_AKHIR = model.STOCK_AWAL + model.JUMLAH;
+                    //        if (model.STOCK_AKHIR < 0)
+                    //        {
+                    //            AddMessageInfo("Stock barang tidak mencukupi", Enums.MessageInfoType.Error);
+                    //            return View(Init(model));
+                    //        }
+                    //    }
+                    //}
+                    //else if(model.JENIS_BARANG == (int)Enums.JenisBarang.BahanBaku)
+                    //{
+                    //    var GetBarang = _mstBahanBakuBLL.GetById(model.NAMA_BARANG);
+                    //    if (GetBarang != null)
+                    //    {
+                    //        model.ID_BAHAN_BAKU = GetBarang.ID;
+                    //        model.STOCK_AWAL = GetBarang.STOCK;
+                    //        model.STOCK_AKHIR = model.STOCK_AWAL + model.JUMLAH;
+                    //        if (model.STOCK_AKHIR < 0)
+                    //        {
+                    //            AddMessageInfo("Stock barang tidak mencukupi", Enums.MessageInfoType.Error);
+                    //            return View(Init(model));
+                    //        }
+                    //    }
+                    //}
                     
                     var Dto = Mapper.Map<TrnMutasiBarangDto>(model);
                     _trnMutasiBarangBLL.Save(Dto, Mapper.Map<LoginDto>(CurrentUser));
-                    if(model.JENIS_BARANG == (int)Enums.JenisBarang.BarangJadi)
-                    {
-                        _mstBarangJadiBLL.TambahSaldo(model.ID_BARANG_JADI.Value, model.JUMLAH.Value);
-                    }
-                    else if(model.JENIS_BARANG == (int)Enums.JenisBarang.BahanBaku)
-                    {
-                        _mstBahanBakuBLL.TambahSaldo(model.ID_BAHAN_BAKU.Value, model.JUMLAH.Value);
-                    }
+                    //if(model.JENIS_BARANG == (int)Enums.JenisBarang.BarangJadi)
+                    //{
+                    //    _mstBarangJadiBLL.TambahSaldo(model.ID_BARANG_JADI.Value, model.JUMLAH.Value);
+                    //}
+                    //else if(model.JENIS_BARANG == (int)Enums.JenisBarang.BahanBaku)
+                    //{
+                    //    _mstBahanBakuBLL.TambahSaldo(model.ID_BAHAN_BAKU.Value, model.JUMLAH.Value);
+                    //}
 
                     AddMessageInfo("Sukses Create Form Mutasi Barang", Enums.MessageInfoType.Success);
                     return RedirectToAction("Index", "TrnMutasiBarang");
@@ -191,14 +191,14 @@ namespace sistem.manajemen.ppic.website.Controllers
                 }
 
                 _trnMutasiBarangBLL.Delete(id.Value, Remarks);
-                if(model.JENIS_BARANG == (int)Enums.JenisBarang.BarangJadi)
-                {
-                    _mstBarangJadiBLL.KurangSaldo(model.ID_BARANG_JADI.Value, model.JUMLAH.Value);
-                }
-                else if(model.JENIS_BARANG == (int)Enums.JenisBarang.BahanBaku)
-                {
-                    _mstBahanBakuBLL.KurangSaldo(model.ID_BAHAN_BAKU.Value, model.JUMLAH.Value);
-                }
+                //if(model.JENIS_BARANG == (int)Enums.JenisBarang.BarangJadi)
+                //{
+                //    _mstBarangJadiBLL.KurangSaldo(model.ID_BARANG_JADI.Value, model.JUMLAH.Value);
+                //}
+                //else if(model.JENIS_BARANG == (int)Enums.JenisBarang.BahanBaku)
+                //{
+                //    _mstBahanBakuBLL.KurangSaldo(model.ID_BAHAN_BAKU.Value, model.JUMLAH.Value);
+                //}
 
                 AddMessageInfo("Data sukses dihapus", Enums.MessageInfoType.Success);
                 return RedirectToAction("Index", "TrnMutasiBarang");

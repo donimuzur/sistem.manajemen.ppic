@@ -9,7 +9,7 @@ namespace sistem.manajemen.ppic.website.Models
     public class TrnSpbModel:BaseModel
     {
         public int ID { get; set; }
-        public System.DateTime TANGGAL { get; set; }
+        public System.DateTime? TANGGAL { get; set; }
         public string NO_SPB { get; set; }
         public string SALES { get; set; }
         public string WILAYAH { get; set; }

@@ -36,6 +36,7 @@ namespace sistem.manajemen.ppic.dal
         public Nullable<System.DateTime> MODIFIED_DATE { get; set; }
         public Nullable<decimal> STOCK_AWAL { get; set; }
         public Nullable<decimal> STOCK_AKHIR { get; set; }
+        public string ITEMNO { get; set; }
     
         public virtual ICollection<TRN_HASIL_PRODUKSI> TRN_HASIL_PRODUKSI { get; set; }
         public virtual ICollection<SO_BARANG_JADI_DETAILS> SO_BARANG_JADI_DETAILS { get; set; }

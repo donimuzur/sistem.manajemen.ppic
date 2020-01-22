@@ -98,15 +98,15 @@ namespace sistem.manajemen.ppic.website.Controllers
                         //}
                     }
 
-                    if (model.KUANTUM > model.SISA_KIRIM )
-                    {
-                        AddMessageInfo("Kuantum tidak boleh melebihi sisa Kirim", Enums.MessageInfoType.Error);
-                        return View(Init(model));
-                    }
+                    //if (model.KUANTUM > model.SISA_KIRIM )
+                    //{
+                    //    AddMessageInfo("Kuantum tidak boleh melebihi sisa Kirim", Enums.MessageInfoType.Error);
+                    //    return View(Init(model));
+                    //}
 
-                    if (model.SISA_KIRIM == 0)
+                    if (model.SISA_KIRIM <= 0)
                     {
-                        AddMessageInfo("Jumlah barang yg dikirim sudah sesuai, sisa kirim 0", Enums.MessageInfoType.Error);
+                        AddMessageInfo("Jumlah barang yg dikirim sudah sesuai", Enums.MessageInfoType.Error);
                         return View(Init(model));
                     }
 

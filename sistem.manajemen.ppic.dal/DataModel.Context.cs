@@ -53,6 +53,8 @@ namespace sistem.manajemen.ppic.dal
         public DbSet<TRN_SURAT_PERINTAH_PRODUKSI> TRN_SURAT_PERINTAH_PRODUKSI { get; set; }
         public DbSet<TRN_SURAT_PERMINTAAN_BAHAN_BAKU> TRN_SURAT_PERMINTAAN_BAHAN_BAKU { get; set; }
         public DbSet<TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS> TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS { get; set; }
+        public DbSet<MST_KONSUMEN> MST_KONSUMEN { get; set; }
+        public DbSet<SLIP_TIMBANGAN> SLIP_TIMBANGAN { get; set; }
     
         public virtual ObjectResult<SP_RealisasiHarian_Result> SP_RealisasiHarian(string date)
         {

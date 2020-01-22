@@ -55,11 +55,25 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
+                                        <label class="control-label">Tanggal<span class="text-red">*</span></label>
+                                        <div class="input-group date" id="Tanggal">
+                                            @Html.TextBoxFor(model => model.TANGGAL, "{0:dd-MMM-yyyy}", new { @class = "form-control", @tabindex = "1", required = "required" })
+                                            <span class="input-group-addon btn btn-success">
+                                                <i class="fa fa-calendar "></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
                                         <label class="control-label">No SPB<span class="text-red">*</span></label>
                                         @Html.TextBoxFor(model => model.NO_SPB, new { @class = "form-control", @tabindex = "1", @style = "text-transform: uppercase;", @required = "required" })
                                     </div>
-                                   
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <label class="control-label">Sales Representative<span class="text-red">*</span></label>
@@ -488,9 +502,10 @@
 
             initilize();
 
-            InitSpb('@Url.Action("GetWilayahList", "TrnSpb")');
+            InitWilayah('@Url.Action("GetWilayahList", "TrnSpb")');
             InitSales('@Url.Action("GetSalesRef", "TrnSpb")');
-            InitProduk('@Url.Action("GetProdukList", "TrnSpb")')
+            InitProduk('@Url.Action("GetProdukList", "TrnSpb")');
+            InitKonsumen('@Url.Action("GetKonsumenList", "TrnSpb")');
         }
 
         //SubmitButton
@@ -545,7 +560,7 @@
         }
 
         //Wilayah
-        function InitSpb(url) {
+        function InitWilayah(url) {
             var options = {
                 url: function (phrase) {
                     return url;
@@ -562,7 +577,15 @@
                         dataType: "json"
                     }
                 },
-
+                list: {
+                    maxNumberOfElements: 10,
+                    match: {
+                        enabled: true
+                    },
+                    sort: {
+                        enabled: true
+                    },
+                },
                 preparePostData: function (data) {
                     data.phrase = $("#WILAYAH").val();
                     return data;
@@ -613,6 +636,7 @@
                     }
                 },
                 list: {
+                    maxNumberOfElements: 10,
                     match: {
                         enabled: true
                     },
@@ -673,7 +697,7 @@
         }
 
          //Konsumen List
-        function InitProduk(url) {
+        function InitKonsumen(url) {
             var options = {
                 url: url,
                 getValue: "DATA",
@@ -684,6 +708,7 @@
                     }
                 },
                 list: {
+                    maxNumberOfElements: 10,
                     match: {
                         enabled: true
                     },
