@@ -17,7 +17,7 @@
                         <span class="text-muted text-xs block">@Model.CurrentUser.ROLE_ID<b class="caret"></b></span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs" style="position: absolute; top: 91px; left: 0px; will-change: top, left;">
-                        <li><a class="dropdown-item" href="@Url.Action("SettingAkun", "Login")">Setting Akun</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("Edit", "SettingUser",new { @UserId= @Model.CurrentUser.USER_ID})">Setting Akun</a></li>
                         <li><a class="dropdown-item" href="@Url.Action("ChangePassword", "Login")">Ganti Password</a></li>
                         <li class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="@Url.Action("SignOut", "Login")">Keluar</a></li>
@@ -35,13 +35,13 @@
                     <li class="@Html.IsSelected(controller:"TrnDo",action: "Index")"><a href="@Url.Action("Index", "TrnDo")">DO</a></li>
                 </ul>
             </li>
-            <li class="@Html.IsSelectedMenu(Menu: "Gudang", CurrentMenu : Model.Menu)"  style="@Html.IsShownMenu(Model.CurrentUser.ROLE_ID, "Gudang" )">
+            @*<li class="@Html.IsSelectedMenu(Menu: "Gudang", CurrentMenu : Model.Menu)"  style="@Html.IsShownMenu(Model.CurrentUser.ROLE_ID, "Gudang" )">
                 <a href="#"><i class="fa fa-cubes"></i> <span class="nav-label">Gudang</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Gudang", CurrentMenu : Model.Menu, cssClass: "in")">
                     <li class="@Html.IsSelected(controller:"GdgBarangJadi",action: "Index")"><a href="@Url.Action("Index","GdgBarangJadi")">Barang Jadi</a></li>
                     <li class="@Html.IsSelected(controller:"GdgBahanBaku",action: "Index")"><a href="@Url.Action("Index","GdgBahanBaku")">Bahan Baku</a></li>
                 </ul>
-            </li>
+            </li>*@
             <li class="@Html.IsSelectedMenu(Menu: "Produksi", CurrentMenu : Model.Menu)" style="@Html.IsShownMenu(Model.CurrentUser.ROLE_ID, "Produksi" )">
                 <a href="#"><i class="fa fa-industry"></i> <span class="nav-label">Produksi</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Produksi", CurrentMenu : Model.Menu, cssClass: "in")">
@@ -54,12 +54,12 @@
                 <a href="#"><i class="fa fa-truck"></i> <span class="nav-label">Ekspedisi</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Ekspedisi", CurrentMenu : Model.Menu, cssClass: "in")">
                     <li class="@Html.IsSelected(controller:"TrnPengiriman",action: "Index")"><a href="@Url.Action("Index", "TrnPengiriman")">Pengiriman</a></li>
+                    <li class="@Html.IsSelected(controller: "TrnSlipTimbangan", action: "Index")"><a href="@Url.Action("Index", "TrnSlipTimbangan")">Slip Timbangan</a></li>
                     <li class="@Html.IsSelected(controller: "TrnSuratPengantarBongkarMuat", action: "Index")"><a href="@Url.Action("Index", "TrnSuratPengantarBongkarMuat")">Surat Pengantar Bongkar Muat</a></li>
                     <li class="@Html.IsSelected(controller: "TrnMutasiBarang", action: "Index")"><a href="@Url.Action("Index", "TrnMutasiBarang")">Mutasi Barang</a></li>
                     <li class="@Html.IsSelected(controller: "TrnPenerimaanBarang", action: "Index")"><a href="@Url.Action("Index", "TrnPenerimaanBarang")">Penerimaan Barang</a></li>
                 </ul>
             </li>
-
             <li class="@Html.IsSelectedMenu(Menu: "Master", CurrentMenu : Model.Menu)" style="@Html.IsShownMenu(Model.CurrentUser.ROLE_ID, "Master" )">
                 <a href="#"><i class="fa fa-database"></i> <span class="nav-label">Master</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Master", CurrentMenu : Model.Menu, cssClass: "in")">
@@ -80,7 +80,10 @@
                 </ul>
             </li>
             <li class="@Html.IsSelectedMenu(Menu: "Setting", CurrentMenu : Model.Menu)" style="@Html.IsShownMenu(Model.CurrentUser.ROLE_ID, "Setting" )">
-                <a href="@Url.Action("Index", "Setting")"><i class="fa fa-gears"></i> <span class="nav-label">Setting</span></a>
+                <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Setting</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelectedMenu(Menu: "Setting", CurrentMenu : Model.Menu, cssClass: "in")">
+                    <li class="@Html.IsSelected(controller:"SettingUser",action: "Index")"><a href="@Url.Action("Index","SettingUser")">Setting User</a></li>
+                </ul>
             </li>
         </ul>
     </div>

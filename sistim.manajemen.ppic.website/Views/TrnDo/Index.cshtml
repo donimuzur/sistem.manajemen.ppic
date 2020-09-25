@@ -64,7 +64,7 @@
                                         }
                                         <a href="@Url.Action("Details","TrnDo",new {@id=item.ID})" data-toggle="tooltip" data-placement="bottom" title="Details"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     </td>
-                                    <td>@Html.Raw(item.TANGGAL.ToString("dd MMM yyyy"))</td>
+                                    <td>@Html.Raw(item.TANGGAL.Value.ToString("dd MMM yyyy"))</td>
                                     <td>@Html.Raw(item.NO_SPB)</td>
                                     <td>
                                         @{
@@ -133,6 +133,7 @@
                 dom: '<"html5buttons"B>lTfgitp',
                 scrollX:        true,
                 scrollCollapse: true,
+                "ordering": false,
                 buttons: [
                     { extend: 'copy' },
                     { extend: 'csv' },

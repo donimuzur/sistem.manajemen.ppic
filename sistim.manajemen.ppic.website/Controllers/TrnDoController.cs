@@ -21,11 +21,13 @@ namespace sistem.manajemen.ppic.website.Controllers
         private ITrnDoBLL _trnDoBLL;
         private ITrnSpbBLL _trnSpbBLL;
         private IMstBarangJadiBLL _mstBarangJadiBLL;
-        public TrnDoController(IPageBLL pageBll, ITrnDoBLL TrnDoBLL, ITrnSpbBLL TrnSpbBLL, IMstBarangJadiBLL MstBarangJadiBLL) : base(pageBll, Enums.MenuList.TrnDo)
+        private IMstKonsumenBLL _mstKonsumenBLL;
+        public TrnDoController(IPageBLL pageBll, ITrnDoBLL TrnDoBLL, ITrnSpbBLL TrnSpbBLL, IMstBarangJadiBLL MstBarangJadiBLL, IMstKonsumenBLL MstKonsumenBLL) : base(pageBll, Enums.MenuList.TrnDo)
         {
             _trnDoBLL = TrnDoBLL;
             _trnSpbBLL = TrnSpbBLL;
             _mstBarangJadiBLL = MstBarangJadiBLL;
+            _mstKonsumenBLL = MstKonsumenBLL;
         }
         public TrnDoModel Init(TrnDoModel model)
         {
@@ -56,7 +58,9 @@ namespace sistem.manajemen.ppic.website.Controllers
         public ActionResult Create()
         {
             var model = new TrnDoModel();
-            
+
+            model.TANGGAL = DateTime.Now;
+
             model = Init(model);
             return View(model);
         }
@@ -69,19 +73,11 @@ namespace sistem.manajemen.ppic.website.Controllers
                 {
                     model.CREATED_BY = CurrentUser.USERNAME;
                     model.CREATED_DATE = DateTime.Now;
-                    model.TANGGAL = DateTime.Now;
                     model.STATUS = Enums.StatusDocument.Open;
 
                     model.NO_SPB = model.NO_SPB.ToUpper();
                     model.NO_SPB = model.NO_SPB.TrimEnd('\r', '\n', ' ');
                     model.NO_SPB = model.NO_SPB.TrimStart('\r', '\n', ' ');
-
-                    var CheckDataExist = _trnSpbBLL.GetBySPB(model.NO_SPB);
-                    if (CheckDataExist == null)
-                    {
-                        AddMessageInfo("No SPB tersebut tidak ada", Enums.MessageInfoType.Error);
-                        return View(Init(model));
-                    }
 
                     var Dto = _trnDoBLL.Save(Mapper.Map<TrnDoDto>(model), Mapper.Map<LoginDto>(CurrentUser));
 
@@ -138,15 +134,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                     model.NO_SPB = model.NO_SPB.ToUpper();
                     model.NO_SPB = model.NO_SPB.TrimEnd('\r', '\n', ' ');
                     model.NO_SPB = model.NO_SPB.TrimStart('\r', '\n', ' ');
-                    var CheckDataExist = _trnSpbBLL.GetBySPB(model.NO_SPB);
-
-                    if (CheckDataExist == null)
-                    {
-                        AddMessageInfo("No SPB tersebut tidak ada", Enums.MessageInfoType.Error);
-                        model = Init(model);
-                        return View(model);
-                    }
-
+                  
                     _trnDoBLL.Save(Mapper.Map<TrnDoDto>(model), Mapper.Map<LoginDto>(CurrentUser));
 
                     AddMessageInfo("Sukses Update DO", Enums.MessageInfoType.Success);
@@ -242,7 +230,27 @@ namespace sistem.manajemen.ppic.website.Controllers
 
             return Json(data);
         }
+        public JsonResult GetKonsumenList()
+        {
+            var model = _mstKonsumenBLL
+             .GetAll()
+             .Select(x
+                => new
+                {
+                    DATA = (x.NAMA_KONSUMEN.ToUpper())
+                })
+             .Distinct()
+             .OrderBy(X => X.DATA)
+             .ToList();
 
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult GetKonsumen(string Konsumen)
+        {
+            var data = _mstKonsumenBLL.GetByNama(Konsumen);
+            return Json(data);
+        }
         [HttpPost]
         public JsonResult PrintPDF(int id)
         {

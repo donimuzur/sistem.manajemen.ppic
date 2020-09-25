@@ -69,6 +69,9 @@ namespace sistem.manajemen.ppic.website.Code
                 cfg.CreateMap<TrnSuratPermintaanBahanBakuDetailsModel, TrnSuratPermintaanBahanBakuDetailsDto>().ReverseMap();
                 cfg.CreateMap<TrnSuratPermintaanBahanBakuDetailsDto, TRN_SURAT_PERMINTAAN_BAHAN_BAKU_DETAILS>().ReverseMap();
 
+                cfg.CreateMap<TrnSlipTimbanganModel, TrnSlipTimbanganDto>().ReverseMap();
+                cfg.CreateMap<TrnSlipTimbanganDto, SLIP_TIMBANGAN>().ReverseMap();
+
             });
         }
     }

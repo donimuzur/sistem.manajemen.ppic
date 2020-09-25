@@ -1,0 +1,377 @@
+﻿@using System.Web.Optimization
+@using sistem.manajemen.ppic.core
+
+@model sistem.manajemen.ppic.website.Models.TrnSlipTimbanganModel
+@{
+    ViewBag.Title = "Slip Timbangan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "TrnSlipTimbangan", FormMethod.Post, new { @id = "FormCreate", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>@Model.Tittle</h2>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="@Url.Action("Index", "Home")">Home</a>
+                </li>
+                <li class="active breadcrumb-item">
+                    <a href="@Url.Action("Index", "TrnSlipTimbangan")">Slip Timbangan</a>
+                </li>
+                <li class="active breadcrumb-item">
+                    <strong>Create</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-sm-8">
+            <div class="title-action">
+                <button class="btn btn-success" id="btnSubmit" style="display:none" type="submit">Simpan</button>
+                <button class="btn btn-success" onclick="PreSubmit()" type="button">Simpan</button>
+                <a href="@Url.Action("Index", "TrnSlipTimbangan")" class="btn btn-danger">Batal</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Informasi</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Tanggal<span class="text-red">*</span></label>
+                                            <div class="input-group date" id="Tanggal">
+                                                @Html.TextBoxFor(model => model.TANGGAL, "{0:dd-MMM-yyyy}", new { @class = "form-control", @tabindex = "1", required = "required" })
+                                                <span class="input-group-addon btn btn-success">
+                                                    <i class="fa fa-calendar "></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">No</label>
+                                            @Html.TextBoxFor(model => model.NO_RECORD, new { @class = "form-control", @style = "text-transform: uppercase;", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">No Surat Jalan</label>
+                                            @Html.TextBoxFor(model => model.NO_SURAT_JALAN, new { @class = "form-control", @tabindex = "2", @style = "text-transform: uppercase;"})
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Nama Perusahaan<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.PERUSAHAAN, new { @class = "form-control", @tabindex = "3", @style = "text-transform: uppercase;", @required = "required" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Nama Supplier<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.SUPPLIER, new { @class = "form-control", @tabindex = "3", @style = "text-transform: uppercase;", @required = "required" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">No Polisi<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.NO_POLISI, new { @class = "form-control", @tabindex = "4", @style = "text-transform: uppercase;", @required = "required" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Nama Pengemudi</label>
+                                            @Html.TextBoxFor(model => model.PENGEMUDI, new { @class = "form-control", @tabindex = "5", @style = "text-transform: uppercase;" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Nama Barang<span class="text-red">*</span></label>
+                                            @Html.TextBoxFor(model => model.BAHAN_BAKU, new { @class = "form-control", @tabindex = "6", @style = "text-transform: uppercase;", @required = "required" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Jam Masuk</label>
+                                            <div class="input-group clockpicker" data-autoclose="true">
+                                                @Html.TextBoxFor(model => model.JAM_MASUK, "{0:HH:mm}", new { @class = "form-control", @type = "text", @tabindex = "7" })
+                                                <span class="input-group-addon">
+                                                    <span class="fa fa-clock-o"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Jam Keluar</label>
+                                            <div class="input-group clockpicker" data-autoclose="true">
+                                                @Html.TextBoxFor(model => model.JAM_KELUAR, "{0:HH:mm}", new { @class = "form-control", @type = "text", @tabindex = "8"})
+                                                <span class="input-group-addon">
+                                                    <span class="fa fa-clock-o"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-footer">
+                        <span style="color:red">
+                            (*)
+                        </span>
+                        harus diisi
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Lain Lain</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Berat Masuk</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-addon">Kg</span>
+                                                </div>
+                                                @Html.TextBoxFor(model => model.BERAT_MASUK, new { @class = "form-control numeric", @tabindex = "9"})
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Berat Keluar</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-addon">Kg</span>
+                                                </div>
+                                                @Html.TextBoxFor(model => model.BERAT_KELUAR, new { @class = "form-control numeric", @tabindex = "10"})
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Berat Brutto</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-addon">Kg</span>
+                                                </div>
+                                                @Html.TextBoxFor(model => model.BERAT_BRUTTO, new { @class = "form-control numeric", @tabindex = "11"})
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Berat Netto</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-addon">Kg</span>
+                                                </div>
+                                                @Html.TextBoxFor(model => model.BERAT_NETTO, new { @class = "form-control numeric", @tabindex = "12"})
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-footer">
+                        <span style="color:red">
+                            (*)
+                        </span>
+                        harus diisi
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label">Keterangan</label>
+                                    @Html.TextAreaFor(model => model.KETERANGAN, new { @class = "form-control", style = "height:200px" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div id="modalSubmit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" style="color:white">Submit Form</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Apakah anda yakin data sudah benar?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="ladda-button ladda-button-submit btn btn-success" data-style="zoom-in" onclick="Confirm()">Ok</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Styles {
+    @Styles.Render("~/plugins/laddaStyles")
+    @Styles.Render("~/plugins/easyautocompleteStyle")
+    @Styles.Render("~/plugins/clockpickerStyles")
+    @Styles.Render("~/plugins/datePickerStyles")
+    @Styles.Render("~/plugins/jquery-confirmStyle")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/ladda")
+    @Scripts.Render("~/plugins/easyautocomplete")
+    @Scripts.Render("~/plugins/clockpicker")
+    @Scripts.Render("~/plugins/datePicker")
+    @Scripts.Render("~/plugins/validate")
+    @Scripts.Render("~/plugins/autonumeric")
+    @Scripts.Render("~/plugins/jquery-confirm")
+
+
+    <script type="text/javascript">
+       $(document).ready()
+       {
+           new AutoNumeric.multiple('.numeric', [{ unformatOnSubmit: true, modifyValueOnWheel: false }, 'integerPos']);
+
+           $('.clockpicker').clockpicker();
+           $('.date').datepicker({
+               format: 'dd-M-yyyy'
+           });
+
+           var l = $('.ladda-button-submit').ladda();
+           l.click(function () {
+               // Start loading
+               l.ladda('start');
+               // Do something in backend and then stop ladda
+               // setTimeout() is only for demo purpose
+               setTimeout(function () {
+                   l.ladda('stop');
+               }, 2000)
+           });
+
+           InitKonsumen('@Url.Action("GetKonsumenList", "TrnSlipTimbangan")');
+       }
+
+       //SubmitButton
+       function PreSubmit(event) {
+           var validate = $('#FormCreate').validate({
+               errorPlacement: function (error, element) {
+
+                   if (element.parent().attr("class") == "form-group")
+                       error.insertAfter(element);
+                   else if (element.parent().attr("class") == 'input-group')
+                       error.insertAfter(element.parent());
+                   else if (element.parent().attr("class").search('easy-autocomplete') >= 0 || element.parent().attr("class") == "row" || element.parent().attr("class") == 'input-group date')
+                       error.insertAfter(element.parent());
+                   else
+                       error.insertAfter(element.parent().parent());
+               }
+           });
+
+           jQuery.extend(jQuery.validator.messages, {
+               required: "Tidak boleh kosong",
+               remote: "Please fix this field.",
+               email: "Please enter a valid email address.",
+               url: "Please enter a valid URL.",
+               date: "Please enter a valid date.",
+               dateISO: "Please enter a valid date (ISO).",
+               number: "Please enter a valid number.",
+               digits: "Please enter only digits.",
+               creditcard: "Please enter a valid credit card number.",
+               equalTo: "Please enter the same value again.",
+               accept: "Please enter a value with a valid extension.",
+               maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
+               minlength: jQuery.validator.format("Please enter at least {0} characters."),
+               rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
+               range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+               max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+               min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+           });
+           var isValid = validate.checkForm();
+           if (isValid) {
+               $('.alert-notification').hide();
+               $('#modalSubmit').modal('show');
+           }
+           else {
+               validate.showErrors();
+               $('.alert-notification').show();
+           }
+       }
+
+
+       //Konsumen List
+       function InitKonsumen(url) {
+           var options = {
+               url: url,
+               getValue: "DATA",
+               template: {
+                   type: "description",
+                   fields: {
+                       description: "DESKRIPSI"
+                   }
+               },
+               list: {
+                   maxNumberOfElements: 10,
+                   match: {
+                       enabled: true
+                   },
+                   sort: {
+                       enabled: true
+                   },
+                   onChooseEvent: function () {
+                       GetKonsumen();
+                   }
+               }
+           };
+           $("#SUPPLIER").easyAutocomplete(options);
+           $("#PERUSAHAAN").easyAutocomplete(options);
+       }
+
+       function Confirm(event) {
+           $("#btnSubmit").trigger('click');
+           event.preventDefault();
+       }
+
+    </script>
+}

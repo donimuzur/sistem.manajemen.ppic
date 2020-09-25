@@ -8,7 +8,7 @@ namespace sistem.manajemen.ppic.website.Models
     public class TrnDoModel:BaseModel
     {
         public int ID { get; set; }
-        public System.DateTime TANGGAL { get; set; }
+        public System.DateTime? TANGGAL { get; set; }
         public string NO_SPB { get; set; }
         public string NO_DO { get; set; }
         public string NAMA_KONSUMEN { get; set; }

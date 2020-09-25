@@ -6,6 +6,14 @@ using System.Web;
 
 namespace sistem.manajemen.ppic.website.Models
 {
+    public class LoginViewModel : BaseModel
+    {
+        public List<LoginModel> ListData { set; get; }
+        public LoginViewModel()
+        {
+            ListData = new List<LoginModel>();
+        }
+    }
     public class LoginModel : BaseModel
     {
         public string USER_ID { get; set; }

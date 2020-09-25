@@ -374,11 +374,11 @@
     <script type="text/javascript">
         $(document).ready()
         {
-            new AutoNumeric.multiple('.numeric', { unformatOnSubmit: true })
-            new AutoNumeric.multiple('.numeric-int', [{ unformatOnSubmit: true }, 'integerPos']);
-            new AutoNumeric('#PARTAI', [{ unformatOnSubmit: true }, 'numeric']);
-            new AutoNumeric('#SISA_KIRIM', [{ unformatOnSubmit: true }, 'numeric']);
-            new AutoNumeric('#TOTAL_KIRIM', [{ unformatOnSubmit: true }, 'numeric']);
+            new AutoNumeric.multiple('.numeric', { unformatOnSubmit: true , modifyValueOnWheel :false})
+            new AutoNumeric.multiple('.numeric-int', [{ unformatOnSubmit: true, modifyValueOnWheel :false}, 'integerPos']);
+            new AutoNumeric('#PARTAI', [{ unformatOnSubmit: true , modifyValueOnWheel : false}, 'numeric']);
+            new AutoNumeric('#SISA_KIRIM', [{ unformatOnSubmit: true, modifyValueOnWheel :false }, 'numeric']);
+            new AutoNumeric('#TOTAL_KIRIM', [{ unformatOnSubmit: true , modifyValueOnWheel :false}, 'numeric']);
 
             $('.clockpicker').clockpicker();
             $('.date').datepicker({

@@ -366,8 +366,8 @@
         var ladda_print = null;
         $(document).ready()
         {
-            new AutoNumeric.multiple('.numeric', { unformatOnSubmit: true })
-            new AutoNumeric.multiple('.numeric-int', [{ unformatOnSubmit: true }, 'integerPos']);
+            new AutoNumeric.multiple('.numeric', { unformatOnSubmit: true, modifyValueOnWheel: false })
+            new AutoNumeric.multiple('.numeric-int', [{ unformatOnSubmit: true, modifyValueOnWheel :false }, 'integerPos']);
 
             $('.clockpicker').clockpicker();
 

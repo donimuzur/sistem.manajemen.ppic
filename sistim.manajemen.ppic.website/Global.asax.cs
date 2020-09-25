@@ -53,6 +53,7 @@ namespace sistem.manajemen.ppic.website
             container.Register<ITrnSuratPerintahProduksiBLL, TrnSuratPerintahProduksiBLL>();
             container.Register<ITrnSuratPermintaanBahanBakuBLL, TrnSuratPermintaanBahanBakuBLL>();
             container.Register<IMstKonsumenBLL, MstKonsumenBLL>();
+            container.Register<ITrnSlipTimbanganBLL, TrnSlipTimbanganBLL>();
 
             // 3. Optionally verify the container's configuration.
             container.Verify();

@@ -241,3 +241,9 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /sistim.manajemen.ppic.website/Web.config
+/sistim.manajemen.ppic.website/files_upload/Reports/Do
+/sistim.manajemen.ppic.website/files_upload/Reports/Laporan
+/sistim.manajemen.ppic.website/files_upload/Reports/Mutasi Barang
+/sistim.manajemen.ppic.website/files_upload/Reports/Surat Jalan
+/sistim.manajemen.ppic.website/files_upload/Reports/Slip Timbangan
+/sistim.manajemen.ppic.website/files_upload/Reports/SPB

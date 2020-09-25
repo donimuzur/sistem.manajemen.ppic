@@ -67,6 +67,8 @@ namespace sistem.manajemen.ppic.website.Controllers
         {
             var model = new TrnPengirimanModel();
 
+            model.TANGGAL = DateTime.Now;
+
             model = Init(model);
             return View(model);
         }
@@ -104,13 +106,13 @@ namespace sistem.manajemen.ppic.website.Controllers
                     //    return View(Init(model));
                     //}
 
-                    if (model.SISA_KIRIM <= 0)
-                    {
-                        AddMessageInfo("Jumlah barang yg dikirim sudah sesuai", Enums.MessageInfoType.Error);
-                        return View(Init(model));
-                    }
+                    //if (model.SISA_KIRIM <= 0)
+                    //{
+                    //    AddMessageInfo("Jumlah barang yg dikirim sudah sesuai", Enums.MessageInfoType.Error);
+                    //    return View(Init(model));
+                    //}
 
-                    var CheckDataSPBExist = _trnSpbBLL.GetBySPB(model.NO_SPB);
+                    var CheckDataSPBExist = _trnDoBLL.GetBySPB(model.NO_SPB).FirstOrDefault();
                     if (CheckDataSPBExist == null)
                     {
                         AddMessageInfo("No SPB tersebut tidak ada", Enums.MessageInfoType.Error);
@@ -235,7 +237,7 @@ namespace sistem.manajemen.ppic.website.Controllers
         }
         public JsonResult GetSpbList()
         {
-            var model = _trnSpbBLL
+            var model = _trnDoBLL
                 .GetAll()
                 .Select(x
                     => new
@@ -269,7 +271,6 @@ namespace sistem.manajemen.ppic.website.Controllers
             var data = new TrnPengirimanDto();
             if(!string.IsNullOrEmpty(No_Spb) && !string.IsNullOrEmpty(No_Do))
             {
-                var GetSpb = _trnSpbBLL.GetBySPB(No_Spb);
                 var GetDo = _trnDoBLL.GetBySpbAndDo(No_Spb, int.Parse(No_Do).ToString());
                 
                 var GetAkumulasi = _trnPengirimanBLL.GetAkumulasi(int.Parse(No_Do), No_Spb);
@@ -396,6 +397,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                 var connection = System.Configuration.ConfigurationManager.ConnectionStrings["PPICEntities"].ConnectionString;
                 var connectString = ConfigurationManager.ConnectionStrings["PPICEntities"].ConnectionString;
                 var entityStringBuilder = new EntityConnectionStringBuilder(connectString);
+                var PrinterName = ConfigurationManager.AppSettings["PrinterName"];
                 SqlConnectionStringBuilder SqlConnection = new SqlConnectionStringBuilder(entityStringBuilder.ProviderConnectionString);
 
                 ReportDocument cryRpt = new ReportDocument();
@@ -418,7 +420,7 @@ namespace sistem.manajemen.ppic.website.Controllers
                 pageSettings.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0);
                 pageSettings.Landscape = true;
 
-                printersettings.PrinterName = "EPSON LX-310";
+                printersettings.PrinterName = PrinterName;
 
                 cryRpt.PrintToPrinter(printersettings, pageSettings, false);
                 return Json(true);

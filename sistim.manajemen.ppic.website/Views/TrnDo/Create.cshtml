@@ -55,6 +55,17 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
+                                            <label class="control-label">Tanggal<span class="text-red">*</span></label>
+                                            <div class="input-group date" id="Tanggal">
+                                                @Html.TextBoxFor(model => model.TANGGAL, "{0:dd-MMM-yyyy}", new { @class = "form-control", @tabindex = "1", required = "required" })
+                                                <span class="input-group-addon btn btn-success">
+                                                    <i class="fa fa-calendar "></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
                                             <label class="control-label">No SPB<span class="text-red">*</span></label>
                                             @Html.TextBoxFor(model => model.NO_SPB, new { @class = "form-control", @tabindex = "1", @style = "text-transform: uppercase;", @required = "required" })
                                         </div>
@@ -62,7 +73,7 @@
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">No DO<span class="text-red">*</span></label>
-                                            @Html.TextBoxFor(model => model.NO_DO, new { @class = "form-control", @tabindex = "2", @style = "text-transform: uppercase;", @readonly = "readonly" })
+                                            @Html.TextBoxFor(model => model.NO_DO, new { @class = "form-control", @tabindex = "2", @type="text", @style = "text-transform: uppercase;", @required = "required" })
                                         </div>
                                     </div>
                                 </div>
@@ -249,6 +260,7 @@
 @section Styles {
     @Styles.Render("~/plugins/laddaStyles")
     @Styles.Render("~/plugins/easyautocompleteStyle")
+    @Styles.Render("~/plugins/datePickerStyles")
 }
 
 @section Scripts {
@@ -256,11 +268,12 @@
     @Scripts.Render("~/plugins/easyautocomplete")
     @Scripts.Render("~/plugins/validate")
     @Scripts.Render("~/plugins/autonumeric")
+    @Scripts.Render("~/plugins/datePicker")
 
     <script type="text/javascript">
         $(document).ready()
         {
-            new AutoNumeric('.numeric', { unformatOnSubmit: true })
+            new AutoNumeric('.numeric', { unformatOnSubmit: true, modifyValueOnWheel: false })
 
             var l = $('.ladda-button-submit').ladda();
             l.click(function () {
@@ -274,7 +287,8 @@
             });
 
             InitSpb('@Url.Action("GetSpbList", "TrnDo")');
-            InitProduk('@Url.Action("GetProdukList", "TrnDo")')
+            InitProduk('@Url.Action("GetProdukList", "TrnDo")');
+            InitKonsumen('@Url.Action("GetKonsumenList", "TrnDo")');
             initilize();
         }
 
@@ -381,7 +395,7 @@
                         if (response.KEMASAN == "Lain-Lain") {
                             $('#KEMASAN').val(response.KEMASAN_DESC);
                         }
-                        
+
                         $('#TUJUAN_KIRIM').val(response.LOKASI_KIRIM);
                         $('#NAMA_CP').val(response.CONTACT_PERSON);
                         $('#NO_TELP').val(response.NO_TELP);
@@ -438,6 +452,49 @@
                 },
             });
         }
+
+        //Konsumen List
+        function InitKonsumen(url) {
+            var options = {
+                url: url,
+                getValue: "DATA",
+                template: {
+                    type: "description",
+                    fields: {
+                        description: "DESKRIPSI"
+                    }
+                },
+                list: {
+                    maxNumberOfElements: 10,
+                    match: {
+                        enabled: true
+                    },
+                    sort: {
+                        enabled: true
+                    },
+                    onChooseEvent: function () {
+                        GetKonsumen();
+                    }
+                }
+            };
+            $("#NAMA_KONSUMEN").easyAutocomplete(options);
+        }
+
+        function GetKonsumen() {
+            var Produk = document.getElementById("NAMA_KONSUMEN").value;
+            $.ajax({
+                url: '@Url.Action("GetKonsumen", "TrnDo")',
+                type: "POST",
+                dataType: "JSON",
+                data: { Konsumen: Konsumen },
+                success: function (response) {
+                    if (response != null) {
+                        $("#ALAMAT_KONSUMEN").val(response.ALAMAT_KONSUMEN);
+                    }
+                },
+            });
+        }
+
         function initilize()
         {
             $('#BENTUK_DESC').prop('disabled', true);
@@ -468,6 +525,9 @@
                 $('#KEMASAN_DESC').prop('required', true);
             }
         }
+        $('.date').datepicker({
+            format: 'dd-M-yyyy'
+        });
     </script>
 }
 

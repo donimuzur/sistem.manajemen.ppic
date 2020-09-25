@@ -26,7 +26,73 @@
     </div>
 </div>
 <div class="wrapper wrapper-content">
-    <div class="row">
+    @*<div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Filter</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Tanggal<span class="text-red">*</span></label>
+                                        <div class="input-group date" id="BatasKirim">
+                                            @Html.TextBoxFor(model => model.SearchView.TANGGAL, "{0:dd-MMM-yyyy}", new { @class = "form-control", @tabindex = "1"})
+                                            <span class="input-group-addon btn btn-success">
+                                                <i class="fa fa-calendar "></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Nama Barang<span class="text-red">*</span></label>
+                                        @Html.TextBoxFor(model => model.SearchView.NAMA_BARANG, new { @class = "form-control", @tabindex = "2", @style = "text-transform: uppercase;", })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Nama Konsumen<span class="text-red">*</span></label>
+                                        @Html.TextBoxFor(model => model.SearchView.NAMA_KONSUMEN, new { @class = "form-control", @tabindex = "3", @style = "text-transform: uppercase;", })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Nama Konsumen<span class="text-red">*</span></label>
+                                        @Html.TextBoxFor(model => model.SearchView.PROVINSI, new { @class = "form-control", @tabindex = "3", @style = "text-transform: uppercase;", })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Nama Konsumen<span class="text-red">*</span></label>
+                                        @Html.TextBoxFor(model => model.SearchView.KABUPATEN, new { @class = "form-control", @tabindex = "3", @style = "text-transform: uppercase;", })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <a href="#" class="ladda-button ladda-button-filter btn btn-success" data-style="zoom-in">Filter</a>
+                                    <a href="#" class="ladda-button ladda-button-reset btn btn-warning" data-style="zoom-in">Reset</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>*@
+  
+      <div class="row">
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title">
@@ -162,6 +228,7 @@
                 dom: '<"html5buttons"B>lTfgitp',
                 scrollX:        true,
                 scrollCollapse: true,
+                "ordering": false,
                 buttons: [
                     { extend: 'copy' },
                     { extend: 'csv' },

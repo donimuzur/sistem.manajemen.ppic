@@ -34,7 +34,19 @@
       <HintPath>..\packages\AutoMapper.6.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CryptoHelpers, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CryptoHelpers.1.0.0\lib\CryptoHelpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <Reference Include="License, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LicenseEncrypt.1.0.0\lib\net45\License.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -52,6 +64,7 @@
     <Compile Include="BLL\TrnMutasiBarangBLL.cs" />
     <Compile Include="BLL\TrnPenerimaanBarangBLL.cs" />
     <Compile Include="BLL\TrnPengirimanBLL.cs" />
+    <Compile Include="BLL\TrnSlipTimbanganBLL.cs" />
     <Compile Include="BLL\TrnSuratPengantarBongkarMuatBLL.cs" />
     <Compile Include="BLL\TrnSuratPerintahProduksiBLL.cs" />
     <Compile Include="BLL\TrnSuratPermintaanBahanBakuBLL.cs" />
@@ -73,6 +86,7 @@
     <Compile Include="IBLL\ITrnMutasiBarangBLL.cs" />
     <Compile Include="IBLL\ITrnPenerimaanBarangBLL.cs" />
     <Compile Include="IBLL\ITrnPengirimanBLL.cs" />
+    <Compile Include="IBLL\ITrnSlipTimbanganBLL.cs" />
     <Compile Include="IBLL\ITrnSpbBLL.cs" />
     <Compile Include="BLL\MstBahanBakuBLL.cs" />
     <Compile Include="BLL\MstUomBLL.cs" />

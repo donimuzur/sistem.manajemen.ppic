@@ -15,5 +15,6 @@ namespace sistem.manajemen.ppic.bll.IBLL
         void ChangePassword(string UserId, string PasswordBaru);
         void SetLastOnline(string UserId);
         DateTime? GetLastOnline(string UserId);
+        LoginDto Save(LoginDto Login);
     }
 }

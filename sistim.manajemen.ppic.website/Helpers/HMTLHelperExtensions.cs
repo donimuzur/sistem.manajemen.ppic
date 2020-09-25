@@ -43,7 +43,7 @@ namespace sistem.manajemen.ppic.website.Helpers
         {
             string display = "display:block";
             
-            if(Role != Enums.Role.Administrator && CurrentMenu == "Master")
+            if(Role != Enums.Role.Administrator && (CurrentMenu == "Master" || CurrentMenu == "Setting") )
             {
                 display = "display:none";
             }

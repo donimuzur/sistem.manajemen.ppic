@@ -53,6 +53,7 @@
     <Compile Include="Dto\RptOutstandingDto.cs" />
     <Compile Include="Dto\TrnMutasiBarangDto.cs" />
     <Compile Include="Dto\TrnPengirimanDto.cs" />
+    <Compile Include="Dto\TrnSlipTimbanganDto.cs" />
     <Compile Include="Dto\TrnSuratPengantarBongkarMuatDto.cs" />
     <Compile Include="Dto\TrnSuratPerintahProduksiDto.cs" />
     <Compile Include="Dto\TrnSuratPermintaanBahanBakuDto.cs" />

@@ -506,6 +506,10 @@
             InitSales('@Url.Action("GetSalesRef", "TrnSpb")');
             InitProduk('@Url.Action("GetProdukList", "TrnSpb")');
             InitKonsumen('@Url.Action("GetKonsumenList", "TrnSpb")');
+
+            $('input[type=number]').on('wheel', function (e) {
+                return false;
+            });
         }
 
         //SubmitButton
@@ -724,7 +728,7 @@
         }
 
         function GetKonsumen() {
-            var Produk = document.getElementById("NAMA_KONSUMEN").value;
+            var Konsumen = document.getElementById("NAMA_KONSUMEN").value;
             $.ajax({
                 url: '@Url.Action("GetKonsumen", "TrnSpb")',
                 type: "POST",

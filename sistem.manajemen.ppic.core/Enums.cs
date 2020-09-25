@@ -69,10 +69,13 @@ namespace sistem.manajemen.ppic.core
 
             Timbangan = 60,
 
+            SettingUser = 70,
+
             TrnPengiriman = 80,
             TrnSuratPengantarBongkarMuat = 81,
             TrnSuratMutasiBarang = 82,
             TrnPenerimaanBarang = 83,
+            TrnSlipTimbangan = 84,
             
             TrnHasilProduksi = 90,
             TrnPermintaanBahanBaku =91,

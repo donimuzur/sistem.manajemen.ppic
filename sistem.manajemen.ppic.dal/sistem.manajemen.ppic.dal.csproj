@@ -90,6 +90,7 @@
     <Compile Include="IServices\ITrnMutasiBarangServices.cs" />
     <Compile Include="IServices\ITrnPenerimaanBarangServices.cs" />
     <Compile Include="IServices\ITrnPengirimanServices.cs" />
+    <Compile Include="IServices\ITrnSlipTimbanganServices.cs" />
     <Compile Include="IServices\ITrnSpbServices.cs" />
     <Compile Include="IServices\ITrnSuratPengantarBongkarMuatServices.cs" />
     <Compile Include="IServices\ITrnSuratPerintahProduksiServices.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Services\TrnMutasiBarangServices.cs" />
     <Compile Include="Services\TrnPenerimaanBarangServices.cs" />
     <Compile Include="Services\TrnPengirimanServices.cs" />
+    <Compile Include="Services\TrnSlipTimbanganServices.cs" />
     <Compile Include="Services\TrnSpbServices.cs" />
     <Compile Include="Services\TrnSuratPengantarBongkarMuatServices.cs" />
     <Compile Include="Services\TrnSuratPerintahProduksiServices.cs" />

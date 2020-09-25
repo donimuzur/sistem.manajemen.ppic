@@ -53,9 +53,19 @@ namespace sistem.manajemen.ppic.website.Models
     public class TrnPengirimanViewModel : BaseModel
     {
         public List<TrnPengirimanModel> ListData { set; get; }
+        public SearchView_TrnPengiriman SearchView { get; set; }
         public TrnPengirimanViewModel()
         {
             ListData = new List<TrnPengirimanModel>();
+            SearchView = new SearchView_TrnPengiriman();
         }
+    }
+    public class SearchView_TrnPengiriman
+    {
+        public DateTime? TANGGAL { set; get; }
+        public string NAMA_KONSUMEN { set; get; }
+        public string NAMA_BARANG { set; get; }
+        public string PROVINSI { get; set; }
+        public string KABUPATEN { set; get; }
     }
 }
